@@ -39,38 +39,14 @@
 		<uicommonsVersion>1.7</uicommonsVersion>
 		<reportingVersion>0.9.6</reportingVersion>
 		<reportingobjectgroupVersion>1.1</reportingobjectgroupVersion>
-		<htmlwidgetsVersion>1.6.4</htmlwidgetsVersion>
-		<serializationVersion>0.2.7</serializationVersion>
-		<calculationVersion>1.1</calculationVersion>
+		<reportinguiVersion>1.1</reportinguiVersion>
+        <reportingrestVersion>1.6</reportingrestVersion>
+        <serializationVersion>0.2.7</serializationVersion>
+		<serializationxstreamVersion>0.2.10</serializationxstreamVersion>
 		<emrapiVersion>1.12</emrapiVersion>
 		<appframeworkVersion>2.9</appframeworkVersion>
 		<providermanagementVersion>2.3</providermanagementVersion>
-        <metadatasharingVersion>1.2.2</metadatasharingVersion>
-        <metadatamappingVersion>1.0.1</metadatamappingVersion>
-        <metadatadeployVersion>1.7</metadatadeployVersion>
-        <htmlformentryVersion>3.3.1</htmlformentryVersion>
-        <htmlformentry19extVersion>1.7</htmlformentry19extVersion>
-        <htmlformentryuiVersion>1.5</htmlformentryuiVersion>
-        <calculationVersion>1.2</calculationVersion>
-        <reportinguiVersion>1.1</reportinguiVersion>
-        <reportingrestVersion>1.6</reportingrestVersion>
-        <htmlwidgetsVersion>1.6.4</htmlwidgetsVersion>
-        <serializationxstreamVersion>0.2.10</serializationxstreamVersion>
-        <idgenVersion>3.2</idgenVersion>
-        <addresshierarchyVersion>2.9</addresshierarchyVersion>
-        <providermanagementVersion>2.5.0</providermanagementVersion>
-        <eventVersion>2.5</eventVersion>
-        <uilibraryVersion>1.5</uilibraryVersion>
-        <appuiVersion>1.5.1</appuiVersion>
-        <registrationcoreVersion>1.6</registrationcoreVersion>
-        <registrationappVersion>1.6</registrationappVersion>
-        <coreappsVersion>1.7</coreappsVersion>
-        <webservicesRestVersion>2.12.474b25</webservicesRestVersion>
-        <appointmentschedulingVersion>1.7.0</appointmentschedulingVersion>
-        <appointmentschedulinguiVersion>1.3</appointmentschedulinguiVersion>
-        <allergyapiVersion>1.4</allergyapiVersion>
-        <allergyuiVersion>1.5</allergyuiVersion>
-        <chartsearchVersion>1.6</chartsearchVersion>
+		<calculationVersion>1.1</calculationVersion>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencyManagement>
@@ -139,27 +115,6 @@
 			<version>${reportingobjectgroupVersion}</version>
 			<scope>provided</scope>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>htmlwidgets-api</artifactId>
-			<version>${htmlwidgetsVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>serialization.xstream-api</artifactId>
-			<version>${serializationVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openmrs.module</groupId>
-			<artifactId>htmlwidgets-omod</artifactId>
-			<version>${htmlwidgetsVersion}</version>
-			<scope>provided</scope>
-		</dependency>
          <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>providermanagement-api</artifactId>
@@ -204,6 +159,19 @@
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
+         <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>reportingrest</artifactId>
+            <version>${reportingrestVersion}</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>reportingui-api</artifactId>
+				<version>${reportinguiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>serialization.xstream-api</artifactId>
@@ -230,38 +198,8 @@
         </dependency>
         <dependency>
             <groupId>org.openmrs.module</groupId>
-            <artifactId>calculation-api</artifactId>
-            <version>${calculationVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>htmlformentry-api</artifactId>
-            <version>${htmlformentryVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>htmlformentry-api-tests</artifactId>
-            <version>${htmlformentryVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>htmlformentry-api-1.10</artifactId>
-            <version>${htmlformentryVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
             <artifactId>providermanagement-api</artifactId>
             <version>${providermanagementVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>idgen-api</artifactId>
-            <version>${idgenVersion}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -270,87 +208,13 @@
             <version>${appframeworkVersion}</version>
             <scope>provided</scope>
         </dependency>
-        
         <dependency>
             <groupId>org.openmrs.module</groupId>
-            <artifactId>appointmentscheduling-api</artifactId>
-            <version>${appointmentschedulingVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>metadatadeploy-api</artifactId>
-            <version>${metadatadeployVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>coreapps-api</artifactId>
-            <version>${coreappsVersion}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>addresshierarchy-api</artifactId>
-            <version>${addresshierarchyVersion}</version>
+            <artifactId>calculation-api</artifactId>
+            <version>${calculationVersion}</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- we include the rest and reporting rest dependencies just so that the versions updater properly updates rest version numbers -->
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>reportingrest</artifactId>
-            <version>${reportingrestVersion}</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>webservices.rest</artifactId>
-            <version>${webservicesRestVersion}</version>
-            <type>pom</type>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- modules only required to fire up the app context when running component tests -->
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>metadatasharing-api</artifactId>
-            <version>${metadatasharingVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs</groupId>
-            <artifactId>event-api</artifactId>
-            <version>${eventVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs</groupId>
-            <artifactId>event-api-1.x</artifactId>
-            <version>${eventVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs</groupId>
-            <artifactId>event-api-2.x</artifactId>
-            <version>${eventVersion}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>registrationcore-api</artifactId>
-            <version>${registrationcoreVersion}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.openmrs.module</groupId>
-            <artifactId>registrationapp-api</artifactId>
-            <version>${registrationappVersion}</version>
-            <scope>test</scope>
-        </dependency>
         <!-- End OpenMRS modules -->
         
         <!-- Begin OpenMRS core -->

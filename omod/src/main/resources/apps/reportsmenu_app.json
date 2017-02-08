@@ -1,0 +1,110 @@
+[
+{
+        "id": "${project.parent.artifactId}.reports",
+        "description": "Homepage showing a list of different kinds of reports",
+        "order": 10,
+        "extensionPoints": [
+            {
+                "id": "org.openmrs.module.reportingui.reports.overview",
+                "description": "Links to available Overview Reports",
+                "supportedExtensionTypes": [ "link" ]
+            },
+            {
+                "id": "org.openmrs.module.reportingui.reports.dataquality",
+                "description": "Links to available Data Quality Reports",
+                "supportedExtensionTypes": [ "link" ]
+            },
+            {
+                "id": "org.openmrs.module.reportingui.reports.dataexport",
+                "description": "Links to available Data Exports",
+                "supportedExtensionTypes": [ "link" ]
+            }
+        ],
+        "extensions": [
+            {
+                "id": "reportingui.reports.homepagelink",
+                "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+                "type": "link",
+                "label": "reportingui.reportsapp.home.title",
+                "url": "reportingui/reportsapp/home.page",
+                "icon": "icon-list-alt",
+                "order": 30,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+                "id": "reportingui.dataExports.adHoc",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "reportingui.adHocAnalysis.label",
+                "url": "reportingui/adHocManage.page",
+                "order": 9999,
+                "requiredPrivilege": "App: reportingui.adHocAnalysis",
+                "featureToggle": "reportingui_adHocAnalysis"
+            },
+            {
+                "id": "Hospitalization Diagnosis Report",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "${project.parent.artifactId}.numberPat",
+                "url": "isanteplusreports/nombrePatients.page",
+                "order": 1,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+                "id": "Hospitalization Diagnosis Report",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "${project.parent.artifactId}.septJoursLibelle",
+                "url": "isanteplusreports/rendezvousSeptJours.page",
+                "order": 2,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+                "id": "Hospitalization Diagnosis Report",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "${project.parent.artifactId}.quatorzeJoursLibelle",
+                "url": "isanteplusreports/rendezVousQuatorzeJours.page",
+                "order": 3,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+                "id": "Hospitalization Diagnosis Report",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "${project.parent.artifactId}.patByAge",
+                "url": "isanteplusreports/patientByAgeGroup.page",
+                "order": 4,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "${project.parent.artifactId}.septJoursLibelle",
+                "url": "reportingui/runReport.page?reportDefinition=1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2",
+                "order": 1,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "${project.parent.artifactId}.quatorzeJoursLibelle",
+                "url": "reportingui/runReport.page?reportDefinition=d5ced5d1-bbc7-4679-9020-51e732b69dfd",
+                "order": 1,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "${project.parent.artifactId}.patByAge",
+                "url": "reportingui/runReport.page?reportDefinition=5c40612b-bd9b-4cb7-8c30-1ae89fcdf038",
+                "order": 1,
+                "requiredPrivilege": "App: reportingui.reports"
+            }
+        ],
+        "requiredPrivilege": "App: reportingui.reports"
+    }
+   ]

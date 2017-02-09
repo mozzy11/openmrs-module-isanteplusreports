@@ -23,4 +23,5 @@ Here the list of modules and version that need to be install
 - openmrs-module-reportingui 1.1
 - openmrs-module-serialization.xstream 0.2.10
 - openmrs-module-calculation 1.1
+- openmrs-module-providermanagement 2.3
 

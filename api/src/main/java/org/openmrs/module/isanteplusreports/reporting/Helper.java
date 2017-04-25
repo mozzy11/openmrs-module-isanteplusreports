@@ -19,7 +19,7 @@ import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.util.OpenmrsClassLoader;
 
 public class Helper {
-
+	
 	public static void purgeReportDefinition(String name) {
 		ReportDefinitionService rds = Context.getService(ReportDefinitionService.class);
 		try {
@@ -62,10 +62,8 @@ public class Helper {
 		}
 	}
 	
-	
-	public static ReportDesign createRowPerPatientXlsOverviewReportDesign(ReportDefinition rd, String resourceName, String name,
-	                                                               Map<? extends Object, ? extends Object> properties)
-	    throws IOException {
+	public static ReportDesign createRowPerPatientXlsOverviewReportDesign(ReportDefinition rd, String resourceName,
+	        String name, Map<? extends Object, ? extends Object> properties) throws IOException {
 		
 		ReportService rs = Context.getService(ReportService.class);
 		for (ReportDesign rdd : rs.getAllReportDesigns(false)) {
@@ -95,16 +93,17 @@ public class Helper {
 	/**
 	 * @return a new ReportDesign for a standard Excel output
 	 */
-	public static ReportDesign createExcelDesign(ReportDefinition reportDefinition, String reportDesignName,boolean includeParameters) {
+	public static ReportDesign createExcelDesign(ReportDefinition reportDefinition, String reportDesignName,
+	        boolean includeParameters) {
 		ReportDesign design = new ReportDesign();
 		design.setName(reportDesignName);
 		design.setReportDefinition(reportDefinition);
 		design.setRendererType(XlsReportRenderer.class);
-		if(includeParameters)
-		   design.addPropertyValue(XlsReportRenderer.INCLUDE_DATASET_NAME_AND_PARAMETERS_PROPERTY, "true");
+		if (includeParameters)
+			design.addPropertyValue(XlsReportRenderer.INCLUDE_DATASET_NAME_AND_PARAMETERS_PROPERTY, "true");
 		return design;
 	}
-
+	
 	/**
 	 * @return a new ReportDesign for a standard CSV output
 	 */
@@ -120,6 +119,5 @@ public class Helper {
 		ReportService rs = Context.getService(ReportService.class);
 		rs.saveReportDesign(design);
 	}
-
 	
 }

@@ -45,35 +45,8 @@
                 "id": "Hospitalization Diagnosis Report",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
                 "type": "link",
-                "label": "${project.parent.artifactId}.numberPat",
-                "url": "isanteplusreports/nombrePatients.page",
-                "order": 1,
-                "requiredPrivilege": "App: reportingui.reports"
-            },
-            {
-                "id": "Hospitalization Diagnosis Report",
-                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
-                "type": "link",
-                "label": "${project.parent.artifactId}.septJoursLibelle",
-                "url": "isanteplusreports/rendezvousSeptJours.page",
-                "order": 2,
-                "requiredPrivilege": "App: reportingui.reports"
-            },
-            {
-                "id": "Hospitalization Diagnosis Report",
-                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
-                "type": "link",
-                "label": "${project.parent.artifactId}.quatorzeJoursLibelle",
-                "url": "isanteplusreports/rendezVousQuatorzeJours.page",
-                "order": 3,
-                "requiredPrivilege": "App: reportingui.reports"
-            },
-            {
-                "id": "Hospitalization Diagnosis Report",
-                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
-                "type": "link",
-                "label": "${project.parent.artifactId}.patByAge",
-                "url": "isanteplusreports/patientByAgeGroup.page",
+                "label": "isanteplusreports.patByAge",
+                "url": "reportingui/runReport.page?reportDefinition=5c40612b-bd9b-4cb7-8c30-1ae89fcdf038",
                 "order": 4,
                 "requiredPrivilege": "App: reportingui.reports"
             },
@@ -81,29 +54,122 @@
                 "id": "Address and Diagnosis",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
                 "type": "link",
-                "label": "${project.parent.artifactId}.septJoursLibelle",
+                "label": "isanteplusreports.septJoursLibelle",
                 "url": "reportingui/runReport.page?reportDefinition=1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2",
-                "order": 1,
+                "order": 5,
                 "requiredPrivilege": "App: reportingui.reports"
             },
              {
                 "id": "Address and Diagnosis",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
                 "type": "link",
-                "label": "${project.parent.artifactId}.quatorzeJoursLibelle",
+                "label": "isanteplusreports.quatorzeJoursLibelle",
                 "url": "reportingui/runReport.page?reportDefinition=d5ced5d1-bbc7-4679-9020-51e732b69dfd",
-                "order": 1,
+                "order": 6,
                 "requiredPrivilege": "App: reportingui.reports"
             },
             {
                 "id": "Address and Diagnosis",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
                 "type": "link",
-                "label": "${project.parent.artifactId}.patByAge",
+                "label": "isanteplusreports.patByAge",
                 "url": "reportingui/runReport.page?reportDefinition=5c40612b-bd9b-4cb7-8c30-1ae89fcdf038",
-                "order": 1,
+                "order": 7,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientsCrachatWithoutTbDiagnostic",
+                "url": "reportingui/runReport.page?reportDefinition=54ecf434-5978-4826-b049-d965fe1f81ed",
+                "order": 8,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientsWithTbDiagnosticWithoutTreatment",
+                "url": "reportingui/runReport.page?reportDefinition=7acca9bf-ee7c-49bd-9444-faf2e66aaeb9",
+                "order": 9,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientsWithTbDiagnosticWithoutCrachat",
+                "url": "reportingui/runReport.page?reportDefinition=73173f96-69fc-4c74-b31c-c7ffb9a37d69",
+                "order": 10,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientsWithCompletedTbTreatment",
+                "url": "reportingui/runReport.page?reportDefinition=5c4201e3-83c1-421a-8bc1-f23ecb67cf60",
+                "order": 11,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.firstVisitAge",
+                "url": "reportingui/runReport.page?reportDefinition=27882c50-7a45-475b-97c1-b0618135e667",
+                "order": 12,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.consultationByDay",
+                "url": "reportingui/runReport.page?reportDefinition=d5ca9447-c2b2-4625-af65-93fc1ff58843",
+                "order": 13,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.numberVisitByMonth",
+                "url": "reportingui/runReport.page?reportDefinition=68023435-7e82-4e95-af6b-c137476f0f02",
+                "order": 14,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.numberPatientBySex",
+                "url": "reportingui/runReport.page?reportDefinition=892661ed-f096-4580-a2de-abcf8a13658d",
+                "order": 15,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.dispensingMedications",
+                "url": "reportingui/runReport.page?reportDefinition=bdd40a99-1727-43a3-b155-71b73bf681b9",
+                "order": 16,
                 "requiredPrivilege": "App: reportingui.reports"
             }
+            ,
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientStatus",
+                "url": "reportingui/runReport.page?reportDefinition=b5a70371-3ef5-4d6b-a3e1-1a2cfde6a66d",
+                "order": 17,
+                "requiredPrivilege": "App: reportingui.reports"
+            }
+           
+           
         ],
         "requiredPrivilege": "App: reportingui.reports"
     }

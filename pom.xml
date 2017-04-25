@@ -1,68 +1,49 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.openmrs.maven.parents</groupId>
+        <artifactId>maven-parent-openmrs-module</artifactId>
+        <version>1.1.0</version>
+    </parent>
 
 	<groupId>org.openmrs.module</groupId>
 	<artifactId>isanteplusreports</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
-	<name>IsantePlusReports Module</name>
-	<description>Module that provides all reports of iSantePlus EMR</description>
-	<url>https://wiki.openmrs.org/display/docs/IsantePlusReports+Module+Module</url>
-	
-	<developers>
-		<developer>
-			<name>ITECH</name>
-		</developer>
-	</developers>
-	
-	<organization>
-		<name>OpenMRS</name>
-		<url>http://openmrs.org</url>
-	</organization>
+	<name>IsantePlusReports</name>
+	<description>Provides all reports for iSantePlus EMR</description>
+
+	<url>https://wiki.openmrs.org/x/FQ4z</url>
 
 	<scm>
-		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/isanteplusreports/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/isanteplusreports/trunk/</developerConnection>
-		<url>https://svn.openmrs.org/openmrs-modules/isanteplusreports/trunk/</url>
+		<connection>scm:git:git@github.com:openmrs/openmrs-module-isanteplusreports.git</connection>
+		<developerConnection>scm:git:git@github.com:openmrs/openmrs-module-isanteplusreports.git</developerConnection>
+		<url>https://github.com/openmrs/openmrs-module-isanteplusreports/</url>
 	</scm>
 
 	<modules>
 		<module>api</module>
 		<module>omod</module>
 	</modules>
-	
-	<properties>
-		<openMRSVersion>1.11.5</openMRSVersion>
-		<openMRSwebVersion>1.11.5</openMRSwebVersion>
-		<uiframeworkVersion>3.6</uiframeworkVersion>
-		<uicommonsVersion>1.7</uicommonsVersion>
-		<reportingVersion>0.9.6</reportingVersion>
-		<reportingobjectgroupVersion>1.1</reportingobjectgroupVersion>
-		<reportinguiVersion>1.1</reportinguiVersion>
-        <reportingrestVersion>1.6</reportingrestVersion>
-        <serializationVersion>0.2.7</serializationVersion>
-		<serializationxstreamVersion>0.2.10</serializationxstreamVersion>
-		<emrapiVersion>1.12</emrapiVersion>
-		<appframeworkVersion>2.9</appframeworkVersion>
-		<providermanagementVersion>2.3</providermanagementVersion>
-		<calculationVersion>1.1</calculationVersion>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
+
 	<dependencyManagement>
 		<dependencies>
-		
-			<!--
-			Libraries to add as dependencies with compile or runtime scope:
-			Find matching dependencies in the maven central repository.
+			<!-- Importing versions from refapp distro -->
+            <dependency>
+                <groupId>org.openmrs.distro</groupId>
+                <artifactId>referenceapplication</artifactId>
+                <version>2.3</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 			<dependency>
 				<groupId>org.other.library</groupId>
 				<artifactId>library-name</artifactId>
 				<version>library.version</version>
 				<scope>compile</scope>
-			</dependency>
-			-->
-						
+			</dependency>		
 			<!-- Begin OpenMRS modules -->
 			<dependency>
 				<groupId>org.openmrs.module</groupId>
@@ -214,6 +195,18 @@
             <version>${calculationVersion}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>appui-api</artifactId>
+            <version>${appuiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>appui-omod</artifactId>
+            <version>${appuiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- End OpenMRS modules -->
         
@@ -250,7 +243,6 @@
 				<type>test-jar</type>
 				<scope>test</scope>
 			</dependency>
-			
 			<dependency>
 				<groupId>org.openmrs.test</groupId>
 				<artifactId>openmrs-test</artifactId>
@@ -258,35 +250,8 @@
 				<type>pom</type>
 				<scope>test</scope>
 			</dependency>
-						
-			<!-- End OpenMRS core -->
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<configuration>
-						<target>1.6</target>
-						<source>1.6</source>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.openmrs.maven.plugins</groupId>
-					<artifactId>maven-openmrs-plugin</artifactId>
-					<version>1.0.1</version>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.4</version>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
 
 	<repositories>
 		<repository>
@@ -294,8 +259,13 @@
 			<name>OpenMRS Nexus Repository</name>
 			<url>http://mavenrepo.openmrs.org/nexus/content/repositories/public</url>
 		</repository>
+		<repository>
+			<id>central</id>
+			<name>Maven Repository Switchboard</name>
+			<layout>default</layout>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
 	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
 			<id>openmrs-repo</id>
@@ -307,4 +277,22 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<properties>
+		<openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
+		<openMRSVersion>1.11.5</openMRSVersion>
+		<openMRSwebVersion>1.11.5</openMRSwebVersion>
+		<uiframeworkVersion>3.6</uiframeworkVersion>
+		<uicommonsVersion>1.7</uicommonsVersion>
+		<reportingVersion>0.9.6</reportingVersion>
+		<reportingobjectgroupVersion>1.1</reportingobjectgroupVersion>
+		<reportinguiVersion>1.1</reportinguiVersion>
+        <reportingrestVersion>1.6</reportingrestVersion>
+        <serializationVersion>0.2.7</serializationVersion>
+		<serializationxstreamVersion>0.2.10</serializationxstreamVersion>
+		<emrapiVersion>1.12</emrapiVersion>
+		<appframeworkVersion>2.9</appframeworkVersion>
+		<providermanagementVersion>2.3</providermanagementVersion>
+		<calculationVersion>1.1</calculationVersion>
+		<appuiVersion>1.4</appuiVersion>
+	</properties>
 </project>

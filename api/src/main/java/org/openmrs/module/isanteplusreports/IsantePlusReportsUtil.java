@@ -55,25 +55,24 @@ public class IsantePlusReportsUtil {
 			IOUtils.closeQuietly(is);
 		}
 	}
-
+	
 	/**
-	 * Copied from the reporting module ReportUtil class.
-	 * Using this one due to bug fix that will be available in 0.7.8
-	 * Also added ability to specify properties
-	 * Also, needed to remove the character encoding specification here... :/
-	 *
+	 * Copied from the reporting module ReportUtil class. Using this one due to bug fix that will be
+	 * available in 0.7.8 Also added ability to specify properties Also, needed to remove the
+	 * character encoding specification here... :/
+	 * 
 	 * @throws java.io.UnsupportedEncodingException
 	 */
 	public static RenderingMode renderingModeFromResource(String label, String resourceName, Properties properties) {
 		InputStreamReader reader;
-
+		
 		try {
 			reader = new InputStreamReader(OpenmrsClassLoader.getInstance().getResourceAsStream(resourceName));
 		}
 		catch (Exception e) {
 			throw new IllegalArgumentException("Error reading template from stream", e);
 		}
-
+		
 		final ReportDesign design = new ReportDesign();
 		ReportDesignResource resource = new ReportDesignResource();
 		resource.setName("template");
@@ -93,19 +92,19 @@ public class IsantePlusReportsUtil {
 		catch (Exception e) {
 			throw new RuntimeException("Error reading template from stream", e);
 		}
-
+		
 		design.getResources().add(resource);
 		design.setProperties(properties);
 		if ("xls".equals(extension)) {
 			renderer = new ExcelTemplateRenderer() {
-
+				
 				public ReportDesign getDesign(String argument) {
 					return design;
 				}
 			};
 		} else {
 			renderer = new TextTemplateRenderer() {
-
+				
 				public ReportDesign getDesign(String argument) {
 					return design;
 				}
@@ -113,15 +112,15 @@ public class IsantePlusReportsUtil {
 		}
 		return new RenderingMode(renderer, label, extension, null);
 	}
-
-    // has been moved to ReportUtil in reporting module, use the one there
-    @Deprecated
-    public static List<Map<String, Object>> simplify(DataSet dataSet) {
-        List<Map<String, Object>> simplified = new ArrayList<Map<String, Object>>();
-        for (DataSetRow row : dataSet) {
-            simplified.add(row.getColumnValuesByKey());
-        }
-        return simplified;
-}
-
+	
+	// has been moved to ReportUtil in reporting module, use the one there
+	@Deprecated
+	public static List<Map<String, Object>> simplify(DataSet dataSet) {
+		List<Map<String, Object>> simplified = new ArrayList<Map<String, Object>>();
+		for (DataSetRow row : dataSet) {
+			simplified.add(row.getColumnValuesByKey());
+		}
+		return simplified;
+	}
+	
 }

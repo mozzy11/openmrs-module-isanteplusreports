@@ -10,21 +10,22 @@ public abstract class SessionTask extends AbstractTask {
 	 */
 	@Override
 	public void execute() {
-		execute(true);
+		//execute(true);
 	}
 	
 	/**
 	 * Executes this data aggregation task
+	 * 
 	 * @param newSession true to create a new OpenMRS session
 	 */
-	@SuppressWarnings("deprecation")
+	/*@SuppressWarnings("deprecation")
 	public void execute(boolean newSession) {
 		if (!isExecuting) {
-            isExecuting = true;
-            
-            if (newSession)
-            	Context.openSession();
-            
+	        isExecuting = true;
+	        
+	        if (newSession)
+	        	Context.openSession();
+	        
 			try {
 				if (!Context.isAuthenticated())
 					authenticate();
@@ -38,12 +39,13 @@ public abstract class SessionTask extends AbstractTask {
 				isExecuting = false;
 			}
 		}
-	}
-
+	}*/
+	
 	/**
 	 * Does the actual task work
-	 * @throws Exception 
+	 * 
+	 * @throws Exception
 	 */
 	abstract protected void onExecute() throws Exception;
-
+	
 }

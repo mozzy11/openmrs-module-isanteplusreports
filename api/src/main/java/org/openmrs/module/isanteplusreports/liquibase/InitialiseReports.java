@@ -1,7 +1,7 @@
 package org.openmrs.module.isanteplusreports.liquibase;
 
 public class InitialiseReports {
-
+	
 	/*public void execute(Database database) throws CustomChangeException {
 		JdbcConnection connection = (JdbcConnection) database.getConnection();
 		

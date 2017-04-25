@@ -1,69 +1,48 @@
 /**
- * The contents of this file are subject to the OpenMRS Public License
- * Version 1.0 (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- * http://license.openmrs.org
+ * This Source Code Form is subject to the terms of the Mozilla Public License,
+ * v. 2.0. If a copy of the MPL was not distributed with this file, You can
+ * obtain one at http://mozilla.org/MPL/2.0/. OpenMRS is also distributed under
+ * the terms of the Healthcare Disclaimer located at http://openmrs.org/license.
  *
- * Software distributed under the License is distributed on an "AS IS"
- * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
- * License for the specific language governing rights and limitations
- * under the License.
- *
- * Copyright (C) OpenMRS, LLC.  All Rights Reserved.
+ * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
+ * graphic logo is a trademark of OpenMRS Inc.
  */
 package org.openmrs.module.isanteplusreports.api;
 
-import java.sql.Connection;
-import java.util.List;
+import org.openmrs.annotation.Authorized;
+import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
-import org.openmrs.module.reporting.dataset.DataSet;
-import org.openmrs.module.reporting.evaluation.parameter.Parameter;
+import org.openmrs.module.isanteplusreports.IsantePlusReportsConfig;
+import org.openmrs.module.isanteplusreports.Item;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
-import org.openmrs.module.reporting.indicator.Indicator;
-import org.openmrs.module.reporting.indicator.dimension.Dimension;
-
 /**
- * This service exposes module's core functionality. It is a Spring managed bean which is configured in moduleApplicationContext.xml.
- * <p>
- * It can be accessed only via Context:<br>
- * <code>
- * Context.getService(IsantePlusReportsService.class).someMethod();
- * </code>
- * 
- * @see org.openmrs.api.context.Context
+ * The main service of this module, which is exposed for other modules. See
+ * moduleApplicationContext.xml on how it is wired up.
  */
-@Transactional
 public interface IsantePlusReportsService extends OpenmrsService {
-     
-	/*
-	 * Add service methods here
-	 * 
-	 */
-	/**
-	 * @return the CohortDefinition with the passed uuid that is defined in a DefinitionLibrary
-	 * if none is defined in a DefinitionLibrary it will query the Reporting definition service
-	 */
-	public CohortDefinition getCohortDefinition(String uuid);
-
-	/**
-	 * @return the Indicator with the passed uuid that is defined in a DefinitionLibrary
-	 * if none is defined in a DefinitionLibrary it will query the Reporting definition service
-	 */
-	public Indicator getIndicator(String uuid);
-
-	/**
-	 * @return the Dimension with the passed uuid that is defined in a DefinitionLibrary
-	 * if none is defined in a DefinitionLibrary it will query the Reporting definition service
-	 */
-public Dimension getDimension(String uuid);
 	
-	public Connection getConnection();
-	public List<Parameter> parametersList(String queryString);
-	public DataSet evaluateList();
-	public DataSet patientTrancheAge();
-	public DataSet numberPatient();
-	public DataSet nextVisitSevenDays();
-	public DataSet nextVisitFourteenDays();
+	/**
+	 * Returns an item by uuid. It can be called by any authenticated user. It is fetched in read
+	 * only transaction.
+	 * 
+	 * @param uuid
+	 * @return
+	 * @throws APIException
+	 */
+	@Authorized()
+	@Transactional(readOnly = true)
+	Item getItemByUuid(String uuid) throws APIException;
+	
+	/**
+	 * Saves an item. Sets the owner to superuser, if it is not set. It can be called by users with
+	 * this module's privilege. It is executed in a transaction.
+	 * 
+	 * @param item
+	 * @return
+	 * @throws APIException
+	 */
+	@Authorized(IsantePlusReportsConfig.MODULE_PRIVILEGE)
+	@Transactional
+	Item saveItem(Item item) throws APIException;
 }

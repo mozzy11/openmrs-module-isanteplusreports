@@ -30,6 +30,7 @@ public class RegisterReportsTask {
 			register.numberPatientBySex();
 			register.dispensingMedications();
 			register.patientsStatusList();
+			register.patientsReceivingARVByPeriod();
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

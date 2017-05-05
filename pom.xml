@@ -207,7 +207,19 @@
             <version>${appuiVersion}</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>coreapps-api</artifactId>
+            <version>${coreappsVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+         <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>coreapps-omod</artifactId>
+            <version>${coreappsVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+      
         <!-- End OpenMRS modules -->
         
         <!-- Begin OpenMRS core -->
@@ -294,5 +306,6 @@
 		<providermanagementVersion>2.3</providermanagementVersion>
 		<calculationVersion>1.1</calculationVersion>
 		<appuiVersion>1.4</appuiVersion>
+		<coreappsVersion>1.11.1</coreappsVersion>
 	</properties>
 </project>

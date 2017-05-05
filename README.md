@@ -27,4 +27,5 @@ Here the list of modules and version that need to be install
 - openmrs-module-calculation 1.1
 - openmrs-module-providermanagement 2.3
 - openmrs-module-isanteplus 1.0 and above
+- openmrs-module-coreapps 1.11.1
 

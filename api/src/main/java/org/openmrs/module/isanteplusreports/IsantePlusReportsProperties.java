@@ -4,6 +4,12 @@ import org.openmrs.module.emrapi.EmrApiProperties;
 
 public class IsantePlusReportsProperties extends EmrApiProperties {
 	
+	//***** PRIVILEGES ******
+	public static final String PRIVILEGE_PATIENT_DASHBOARD = "App: coreapps.patientDashboard";
+	
+	//***** GLOBAL PROPERTIES ******
+	public static final String DAILY_CHECKINS_HIDE_COUNTS = "isanteplusreports.dailyCheckins.hideCounts";
+	
 	public final String SEVEN_DAYS_REPORT_DEFINITION_UUID = "1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2";
 	
 	public final String FOURTEEN_DAYS_REPORT_DEFINITION_UUID = "d5ced5d1-bbc7-4679-9020-51e732b69dfd";
@@ -29,4 +35,6 @@ public class IsantePlusReportsProperties extends EmrApiProperties {
 	public final String DISPENSINGMEDICATIONS = "bdd40a99-1727-43a3-b155-71b73bf681b9";
 	
 	public final String PATIENTSTATUS = "b5a70371-3ef5-4d6b-a3e1-1a2cfde6a66d";
+	
+	public final String PATIENTRECEIVINGARVBYPERIOD = "ead22ae8-c3ab-4c27-ab8d-e63ec8658e50";
 }

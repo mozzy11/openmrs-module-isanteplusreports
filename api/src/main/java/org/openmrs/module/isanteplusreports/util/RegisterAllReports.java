@@ -39,6 +39,7 @@ import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
 import org.openmrs.module.reporting.report.manager.ReportManager;
 import org.openmrs.module.reporting.report.manager.ReportManagerUtil;
+import org.openmrs.module.reporting.report.renderer.ExcelTemplateRenderer;
 import org.openmrs.module.reporting.report.renderer.ReportRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.ui.framework.WebConstants;
@@ -155,8 +156,10 @@ public class RegisterAllReports extends SessionContext {
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design 7 days", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 	}
 	
 	@DocumentedDefinition("fullDataExports")
@@ -172,8 +175,10 @@ public class RegisterAllReports extends SessionContext {
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design 14 days", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -190,7 +195,7 @@ public class RegisterAllReports extends SessionContext {
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design Age group", repDefinition, IsantePlusOtherHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusOtherHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		
 	}
@@ -214,9 +219,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design first visit age", repDefinition,
-		    IsantePlusOtherHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusOtherHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -243,9 +249,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design analyses de crachats", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -271,9 +278,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design tb complete", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -300,9 +308,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design tb diagnostics", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -329,9 +338,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design tb diagnostics", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -357,8 +367,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design tb sign", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -389,17 +401,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design consultation by day", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
-		locationService = Context.getLocationService();
-		providerService = Context.getProviderService();
-		
-		//rm.
-		// List<ReportRequest> scheduledRequests = rm.constructScheduledRequests(repDefinition);
-		//request = Context.
-		// request= new HttpServletRequest();
-		// UiSessionContext uiSessionContext = new UiSessionContext(locationService, providerService, null);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -416,9 +421,10 @@ public class RegisterAllReports extends SessionContext {
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design visits by month", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -442,9 +448,10 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design patient by sex", repDefinition,
-		    IsantePlusOtherHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusOtherHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 		
 	}
 	
@@ -461,9 +468,10 @@ public class RegisterAllReports extends SessionContext {
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design dispensingMedications", repDefinition,
-		    IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 	}
 	
 	@DocumentedDefinition("fullDataExports")
@@ -485,7 +493,33 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html design status", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void patientsReceivingARVByPeriod() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("numberPatientReceivingARVByPeriod.sql",
+		    "Nombre de patients ayant reçu des ARV par période", "Nombre de patients ayant reçu des ARV par période");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.patientArvByPeriod", "",
+		    props.PATIENTRECEIVINGARVBYPERIOD);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		
 	}
@@ -528,6 +562,9 @@ public class RegisterAllReports extends SessionContext {
 		rDesign.setName(name);
 		rDesign.setReportDefinition(rDefinition);
 		rDesign.setRendererType(rendererType);
+		//ReportDesign rDesignExcel = new ReportDesign();
+		//ReportDesign rDesign = reportDesign("Html design status", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		//rs.saveReportDesign(rDesign);
 		return rDesign;
 	}
 	

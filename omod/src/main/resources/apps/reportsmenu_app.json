@@ -157,8 +157,7 @@
                 "url": "reportingui/runReport.page?reportDefinition=bdd40a99-1727-43a3-b155-71b73bf681b9",
                 "order": 16,
                 "requiredPrivilege": "App: reportingui.reports"
-            }
-            ,
+            },
              {
                 "id": "Address and Diagnosis",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
@@ -196,10 +195,36 @@
 		        "order": 20,
 		        "requiredPrivilege": "App: reportingui.reports",
 		        "extensionParams": { "linkId": "isanteplusreports-dailyRegistrationsReport-link" }
-		    }
+		    },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.drugsPrescriptionAmount",
+                "url": "reportingui/runReport.page?reportDefinition=184c228b-ff83-41cb-97c3-6bfc7fe5c4c8",
+                "order": 16,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.labPrescription",
+                "url": "reportingui/runReport.page?reportDefinition=84f3fc41-c932-411f-b43f-f51cfe4e44a7",
+                "order": 16,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.labDone",
+                "url": "reportingui/runReport.page?reportDefinition=0a290fe4-863b-4137-bbd6-c79899baf694",
+                "order": 16,
+                "requiredPrivilege": "App: reportingui.reports"
+            }
+            
 		    
-		    
-           
         ],
         "requiredPrivilege": "App: reportingui.reports"
     }

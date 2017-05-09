@@ -9,9 +9,16 @@
  */
 package org.openmrs.module.isanteplusreports;
 
+import java.util.Calendar;
+import java.util.UUID;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
+import org.openmrs.scheduler.SchedulerException;
+import org.openmrs.scheduler.Task;
+import org.openmrs.scheduler.TaskDefinition;
 
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
@@ -25,14 +32,16 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 	 */
 	public void started() {
 		log.info("Started IsantePlusReports");
-		RegisterReportsTask register = new RegisterReportsTask();
+		RegisterReports register = new RegisterReports();
 		try {
-			register.onExecute();
+			register.registerReports();
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		registerTask("Clean reports request iSantePlus", "Clean Reports Request for iSantePlus", RegisterReportsTask.class,
+		    60 * 60 * 24l);
 	}
 	
 	/**
@@ -40,6 +49,37 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 	 */
 	public void shutdown() {
 		log.info("Shutdown IsantePlusReports");
+	}
+	
+	private boolean registerTask(String name, String description, Class<? extends Task> clazz, long interval) {
+		try {
+			Context.addProxyPrivilege("Manage Scheduler");
+			
+			TaskDefinition taskDef = Context.getSchedulerService().getTaskByName(name);
+			if (taskDef == null) {
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.MINUTE, 20);
+				taskDef = new TaskDefinition();
+				taskDef.setTaskClass(clazz.getCanonicalName());
+				taskDef.setStartOnStartup(true);
+				taskDef.setRepeatInterval(interval);
+				taskDef.setStarted(true);
+				taskDef.setStartTime(cal.getTime());
+				taskDef.setName(name);
+				taskDef.setUuid(UUID.randomUUID().toString());
+				taskDef.setDescription(description);
+				Context.getSchedulerService().scheduleTask(taskDef);
+			}
+			
+		}
+		catch (SchedulerException ex) {
+			log.warn("Unable to clean reports request '" + name + "' with scheduler", ex);
+			return false;
+		}
+		finally {
+			Context.removeProxyPrivilege("Manage Scheduler");
+		}
+		return true;
 	}
 	
 }

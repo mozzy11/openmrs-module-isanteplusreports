@@ -143,6 +143,18 @@ public class RegisterAllReports extends SessionContext {
 		}
 	}
 	
+	public void cleanReportsRequest() throws Exception {
+		ReportService rs = Context.getService(ReportService.class);
+		for (ReportRequest request : rs.getReportRequests(null, null, null, Status.COMPLETED, Status.FAILED)) {
+			try {
+				rs.purgeReportRequest(request);
+			}
+			catch (Exception e) {
+				log.warn("Unable to delete old report request: " + request, e);
+			}
+		}
+	}
+	
 	@DocumentedDefinition("fullDataExports")
 	public void nextVisitSevenDays() throws Exception {
 		SqlDataSetDefinition sqlData = sqlDataSetDefinition("visitNextSevenDays.sql", "PatientNextVisitNextSevenDays",
@@ -522,6 +534,56 @@ public class RegisterAllReports extends SessionContext {
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void drugsPrescription() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("medicamentPrescrit.sql", "Médicaments prescrits",
+		    "Médicaments prescrits");
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.drugsPrescriptionAmount", "",
+		    props.DRUGS_PRESCRIPTION_UUID);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void labPrescription() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("analyses_laboratoire_prescrites.sql",
+		    "Analyses de laboratoire prescrites", "Analyses de laboratoire prescrites");
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.labPrescription", "",
+		    props.LAB_PRESCRIPTION_UUID);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void labPerfomed() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("analyses_laboratoire_effectues.sql",
+		    "Analyses de laboratoire effectuées", "Analyses de laboratoire effectuées");
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.labDone", "", props.LAB_DONE_UUID);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 	}
 	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {

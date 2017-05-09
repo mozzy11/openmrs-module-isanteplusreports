@@ -114,13 +114,13 @@ public class IsantePlusReportsUtil {
 	}
 	
 	// has been moved to ReportUtil in reporting module, use the one there
-	@Deprecated
+	/*@Deprecated
 	public static List<Map<String, Object>> simplify(DataSet dataSet) {
 		List<Map<String, Object>> simplified = new ArrayList<Map<String, Object>>();
 		for (DataSetRow row : dataSet) {
 			simplified.add(row.getColumnValuesByKey());
 		}
 		return simplified;
-	}
+	}*/
 	
 }

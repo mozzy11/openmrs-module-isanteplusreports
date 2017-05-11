@@ -11,6 +11,11 @@
 	<packaging>jar</packaging>
 	<name>IsantePlusReports OMOD</name>
 	<description>Omod submodule for IsantePlusReports</description>
+	  <!-- by default rubygems are installed in the target directory, which we don't want, because then they'd need to be reinstalled after every clean -->
+    <properties>
+        <gem.home>${basedir}/.rubygems</gem.home>
+        <gem.path>${basedir}/.rubygems</gem.path>
+    </properties>
 
 	<dependencies>
 		<dependency>
@@ -18,13 +23,6 @@
 			<artifactId>${project.parent.artifactId}-api</artifactId>
 			<version>${project.parent.version}</version>
 		</dependency>
-        <!--<dependency>
-            <groupId>rubygems</groupId>
-            <artifactId>compass</artifactId>
-            <version>0.11.7</version>
-            <type>gem</type>
-            <scope>provided</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>isanteplusreports-api</artifactId>
@@ -41,6 +39,13 @@
 			<scope>provided</scope>
 			<classifier>tests</classifier>
 		</dependency>
+		 <dependency>
+            <groupId>rubygems</groupId>
+            <artifactId>compass</artifactId>
+            <version>0.11.7</version>
+            <type>gem</type>
+            <scope>provided</scope>
+        </dependency>
 
 		<dependency>
 			<groupId>org.openmrs.module</groupId>
@@ -126,16 +131,78 @@
 				</includes>
 			</testResource>
 		</testResources>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.openmrs.maven.plugins</groupId>
 				<artifactId>maven-openmrs-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>init</id>
+						<phase>initialize</phase>
+						<goals>
+							<goal>initialize-module</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>pack</id>
+						<phase>package</phase>
+						<goals>
+							<goal>package-module</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>Expand moduleApplicationContext and messages</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<includeGroupIds>${project.parent.groupId}</includeGroupIds>
+							<includeArtifactIds>${project.parent.artifactId}-api</includeArtifactIds>
+							<excludeTransitive>true</excludeTransitive>
+							<includes>**/*</includes>
+							<outputDirectory>${project.build.directory}/classes</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
+          
 		</plugins>
 	</build>
+	
+	<profiles>
+        <profile>
+            <id>watch-sass</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>de.saumya.mojo</groupId>
+                        <artifactId>gem-maven-plugin</artifactId>
+                        <extensions>true</extensions>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>exec</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <jrubyVersion>1.7.10</jrubyVersion>
+                            <execArgs>${gem.home}/bin/compass watch ${basedir}/src/main/compass</execArgs>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

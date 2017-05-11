@@ -175,14 +175,14 @@
                 "url": "reportingui/runReport.page?reportDefinition=ead22ae8-c3ab-4c27-ab8d-e63ec8658e50",
                 "order": 18,
                 "requiredPrivilege": "App: reportingui.reports"
-            }, 
+            },
             {
 		        "id": "isanteplusreports.overview.dailyRegistrations",
 		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
 		        "type": "link",
 		        "label": "isanteplusreports.patientArvByPeriod",
 		        "url": "isanteplusreports/arvByPeriodReport.page?reportDefinition=ead22ae8-c3ab-4c27-ab8d-e63ec8658e50",
-		        "order": 19,
+		        "order": 22,
 		        "requiredPrivilege": "App: reportingui.reports",
 		        "extensionParams": { "linkId": "isanteplusreports-dailyRegistrationsReport-link" }
 		    },
@@ -190,9 +190,9 @@
 		        "id": "isanteplusreports.overview.patientStartedArv",
 		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataquality",
 		        "type": "link",
-		        "label": "isanteplusreports.patientListStartedARV",
+		        "label": "isanteplusreports.patientStartedArv",
 		        "url": "isanteplusreports/arvByPeriodReport.page?reportDefinition=ead22ae8-c3ab-4c27-ab8d-e63ec8658e50",
-		        "order": 20,
+		        "order": 23,
 		        "requiredPrivilege": "App: reportingui.reports",
 		        "extensionParams": { "linkId": "isanteplusreports-dailyRegistrationsReport-link" }
 		    },
@@ -202,7 +202,7 @@
                 "type": "link",
                 "label": "isanteplusreports.drugsPrescriptionAmount",
                 "url": "reportingui/runReport.page?reportDefinition=184c228b-ff83-41cb-97c3-6bfc7fe5c4c8",
-                "order": 16,
+                "order": 24,
                 "requiredPrivilege": "App: reportingui.reports"
             },
              {
@@ -211,7 +211,7 @@
                 "type": "link",
                 "label": "isanteplusreports.labPrescription",
                 "url": "reportingui/runReport.page?reportDefinition=84f3fc41-c932-411f-b43f-f51cfe4e44a7",
-                "order": 16,
+                "order": 25,
                 "requiredPrivilege": "App: reportingui.reports"
             },
              {
@@ -220,7 +220,34 @@
                 "type": "link",
                 "label": "isanteplusreports.labDone",
                 "url": "reportingui/runReport.page?reportDefinition=0a290fe4-863b-4137-bbd6-c79899baf694",
-                "order": 16,
+                "order": 26,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientStartedArv",
+                "url": "reportingui/runReport.page?reportDefinition=a34a5b4a-13d7-4909-a2ef-557db15411cc",
+                "order": 30,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientArvExpectedDateInThirtyDays",
+                "url": "reportingui/runReport.page?reportDefinition=2bde1a37-dcbc-4e06-8090-72b6d5356abf",
+                "order": 31,
+                "requiredPrivilege": "App: reportingui.reports"
+            }, 
+            {
+                "id": "Address and Diagnosis",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patientArvEnd",
+                "url": "reportingui/runReport.page?reportDefinition=fd4f74f0-4e3b-42a3-bec0-be1367a2e2ce",
+                "order": 32,
                 "requiredPrivilege": "App: reportingui.reports"
             }
             

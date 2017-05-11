@@ -1,4 +1,4 @@
-var app = angular.module('receivingArvReport', ['ui.bootstrap']).
+var app = angular.module('arvByPeriodReport', ['ui.bootstrap']).
 
     filter('translate', function() {
         return function(input, prefix) {
@@ -10,7 +10,7 @@ var app = angular.module('receivingArvReport', ['ui.bootstrap']).
         }
     }).
 
-    controller('ReceivingArvReportController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
+    controller('ArvByPeriodReportController', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 
         function dataFor(date) {
             return $scope.data[date.getTime()];

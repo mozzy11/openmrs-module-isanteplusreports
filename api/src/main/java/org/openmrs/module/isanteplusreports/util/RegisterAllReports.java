@@ -512,6 +512,68 @@ public class RegisterAllReports extends SessionContext {
 	}
 	
 	@DocumentedDefinition("fullDataExports")
+	public void patientStartingArv() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("patientStartingArv.sql",
+		    "Liste des patients ayant démarré un régime ARV", "Liste des patients ayant démarré un régime ARV");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.patientStartedArv", "",
+		    props.PATIENT_STARTED_ARV_REGIMEN_UUID);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+		
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void patientArvThirtyDay() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("patientNextArvInThirtyDay.sql",
+		    "La liste des patients dont la date de renflouement des ARV est prévue dans les 30 prochains jours",
+		    "La liste des patients dont la date de renflouement des ARV est prévue dans les 30 prochains jours");
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.patientArvExpectedDateInThirtyDays", "",
+		    props.PATIENT_ARV_EXPECTATION_IN_THIRTY_DAYS_UUID);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void patientNextArvArrives() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("patientArvEnd.sql",
+		    "La liste des patients dont la date de renflouement des ARV est arrivée à terme",
+		    "La liste des patients dont la date de renflouement des ARV est arrivée à terme");
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.patientArvEnd", "", props.PATIENT_ARV_END);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
 	public void patientsReceivingARVByPeriod() throws Exception {
 		SqlDataSetDefinition sqlData = sqlDataSetDefinition("numberPatientReceivingARVByPeriod.sql",
 		    "Nombre de patients ayant reçu des ARV par période", "Nombre de patients ayant reçu des ARV par période");

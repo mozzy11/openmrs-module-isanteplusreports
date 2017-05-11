@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ArvByPeriodReportPageController {
 	
 	public void get(@SpringBean ReportDefinitionService reportDefinitionService,
-	/* @SpringBean CoreAppsProperties coreAppsProperties,*/
-	@RequestParam("reportDefinition") String reportDefinitionUuid, PageModel model) throws Exception {
+	        @SpringBean CoreAppsProperties coreAppsProperties,
+	        @RequestParam("reportDefinition") String reportDefinitionUuid, PageModel model) throws Exception {
 		
 		if (reportDefinitionUuid.startsWith("@")) {
 			// References a public static field on MirebalaisProperties, e.g. @DAILY_REGISTRATIONS_REPORT_DEFINITION_UUID
@@ -29,7 +29,7 @@ public class ArvByPeriodReportPageController {
 		}
 		
 		model.addAttribute("reportDefinition", reportDefinition);
-		/*model.addAttribute("dashboardUrlWithoutQueryParams", coreAppsProperties.getDashboardUrlWithoutQueryParams());*/
+		//model.addAttribute("dashboardUrlWithoutQueryParams", coreAppsPro.getVisitsPageUrl());
 		model.addAttribute("privilegePatientDashboard", IsantePlusReportsProperties.PRIVILEGE_PATIENT_DASHBOARD);
 		model.addAttribute("hideCounts",
 		    Context.getAdministrationService().getGlobalProperty(IsantePlusReportsProperties.DAILY_CHECKINS_HIDE_COUNTS));

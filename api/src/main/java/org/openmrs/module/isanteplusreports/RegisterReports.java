@@ -33,6 +33,9 @@ public class RegisterReports {
 			register.drugsPrescription();
 			register.labPrescription();
 			register.labPerfomed();
+			register.patientArvThirtyDay();
+			register.patientStartingArv();
+			register.patientNextArvArrives();
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

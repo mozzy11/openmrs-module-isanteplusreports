@@ -10,17 +10,17 @@ import org.openmrs.module.reporting.dataset.DataSetRow;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.report.ReportData;
 import org.openmrs.module.reporting.report.ReportRequest;
-import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.renderer.RenderingException;
 import org.openmrs.module.reporting.report.renderer.ReportDesignRenderer;
-import org.openmrs.module.reporting.report.service.ReportService;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A Default Renderer Implementation that aims to support all ReportDefinitions
@@ -53,8 +53,9 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 		w.write("<html>");
 		w.write("<head>");
 		w.write("<body>");
-		w.write("<button id=\"printButton\" href=\"javascript:window.print()\">Imprimer</button><br/>");
-		w.write("<div id=\"print\">");
+		w.write("<script type=\"text/javascript\"> ui.includeJavascript(\"isanteplusreports\"',' \"print.js\"</script>");
+		// w.write("<button id=\"printButton\" href=\"javascript:window.print()\" onclick='printDiv();'>Imprimer</button><br/>"); 
+		w.write("<div id=\"DivIdToPrint\">");
 		for (String key : results.getDataSets().keySet()) {
 			DataSet dataset = results.getDataSets().get(key);
 			List<DataSetColumn> columns = dataset.getMetaData().getColumns();
@@ -63,7 +64,9 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 			//ReportDefinition repDefinition = new ReportDefinition();
 			//List<Parameter> param=repDefinition.getParameters();
 			//param.
-			//SimpleDateFormat formater = new SimpleDateFormat("dd-MM-yyyy");
+			//SimpleDateFormat formater = new SimpleDateFormat("dd-MMM-yyyy", Locale.getDefault());
+			SimpleDateFormat parseFormater = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.getDefault());
+			SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 			w.write("<h4>" + key + "</h4>");
 			w.write("<table border=\"1\">");
 			w.write("<tr>");
@@ -73,7 +76,20 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 				if (param != null) {
 					w.write("<tr>");
 					w.write("<td><b>" + param.getName() + " :</b></td>");
-					w.write("<td>" + dataset.getContext().getParameterValue(param.getName()) + "</td>");
+					try {
+						if (param.getName().equals("startDate") || param.getName().equals("endDate")) {
+							w.write("<td>"
+							        + formater.format(parseFormater.parse(dataset.getContext()
+							                .getParameterValue(param.getName()).toString())) + "</td>");
+						} else {
+							w.write("<td>" + dataset.getContext().getParameterValue(param.getName()) + "</td>");
+						}
+					}
+					catch (ParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					//String datA = inputFormat.format(inputFormat.parse(request.getParameter("startDate").toString()));
 					/*	if(param.getName().equals("startDate"))
 						{
 							//w.write("<td>"+formater.format(dataset.getContext().getParameterValue(param.getName()).toString())+"</td>");

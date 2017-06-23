@@ -49,4 +49,22 @@ public class IsantePlusReportsProperties extends EmrApiProperties {
 	public final String PATIENT_ARV_EXPECTATION_IN_THIRTY_DAYS_UUID = "2bde1a37-dcbc-4e06-8090-72b6d5356abf";
 	
 	public final String PATIENT_ARV_END = "fd4f74f0-4e3b-42a3-bec0-be1367a2e2ce";
+	
+	public final String INSTITUTION_FREQUENTING_OTHER_BY_USER_UUID = "6cd7ff44-4139-4289-8a1c-125cbb9b305a";
+	
+	public final String INSTITUTION_FREQUENTING_OTHER_BY_USER_AND_DATE_UUID = "ce6214e2-08e5-43bc-8b83-c934e712b28c";
+	
+	public final String INSTITUTION_FREQUENTING = "1ed1cfcf-38f6-460f-b7c0-7fa3ea0dfd2a";
+	
+	public final String INSTITUTION_FREQUENTING_ORDER_BY_DATE = "33c5cee6-8102-43c1-975e-c11b3ce26ea9";
+	
+	public final String ALERT_REPORT_DEFINITION_UUID = "bbb6e146-67f3-49fd-be43-7aeb776def9b";
+	
+	public final String PATIENT_WITH_ONLY_REGISTER_FORM = "dfa9a7a6-629f-46db-9648-60a8ca9214be";
+	
+	public final String HIV_PATIENT_WITHOUT_FIRST_VISIT = "aea43fb1-3bed-4745-a316-4c55cfdd868e";
+	
+	public final String HIV_PATIENT_WITH_ACTIVITY_AFTER_DISC = "1d83343e-9467-42e7-b2dd-a69362802d62";
+	
+	public final String FORM_RECENTLY_FILLED_UUID = "93845fc4-d16e-4594-8497-2afda9d398d6";
 }

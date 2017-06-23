@@ -9,11 +9,17 @@
  */
 package org.openmrs.module.isanteplusreports.api;
 
+import java.util.Date;
+
 import org.openmrs.annotation.Authorized;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsConfig;
 import org.openmrs.module.isanteplusreports.Item;
+import org.openmrs.module.reporting.cohort.definition.CohortDefinition;
+import org.openmrs.module.reporting.dataset.DataSet;
+import org.openmrs.module.reporting.indicator.Indicator;
+import org.openmrs.module.reporting.indicator.dimension.Dimension;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -45,4 +51,29 @@ public interface IsantePlusReportsService extends OpenmrsService {
 	@Authorized(IsantePlusReportsConfig.MODULE_PRIVILEGE)
 	@Transactional
 	Item saveItem(Item item) throws APIException;
+	
+	/**
+	 * @return the CohortDefinition with the passed uuid that is defined in a DefinitionLibrary if
+	 *         none is defined in a DefinitionLibrary it will query the Reporting definition service
+	 */
+	public CohortDefinition getCohortDefinition(String uuid);
+	
+	/**
+	 * @return the Indicator with the passed uuid that is defined in a DefinitionLibrary if none is
+	 *         defined in a DefinitionLibrary it will query the Reporting definition service
+	 */
+	public Indicator getIndicator(String uuid);
+	
+	/**
+	 * @return the Dimension with the passed uuid that is defined in a DefinitionLibrary if none is
+	 *         defined in a DefinitionLibrary it will query the Reporting definition service
+	 */
+	public Dimension getDimension(String uuid);
+	
+	//DataSet patientListArvByPeriod(Integer id, Date startDate, Date endDate);
+	
+	DataSet patientListArvByPeriod(Integer id, String startDate, String endDate);
+	
+	//DataSet patientListArvByPeriod(int parseInt, Date startDate, Date endDate);
+	
 }

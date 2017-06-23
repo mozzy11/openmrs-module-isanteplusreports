@@ -9,6 +9,7 @@
  */
 package org.openmrs.module.isanteplusreports.api.dao;
 
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.openmrs.api.db.hibernate.DbSession;
 import org.openmrs.api.db.hibernate.DbSessionFactory;
@@ -34,4 +35,9 @@ public class IsantePlusReportsDao {
 		getSession().saveOrUpdate(item);
 		return item;
 	}
+	
+	public DbSession getSessionFactoryResult() {
+		return sessionFactory.getCurrentSession();
+	}
+	
 }

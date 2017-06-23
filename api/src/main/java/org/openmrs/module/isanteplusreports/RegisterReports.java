@@ -36,6 +36,14 @@ public class RegisterReports {
 			register.patientArvThirtyDay();
 			register.patientStartingArv();
 			register.patientNextArvArrives();
+			register.institutionFrequentingByUser();
+			register.institutionFrequentingByUserAndDate();
+			register.institutionFrequenting();
+			register.institutionFrequentingByDate();
+			register.saveAlertReport();
+			register.patientWithOnlyRegisterForm();
+			register.hivPatientWithoutFirstVisit();
+			register.hivPatientWithActivityAfterDisc();
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

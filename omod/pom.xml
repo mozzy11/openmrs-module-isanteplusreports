@@ -81,6 +81,16 @@
             <artifactId>coreapps-omod</artifactId>
             <scope>provided</scope>
         </dependency>
+         <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>calculation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+         <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>emrapi-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
 	</dependencies>
     
 		

@@ -15,25 +15,33 @@ var app = angular.module('arvByPeriodReport', ['ui.bootstrap']).
         function dataFor(date) {
             return $scope.data[date.getTime()];
         }
+        function dataEnd(date) {
+            return $scope.data[date.getTime()];
+        }
 
         $scope.data = { };
 
         $scope.viewingCohort = null;
 
-        $scope.maxDay = moment().startOf('day').toDate();
+        $scope.maxstartDate = moment().startOf('startDate').toDate();
 
-        $scope.day = moment().startOf('day').toDate(); // default to today
+        $scope.startDate = moment().startOf('startDate').toDate(); // default to tostartDate
+        
+        $scope.maxstartDateStop = moment().startOf('endDate').toDate();
 
-        $scope.$watch('day', function() {
+        $scope.endDate = moment().startOf('endDate').toDate(); // default to tostartDate
+
+        $scope.$watch('startDate','endDate', function() {
             $scope.viewingCohort = null;
         });
 
         $scope.currentData = function() {
-            var day = $scope.day;
-            if (!dataFor(day)) {
-                evaluate(day);
+            var startDate = $scope.startDate;
+            var endDate = $scope.endDate;
+            if (!dataFor(startDate) && !dataFor(endDate)) {
+                evaluate(startDate,endDate);
             }
-            return dataFor(day);
+            return dataFor(startDate) && dataFor(endDate);
         }
 
         $scope.openDatePicker = function() {
@@ -43,15 +51,15 @@ var app = angular.module('arvByPeriodReport', ['ui.bootstrap']).
         };
 
         $scope.isLoading = function() {
-            return dataFor($scope.day) && dataFor($scope.day).loading;
+            return dataFor($scope.startDate) && dataFor($scope.startDate).loading;
         };
 
         $scope.hasResults = function() {
-            return dataFor($scope.day) && dataFor($scope.day).dataSets;
+            return dataFor($scope.startDate) && dataFor($scope.startDate).dataSets;
         };
 
         $scope.hasResultsWithMembers = function() {
-            var data = dataFor($scope.day);
+            var data = dataFor($scope.startDate);
             if (!data || data.loading) {
                 return false;
             }
@@ -87,23 +95,25 @@ var app = angular.module('arvByPeriodReport', ['ui.bootstrap']).
             }
         }
 
-        function evaluate(day) {
-            var forDay = new Date(day.getTime());
-            if (dataFor(forDay)) {
+        function evaluate(startDate, endDate) {
+            var forstartDate = new Date(startDate.getTime());
+            var forendDate = new Date(endDate.getTime());
+            if (dataFor(forstartDate) && dataFor(forendDate)) {
                 return;
             }
 
-            $scope.data[forDay.getTime()] = { loading: true };
-
-            $http.get('/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/reportingrest/reportdata/' + window.reportDefinition.uuid + '?day=' + moment(forDay).format('YYYY-MM-DD')).
-                success(function(data, status, headers, config) {
-                    $scope.data[forDay.getTime()] = data;
+            $scope.data[forstartDate.getTime()] = { loading: true };
+            $scope.data1[forendDate.getTime()] = { loading: true };
+            $http.get('/' + OPENMRS_CONTEXT_PATH + '/ws/rest/v1/reportingrest/reportdata/' + window.reportDefinition.uuid + '?startDate=' + moment(forstartDate).format('YYYY-MM-DD') + '&endDate=' + moment(forendDate).format('YYYY-MM-DD')).
+                success(function(data, data1, status, headers, config) {
+                    $scope.data[forstartDate.getTime()] = data;
+                    $scope.data1[forendDate.getTime()] = data1;
                 });
         }
 
-        $scope.viewCohort = function(day, row, column) {
-            day = new Date(day.getTime());
-
+        $scope.viewCohort = function(startDate, endDate, row, column) {
+            startDate = new Date(startDate.getTime());
+            endDate = new Date(endDate.getTime());
             var ptIds = row[column.name].memberIds;
             if (ptIds == null || ptIds.length == 0) {
                 $scope.viewingCohort = null;
@@ -120,11 +130,12 @@ var app = angular.module('arvByPeriodReport', ['ui.bootstrap']).
                     $scope.viewingCohort = {
                         row: row,
                         column: column,
-                        day: day,
+                        startDate: startDate,
+                        endDate: endDate,
                         members: data.members
                     };
                 });
         }
 
-        evaluate($scope.day);
+        evaluate($scope.startDate,$scope.endDate);
     }]);

@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import org.openmrs.Cohort;
 import org.openmrs.module.reporting.dataset.DataSet;
@@ -43,6 +46,8 @@ public class IsantePlusReportsOtherHtmlReportRenderer extends ReportDesignRender
 		w.write("<html>");
 		w.write("<head>");
 		w.write("<body>");
+		SimpleDateFormat parseFormater = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.getDefault());
+		SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 		for (String key : results.getDataSets().keySet()) {
 			DataSet dataset = results.getDataSets().get(key);
 			List<DataSetColumn> columns = dataset.getMetaData().getColumns();
@@ -54,7 +59,20 @@ public class IsantePlusReportsOtherHtmlReportRenderer extends ReportDesignRender
 					if (param != null) {
 						w.write("<tr>");
 						w.write("<td><b>" + param.getName() + " :</b></td>");
-						w.write("<td>" + dataset.getContext().getParameterValue(param.getName()) + "</td>");
+						try {
+							if (param.getName().equals("startDate") || param.getName().equals("endDate")) {
+								w.write("<td>"
+								        + formater.format(parseFormater.parse(dataset.getContext()
+								                .getParameterValue(param.getName()).toString())) + "</td>");
+							} else {
+								w.write("<td>" + dataset.getContext().getParameterValue(param.getName()) + "</td>");
+							}
+						}
+						catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						w.write("</tr>");
 					}
 				}

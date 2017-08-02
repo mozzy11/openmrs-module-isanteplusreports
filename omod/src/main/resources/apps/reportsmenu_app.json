@@ -319,10 +319,135 @@
 		        "url": "isanteplusreports/formRecentlyFilled.page",
 		        "order": 42,
 		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_pregnancy_women_hiv_tested",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_pregnancy_women_hiv_tested",
+		      	"url": "reportingui/runReport.page?reportDefinition=7a55fec8-6189-4e0f-9742-a462e4dbc189",
+		        "order": 43,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_prenancy_women_vih_positive",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_prenancy_women_vih_positive",
+		      	"url": "reportingui/runReport.page?reportDefinition=f5c6a8db-73cb-4537-b2ce-833cf850fad4",
+		        "order": 44,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.community_arv_distribution",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.community_arv_distribution",
+		      	"url": "reportingui/runReport.page?reportDefinition=437469a1-7112-47a7-b48a-6cec7bf87260",
+		        "order": 45,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.pregnancy_women_on_haart",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.pregnancy_women_on_haart",
+		      	"url": "reportingui/runReport.page?reportDefinition=b3c29c8d-6918-4b16-90b7-aff3d1204860",
+		        "order": 46,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.pregnancy_women_tested_for_syphilis",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.pregnancy_women_tested_for_syphilis",
+		      	"url": "reportingui/runReport.page?reportDefinition=23f61edd-76b1-4e68-a24d-c3c16a91436d",
+		        "order": 47,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.pregnancy_women_diagnosed_with_syphilis",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.pregnancy_women_diagnosed_with_syphilis",
+		      	"url": "reportingui/runReport.page?reportDefinition=613d0119-cb40-4fed-aa67-56f032a20cc9",
+		        "order": 48,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_prenatal_visit_by_site",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_prenatal_visit_by_site",
+		      	"url": "reportingui/runReport.page?reportDefinition=b7f7ea96-3fe4-4a17-99b5-1ad2cdaadf50",
+		        "order": 49,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_pregnancy_women_had_first_consultation_prenatal",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_pregnancy_women_had_first_consultation_prenatal",
+		      	"url": "reportingui/runReport.page?reportDefinition=60051dfe-85f3-45e1-9df2-a45bbed2918b",
+		        "order": 50,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital",
+		      	"url": "reportingui/runReport.page?reportDefinition=a366a646-382a-4eb1-b2a7-16282579c9df",
+		        "order": 51,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.exposed_infants_register_in_ptme_program",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.exposed_infants_register_in_ptme_program",
+		      	"url": "reportingui/runReport.page?reportDefinition=f786f658-c9a8-4a3b-bfc1-6232807ef8fe",
+		        "order": 52,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_infants_from_mother_on_prophylaxis",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_infants_from_mother_on_prophylaxis",
+		      	"url": "reportingui/runReport.page?reportDefinition=d0ba4eba-dc36-4adc-9c0e-f0eb244fd279",
+		        "order": 53,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.frequency_prenatal_visits_per_patient",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.frequency_prenatal_visits_per_patient",
+		      	"url": "reportingui/runReport.page?reportDefinition=6d2de0f7-2396-4e17-9399-5a704b3ea7f9",
+		        "order": 54,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_exposed_infants_tested_by_pcr",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_exposed_infants_tested_by_pcr",
+		      	"url": "reportingui/runReport.page?reportDefinition=314972cc-0d5c-45c6-9445-54a942e96b43",
+		        "order": 55,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_exposed_infants_confirmed_hiv",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.number_exposed_infants_confirmed_hiv",
+		      	"url": "reportingui/runReport.page?reportDefinition=1c072b8f-2740-4cb4-aff7-6d0095df2437",
+		        "order": 56,
+		        "requiredPrivilege": "App: reportingui.reports"
 		    }
-            
-           
 		    
+           
         ],
         "requiredPrivilege": "App: reportingui.reports"
     }

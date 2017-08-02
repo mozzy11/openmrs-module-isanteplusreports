@@ -65,7 +65,9 @@
         <% } else formRecentlyFilled.each { %>
             <tr id="obs-id-${ it.getColumnValue("numero") }">
                 <td>
-                    ${ ui.format(it.getColumnValue("numero")) }
+                	<a target="_blank" href="${ "/" + contextPath + dashboardUrlWithoutQueryParams }?patientId=${ui.format(it.getColumnValue("patient_id"))}" target="_blank">
+                    	${ ui.format(it.getColumnValue("numero")) }
+                    </a>
                 </td>
                  <td>
                      ${ ui.format(it.getColumnValue("utilisateur")) }
@@ -82,7 +84,9 @@
                     ${ ui.format(it.getColumnValue("modification")) }
                 </td>
                 <td>
-                    ${ ui.format(it.getColumnValue("fiches")) }
+                    <a href="${ "/" + contextPath + "/" }htmlformentryui/htmlform/editHtmlFormWithStandardUi.page?patientId=${ ui.format(it.getColumnValue("patient_id")) }&formUuid=${ ui.format(it.getColumnValue("form_uuid")) }&encounterId=${ ui.format(it.getColumnValue("encounter_uuid")) }" target="_blank">
+                    	${ ui.format(it.getColumnValue("fiches")) }
+                    </a>
                 </td>
             </tr>
         <% } %>

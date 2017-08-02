@@ -22,6 +22,7 @@ public class FormRecentlyFilledPageController {
 	private final Log log = LogFactory.getLog(getClass());
 	
 	public void get(@SpringBean FormRecentlyFilledReportManager reportManager,
+	        @SpringBean CoreAppsProperties coreAppsProperties,
 	        @RequestParam(required = false, value = "total") String total, PageModel model) throws EvaluationException,
 	        IOException {
 		Integer tot = 0;
@@ -32,6 +33,7 @@ public class FormRecentlyFilledPageController {
 		model.addAttribute("reportManager", reportManager);
 		model.addAttribute("formRecentlyFilled", null);
 		model.addAttribute("total", null);
+		model.addAttribute("dashboardUrlWithoutQueryParams", coreAppsProperties.getDashboardUrlWithoutQueryParams());
 		
 	}
 	
@@ -41,11 +43,12 @@ public class FormRecentlyFilledPageController {
 	        IOException {
 		
 		Integer tot = 0;
-		if (total == null) {
+		if (total == null || total == "" || Integer.parseInt(total) <= 0) {
 			total = "100";
 			tot = Integer.parseInt(total);
+		} else {
+			tot = Integer.parseInt(total);
 		}
-		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("total", tot);
 		EvaluationContext context = reportManager.initializeContext(params);
@@ -56,6 +59,7 @@ public class FormRecentlyFilledPageController {
 		model.addAttribute("formRecentlyFilled", reportData.getDataSets().get(FormRecentlyFilledReportManager.DATA_SET_NAME));
 		model.addAttribute("dashboardUrl", coreAppsProperties.getDashboardUrl());
 		model.addAttribute("total", total);
+		model.addAttribute("dashboardUrlWithoutQueryParams", coreAppsProperties.getDashboardUrlWithoutQueryParams());
 	}
 	
 }

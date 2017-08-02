@@ -16,7 +16,10 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A Default Renderer Implementation that aims to support all ReportDefinitions
@@ -54,7 +57,8 @@ public class IsantePlusOtherHtmlReportRenderer extends ReportDesignRenderer {
 			DataSet dataset = results.getDataSets().get(key);
 			List<DataSetColumn> columns = dataset.getMetaData().getColumns();
 			List<Parameter> parameter = dataset.getDefinition().getParameters();
-			
+			SimpleDateFormat parseFormater = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.getDefault());
+			SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 			w.write("<h4>" + key + "</h4>");
 			if (dataset != null) {
 				w.write("<table id=\"simple-html-parameter-" + key + "\" class=\"display simple-html-parameter" + key
@@ -63,7 +67,20 @@ public class IsantePlusOtherHtmlReportRenderer extends ReportDesignRenderer {
 					if (param != null) {
 						w.write("<tr>");
 						w.write("<td><b>" + param.getName() + " :</b></td>");
-						w.write("<td>" + dataset.getContext().getParameterValue(param.getName()) + "</td>");
+						try {
+							if (param.getName().equals("startDate") || param.getName().equals("endDate")) {
+								w.write("<td>"
+								        + formater.format(parseFormater.parse(dataset.getContext()
+								                .getParameterValue(param.getName()).toString())) + "</td>");
+							} else {
+								w.write("<td>" + dataset.getContext().getParameterValue(param.getName()) + "</td>");
+							}
+						}
+						catch (ParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
 						w.write("</tr>");
 					}
 				}

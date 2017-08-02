@@ -49,7 +49,7 @@ public class FormRecentlyFilledDataSetEvaluator implements DataSetEvaluator {
 		                + " p.st_id as 'No. de patient attribué par le site', usr.username as utilisateur, entype.name as Fiche,"
 		                + " DATE(enc.date_created) as 'Date de création',"
 		                + " CASE WHEN enc.date_changed is null then enc.date_created ELSE enc.date_changed  END as 'Dernière modification',"
-		                + " f.name as Fiches");
+		                + " f.name as Fiches, p.patient_id,f.uuid as formUuid, enc.uuid as encounterUuid");
 		sqlQuery.append(" FROM isanteplus.patient p, openmrs.encounter enc, openmrs.encounter_type entype, openmrs.form f, openmrs.users usr");
 		sqlQuery.append(" WHERE p.patient_id=enc.patient_id");
 		sqlQuery.append(" AND enc.encounter_type=entype.encounter_type_id");
@@ -61,9 +61,10 @@ public class FormRecentlyFilledDataSetEvaluator implements DataSetEvaluator {
 		}
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
 		//query.setInteger("primaryIdentifierType", primaryIdentifierType.getId());
-		/*if (startDate != null) {
-			query.setTimestamp("startDate", startDate);
+		if (total != null) {
+			query.setInteger("total", total);
 		}
+		/*
 		if (startDate != null) {
 			query.setTimestamp("endDate", endDate);
 		}*/
@@ -78,6 +79,9 @@ public class FormRecentlyFilledDataSetEvaluator implements DataSetEvaluator {
 			row.addColumnValue(new DataSetColumn("creation", "creation", String.class), o[3]);
 			row.addColumnValue(new DataSetColumn("modification", "modification", String.class), o[4]);
 			row.addColumnValue(new DataSetColumn("fiches", "fiches", String.class), o[5]);
+			row.addColumnValue(new DataSetColumn("patient_id", "patient_id", String.class), o[6]);
+			row.addColumnValue(new DataSetColumn("form_uuid", "form_uuid", String.class), o[7]);
+			row.addColumnValue(new DataSetColumn("encounter_uuid", "encounter_uuid", String.class), o[8]);
 			dataSet.addRow(row);
 		}
 		return dataSet;

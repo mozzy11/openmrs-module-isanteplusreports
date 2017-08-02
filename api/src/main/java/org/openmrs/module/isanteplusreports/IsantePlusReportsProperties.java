@@ -67,4 +67,32 @@ public class IsantePlusReportsProperties extends EmrApiProperties {
 	public final String HIV_PATIENT_WITH_ACTIVITY_AFTER_DISC = "1d83343e-9467-42e7-b2dd-a69362802d62";
 	
 	public final String FORM_RECENTLY_FILLED_UUID = "93845fc4-d16e-4594-8497-2afda9d398d6";
+	
+	public final String NUMBER_PREGNANT_WOMEN_HIV_TESTED_UUID = "7a55fec8-6189-4e0f-9742-a462e4dbc189";
+	
+	public final String NUMBER_PREGNANT_WOMEN_HIV_POSITIVE_UUID = "f5c6a8db-73cb-4537-b2ce-833cf850fad4";
+	
+	public final String COMMUNITY_ARV_DISTRIBUTION_UUID = "437469a1-7112-47a7-b48a-6cec7bf87260";
+	
+	public final String PREGNANCY_WOMEN_ON_HAART_UUID = "b3c29c8d-6918-4b16-90b7-aff3d1204860";
+	
+	public final String PREGNANCY_WOMEN_TESTED_FOR_SYPHILIS_UUID = "23f61edd-76b1-4e68-a24d-c3c16a91436d";
+	
+	public final String PREGNANCY_WOMEN_DIAGNOSED_WITH_SYPHILIS = "613d0119-cb40-4fed-aa67-56f032a20cc9";
+	
+	public final String NUMBER_PRENATAL_VISIT_BY_SITE_UUID = "b7f7ea96-3fe4-4a17-99b5-1ad2cdaadf50";
+	
+	public final String NUMBER_PREGNANCY_WOMEN_HAD_FIRST_PRENATAL_CONSULTATION = "60051dfe-85f3-45e1-9df2-a45bbed2918b";
+	
+	public final String NUMBER_HIV_PREGNANCY_WOMEN_GAVE_BIRTH_AT_HOSP = "a366a646-382a-4eb1-b2a7-16282579c9df";
+	
+	public final String EXPOSED_INFANT_WITH_MOTHER_IN_PTME_UUID = "f786f658-c9a8-4a3b-bfc1-6232807ef8fe";
+	
+	public final String NUMBER_INFANTS_FROM_MOTHER_ON_PROPHYLAXIS = "d0ba4eba-dc36-4adc-9c0e-f0eb244fd279";
+	
+	public final String FREQUENCY_PRENATAL_VISITS_PER_PATIENT_UUID = "6d2de0f7-2396-4e17-9399-5a704b3ea7f9";
+	
+	public final String NUMBER_EXPOSED_INFANTS_TESTED_BY_PCR_UUID = "314972cc-0d5c-45c6-9445-54a942e96b43";
+	
+	public final String NUMBER_EXPOSED_INFANTS_CONFIRMED_HIV_UUID = "1c072b8f-2740-4cb4-aff7-6d0095df2437";
 }

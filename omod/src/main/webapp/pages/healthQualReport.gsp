@@ -62,9 +62,9 @@
             <table id="indicators" style="display:block; width: 100%; padding-top: 11px;">
                 <thead>
                     <tr>
-                        <th style="width:100%">Indicator</th>
-                        <th>Options</th>
-                        <th>Selection</th>
+                        <th style="width:100%">${ ui.message("isanteplusreports.healthqual.indicator.label") }</th>
+                        <th>${ ui.message("isanteplusreports.healthqual.options.label") }</th>
+                        <th>${ ui.message("isanteplusreports.healthqual.selection.label") }</th>
                     </tr>
                 </thead>
                 <tbody>

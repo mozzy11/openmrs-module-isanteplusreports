@@ -31,9 +31,9 @@ public class HealthQualReportPageController {
 		}
 		startDate = DateUtil.getStartOfDay(startDate);
 		endDate = DateUtil.getEndOfDay(endDate);
-
+		
 		model.addAttribute("reportManager", reportManager);
-
+		
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 	}
@@ -51,9 +51,9 @@ public class HealthQualReportPageController {
 		}
 		startDate = DateUtil.getStartOfDay(startDate);
 		endDate = DateUtil.getEndOfDay(endDate);
-
+		
 		model.addAttribute("reportManager", reportManager);
-
+		
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 	}

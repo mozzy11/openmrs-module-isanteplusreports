@@ -21,7 +21,7 @@
         var indicators = parseIndicators(form);
         
         jq("#codedIndicators").remove();    // if it exists
-        form.append("<input id='codedIndicators' type='hidden' name='indicators' value='" + JSON.stringify(indicators) + "'/>");
+        form.append("<input id='codedIndicators' type='hidden' name='indicatorList' value='" + JSON.stringify(indicators) + "'/>");
     }
 
     function parseIndicators(form) {

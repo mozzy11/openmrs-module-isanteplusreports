@@ -1,10 +1,12 @@
 package org.openmrs.module.isanteplusreports.model;
 
+import java.util.Map;
+
 public class HealthQualIndicator {
 	
 	private String uuid;
 	
-	private Integer option;
+	private Map<String, Object> option;
 	
 	public String getUuid() {
 		return uuid;
@@ -14,11 +16,11 @@ public class HealthQualIndicator {
 		this.uuid = uuid;
 	}
 	
-	public Integer getOption() {
+	public Map<String, Object> getOption() {
 		return option;
 	}
 	
-	public void setOption(Integer option) {
+	public void setOption(Map<String, Object> option) {
 		this.option = option;
 	}
 }

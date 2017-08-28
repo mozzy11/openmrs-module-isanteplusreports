@@ -31,10 +31,14 @@
         indicators.each(function() {
             var indicator = jq(this);
             if (indicator.find("[name=selection]").prop('checked') === true) {
+                var map = new Object();
+                indicator.find('[name=options]').each(function(){
+                    map[jq(this).attr('id')] = indicator.find('[name=options] :selected').val();
+                }).get()
                 parsedIndicators.push(
                     createIndicator(
                         indicator.attr('id'),
-                        indicator.find('[name=options] :selected').val()
+                        map
                     )
                 );
             }
@@ -116,8 +120,8 @@
                         <td>Retention of patients on ARV treatment</td>
                         <td style="text-align: center;">
                             <div>
-                                <label style="display:inline-block;">Peroid:</label> 
-                                <select name="options" style="display:inline-block; margin: 0; min-width:120px; ">
+                                <label style="display:inline-block;">Period:</label> 
+                                <select id="period" name="options" style="display:inline-block; margin: 0; min-width:120px; ">
                                     <option value="6">6 months</option>
                                     <option value="12">12 months</option>
                                     <option value="24">24 months</option>

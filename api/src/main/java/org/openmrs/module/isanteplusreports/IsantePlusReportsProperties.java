@@ -1,14 +1,11 @@
 package org.openmrs.module.isanteplusreports;
 
-import org.openmrs.module.emrapi.EmrApiProperties;
+//import org.openmrs.module.emrapi.EmrApiProperties;
 
-public class IsantePlusReportsProperties extends EmrApiProperties {
+public class IsantePlusReportsProperties{
 	
 	//***** PRIVILEGES ******
 	public static final String PRIVILEGE_PATIENT_DASHBOARD = "App: coreapps.patientDashboard";
-	
-	//***** GLOBAL PROPERTIES ******
-	public static final String DAILY_CHECKINS_HIDE_COUNTS = "isanteplusreports.dailyCheckins.hideCounts";
 	
 	public final String SEVEN_DAYS_REPORT_DEFINITION_UUID = "1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2";
 	
@@ -95,4 +92,14 @@ public class IsantePlusReportsProperties extends EmrApiProperties {
 	public final String NUMBER_EXPOSED_INFANTS_TESTED_BY_PCR_UUID = "314972cc-0d5c-45c6-9445-54a942e96b43";
 	
 	public final String NUMBER_EXPOSED_INFANTS_CONFIRMED_HIV_UUID = "1c072b8f-2740-4cb4-aff7-6d0095df2437";
+	
+	public final String NUMBER_WOMEN_SEEN_FIRST_PRENATAL_VISIT_FIRST_SEMESTER_UUID = "99dd9482-6e97-49be-8e6e-123ba8f689cb";
+	
+	public final String NUMBER_PATIENTS_BY_ARV_STATUS_UUID = "28cf5e0c-e1d6-49de-8b24-eb165a242d69";
+	
+	public final String HIV_TRANSMISSION_RISKS_FACTOR_UUID = "b66e2895-d766-4fad-b12f-19b979c82d06";
+	
+	public final String NUMBER_VISITS_BY_PREGNANT_WOMEN_UUID = "6647de56-ada8-4a01-a5ed-3e8db17d3957";
+	
+	public final String LIST_VISITS_BY_PREGNANT_WOMEN_UUID = "a3d743f9-fc42-429e-bd71-e2b9e375cc61";
 }

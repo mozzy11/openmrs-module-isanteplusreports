@@ -50,8 +50,8 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 	@Autowired
 	private DbSessionFactory sessionFactory;
 	
-	@Autowired
-	private EmrApiProperties emrApiProperties;
+	/*@Autowired
+	private EmrApiProperties emrApiProperties;*/
 	
 	/**
 	 * Injected in moduleApplicationContext.xml
@@ -130,7 +130,7 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		if (id == 121) {
 			result = " > 120";
 		}
-		PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
+		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder("select "
 		        + "distinct p.patient_id, p.national_id as national_id, p.given_name as Prénom, p.family_name as Nom");
 		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv");

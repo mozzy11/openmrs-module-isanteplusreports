@@ -18,11 +18,12 @@ public class RegisterReports {
 	public void registerReports() {
 		try {
 			
-			//String version = ModuleFactory.getModuleById("isanteplusreports").getVersion();
-			//String oldversion = Context.getAdministrationService().getGlobalProperty("reports.moduleVersion");
-			//if (!version.equals(oldversion)) {
+			String version = ModuleFactory.getModuleById("isanteplusreports").getVersion();
+			String oldversion = Context.getAdministrationService().getGlobalProperty("reports.moduleVersion");
+			if (!version.equals(oldversion)) {
 			RegisterAllReports register = new RegisterAllReports();
 			register.cleanTables();
+			register.cleanReportsRequest();
 			register.nextVisitSevenDays();
 			register.nextVisitFourteenDays();
 			register.patientAgeGroup();
@@ -65,8 +66,13 @@ public class RegisterReports {
 			register.frequencyPrenatalVisitsPerPatient();
 			register.numberExposedInfantsTestedByPcr();
 			register.numberExposedInfantsConfirmedHiv();
-			//Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
-			//}
+			register.numberWomenFirstPrenatalVisitFirstTrimester();
+			register.numberPatientsByArvStatus();
+			register.hivTransmissionRisksFactor();
+			register.numberVisitsByPregnantWomenToClinic();
+			register.ListVisitsByPregnantWomenToClinic();
+			Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
+			}
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

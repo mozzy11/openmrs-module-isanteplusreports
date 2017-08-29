@@ -86,22 +86,11 @@
                 <legend>
                     ${ ui.message("reportingui.runReport.run.legend") }
                 </legend>
-
-                     
-                    <% for (int i=0; i < reportManager.parameters.size(); i++) { %>
-                    <% def parameter = reportManager.parameters.get(i); %> 
-                    
-                        <p id="parameter${i}Section">
-                            <% if (parameter.name == "startDate") { %>
-                                ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "startDateField", "label": parameter.label, "formFieldName": "startDate", "defaultDate": startDate, "useTime": false ]) }
-                            <% } else if (parameter.name == "endDate") { %>
-                                ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "endDateField", "label": parameter.label, "formFieldName": "endDate", "defaultDate": endDate, "useTime": false ]) }
-                            <% } %>
-                        <p>
-
-                    <% } %>
-
-                    <button id="submit" type="submit">${ ui.message("reportingui.runButtonLabel") }</button>
+                <p id="parameterSection">
+                    ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "startDateField", "label": "From Date", "formFieldName": "startDate", "defaultDate": startDate, "useTime": false ]) }
+                    ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "endDateField", "label": "To Date", "formFieldName": "endDate", "defaultDate": endDate, "useTime": false ]) }
+                <p>
+                <button id="submit" type="submit">${ ui.message("reportingui.runButtonLabel") }</button>
             </fieldset>
 
             <table id="indicators" style="display:block; width: 100%; padding-top: 11px;">
@@ -116,26 +105,34 @@
                     <tr>
                         <th class="indicatorsHeader" colspan="3"><i>Adult Indicators</i></th>
                     </tr>
-                    <tr id="sampleGuid" class="indicator">
-                        <td>Retention of patients on ARV treatment</td>
-                        <td style="text-align: center;">
-                            <div>
-                                <label style="display:inline-block;">Period:</label> 
-                                <select id="period" name="options" style="display:inline-block; margin: 0; min-width:120px; ">
-                                    <option value="6">6 months</option>
-                                    <option value="12">12 months</option>
-                                    <option value="24">24 months</option>
-                                    <option value="48">48 months</option>
-                                    <option value="60">60 months</option>
-                                </select>
-                            <div>
-                        </td>
-                        <td style="text-align: center;">
-                            <div style="display:inline-block">
-                                <input name="selection" type="checkbox"/>
-                            </div>
-                        </td>
-                    </tr>
+
+                    <%  manager.getAdultIndicators().each { adultIndicator -> %>
+                        <tr id="${ adultIndicator.getUuid() }" class="indicator">
+                            <td>
+                                ${ adultIndicator.getName() }
+                                ${ adultIndicator.getName() }
+                            </td>
+                            <td style="text-align: center;">
+                                <% if (adultIndicator.getOption().isSet()) { %>
+                                    <label style="display:inline-block;">
+                                        ${adultIndicator.getOption().getLabel()}:
+                                    </label> 
+                                    <select id="${adultIndicator.getOption().getId()}" name="options" style="display:inline-block; margin: 0; min-width:120px; ">
+                                        <%  adultIndicator.getOption().getValues().each { optionValue -> %>
+                                            <option value="${optionValue}">
+                                                ${optionValue}
+                                            </option>
+                                        <% } %>
+                                    </select>
+                                <% } %>
+                            </td>
+                            <td style="text-align: center;">
+                                <div style="display:inline-block">
+                                    <input name="selection" type="checkbox"/>
+                                </div>
+                            </td>
+                        </tr>
+                    <% } %>
                 </tbody>
             </table>
         </form>

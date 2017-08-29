@@ -137,12 +137,11 @@
             </table>
         </form>
 
-        <% if (startDate != null || endDate != null) { %>
+        <% if (divWithResult != null) { %>
             <h3> 
-                ${ ui.message("isanteplusreports.healthqual.label") } - response
+                ${ ui.message("isanteplusreports.healthqual.label") } - data
             </h3>
-            <table id="non-coded-diagnoses" width="100%" border="1" cellspacing="0" cellpadding="2">
-            </table>
+            <%= divWithResult %>
         <% } %>
    </div>
    

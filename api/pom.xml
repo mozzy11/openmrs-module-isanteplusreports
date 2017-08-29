@@ -113,6 +113,10 @@
 		</dependency>
 				
 		<!-- End OpenMRS core -->
-		
+
+		<dependency>
+			<groupId>com.j2html</groupId>
+			<artifactId>j2html</artifactId>
+		</dependency>
 	</dependencies>
 </project>

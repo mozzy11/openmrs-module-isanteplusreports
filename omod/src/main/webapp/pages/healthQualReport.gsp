@@ -116,7 +116,7 @@
                     <tr>
                         <th class="indicatorsHeader" colspan="3"><i>Adult Indicators</i></th>
                     </tr>
-                    <tr id="sampleGuid" class="indicator">
+                    <tr id="1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2" class="indicator">
                         <td>Retention of patients on ARV treatment</td>
                         <td style="text-align: center;">
                             <div>
@@ -140,12 +140,11 @@
             </table>
         </form>
 
-        <% if (startDate != null || endDate != null) { %>
+        <% if (divWithResult != null) { %>
             <h3> 
-                ${ ui.message("isanteplusreports.healthqual.label") } - response
+                ${ ui.message("isanteplusreports.healthqual.label") } - data
             </h3>
-            <table id="non-coded-diagnoses" width="100%" border="1" cellspacing="0" cellpadding="2">
-            </table>
+            <%= divWithResult %>
         <% } %>
    </div>
    

@@ -125,7 +125,7 @@
 
         <% if (divWithResult != null) { %>
             <h3> 
-                ${ ui.message("isanteplusreports.healthqual.label") } - data
+                ${ ui.message("isanteplusreports.healthqual.result.label") }
             </h3>
             <%= divWithResult %>
         <% } %>

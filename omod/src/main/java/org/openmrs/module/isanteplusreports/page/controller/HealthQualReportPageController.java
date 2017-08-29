@@ -90,7 +90,7 @@ public class HealthQualReportPageController {
 				builder.addReportData(reportDefinitionService.evaluate(reportDefinition, context));
 			}
 			catch (EvaluationException e) {
-				log.error("Evaluation exception was thrown");
+				log.error("Report evaluation exception was thrown");
 				throw e;
 			}
 			

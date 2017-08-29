@@ -8,6 +8,8 @@ import java.util.List;
 
 import j2html.tags.ContainerTag;
 import org.apache.commons.lang3.builder.Builder;
+import org.openmrs.module.reporting.dataset.DataSet;
+import org.openmrs.module.reporting.report.ReportData;
 
 import static j2html.TagCreator.div;
 import static j2html.TagCreator.table;
@@ -31,7 +33,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	private ContainerTag[] rows;
 	
-	private List<Object> reportData;
+	private List<DataSet> dataSets;
 	
 	private String clinicDepartment;
 	
@@ -40,7 +42,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	@Override
 	public String build() {
 		ContainerTag tables = div();
-		Iterator<Object> iterator = getReportData().iterator();
+		Iterator<DataSet> iterator = getDataSets().iterator();
 		while (iterator.hasNext()) {
 			tables.with(buildOneTable(iterator));
 			setRows(null); // clear already built table
@@ -49,7 +51,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		return tables.render();
 	}
 	
-	private ContainerTag buildOneTable(Iterator<Object> iterator) {
+	private ContainerTag buildOneTable(Iterator<DataSet> iterator) {
 		buildClinicInfoTable();
 		buildLegend();
 		buildPatientsInfo();
@@ -70,7 +72,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		
 		labels.with(th("Dept.").withClass("label"), th("Clinic").withClass("label"));
 		
-		data.with(td("A").attr("rowspan", "3"), td("B").attr("rowspan", "3"));
+		data.with(td(clinicDepartment).attr("rowspan", "3"), td(clinic).attr("rowspan", "3"));
 		
 	}
 	
@@ -78,21 +80,21 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		fillEmptyRow(getRows()[0], 1);
 		fillEmptyRow(getRows()[1], 1);
 		
-		getRows()[2].with(th("Type").withClass("label"));
-		getRows()[3].with(td("Adult").withClass("label"));
-		getRows()[4].with(td("Ped").withClass("label"));
-		getRows()[5].with(td("Total").withClass("label").withClass("total"));
+		getRows()[2].with(th("<Type>").withClass("label"));
+		getRows()[3].with(td("<Adult>").withClass("label"));
+		getRows()[4].with(td("<Ped>").withClass("label"));
+		getRows()[5].with(td("<Total>").withClass("label").withClass("total"));
 	}
 	
 	private void buildPatientsInfo() {
 		fillEmptyRow(getRows()[0], 3);
 		
-		getRows()[1].with(th("Patients actifs").attr("colspan", "3").withClass("label"));
+		getRows()[1].with(th("<Patients actifs>").attr("colspan", "3").withClass("label"));
 		
 		buildIndicatorSummary(createSummaryArray(11, 22, 33, 44));
 	}
 	
-	private void buildIndicator(Object data) {
+	private void buildIndicator(DataSet data) {
 		getRows()[0].with(td("<Indicator Name>").attr("colspan", "9").withClass("indicatorLabel"));
 		getRows()[1].with(td("<Nominator>").attr("colspan", "3").withClass("label"), td("<Denominator>")
 		        .attr("colspan", "3").withClass("label"), td("%").attr("colspan", "3").withClass("label"));
@@ -181,19 +183,23 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		this.rows = rows;
 	}
 	
-	public List<Object> getReportData() {
-		if (reportData == null) {
-			reportData = new LinkedList<Object>();
+	public List<DataSet> getDataSets() {
+		if (dataSets == null) {
+			dataSets = new LinkedList<DataSet>();
 		}
-		return reportData;
+		return dataSets;
 	}
 	
-	public void addReportData(Object i) {
-		getReportData().add(i);
+	public void setDataSets(List<DataSet> dataSets) {
+		this.dataSets = dataSets;
 	}
 	
-	public void setReportData(List<Object> reportData) {
-		this.reportData = reportData;
+	public void addDataSet(DataSet i) {
+		getDataSets().add(i);
+	}
+	
+	public void addReportData(ReportData reportData) {
+		getDataSets().addAll(reportData.getDataSets().values());
 	}
 	
 	public int getNumberOfIndicatorsInOneTable() {

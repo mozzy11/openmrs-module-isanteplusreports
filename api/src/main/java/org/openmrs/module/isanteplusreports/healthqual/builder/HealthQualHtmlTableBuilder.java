@@ -53,7 +53,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	private ContainerTag buildOneTable(Iterator<DataSet> iterator) {
 		buildClinicInfoTable();
-		buildLegend();
+		// buildLegend();
 		buildPatientsInfo();
 		
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
@@ -73,25 +73,24 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		labels.with(th("Dept.").withClass("label"), th("Clinic").withClass("label"));
 		
 		data.with(td(clinicDepartment).attr("rowspan", "3"), td(clinic).attr("rowspan", "3"));
-		
 	}
 	
-	private void buildLegend() {
-		fillEmptyRow(getRows()[0], 1);
-		fillEmptyRow(getRows()[1], 1);
-		
-		getRows()[2].with(th("<Type>").withClass("label"));
-		getRows()[3].with(td("<Adult>").withClass("label"));
-		getRows()[4].with(td("<Ped>").withClass("label"));
-		getRows()[5].with(td("<Total>").withClass("label").withClass("total"));
-	}
+	//	private void buildLegend() {
+	//		fillEmptyRow(getRows()[0], 1);
+	//		fillEmptyRow(getRows()[1], 1);
+	//
+	//		getRows()[2].with(th("<Type>").withClass("label"));
+	//		getRows()[3].with(td("<Adult>").withClass("label"));
+	//		getRows()[4].with(td("<Ped>").withClass("label"));
+	//		getRows()[5].with(td("<Total>").withClass("label").withClass("total"));
+	//	}
 	
 	private void buildPatientsInfo() {
 		fillEmptyRow(getRows()[0], 3);
 		
 		getRows()[1].with(th("<Patients actifs>").attr("colspan", "3").withClass("label"));
 		
-		buildIndicatorSummary(createSummaryArray(11, 22, 33, 44));
+		buildIndicatorSummary(createSummaryArray(11, 22));
 	}
 	
 	private void buildIndicator(DataSet data) {
@@ -99,51 +98,36 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		getRows()[1].with(td("<Nominator>").attr("colspan", "3").withClass("label"), td("<Denominator>")
 		        .attr("colspan", "3").withClass("label"), td("%").attr("colspan", "3").withClass("label"));
 		
-		Integer[][] nominator = createSummaryArray(11, 22, 33, 44);
+		Integer[] nominator = createSummaryArray(11, 22);
 		buildIndicatorSummary(nominator); // Nominator
 		
-		Integer[][] denominator = createSummaryArray(33, 44, 55, 66);
+		Integer[] denominator = createSummaryArray(33, 44);
 		buildIndicatorSummary(denominator); // Denominator
 		
 		buildIndicatorSummary(createPercentageArray(nominator, denominator)); // Percentage
 	}
 	
-	private <T> void buildIndicatorSummary(T[][] data) {
+	private <T> void buildIndicatorSummary(T[] dataArray) {
 		getRows()[2].with(MALE_LABEL, FEMALE_LABEL, TOTAL_LABEL);
 		
-		final int ROW_BASE = 3;
-		final int SIZE = 3;
-		for (int i = 0; i < SIZE; ++i) {
-			for (int j = 0; j < SIZE; ++j) {
-				getRows()[ROW_BASE + i].with(td(data[i][j].toString()));
-			}
-		}
+		final int ROW = 3;
+		getRows()[ROW].with(td(dataArray[0].toString()).attr("rowspan", "3"));
+		getRows()[ROW].with(td(dataArray[1].toString()).attr("rowspan", "3"));
+		getRows()[ROW].with(td(dataArray[2].toString()).attr("rowspan", "3").withClass("total"));
 	}
 	
-	private Integer[][] createSummaryArray(Integer adulteMales, Integer adulteFemales, Integer pediatricMales,
-	        Integer pediatricFemales) {
-		
-		Integer totalMales = adulteMales + pediatricMales;
-		Integer totalFemales = adulteFemales + adulteFemales;
-		Integer totalAdulte = adulteMales + adulteFemales;
-		Integer totalPediatric = pediatricMales + pediatricFemales;
-		Integer total = totalAdulte + totalPediatric;
-		
-		return new Integer[][] { { adulteMales, adulteFemales, totalAdulte },
-		        { pediatricMales, pediatricFemales, totalPediatric }, { totalMales, totalFemales, total } };
+	private Integer[] createSummaryArray(Integer males, Integer females) {
+		return new Integer[] { males, females, males + females };
 	}
 	
-	private String[][] createPercentageArray(Integer[][] dividend, Integer[][] factor) {
+	private String[] createPercentageArray(Integer[] dividend, Integer[] factor) {
 		DecimalFormat df = new DecimalFormat(PERCENTAGE_STRING_FORMAT);
 		df.setRoundingMode(RoundingMode.HALF_UP);
 		
 		final int SIZE = 3;
-		String result[][] = new String[SIZE][];
+		String result[] = new String[SIZE];
 		for (int i = 0; i < SIZE; ++i) {
-			result[i] = new String[SIZE];
-			for (int j = 0; j < SIZE; ++j) {
-				result[i][j] = df.format(100.0f * dividend[i][j] / factor[i][j]);
-			}
+			result[i] = df.format(100.0f * dividend[i] / factor[i]);
 		}
 		return result;
 	}

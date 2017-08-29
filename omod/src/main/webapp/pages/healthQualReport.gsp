@@ -104,13 +104,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="indicatorsHeader" colspan="3">Adult Indicators</th>
+                        <th class="indicatorsHeader" colspan="3">
+                            ${ ui.message("isanteplusreports.healthqual.indicator.adult.label") }
+                        </th>
                     </tr>
                     <%  manager.adultIndicators.each { indicator -> %>
                         ${ ui.includeFragment("isanteplusreports", "healthQualIndiator", [indicator: indicator]) }
                     <% } %>
                     <tr>
-                        <th class="indicatorsHeader" colspan="3">Pediatric Indicators</th>
+                        <th class="indicatorsHeader" colspan="3">
+                            ${ ui.message("isanteplusreports.healthqual.indicator.pediatric.label") }
+                        </th>
                     </tr>
                     <%  manager.pediatricIndicators.each { indicator -> %>
                         ${ ui.includeFragment("isanteplusreports", "healthQualIndiator", [indicator: indicator]) }

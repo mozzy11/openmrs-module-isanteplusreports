@@ -64,6 +64,7 @@
 .indicatorsHeader {
     text-align: center; 
     background-color: #fefad3;
+    font-style: italic;
 }
 
 #indicators thead th {
@@ -86,22 +87,11 @@
                 <legend>
                     ${ ui.message("reportingui.runReport.run.legend") }
                 </legend>
-
-                     
-                    <% for (int i=0; i < reportManager.parameters.size(); i++) { %>
-                    <% def parameter = reportManager.parameters.get(i); %> 
-                    
-                        <p id="parameter${i}Section">
-                            <% if (parameter.name == "startDate") { %>
-                                ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "startDateField", "label": parameter.label, "formFieldName": "startDate", "defaultDate": startDate, "useTime": false ]) }
-                            <% } else if (parameter.name == "endDate") { %>
-                                ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "endDateField", "label": parameter.label, "formFieldName": "endDate", "defaultDate": endDate, "useTime": false ]) }
-                            <% } %>
-                        <p>
-
-                    <% } %>
-
-                    <button id="submit" type="submit">${ ui.message("reportingui.runButtonLabel") }</button>
+                <p id="parameterSection">
+                    ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "startDateField", "label": "From Date", "formFieldName": "startDate", "defaultDate": startDate, "useTime": false ]) }
+                    ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "endDateField", "label": "To Date", "formFieldName": "endDate", "defaultDate": endDate, "useTime": false ]) }
+                <p>
+                <button id="submit" type="submit">${ ui.message("reportingui.runButtonLabel") }</button>
             </fieldset>
 
             <table id="indicators" style="display:block; width: 100%; padding-top: 11px;">
@@ -114,9 +104,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="indicatorsHeader" colspan="3"><i>Adult Indicators</i></th>
+                        <th class="indicatorsHeader" colspan="3">Adult Indicators</th>
                     </tr>
-                    ${ ui.includeFragment("isanteplusreports", "healthQualIndiator", [uuid: "1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2"]) }
+                    <%  manager.adultIndicators.each { indicator -> %>
+                        ${ ui.includeFragment("isanteplusreports", "healthQualIndiator", [indicator: indicator]) }
+                    <% } %>
+                    <tr>
+                        <th class="indicatorsHeader" colspan="3">Pediatric Indicators</th>
+                    </tr>
+                    <%  manager.pediatricIndicators.each { indicator -> %>
+                        ${ ui.includeFragment("isanteplusreports", "healthQualIndiator", [indicator: indicator]) }
+                    <% } %>
                 </tbody>
             </table>
         </form>

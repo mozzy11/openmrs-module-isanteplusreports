@@ -4,9 +4,9 @@ import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
-import org.openmrs.module.isanteplusreports.definitions.ArvReportManager;
+import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
+import org.openmrs.module.isanteplusreports.model.HealthQualSelectedIndicator;
 import org.openmrs.module.isanteplusreports.healthqual.builder.HealthQualHtmlTableBuilder;
-import org.openmrs.module.isanteplusreports.model.HealthQualIndicator;
 import org.openmrs.module.reporting.common.DateUtil;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.EvaluationException;
@@ -30,7 +30,7 @@ public class HealthQualReportPageController {
 	
 	IsantePlusReportsProperties props = new IsantePlusReportsProperties();
 	
-	public void get(@SpringBean ArvReportManager reportManager,
+	public void get(@SpringBean HealthQualManager healthQualManager,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
 	        @RequestParam(required = false, value = "endDate") Date endDate, PageModel model) throws IOException {
 		
@@ -43,15 +43,15 @@ public class HealthQualReportPageController {
 		startDate = DateUtil.getStartOfDay(startDate);
 		endDate = DateUtil.getEndOfDay(endDate);
 		
-		model.addAttribute("reportManager", reportManager);
+		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("divWithResult", null);
 	}
 	
-	public void post(@SpringBean ArvReportManager reportManager,
+	public void post(@SpringBean HealthQualManager healthQualManager,
 	        @SpringBean ReportDefinitionService reportDefinitionService,
-	        @RequestParam(value = "indicatorList") List<HealthQualIndicator> indicators,
+	        @RequestParam(value = "indicatorList") List<HealthQualSelectedIndicator> indicators,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
 	        @RequestParam(required = false, value = "endDate") Date endDate, PageModel model) throws IOException,
 	        EvaluationException {
@@ -67,7 +67,7 @@ public class HealthQualReportPageController {
 		endDate = DateUtil.getEndOfDay(endDate);
 		
 		HealthQualHtmlTableBuilder builder = new HealthQualHtmlTableBuilder();
-		for (HealthQualIndicator indicator : indicators) {
+		for (HealthQualSelectedIndicator indicator : indicators) {
 			
 			ReportDefinition reportDefinition = reportDefinitionService.getDefinitionByUuid(indicator.getUuid());
 			Map<String, Object> parameterValues = new HashMap<String, Object>();
@@ -96,7 +96,7 @@ public class HealthQualReportPageController {
 			
 		}
 		
-		model.addAttribute("reportManager", reportManager);
+		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("divWithResult", builder.build());

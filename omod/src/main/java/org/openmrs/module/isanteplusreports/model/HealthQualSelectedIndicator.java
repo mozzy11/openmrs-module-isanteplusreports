@@ -2,7 +2,7 @@ package org.openmrs.module.isanteplusreports.model;
 
 import java.util.Map;
 
-public class HealthQualIndicator {
+public class HealthQualSelectedIndicator {
 	
 	private String uuid;
 	

@@ -51,7 +51,8 @@ public class HealthQualReportPageController {
 	        @SpringBean ReportDefinitionService reportDefinitionService,
 	        @RequestParam(value = "indicatorList") List<HealthQualIndicator> indicators,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
-	        @RequestParam(required = false, value = "endDate") Date endDate, PageModel model) throws IOException {
+	        @RequestParam(required = false, value = "endDate") Date endDate, PageModel model)
+			throws IOException, EvaluationException {
 		
 		if (startDate == null) {
 			startDate = DateUtils.addDays(new Date(), -21);
@@ -87,7 +88,8 @@ public class HealthQualReportPageController {
 				data = reportDefinitionService.evaluate(reportDefinition, context);
 			}
 			catch (EvaluationException e) {
-				e.printStackTrace();
+				log.error("Evaluation exception was thrown");
+				throw e;
 			}
 			
 		}

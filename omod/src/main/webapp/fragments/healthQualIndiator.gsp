@@ -6,13 +6,13 @@
         ${ indicator.getName() }
     </td>
     <td style="text-align: center;">
-        <% if (indicator.getOption().isSet()) { %>
+        <% if (indicator.getOption() != null) { %>
             <label style="display:inline-block;">
                 ${ indicator.getOption().getLabel() }:
             </label> 
-            <select id="${ indicator.getOption().getId() }" name="options" style="display:inline-block; margin: 0; min-width:120px; ">
+            <select name="options" style="display:inline-block; margin: 0; min-width:120px; ">
                 <% indicator.getOption().getValues().each { optionValue -> %>
-                    <option value="${ optionValue }">
+                    <option name="${ indicator.getOption().getParameterName() }" value="${ optionValue }">
                         ${ optionValue }
                     </option>
                 <% } %>

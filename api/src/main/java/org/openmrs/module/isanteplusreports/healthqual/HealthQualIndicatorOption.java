@@ -3,6 +3,7 @@ package org.openmrs.module.isanteplusreports.healthqual;
 import org.openmrs.module.reporting.common.MessageUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class HealthQualIndicatorOption {
@@ -11,25 +12,16 @@ public class HealthQualIndicatorOption {
 	
 	private String label;
 	
+	private String parameterName;
+	
 	private List<String> values;
 	
-	private boolean isSet;
-	
-	public HealthQualIndicatorOption(List<String> data) {
+	public HealthQualIndicatorOption(String id, String parametrName, String[] values) {
+		this.id = id;
+		this.label = MessageUtil.translate("isanteplusreports.healthqual.option.label." + this.id);
+		this.parameterName = parametrName;
 		this.values = new ArrayList<String>();
-		
-		if (data != null) {
-			isSet = true;
-			for (int i = 0; i < data.size(); i++) {
-				if (i == 0)
-					this.id = data.get(i);
-				else
-					this.values.add(data.get(i));
-			}
-			this.label = MessageUtil.translate("isanteplusreports.healthqual.option.label." + this.id);
-		} else {
-			isSet = false;
-		}
+		this.values.addAll(Arrays.asList(values));
 	}
 	
 	public String getId() {
@@ -40,11 +32,11 @@ public class HealthQualIndicatorOption {
 		return label;
 	}
 	
-	public List<String> getValues() {
-		return values;
+	public String getParameterName() {
+		return parameterName;
 	}
 	
-	public boolean isSet() {
-		return isSet;
+	public List<String> getValues() {
+		return values;
 	}
 }

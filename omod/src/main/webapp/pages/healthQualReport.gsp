@@ -57,7 +57,7 @@
             if (indicator.find("[name=selection]").prop('checked') === true) {
                 var map = new Object();
                 indicator.find('[name=options]').each(function() {
-                    map[jq(this).attr('id')] = indicator.find('[name=options] :selected').val();
+                    map[indicator.find('[name=options] :selected').attr('name')] = indicator.find('[name=options] :selected').val();
                 });
                 parsedIndicators.push(
                     createIndicator(

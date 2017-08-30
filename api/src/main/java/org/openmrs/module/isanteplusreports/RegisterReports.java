@@ -65,6 +65,7 @@ public class RegisterReports {
 			register.frequencyPrenatalVisitsPerPatient();
 			register.numberExposedInfantsTestedByPcr();
 			register.numberExposedInfantsConfirmedHiv();
+			register.indicatorTest();
 			//Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
 			//}
 		}

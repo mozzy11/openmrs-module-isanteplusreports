@@ -3,7 +3,6 @@ package org.openmrs.module.isanteplusreports.page.controller;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
 import org.openmrs.module.isanteplusreports.model.HealthQualSelectedIndicator;
 import org.openmrs.module.isanteplusreports.healthqual.builder.HealthQualHtmlTableBuilder;
@@ -11,7 +10,6 @@ import org.openmrs.module.reporting.common.DateUtil;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.EvaluationException;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
-import org.openmrs.module.reporting.report.ReportData;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
 import org.openmrs.ui.framework.annotation.SpringBean;
@@ -27,8 +25,6 @@ import java.util.Map;
 public class HealthQualReportPageController {
 	
 	private final Log log = LogFactory.getLog(getClass());
-	
-	IsantePlusReportsProperties props = new IsantePlusReportsProperties();
 	
 	public void get(@SpringBean HealthQualManager healthQualManager,
 	        @RequestParam(required = false, value = "startDate") Date startDate,

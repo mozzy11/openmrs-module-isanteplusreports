@@ -24,11 +24,11 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	private static final int ROWS = 7;
 	
-	private static final ContainerTag MALE_LABEL = th("M").withClass("label");
+	private static final ContainerTag MALE_LABEL = th(translateLabel("male")).withClass("label");
 	
-	private static final ContainerTag FEMALE_LABEL = th("F").withClass("label");
+	private static final ContainerTag FEMALE_LABEL = th(translateLabel("female")).withClass("label");
 	
-	private static final ContainerTag TOTAL_LABEL = th("Tot").withClass("label");
+	private static final ContainerTag TOTAL_LABEL = th(translateLabel("total")).withClass("label");
 	
 	private static final String MALE_NUMERATOR_COLUMN_NAME = "maleNumerator";
 	
@@ -120,7 +120,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		
 		buildIndicatorSummary(createPercentageArray(numerator, denominator));
 	}
-
+	
 	private <T> void buildIndicatorSummary(T[] dataArray) {
 		getRows()[2].with(MALE_LABEL, FEMALE_LABEL, TOTAL_LABEL);
 		
@@ -217,8 +217,8 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		}
 		return Integer.valueOf(value.toString());
 	}
-
-	private String translateLabel(String labelName) {
+	
+	private static String translateLabel(String labelName) {
 		return MessageUtil.translate("isanteplusreports.healthqual.result." + labelName + ".label");
 	}
 }

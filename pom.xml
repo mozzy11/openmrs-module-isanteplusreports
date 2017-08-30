@@ -268,6 +268,11 @@
 				<artifactId>j2html</artifactId>
 				<version>${j2htmlVesion}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.xhtmlrenderer</groupId>
+				<artifactId>flying-saucer-pdf-itext5</artifactId>
+				<version>${flyingSaucerPdfItext5Version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 	<repositories>
@@ -313,5 +318,6 @@
 		<appuiVersion>1.4</appuiVersion>
 		<coreappsVersion>1.11.1</coreappsVersion>
 		<j2htmlVesion>1.1.0</j2htmlVesion>
+		<flyingSaucerPdfItext5Version>9.1.6</flyingSaucerPdfItext5Version>
 	</properties>
 </project>

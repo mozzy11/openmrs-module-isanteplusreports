@@ -14,7 +14,31 @@
         jq('#indicatorsForm').submit(function(event) {            
             runReport();
         });
+        jq('#buttonToPdf').click(function(event) {
+            event.preventDefault();                            
+            savePdf();
+        });
     });
+
+    <% if (pdfResult != null) { %>
+    function savePdf() {
+        var link = document.createElement('a');
+        link.setAttribute('href', 'data:text/plain;base64, <%= pdfResult %>');
+        link.setAttribute('download', generatePdfName());
+        link.click();
+    }
+    <% } %>
+
+    function generatePdfName() {
+        return "HealthQualReport" + formatDate(new Date()) + ".pdf";
+    }
+
+    function formatDate(date) {
+        return jq.datepicker.formatDate('yy-mm-dd', new Date()) + '_' 
+                    + date.getHours() + ":"  
+                    + date.getMinutes() + ":" 
+                    + date.getSeconds(); 
+    }
 
     function runReport() {
         var form = jq('#indicatorsForm');
@@ -75,6 +99,21 @@
     white-space: nowrap;
 }
 
+.indicatorLabel {
+    text-align: center;
+    color: blue;
+}
+
+.label {
+    text-align: center;
+}
+
+#divWithReportTables > table {
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: hide;
+}
+
 </style>
 
 <div>
@@ -123,11 +162,12 @@
             </table>
         </form>
 
-        <% if (divWithResult != null) { %>
+        <% if (htmlResult != null) { %>
             <h3> 
                 ${ ui.message("isanteplusreports.healthqual.result.label") }
             </h3>
-            <%= divWithResult %>
+            <input type='button' id='buttonToPdf' value="Save as PDF" />
+            <%= htmlResult %>
         <% } %>
    </div>
    

@@ -1,6 +1,7 @@
 package org.openmrs.module.isanteplusreports.healthqual;
 
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicator;
+import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,16 +19,14 @@ public class HealthQualManager {
 	
 	private static final String[] pediatricIndicatorsUuid = {};
 	
-	private Map<String, List<String>> options;
-	
-	public HealthQualManager() {
-		options = new HashMap<String, List<String>>();
-		String[] period = { "period", "6", "12", "24", "48" };
-		options.put("UUID_indicatorTest", Arrays.asList(period));
-	}
+	private Map<String, HealthQualIndicatorOption> options = new HashMap<String, HealthQualIndicatorOption>();
 	
 	@Autowired
 	private ReportDefinitionService reportDefinitionService;
+	
+	public HealthQualManager() {
+		createIndicatorOptions();
+	}
 	
 	public List<HealthQualIndicator> getAdultIndicators() {
 		return uuidToReportDefinition(Arrays.asList(adultIndicatorsUuid));
@@ -40,10 +39,18 @@ public class HealthQualManager {
 	private List<HealthQualIndicator> uuidToReportDefinition(List<String> uuids) {
 		List<HealthQualIndicator> indicators = new ArrayList<HealthQualIndicator>();
 		for (String uuid : uuids) {
-			List<String> option = options.get(uuid);
-			indicators.add(new HealthQualIndicator(reportDefinitionService.getDefinitionByUuid(uuid),
-			        new HealthQualIndicatorOption(option)));
+			ReportDefinition reportDefinition = reportDefinitionService.getDefinitionByUuid(uuid);
+			HealthQualIndicatorOption option = options.get(uuid);
+			if (reportDefinition != null) {
+				indicators.add(new HealthQualIndicator(reportDefinition, option));
+			}
 		}
 		return indicators;
+	}
+	
+	private void createIndicatorOptions() {
+		String[] periodMonthsValues = { "6", "12", "24", "48" };
+		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
+		options.put("UUID_indicatorTest", period);
 	}
 }

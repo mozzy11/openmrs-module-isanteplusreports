@@ -14,7 +14,7 @@ import java.util.Map;
 @Component
 public class HealthQualManager {
 	
-	private static final String[] adultIndicatorsUuid = { "5c40612b-bd9b-4cb7-8c30-1ae89fcdf038" };
+	private static final String[] adultIndicatorsUuid = { "UUID_indicatorTest" };
 	
 	private static final String[] pediatricIndicatorsUuid = {};
 	
@@ -23,7 +23,7 @@ public class HealthQualManager {
 	public HealthQualManager() {
 		options = new HashMap<String, List<String>>();
 		String[] period = { "period", "6", "12", "24", "48" };
-		options.put("5c40612b-bd9b-4cb7-8c30-1ae89fcdf038", Arrays.asList(period));
+		options.put("UUID_indicatorTest", Arrays.asList(period));
 	}
 	
 	@Autowired

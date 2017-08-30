@@ -1226,6 +1226,25 @@ public class RegisterAllReports extends SessionContext {
 		rs.saveReportDesign(rDes);
 	}
 	
+	public void indicatorTest() {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("indicatorTest.sql", "Test HealthQualIndicator",
+		    "Test HealthQualIndicator");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.indicatorTest", "", "UUID_indicatorTest");
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {
 	        String sql = IsantePlusReportsUtil.getStringFromResource("org/openmrs/module/isanteplusreports/sql/fullDataExports/" + resourceName);
 	        if (replacements != null) {

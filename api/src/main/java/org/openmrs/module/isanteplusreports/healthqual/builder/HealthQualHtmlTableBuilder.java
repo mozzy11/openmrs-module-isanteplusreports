@@ -10,6 +10,7 @@ import j2html.tags.ContainerTag;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
 import org.openmrs.module.isanteplusreports.exception.HealthQualException;
+import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.DataSet;
 import org.openmrs.module.reporting.report.ReportData;
 
@@ -80,7 +81,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		ContainerTag labels = getRows()[2];
 		ContainerTag data = getRows()[3];
 		
-		labels.with(th("Dept.").withClass("label"), th("Clinic").withClass("label"));
+		labels.with(th(translateLabel("department")).withClass("label"), th(translateLabel("clinic")).withClass("label"));
 		
 		data.with(td(clinicDepartment).attr("rowspan", "3"), td(clinic).attr("rowspan", "3"));
 	}
@@ -98,15 +99,16 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	private void buildPatientsInfo() {
 		fillEmptyRow(getRows()[0], 3);
 		
-		getRows()[1].with(th("<Patients actifs>").attr("colspan", "3").withClass("label"));
+		getRows()[1].with(th(translateLabel("activePatients")).attr("colspan", "3").withClass("label"));
 		
 		buildIndicatorSummary(createSummaryArray(11, 22));
 	}
 	
 	private void buildIndicator(DataSet data) {
 		getRows()[0].with(td(data.getDefinition().getName()).attr("colspan", "9").withClass("indicatorLabel"));
-		getRows()[1].with(td("<Nominator>").attr("colspan", "3").withClass("label"), td("<Denominator>")
-		        .attr("colspan", "3").withClass("label"), td("%").attr("colspan", "3").withClass("label"));
+		getRows()[1].with(td(translateLabel("activePatients")).attr("colspan", "3").withClass("label"),
+		    td(translateLabel("denominator")).attr("colspan", "3").withClass("label"), td(translateLabel("percentage"))
+		            .attr("colspan", "3").withClass("label"));
 		
 		Integer[] numerator = createSummaryArray(getDataSetIntegerValue(data, MALE_NUMERATOR_COLUMN_NAME),
 		    getDataSetIntegerValue(data, FEMALE_NUMERATOR_COLUMN_NAME));
@@ -118,7 +120,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 		
 		buildIndicatorSummary(createPercentageArray(numerator, denominator));
 	}
-	
+
 	private <T> void buildIndicatorSummary(T[] dataArray) {
 		getRows()[2].with(MALE_LABEL, FEMALE_LABEL, TOTAL_LABEL);
 		
@@ -214,5 +216,9 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 			        + "` doesn't exist in dataSet. Probably there is a bug in report SQL");
 		}
 		return Integer.valueOf(value.toString());
+	}
+
+	private String translateLabel(String labelName) {
+		return MessageUtil.translate("isanteplusreports.healthqual.result." + labelName + ".label");
 	}
 }

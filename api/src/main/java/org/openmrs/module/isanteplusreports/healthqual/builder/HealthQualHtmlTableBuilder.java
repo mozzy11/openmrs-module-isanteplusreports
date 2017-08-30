@@ -7,7 +7,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 import j2html.tags.ContainerTag;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
+import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.reporting.dataset.DataSet;
 import org.openmrs.module.reporting.report.ReportData;
 
@@ -26,6 +28,14 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	private static final ContainerTag FEMALE_LABEL = th("F").withClass("label");
 	
 	private static final ContainerTag TOTAL_LABEL = th("Tot").withClass("label");
+	
+	private static final String MALE_NUMERATOR_COLUMN_NAME = "maleNumerator";
+	
+	private static final String FEMALE_NUMERATOR_COLUMN_NAME = "femalenumerator";
+	
+	private static final String MALE_DENOMINATOR_COLUMN_NAME = "maleDenominator";
+	
+	private static final String FEMALE_DENOMINATOR_COLUMN_NAME = "femaleDenominator";
 	
 	private static final String PERCENTAGE_STRING_FORMAT = "###.0";
 	
@@ -94,17 +104,19 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	}
 	
 	private void buildIndicator(DataSet data) {
-		getRows()[0].with(td("<Indicator Name>").attr("colspan", "9").withClass("indicatorLabel"));
+		getRows()[0].with(td(data.getDefinition().getName()).attr("colspan", "9").withClass("indicatorLabel"));
 		getRows()[1].with(td("<Nominator>").attr("colspan", "3").withClass("label"), td("<Denominator>")
 		        .attr("colspan", "3").withClass("label"), td("%").attr("colspan", "3").withClass("label"));
 		
-		Integer[] nominator = createSummaryArray(11, 22);
-		buildIndicatorSummary(nominator); // Nominator
+		Integer[] numerator = createSummaryArray(getDataSetIntegerValue(data, MALE_NUMERATOR_COLUMN_NAME),
+		    getDataSetIntegerValue(data, FEMALE_NUMERATOR_COLUMN_NAME));
+		buildIndicatorSummary(numerator);
 		
-		Integer[] denominator = createSummaryArray(33, 44);
-		buildIndicatorSummary(denominator); // Denominator
+		Integer[] denominator = createSummaryArray(getDataSetIntegerValue(data, MALE_DENOMINATOR_COLUMN_NAME),
+		    getDataSetIntegerValue(data, FEMALE_DENOMINATOR_COLUMN_NAME));
+		buildIndicatorSummary(denominator);
 		
-		buildIndicatorSummary(createPercentageArray(nominator, denominator)); // Percentage
+		buildIndicatorSummary(createPercentageArray(numerator, denominator));
 	}
 	
 	private <T> void buildIndicatorSummary(T[] dataArray) {
@@ -192,5 +204,15 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	public void setNumberOfIndicatorsInOneTable(int numberOfIndicatorsInOneTable) {
 		this.numberOfIndicatorsInOneTable = numberOfIndicatorsInOneTable;
+	}
+	
+	private Integer getDataSetIntegerValue(DataSet dataSet, String columnName) {
+		Object value = dataSet.iterator().next().getColumnValue(columnName);
+		if (value == null || StringUtils.isBlank(value.toString())) {
+			dataSet.getDefinition().getName();
+			throw new HealthQualException("`" + dataSet.getDefinition().getName() + "` report - column `" + columnName
+			        + "` doesn't exist in dataSet. Probably there is a bug in report SQL");
+		}
+		return Integer.valueOf(value.toString());
 	}
 }

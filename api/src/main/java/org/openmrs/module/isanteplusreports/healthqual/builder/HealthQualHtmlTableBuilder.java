@@ -32,7 +32,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	private static final String MALE_NUMERATOR_COLUMN_NAME = "maleNumerator";
 	
-	private static final String FEMALE_NUMERATOR_COLUMN_NAME = "femalenumerator";
+	private static final String FEMALE_NUMERATOR_COLUMN_NAME = "femaleNumerator";
 	
 	private static final String MALE_DENOMINATOR_COLUMN_NAME = "maleDenominator";
 	

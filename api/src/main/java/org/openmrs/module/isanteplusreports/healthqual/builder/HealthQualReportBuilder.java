@@ -3,6 +3,8 @@ package org.openmrs.module.isanteplusreports.healthqual.builder;
 import com.itextpdf.text.DocumentException;
 import j2html.tags.ContainerTag;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.DataSet;
@@ -23,7 +25,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import static j2html.TagCreator.body;
 import static j2html.TagCreator.div;
+import static j2html.TagCreator.head;
 import static j2html.TagCreator.html;
 import static j2html.TagCreator.style;
 import static j2html.TagCreator.table;
@@ -32,7 +36,9 @@ import static j2html.TagCreator.th;
 import static j2html.TagCreator.tr;
 
 public class HealthQualReportBuilder {
-	
+
+	private final Log LOGGER = LogFactory.getLog(getClass());
+
 	private static final int ROWS = 7;
 	
 	private static final ContainerTag MALE_LABEL = th(translateLabel("male")).withClass("label");
@@ -61,21 +67,70 @@ public class HealthQualReportBuilder {
 	
 	private String clinic;
 
-	public String buildHtml() {
-		return buildTables().render();
+	public String buildHtmlTables() {
+		String tablesHtml = buildTables().render();
+		LOGGER.debug("built tables html: " + tablesHtml);
+		return tablesHtml;
 	}
 	
 	public String buildPdf() {
-		ContainerTag htmlForPdf = html(buildTables(), style(getStyleForPdf()));
+		String htmlForPdf = html(head(getStyleForPdf()), body(buildTables())).render();
+		LOGGER.debug("built htmlForPdf: " + htmlForPdf);
 		try {
-			return convertHtmlToPdfInBase64(htmlForPdf.render());
+			return convertHtmlToPdfInBase64(htmlForPdf);
 		} catch (Exception ex) {
 			throw new HealthQualException("PDF cannot be created", ex);
 		}
 	}
 	
 	private ContainerTag getStyleForPdf() {
-		return style().withType("text/css").withText("@page {size: landscape}");
+		return style().withType("text/css").withText(
+						"@page {\n" +
+						"    size: landscape\n" +
+						"}\n" +
+						"html, body {\n" +
+						"    height: 210mm;\n" +
+						"    width: 297mm;\n" +
+						"  }" +
+						" \n" +
+						"th, td {\n" +
+						"    padding: 2pt;\n" +
+						"    white-space: nowrap;\n" +
+						"    border-color: black;\n" +
+						"    border-style: solid;\n" +
+						"    border-top-width: 1px;\n" +
+						"    border-left-width: 1px;\n" +
+						"    border-right-width: 0px;\n" +
+						"    border-bottom-width: 0px;\n" +
+						"    font-size: 9pt;" +
+						"}\n" +
+						"\n" +
+						"th:last-child, td:last-child {\n" +
+						"    border-right-width: 1px;\n" +
+						"}\n" +
+						"\n" +
+						"tr:last-child th, tr:last-child td {\n" +
+						"    border-bottom-width: 1px;\n" +
+						"}\n" +
+						"\n" +
+						".indicatorLabel {\n" +
+						"    text-align: center;\n" +
+						"    color: blue;\n" +
+						"}\n" +
+						"\n" +
+						".label {\n" +
+						"    text-align: center;\n" +
+						"}\n" +
+						".total {\n" +
+						"    color: blue;\n" +
+						"}" +
+						"\n" +
+						"table {\n" +
+						"    border-collapse: separate;\n" +
+						"    border-spacing: 0;\n" +
+						"    empty-cells: hide;\n" +
+						"    margin: 41pt 0;\n" +
+						"}");
 	}
 	
 	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,
@@ -84,10 +139,10 @@ public class HealthQualReportBuilder {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes())); // TODO to remove
-		
+
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(doc, null);
-		
+
 		// FIXME
 		// renderer.getFontResolver().addFont("C:/Windows/Fonts/CALIBRI.TTF",
 		// true);
@@ -120,7 +175,7 @@ public class HealthQualReportBuilder {
 			buildIndicator(iterator.next());
 		}
 		
-		return table().with(getRows());
+		return table().with(getNotEmptyRows());
 	}
 	
 	private void buildClinicInfoTable() {
@@ -223,6 +278,16 @@ public class HealthQualReportBuilder {
 			}
 		}
 		return rows;
+	}
+
+	private ContainerTag[] getNotEmptyRows() {
+		LinkedList<ContainerTag> filteredRows = new LinkedList<ContainerTag>();
+		for (ContainerTag row : getRows()) {
+			if (row.getNumChildren() > 0) {
+				filteredRows.add(row);
+			}
+		}
+		return filteredRows.toArray(new ContainerTag[filteredRows.size()]);
 	}
 	
 	public void setRows(ContainerTag[] rows) {

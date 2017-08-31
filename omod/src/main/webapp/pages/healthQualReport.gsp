@@ -78,7 +78,7 @@
     }
 </script>
 
-<style>
+<style type="text/css">
 .clearfix::after {
     content: "";
     clear: both;
@@ -95,8 +95,26 @@
     background-color: #fdf59a;
 }
 
-#indicators th, #indicators td {
+th, td {
     white-space: nowrap;
+}
+
+#divWithReportTables th, #divWithReportTables td {
+    padding: 5pt;
+    border-color: black;
+    border-style: solid;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+}
+
+#divWithReportTables th:last-child, #divWithReportTables td:last-child {
+    border-right-width: 1px;
+}
+
+#divWithReportTables tr:last-child th, #divWithReportTables tr:last-child td {
+    border-bottom-width: 1px;
 }
 
 .indicatorLabel {
@@ -108,12 +126,17 @@
     text-align: center;
 }
 
+.total {
+    color: blue;
+}
+
 #divWithReportTables > table {
     border-collapse: separate;
     border-spacing: 0;
     empty-cells: hide;
+    margin: 10pt auto;
+    width: auto;
 }
-
 </style>
 
 <div>

@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class HealthQualReportPageController {
 	
-	private final Log log = LogFactory.getLog(getClass());
+	private final Log LOGGER = LogFactory.getLog(getClass());
 	
 	public void get(@SpringBean HealthQualManager healthQualManager,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
@@ -87,7 +87,7 @@ public class HealthQualReportPageController {
 			try {
 				builder.addReportData(reportDefinitionService.evaluate(reportDefinition, context));
 			} catch (EvaluationException e) {
-				log.error("Report evaluation exception was thrown");
+				LOGGER.error("Report evaluation exception was thrown");
 				throw new HealthQualException("Report cannot be evaluated", e);
 			}
 			
@@ -96,7 +96,7 @@ public class HealthQualReportPageController {
 		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("htmlResult", builder.buildHtml());
+		model.addAttribute("htmlResult", builder.buildHtmlTables());
 		model.addAttribute("pdfResult", builder.buildPdf());
 	}
 }

@@ -10,15 +10,12 @@ public class HealthQualIndicatorOption {
 	
 	private String id;
 	
-	private String label;
-	
 	private String parameterName;
 	
 	private List<String> values;
 	
 	public HealthQualIndicatorOption(String id, String parametrName, String[] values) {
 		this.id = id;
-		this.label = MessageUtil.translate("isanteplusreports.healthqual.option.label." + this.id);
 		this.parameterName = parametrName;
 		this.values = new ArrayList<String>();
 		this.values.addAll(Arrays.asList(values));
@@ -29,7 +26,7 @@ public class HealthQualIndicatorOption {
 	}
 	
 	public String getLabel() {
-		return label;
+		return MessageUtil.translate("isanteplusreports.healthqual.option.label." + this.id);
 	}
 	
 	public String getParameterName() {

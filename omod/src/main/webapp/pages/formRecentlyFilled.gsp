@@ -28,7 +28,7 @@
             def parameter = reportManager.parameters.get(i); %>
             <p id="parameter${i}Section">
                 <% if (parameter.name == "total") { %>
-                ${ ui.includeFragment("uicommons", "field/text", [ "id": "totalField", "label": parameter.label, "formFieldName": "total", "defaultValue": "100" ]) }
+                ${ ui.includeFragment("uicommons", "field/text", [ "id": "totalField", "label": parameter.label, "formFieldName": "total", classes: ['required'], initialValue: 100, "min": 1, "max": 1000, "cssClasses": [ "number", "numeric-range" ] ]) }
                 <% } %>
               <% } %>
         <p>

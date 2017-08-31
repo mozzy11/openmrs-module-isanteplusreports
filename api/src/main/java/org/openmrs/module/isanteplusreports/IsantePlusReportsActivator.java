@@ -9,11 +9,14 @@
  */
 package org.openmrs.module.isanteplusreports;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Calendar;
 import java.util.UUID;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.scheduler.SchedulerException;
@@ -42,6 +45,9 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 		}
 		registerTask("Clean reports request iSantePlus", "Clean Reports Request for iSantePlus", RegisterReportsTask.class,
 		    60 * 60 * 24l);
+		
+		returnIpAddress();
+		
 	}
 	
 	/**
@@ -80,6 +86,23 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 			Context.removeProxyPrivilege("Manage Scheduler");
 		}
 		return true;
+	}
+	
+	public void returnIpAddress() {
+		InetAddress ip = null;
+		try {
+			ip = InetAddress.getLocalHost();
+		}
+		catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String newIp = ip.getHostAddress().toString();
+		String oldIp = Context.getAdministrationService().getGlobalProperty("iSantePlusReports.ipAddress");
+		if (!newIp.equals(oldIp)) {
+			Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("iSantePlusReports.ipAddress", newIp));
+		}
+		
 	}
 	
 }

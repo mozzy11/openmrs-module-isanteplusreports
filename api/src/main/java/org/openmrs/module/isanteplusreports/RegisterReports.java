@@ -18,56 +18,63 @@ public class RegisterReports {
 	public void registerReports() {
 		try {
 			
-			//String version = ModuleFactory.getModuleById("isanteplusreports").getVersion();
-			//String oldversion = Context.getAdministrationService().getGlobalProperty("reports.moduleVersion");
-			//if (!version.equals(oldversion)) {
-			RegisterAllReports register = new RegisterAllReports();
-			register.cleanTables();
-			register.nextVisitSevenDays();
-			register.nextVisitFourteenDays();
-			register.patientAgeGroup();
-			register.firstVisitAge();
-			register.patientsCrachatAnormalWithoutTbDiagnostic();
-			register.patientsWithTbDiagnosticsWithoutTreatment();
-			register.patientsWithCompletedTbTreatment();
-			register.patientsWithTbSymptomsignWithoutCrachat();
-			register.consultationByDay();
-			register.numberVisitsByMonth();
-			register.numberPatientBySex();
-			register.dispensingMedications();
-			register.patientsStatusList();
-			register.patientsReceivingARVByPeriod();
-			register.drugsPrescription();
-			register.labPrescription();
-			register.labPerfomed();
-			register.patientArvThirtyDay();
-			register.patientStartingArv();
-			register.patientNextArvArrives();
-			register.institutionFrequentingByUser();
-			register.institutionFrequentingByUserAndDate();
-			register.institutionFrequenting();
-			register.institutionFrequentingByDate();
-			register.saveAlertReport();
-			register.patientWithOnlyRegisterForm();
-			register.hivPatientWithoutFirstVisit();
-			register.hivPatientWithActivityAfterDisc();
-			register.numberPregnancyWomenHivTested();
-			register.numberPregnancyWomenHivPositive();
-			register.communityArvDistribution();
-			register.pregnancyWomenOnHaart();
-			register.pregnancyWomenTestedForSyphilis();
-			register.pregnancyWomenDiagnosedWithSyphilis();
-			register.numberPrenatalVisitBySite();
-			register.numberPregnancyWomenHadFirstPrenatalCons();
-			register.numberHivPregnancyWomenGaveBirthAtHospital();
-			register.exposedInfantsWithMotherInPtmeProgram();
-			register.numberInfantsFromMotherOnProphylaxis();
-			register.frequencyPrenatalVisitsPerPatient();
-			register.numberExposedInfantsTestedByPcr();
-			register.numberExposedInfantsConfirmedHiv();
-			register.indicatorTest();
-			//Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
-			//}
+			String version = ModuleFactory.getModuleById("isanteplusreports").getVersion();
+			String oldversion = Context.getAdministrationService().getGlobalProperty("reports.moduleVersion");
+			if (!version.equals(oldversion)) {
+				RegisterAllReports register = new RegisterAllReports();
+				register.cleanTables();
+				register.cleanReportsRequest();
+				register.nextVisitSevenDays();
+				register.nextVisitFourteenDays();
+				register.patientAgeGroup();
+				register.firstVisitAge();
+				register.patientsCrachatAnormalWithoutTbDiagnostic();
+				register.patientsWithTbDiagnosticsWithoutTreatment();
+				register.patientsWithCompletedTbTreatment();
+				register.patientsWithTbSymptomsignWithoutCrachat();
+				register.consultationByDay();
+				register.numberVisitsByMonth();
+				register.numberPatientBySex();
+				register.dispensingMedications();
+				register.patientsStatusList();
+				register.patientsReceivingARVByPeriod();
+				register.drugsPrescription();
+				register.labPrescription();
+				register.labPerfomed();
+				register.patientArvThirtyDay();
+				register.patientStartingArv();
+				register.patientNextArvArrives();
+				register.institutionFrequentingByUser();
+				register.institutionFrequentingByUserAndDate();
+				register.institutionFrequenting();
+				register.institutionFrequentingByDate();
+				register.saveAlertReport();
+				register.patientWithOnlyRegisterForm();
+				register.hivPatientWithoutFirstVisit();
+				register.hivPatientWithActivityAfterDisc();
+				register.numberPregnancyWomenHivTested();
+				register.numberPregnancyWomenHivPositive();
+				register.communityArvDistribution();
+				register.pregnancyWomenOnHaart();
+				register.pregnancyWomenTestedForSyphilis();
+				register.pregnancyWomenDiagnosedWithSyphilis();
+				register.numberPrenatalVisitBySite();
+				register.numberPregnancyWomenHadFirstPrenatalCons();
+				register.numberHivPregnancyWomenGaveBirthAtHospital();
+				register.exposedInfantsWithMotherInPtmeProgram();
+				register.numberInfantsFromMotherOnProphylaxis();
+				register.frequencyPrenatalVisitsPerPatient();
+				register.numberExposedInfantsTestedByPcr();
+				register.numberExposedInfantsConfirmedHiv();
+				register.numberWomenFirstPrenatalVisitFirstTrimester();
+				register.numberPatientsByArvStatus();
+				register.hivTransmissionRisksFactor();
+				register.numberVisitsByPregnantWomenToClinic();
+				register.ListVisitsByPregnantWomenToClinic();
+				Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
+
+				register.indicatorTest();
+			}
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

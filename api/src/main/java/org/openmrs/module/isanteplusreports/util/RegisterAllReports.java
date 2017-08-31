@@ -42,6 +42,7 @@ import org.openmrs.module.reporting.report.manager.ReportManagerUtil;
 import org.openmrs.module.reporting.report.renderer.ExcelTemplateRenderer;
 import org.openmrs.module.reporting.report.renderer.ReportRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
+import org.openmrs.module.reporting.web.renderers.WebReportRenderer;
 import org.openmrs.ui.framework.WebConstants;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.action.FragmentActionResult;
@@ -160,6 +161,7 @@ public class RegisterAllReports extends SessionContext {
 	
 	@DocumentedDefinition("fullDataExports")
 	public void nextVisitSevenDays() throws Exception {
+		//WebReportRenderer webRenderer;
 		SqlDataSetDefinition sqlData = sqlDataSetDefinition("visitNextSevenDays.sql",
 		    "Patient avec Rendez-Vous programm&eacute; dans les 7 jours &agrave;  venir",
 		    "Patient avec Rendez-Vous programm&eacute; dans les 7 jours &agrave; venir");
@@ -170,8 +172,10 @@ public class RegisterAllReports extends SessionContext {
 		    props.SEVEN_DAYS_REPORT_DEFINITION_UUID);
 		repDefinition.addDataSetDefinition(sqlData, null);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-		
 		ReportService rs = Context.getService(ReportService.class);
+		
+		ReportDesign rDesignRender = reportDesign("Web renderer", repDefinition, WebReportRenderer.class);
+		rs.saveReportDesign(rDesignRender);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
@@ -1225,10 +1229,12 @@ public class RegisterAllReports extends SessionContext {
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
 	}
-	
-	public void indicatorTest() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("indicatorTest.sql", "Test HealthQualIndicator",
-		    "Test HealthQualIndicator");
+
+	@DocumentedDefinition("fullDataExports")
+	public void numberWomenFirstPrenatalVisitFirstTrimester() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("number_women_seen_first_prenatal_visit_first_trimester.sql",
+		    "Nombre de femmes enceintes vues en premi&egrave;re visite apr&egrave;s leur 1er trimestre ",
+		    "Nombre de femmes enceintes vues en premi&egrave;re visite apr&egrave;s leur 1er trimestre ");
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1238,11 +1244,136 @@ public class RegisterAllReports extends SessionContext {
 		Map<String, Object> mappings = new HashMap<String, Object>();
 		mappings.put("startDate", "${startDate}");
 		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.indicatorTest", "", "UUID_indicatorTest");
+		ReportDefinition repDefinition = reportDefinition(
+		    "isanteplusreports.number_women_seen_first_prenatal_visit_first_trimester", "",
+		    props.NUMBER_WOMEN_SEEN_FIRST_PRENATAL_VISIT_FIRST_SEMESTER_UUID);
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void numberPatientsByArvStatus() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("number_patient_by_status.sql",
+		    "Nombre de patients par status ARV ", "Nombre de patients par status ARV  ");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.number_patient_by_arv_status", "",
+		    props.NUMBER_PATIENTS_BY_ARV_STATUS_UUID);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void hivTransmissionRisksFactor() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("hiv_transmission_risks_factor.sql",
+		    "Facteurs de risque de transmission du VIH", "Facteurs de risque de transmission du VIH");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.hiv_transmission_risks_factor", "",
+		    props.HIV_TRANSMISSION_RISKS_FACTOR_UUID);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void numberVisitsByPregnantWomenToClinic() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("number_visits_by_pregnant_women_to_the_clinic.sql",
+		    "Nombre de visites de femmes enceintes re&ccedil;ues en clinique",
+		    "Nombre de visites de femmes enceintes re&ccedil;ues en clinique");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.number_visits_by_pregnant_women_to_the_clinic",
+		    "", props.NUMBER_VISITS_BY_PREGNANT_WOMEN_UUID);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+	
+	@DocumentedDefinition("fullDataExports")
+	public void ListVisitsByPregnantWomenToClinic() throws Exception {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("list_pregnancy_women_receiving_in_clinic.sql",
+		    "Liste de visites de femmes enceintes re&ccedil;ues en clinique",
+		    "Liste de visites de femmes enceintes re&ccedil;ues en clinique");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.list_pregnancy_women_receiving_in_clinic", "",
+		    props.LIST_VISITS_BY_PREGNANT_WOMEN_UUID);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+
+	public void indicatorTest() {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("indicatorTest.sql", "Test HealthQualIndicator",
+				"Test HealthQualIndicator");
+
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.indicatorTest", "", "UUID_indicatorTest");
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
 	}
 	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {

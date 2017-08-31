@@ -21,12 +21,12 @@
     });
 
     <% if (pdfResult != null) { %>
-    function savePdf() {
-        var link = document.createElement('a');
-        link.setAttribute('href', 'data:text/plain;base64, <%= pdfResult %>');
-        link.setAttribute('download', generatePdfName());
-        link.click();
-    }
+        function savePdf() {
+            var link = document.createElement('a');
+            link.setAttribute('href', 'data:text/plain;base64, <%= pdfResult %>');
+            link.setAttribute('download', generatePdfName());
+            link.click();
+        }
     <% } %>
 
     function generatePdfName() {
@@ -35,9 +35,9 @@
 
     function formatDate(date) {
         return jq.datepicker.formatDate('yy-mm-dd', new Date()) + '_' 
-                    + date.getHours() + ":"  
-                    + date.getMinutes() + ":" 
-                    + date.getSeconds(); 
+            + date.getHours() + ":"
+            + date.getMinutes() + ":"
+            + date.getSeconds();
     }
 
     function runReport() {
@@ -86,7 +86,7 @@
 }
 
 .indicatorsHeader {
-    text-align: center; 
+    text-align: center;
     background-color: #fefad3;
     font-style: italic;
 }

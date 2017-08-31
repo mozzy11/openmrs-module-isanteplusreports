@@ -2,6 +2,7 @@ package org.openmrs.module.isanteplusreports.healthqual.builder;
 
 import com.itextpdf.text.DocumentException;
 import j2html.tags.ContainerTag;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,6 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -84,53 +86,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	private ContainerTag getStyleForPdf() {
-		return style().withType("text/css").withText(
-						"@page {\n" +
-						"    size: landscape\n" +
-						"}\n" +
-						"html, body {\n" +
-						"    height: 210mm;\n" +
-						"    width: 297mm;\n" +
-						"  }" +
-						" \n" +
-						"th, td {\n" +
-						"    padding: 2pt;\n" +
-						"    white-space: nowrap;\n" +
-						"    border-color: black;\n" +
-						"    border-style: solid;\n" +
-						"    border-top-width: 1px;\n" +
-						"    border-left-width: 1px;\n" +
-						"    border-right-width: 0px;\n" +
-						"    border-bottom-width: 0px;\n" +
-						"    font-size: 9pt;" +
-						"}\n" +
-						"\n" +
-						"th:last-child, td:last-child {\n" +
-						"    border-right-width: 1px;\n" +
-						"}\n" +
-						"\n" +
-						"tr:last-child th, tr:last-child td {\n" +
-						"    border-bottom-width: 1px;\n" +
-						"}\n" +
-						"\n" +
-						".indicatorLabel {\n" +
-						"    text-align: center;\n" +
-						"    color: blue;\n" +
-						"}\n" +
-						"\n" +
-						".label {\n" +
-						"    text-align: center;\n" +
-						"}\n" +
-						".total {\n" +
-						"    color: blue;\n" +
-						"}" +
-						"\n" +
-						"table {\n" +
-						"    border-collapse: separate;\n" +
-						"    border-spacing: 0;\n" +
-						"    empty-cells: hide;\n" +
-						"    margin: 41pt 0;\n" +
-						"}");
+		return style().withType("text/css").withText(readFile("healthQualPdfStyle.css"));
 	}
 	
 	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,
@@ -333,5 +289,19 @@ public class HealthQualReportBuilder {
 	
 	private static String translateLabel(String labelName) {
 		return MessageUtil.translate("isanteplusreports.healthqual.result." + labelName + ".label");
+	}
+
+
+	private String readFile(String file) {
+		InputStream in = getClass().getClassLoader().getResourceAsStream(file);
+		try {
+			try {
+				return IOUtils.toString(in);
+			} finally {
+				in.close();
+			}
+		} catch (Exception ex) {
+			throw new HealthQualException("Cannot read '" + file + "' file", ex);
+		}
 	}
 }

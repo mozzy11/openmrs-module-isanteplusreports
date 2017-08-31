@@ -1,0 +1,46 @@
+@page {
+    size: landscape;
+}
+html, body {
+    height: 210mm;
+    width: 297mm;
+}
+
+th, td {
+    padding: 2pt;
+    white-space: nowrap;
+    border-color: black;
+    border-style: solid;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-right-width: 0px;
+    border-bottom-width: 0px;
+    font-size: 9pt;
+}
+
+th:last-child, td:last-child {
+    border-right-width: 1px;
+}
+
+tr:last-child th, tr:last-child td {
+    border-bottom-width: 1px;
+}
+
+.indicatorLabel {
+    text-align: center;
+    color: blue;
+}
+
+.label {
+    text-align: center;
+}
+.total {
+    color: blue;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    empty-cells: hide;
+    margin: 41pt 0;
+}

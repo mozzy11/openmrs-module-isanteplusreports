@@ -3,9 +3,10 @@ package org.openmrs.module.isanteplusreports.page.controller;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
-import org.openmrs.module.isanteplusreports.model.HealthQualSelectedIndicator;
-import org.openmrs.module.isanteplusreports.healthqual.builder.HealthQualHtmlTableBuilder;
+import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualSelectedIndicator;
+import org.openmrs.module.isanteplusreports.healthqual.builder.HealthQualReportBuilder;
 import org.openmrs.module.reporting.common.DateUtil;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.EvaluationException;
@@ -63,7 +64,7 @@ public class HealthQualReportPageController {
 		startDate = DateUtil.getStartOfDay(startDate);
 		endDate = DateUtil.getEndOfDay(endDate);
 		
-		HealthQualHtmlTableBuilder builder = new HealthQualHtmlTableBuilder();
+		HealthQualReportBuilder builder = new HealthQualReportBuilder();
 		for (HealthQualSelectedIndicator indicator : indicators) {
 			
 			ReportDefinition reportDefinition = reportDefinitionService.getDefinitionByUuid(indicator.getUuid());
@@ -85,10 +86,9 @@ public class HealthQualReportPageController {
 			
 			try {
 				builder.addReportData(reportDefinitionService.evaluate(reportDefinition, context));
-			}
-			catch (EvaluationException e) {
+			} catch (EvaluationException e) {
 				log.error("Report evaluation exception was thrown");
-				throw e;
+				throw new HealthQualException("Report cannot be evaluated", e);
 			}
 			
 		}
@@ -96,7 +96,7 @@ public class HealthQualReportPageController {
 		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("htmlResult", builder.build());
+		model.addAttribute("htmlResult", builder.buildHtml());
 		model.addAttribute("pdfResult", builder.buildPdf());
 	}
 }

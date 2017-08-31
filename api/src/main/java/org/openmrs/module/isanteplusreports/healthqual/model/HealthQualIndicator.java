@@ -1,6 +1,5 @@
 package org.openmrs.module.isanteplusreports.healthqual.model;
 
-import org.openmrs.module.isanteplusreports.healthqual.HealthQualIndicatorOption;
 import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 

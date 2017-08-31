@@ -2,7 +2,7 @@ package org.openmrs.module.isanteplusreports.conventer;
 
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.JavaType;
-import org.openmrs.module.isanteplusreports.model.HealthQualSelectedIndicator;
+import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualSelectedIndicator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;

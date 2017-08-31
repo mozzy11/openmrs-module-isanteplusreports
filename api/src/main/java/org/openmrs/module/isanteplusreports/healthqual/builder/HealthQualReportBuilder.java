@@ -1,18 +1,8 @@
 package org.openmrs.module.isanteplusreports.healthqual.builder;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import com.itextpdf.text.DocumentException;
 import j2html.tags.ContainerTag;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.Builder;
 import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.DataSet;
@@ -25,6 +15,13 @@ import javax.xml.bind.DatatypeConverter;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 import static j2html.TagCreator.div;
 import static j2html.TagCreator.html;
@@ -34,7 +31,7 @@ import static j2html.TagCreator.td;
 import static j2html.TagCreator.th;
 import static j2html.TagCreator.tr;
 
-public class HealthQualHtmlTableBuilder implements Builder<String> {
+public class HealthQualReportBuilder {
 	
 	private static final int ROWS = 7;
 	
@@ -63,24 +60,22 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	private String clinicDepartment;
 	
 	private String clinic;
-	
-	@Override
-	public String build() {
+
+	public String buildHtml() {
 		return buildTables().render();
 	}
 	
 	public String buildPdf() {
-		ContainerTag htmlForPdf = html(buildTables(), style(getCssForPdf()));
+		ContainerTag htmlForPdf = html(buildTables(), style(getStyleForPdf()));
 		try {
 			return convertHtmlToPdfInBase64(htmlForPdf.render());
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			throw new HealthQualException("PDF cannot be created", ex);
 		}
 	}
 	
-	private String getCssForPdf() {
-		return "@page {size: landscape}";
+	private ContainerTag getStyleForPdf() {
+		return style().withType("text/css").withText("@page {size: landscape}");
 	}
 	
 	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,
@@ -190,8 +185,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	private String[] createPercentageArray(Integer[] dividend, Integer[] factor) {
 		DecimalFormat df = new DecimalFormat(PERCENTAGE_STRING_FORMAT);
-		df.setRoundingMode(RoundingMode.HALF_UP);
-		
+
 		final int SIZE = 3;
 		String result[] = new String[SIZE];
 		for (int i = 0; i < SIZE; ++i) {

@@ -1,4 +1,4 @@
-package org.openmrs.module.isanteplusreports.model;
+package org.openmrs.module.isanteplusreports.healthqual.model;
 
 import java.util.Map;
 

@@ -1,6 +1,7 @@
 package org.openmrs.module.isanteplusreports.healthqual;
 
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicator;
+import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicatorOption;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
 import org.springframework.beans.factory.annotation.Autowired;

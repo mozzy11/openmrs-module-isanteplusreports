@@ -1,4 +1,4 @@
-package org.openmrs.module.isanteplusreports.healthqual;
+package org.openmrs.module.isanteplusreports.healthqual.model;
 
 import org.openmrs.module.reporting.common.MessageUtil;
 

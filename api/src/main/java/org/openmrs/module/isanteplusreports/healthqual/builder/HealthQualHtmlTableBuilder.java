@@ -1,11 +1,15 @@
 package org.openmrs.module.isanteplusreports.healthqual.builder;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.itextpdf.text.DocumentException;
 import j2html.tags.ContainerTag;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.Builder;
@@ -13,8 +17,18 @@ import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.DataSet;
 import org.openmrs.module.reporting.report.ReportData;
+import org.w3c.dom.Document;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+import org.xml.sax.SAXException;
+
+import javax.xml.bind.DatatypeConverter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 
 import static j2html.TagCreator.div;
+import static j2html.TagCreator.html;
+import static j2html.TagCreator.style;
 import static j2html.TagCreator.table;
 import static j2html.TagCreator.td;
 import static j2html.TagCreator.th;
@@ -32,7 +46,7 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	private static final String MALE_NUMERATOR_COLUMN_NAME = "maleNumerator";
 	
-	private static final String FEMALE_NUMERATOR_COLUMN_NAME = "femalenumerator";
+	private static final String FEMALE_NUMERATOR_COLUMN_NAME = "femaleNumerator";
 	
 	private static final String MALE_DENOMINATOR_COLUMN_NAME = "maleDenominator";
 	
@@ -52,14 +66,54 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	
 	@Override
 	public String build() {
-		ContainerTag tables = div();
+		return buildTables().render();
+	}
+	
+	public String buildPdf() {
+		ContainerTag htmlForPdf = html(buildTables(), style(getCssForPdf()));
+		try {
+			return convertHtmlToPdfInBase64(htmlForPdf.render());
+		}
+		catch (Exception ex) {
+			throw new HealthQualException("PDF cannot be created", ex);
+		}
+	}
+	
+	private String getCssForPdf() {
+		return "@page {size: landscape}";
+	}
+	
+	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,
+	        DocumentException {
+		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes())); // TODO to remove
+		
+		ITextRenderer renderer = new ITextRenderer();
+		renderer.setDocument(doc, null);
+		
+		// FIXME
+		// renderer.getFontResolver().addFont("C:/Windows/Fonts/CALIBRI.TTF",
+		// true);
+		
+		renderer.layout();
+		renderer.createPDF(out);
+		out.flush();
+		out.close();
+		
+		return DatatypeConverter.printBase64Binary(out.toByteArray());
+	}
+	
+	private ContainerTag buildTables() {
+		ContainerTag tables = div().withId("divWithReportTables");
 		Iterator<DataSet> iterator = getDataSets().iterator();
 		while (iterator.hasNext()) {
 			tables.with(buildOneTable(iterator));
 			setRows(null); // clear already built table
 		}
 		
-		return tables.render();
+		return tables;
 	}
 	
 	private ContainerTag buildOneTable(Iterator<DataSet> iterator) {
@@ -105,8 +159,8 @@ public class HealthQualHtmlTableBuilder implements Builder<String> {
 	}
 	
 	private void buildIndicator(DataSet data) {
-		getRows()[0].with(td(data.getDefinition().getName()).attr("colspan", "9").withClass("indicatorLabel"));
-		getRows()[1].with(td(translateLabel("activePatients")).attr("colspan", "3").withClass("label"),
+		getRows()[0].with(th(data.getDefinition().getName()).attr("colspan", "9").withClass("indicatorLabel"));
+		getRows()[1].with(td(translateLabel("numerator")).attr("colspan", "3").withClass("label"),
 		    td(translateLabel("denominator")).attr("colspan", "3").withClass("label"), td(translateLabel("percentage"))
 		            .attr("colspan", "3").withClass("label"));
 		

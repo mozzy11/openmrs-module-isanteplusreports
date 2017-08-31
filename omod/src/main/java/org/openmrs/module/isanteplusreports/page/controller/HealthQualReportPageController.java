@@ -42,7 +42,8 @@ public class HealthQualReportPageController {
 		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("divWithResult", null);
+		model.addAttribute("htmlResult", null);
+		model.addAttribute("pdfResult", null);
 	}
 	
 	public void post(@SpringBean HealthQualManager healthQualManager,
@@ -95,6 +96,7 @@ public class HealthQualReportPageController {
 		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("divWithResult", builder.build());
+		model.addAttribute("htmlResult", builder.build());
+		model.addAttribute("pdfResult", builder.buildPdf());
 	}
 }

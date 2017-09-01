@@ -89,7 +89,7 @@
     function createIndicator(uuidValue, optionValue) {
         return {
             uuid: uuidValue,
-            option: optionValue
+            options: optionValue
         };
     }
 </script>

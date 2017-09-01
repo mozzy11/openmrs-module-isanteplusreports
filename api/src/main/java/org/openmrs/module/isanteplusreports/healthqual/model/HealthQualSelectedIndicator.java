@@ -6,7 +6,7 @@ public class HealthQualSelectedIndicator {
 	
 	private String uuid;
 	
-	private Map<String, Object> option;
+	private Map<String, Object> options;
 	
 	public String getUuid() {
 		return uuid;
@@ -16,11 +16,11 @@ public class HealthQualSelectedIndicator {
 		this.uuid = uuid;
 	}
 	
-	public Map<String, Object> getOption() {
-		return option;
+	public Map<String, Object> getOptions() {
+		return options;
 	}
 	
-	public void setOption(Map<String, Object> option) {
-		this.option = option;
+	public void setOptions(Map<String, Object> options) {
+		this.options = options;
 	}
 }

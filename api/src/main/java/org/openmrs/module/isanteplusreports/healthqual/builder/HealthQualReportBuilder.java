@@ -2,7 +2,6 @@ package org.openmrs.module.isanteplusreports.healthqual.builder;
 
 import com.itextpdf.text.DocumentException;
 import j2html.tags.ContainerTag;
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +20,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,6 +39,7 @@ import static j2html.TagCreator.table;
 import static j2html.TagCreator.td;
 import static j2html.TagCreator.th;
 import static j2html.TagCreator.tr;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.readResource;
 
 public class HealthQualReportBuilder {
 
@@ -119,7 +118,7 @@ public class HealthQualReportBuilder {
 	}
 
 	private ContainerTag getStyleForPdf() {
-		return style().withType("text/css").withText(readFile("healthQualPdfStyle.css"));
+		return style().withType("text/css").withText(readResource("healthQualPdfStyle.css"));
 	}
 	
 	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,
@@ -322,20 +321,6 @@ public class HealthQualReportBuilder {
 	
 	private static String translateLabel(String labelName) {
 		return MessageUtil.translate("isanteplusreports.healthqual.result." + labelName + ".label");
-	}
-
-
-	private String readFile(String file) {
-		InputStream in = getClass().getClassLoader().getResourceAsStream(file);
-		try {
-			try {
-				return IOUtils.toString(in);
-			} finally {
-				in.close();
-			}
-		} catch (Exception ex) {
-			throw new HealthQualException("Cannot read '" + file + "' file", ex);
-		}
 	}
 
 	public Date getStartDate() {

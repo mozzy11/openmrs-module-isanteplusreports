@@ -41,7 +41,7 @@ public class HealthQualReportBuilder {
 
 	private final Log LOGGER = LogFactory.getLog(getClass());
 
-	private static final int ROWS = 7;
+	private static final int ROWS = 7; // TODO: to refactor
 	
 	private static final ContainerTag MALE_LABEL = th(translateLabel("male")).withClass("label");
 	
@@ -112,7 +112,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	private ContainerTag buildTables() {
-		ContainerTag tables = div().withId("divWithReportTables");
+		ContainerTag tables = div();
 		Iterator<DataSet> iterator = getDataSets().iterator();
 		while (iterator.hasNext()) {
 			tables.with(buildOneTable(iterator));

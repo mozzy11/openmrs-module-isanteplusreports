@@ -1,5 +1,6 @@
 <%
     ui.decorateWith("appui", "standardEmrPage")
+    ui.includeJavascript("isanteplusreports", "healthQualExportToExcel.js")
 %>
 
 <script type="text/javascript">
@@ -18,6 +19,10 @@
             event.preventDefault();                            
             savePdf();
         });
+        jq('#buttonToExcel').click(function(event) {
+            event.preventDefault();                            
+            saveExcel();
+        });
     });
 
     <% if (pdfResult != null) { %>
@@ -28,16 +33,27 @@
             link.click();
         }
     <% } %>
+    
+    function saveExcel() {
+        var worksheet = "";
+        jq("#divWithReportTables").find("table").each(function(i, table) {
+            worksheet += jq(this).html();
+            worksheet += "<tr></tr><tr></tr><tr></tr><tr></tr>"; // table separation
+        });
+
+        saveToExcel(worksheet, 'workbenchName', generateExcelName());
+    }
+
+    function generateExcelName() {
+        return "HealthQualReport" + formatDate(new Date()) + ".xls";
+    }
 
     function generatePdfName() {
         return "HealthQualReport" + formatDate(new Date()) + ".pdf";
     }
 
     function formatDate(date) {
-        return jq.datepicker.formatDate('yy-mm-dd', new Date()) + '_' 
-            + date.getHours() + ":"
-            + date.getMinutes() + ":"
-            + date.getSeconds();
+        return jq.datepicker.formatDate('yy-mm-dd', date) + '_' + date.toLocaleTimeString();
     }
 
     function runReport() {
@@ -130,7 +146,7 @@ th, td {
     color: blue;
 }
 
-#divWithReportTables > table {
+#divWithReportTables table {
     border-collapse: separate;
     border-spacing: 0;
     empty-cells: hide;
@@ -190,7 +206,10 @@ th, td {
                 ${ ui.message("isanteplusreports.healthqual.result.label") }
             </h3>
             <input type='button' id='buttonToPdf' value="Save as PDF" />
-            <%= htmlResult %>
+            <input type='button' id='buttonToExcel' value="Save as Excel" />
+            <div id="divWithReportTables">
+                <%= htmlResult %>
+            </div>
         <% } %>
    </div>
    

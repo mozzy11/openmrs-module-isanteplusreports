@@ -5,7 +5,7 @@ import org.openmrs.module.reporting.report.definition.ReportDefinition;
 
 public class HealthQualIndicator {
 	
-	private String name;
+	private String nameId;
 	
 	private String uuid;
 	
@@ -13,12 +13,12 @@ public class HealthQualIndicator {
 	
 	public HealthQualIndicator(ReportDefinition report, HealthQualIndicatorOption option) {
 		this.option = option;
-		this.name = MessageUtil.translate(report.getName());
+		this.nameId = report.getName();
 		this.uuid = report.getUuid();
 	}
 	
 	public String getName() {
-		return name;
+		return MessageUtil.translate(nameId);
 	}
 	
 	public String getUuid() {

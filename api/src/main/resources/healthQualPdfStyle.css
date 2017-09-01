@@ -38,6 +38,20 @@ tr:last-child th, tr:last-child td {
     color: blue;
 }
 
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h2 {
+    margin: 5pt;
+}
+
+h3, h5 {
+    font-weight: normal;
+    margin: 1pt;
+}
+
 table {
     border-collapse: separate;
     border-spacing: 0;

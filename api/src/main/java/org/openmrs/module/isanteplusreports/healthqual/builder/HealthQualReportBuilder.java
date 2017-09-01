@@ -23,12 +23,17 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 import static j2html.TagCreator.body;
 import static j2html.TagCreator.div;
+import static j2html.TagCreator.h2;
+import static j2html.TagCreator.h3;
+import static j2html.TagCreator.h5;
 import static j2html.TagCreator.head;
 import static j2html.TagCreator.html;
 import static j2html.TagCreator.style;
@@ -57,7 +62,11 @@ public class HealthQualReportBuilder {
 	
 	private static final String FEMALE_DENOMINATOR_COLUMN_NAME = "femaleDenominator";
 	
-	private static final String PERCENTAGE_STRING_FORMAT = "###.0";
+	private static final String PERCENTAGE_STRING_FORMAT_PATTERN = "###.0";
+
+	private static final String PERIOD_DATE_FORMAT_PATTERN = "yyyy/MM/dd";
+
+	private static final String CREATION_DATE_FORMAT_PATTERN = "yyyy/MM/dd HH:mm:ss";
 
 	private static final String STRING_IF_EMPTY = "-";
 	
@@ -71,6 +80,10 @@ public class HealthQualReportBuilder {
 	
 	private String clinic;
 
+	private Date startDate;
+
+	private Date endDate;
+
 	public String buildHtmlTables() {
 		String tablesHtml = buildTables().render();
 		LOGGER.debug("built tables html: " + tablesHtml);
@@ -78,7 +91,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	public String buildPdf() {
-		String htmlForPdf = html(head(getStyleForPdf()), body(buildTables())).render();
+		String htmlForPdf = html(head(getStyleForPdf()), body(createPdfHeader(), buildTables())).render();
 		LOGGER.debug("built htmlForPdf: " + htmlForPdf);
 		try {
 			return convertHtmlToPdfInBase64(htmlForPdf);
@@ -86,7 +99,25 @@ public class HealthQualReportBuilder {
 			throw new HealthQualException("PDF cannot be created", ex);
 		}
 	}
-	
+
+	private ContainerTag createPdfHeader() {
+		return div().withClass("center").with(
+			h2(translateLabel("pdf.header")),
+			h3(createPeriodString()),
+			h5(createDateOfCreationString())
+		);
+	}
+
+	private String createPeriodString() {
+		SimpleDateFormat df = new SimpleDateFormat(PERIOD_DATE_FORMAT_PATTERN);
+		return df.format(startDate) + " - " + df.format(endDate);
+	}
+
+	private String createDateOfCreationString() {
+		SimpleDateFormat df = new SimpleDateFormat(CREATION_DATE_FORMAT_PATTERN);
+		return translateLabel("pdf.creationDate") + " " + df.format(new Date());
+	}
+
 	private ContainerTag getStyleForPdf() {
 		return style().withType("text/css").withText(readFile("healthQualPdfStyle.css"));
 	}
@@ -197,7 +228,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	private String[] createPercentageArray(Integer[] dividend, Integer[] factor) {
-		DecimalFormat df = new DecimalFormat(PERCENTAGE_STRING_FORMAT);
+		DecimalFormat df = new DecimalFormat(PERCENTAGE_STRING_FORMAT_PATTERN);
 
 		final int SIZE = 3;
 		String result[] = new String[SIZE];
@@ -305,5 +336,21 @@ public class HealthQualReportBuilder {
 		} catch (Exception ex) {
 			throw new HealthQualException("Cannot read '" + file + "' file", ex);
 		}
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 }

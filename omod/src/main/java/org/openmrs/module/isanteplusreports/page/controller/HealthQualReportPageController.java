@@ -71,6 +71,8 @@ public class HealthQualReportPageController {
 		Location location = locationService.getDefaultLocation();
 		builder.setClinic(location.getDisplayString());
 		builder.setClinicDepartment(location.getStateProvince());
+		builder.setStartDate(startDate);
+		builder.setEndDate(endDate);
 
 		for (HealthQualSelectedIndicator indicator : indicators) {
 			

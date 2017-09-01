@@ -86,7 +86,7 @@ public class HealthQualReportPageController {
 		model.addAttribute("pdfResult", builder.buildPdf());
 	}
 
-	private void setNumberOfPatients(List<HealthQualSelectedIndicator> indicators, Date startDate, Date endDate, HealthQualReportBuilder builder) {
+	private void setNumberOfPatients(Date startDate, Date endDate, HealthQualReportBuilder builder) {
 		ReportData numberOfPatientsReportData = getReportData(IsantePlusReportsProperties.NUMBERPATIENTBYSEX, startDate, endDate, null);
 		if (numberOfPatientsReportData.getDataSets().isEmpty()) {
 			throw new HealthQualException("Cannot read number of patients - reportData is empty");
@@ -98,9 +98,5 @@ public class HealthQualReportPageController {
 		DataSetRow row = rowIterator.next();
 		builder.setMalePatients((Long) row.getColumnValue(NUMBER_OF_MALES_COLUMN_NAME));
 		builder.setFemalePatients((Long) row.getColumnValue(NUMBER_OF_FEMALES_COLUMN_NAME));
-
-		for (HealthQualSelectedIndicator indicator : indicators) {
-			builder.addReportData(getReportData(indicator.getUuid(), startDate, endDate, indicator.getOptions()));
-		}
 	}
 }

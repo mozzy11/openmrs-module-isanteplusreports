@@ -58,6 +58,8 @@ public class HealthQualReportBuilder {
 	private static final String FEMALE_DENOMINATOR_COLUMN_NAME = "femaleDenominator";
 	
 	private static final String PERCENTAGE_STRING_FORMAT = "###.0";
+
+	private static final String STRING_IF_EMPTY = "-";
 	
 	private int numberOfIndicatorsInOneTable = 3; // if there are too many indicators the table will be splitted
 	
@@ -143,10 +145,10 @@ public class HealthQualReportBuilder {
 		
 		labels.with(th(translateLabel("department")).withClass("label"), th(translateLabel("clinic")).withClass("label"));
 		
-		data.with(td(clinicDepartment).attr("rowspan", "3"), td(clinic).attr("rowspan", "3"));
+		data.with(td(getClinicDepartment()).attr("rowspan", "3"), td(getClinic()).attr("rowspan", "3"));
 	}
 	
-	//	private void buildLegend() {
+	//	private void buildLegend() { // TODO: to refactor
 	//		fillEmptyRow(getRows()[0], 1);
 	//		fillEmptyRow(getRows()[1], 1);
 	//
@@ -211,7 +213,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	public String getClinic() {
-		return clinic;
+		return StringUtils.isNotBlank(clinic) ? clinic : STRING_IF_EMPTY;
 	}
 	
 	public void setClinic(String clinic) {
@@ -219,7 +221,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	public String getClinicDepartment() {
-		return clinicDepartment;
+		return StringUtils.isNotBlank(clinicDepartment) ? clinicDepartment : STRING_IF_EMPTY;
 	}
 	
 	public void setClinicDepartment(String clinicDepartment) {

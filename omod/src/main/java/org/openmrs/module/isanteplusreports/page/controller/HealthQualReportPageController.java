@@ -3,6 +3,8 @@ package org.openmrs.module.isanteplusreports.page.controller;
 import org.apache.commons.lang.time.DateUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.Location;
+import org.openmrs.api.LocationService;
 import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualSelectedIndicator;
@@ -49,6 +51,7 @@ public class HealthQualReportPageController {
 	
 	public void post(@SpringBean HealthQualManager healthQualManager,
 	        @SpringBean ReportDefinitionService reportDefinitionService,
+			@SpringBean("locationService") LocationService locationService,
 	        @RequestParam(value = "indicatorList") List<HealthQualSelectedIndicator> indicators,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
 	        @RequestParam(required = false, value = "endDate") Date endDate, PageModel model) throws IOException,
@@ -65,6 +68,10 @@ public class HealthQualReportPageController {
 		endDate = DateUtil.getEndOfDay(endDate);
 		
 		HealthQualReportBuilder builder = new HealthQualReportBuilder();
+		Location location = locationService.getDefaultLocation();
+		builder.setClinic(location.getDisplayString());
+		builder.setClinicDepartment(location.getStateProvince());
+
 		for (HealthQualSelectedIndicator indicator : indicators) {
 			
 			ReportDefinition reportDefinition = reportDefinitionService.getDefinitionByUuid(indicator.getUuid());
@@ -81,11 +88,10 @@ public class HealthQualReportPageController {
 				}
 			}
 			
-			EvaluationContext context = new EvaluationContext();
-			context.setParameterValues(parameterValues);
-			
+			EvaluationContext evaluationContext = new EvaluationContext();
+			evaluationContext.setParameterValues(parameterValues);
 			try {
-				builder.addReportData(reportDefinitionService.evaluate(reportDefinition, context));
+				builder.addReportData(reportDefinitionService.evaluate(reportDefinition, evaluationContext));
 			} catch (EvaluationException e) {
 				LOGGER.error("Report evaluation exception was thrown");
 				throw new HealthQualException("Report cannot be evaluated", e);

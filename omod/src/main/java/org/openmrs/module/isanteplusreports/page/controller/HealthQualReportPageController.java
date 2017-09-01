@@ -73,7 +73,7 @@ public class HealthQualReportPageController {
 		builder.setStartDate(startDate);
 		builder.setEndDate(endDate);
 
-		setNumberOfPatients(indicators, startDate, endDate, builder);
+		setNumberOfPatients(startDate, endDate, builder);
 
 		for (HealthQualSelectedIndicator indicator : indicators) {
 			builder.addReportData(getReportData(indicator.getUuid(), startDate, endDate, indicator.getOptions()));

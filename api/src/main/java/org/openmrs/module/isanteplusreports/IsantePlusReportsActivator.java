@@ -18,6 +18,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
+import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.scheduler.SchedulerException;
 import org.openmrs.scheduler.Task;
@@ -36,8 +37,12 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 	public void started() {
 		log.info("Started IsantePlusReports");
 		RegisterReports register = new RegisterReports();
+		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
+
 		try {
 			register.registerReports();
+
+			appFrameworkService.disableApp("reportingui.reports");
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block

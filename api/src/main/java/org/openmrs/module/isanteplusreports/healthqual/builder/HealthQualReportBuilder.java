@@ -83,6 +83,10 @@ public class HealthQualReportBuilder {
 
 	private Date endDate;
 
+	private Long femalePatients;
+
+	private Long malePatients;
+
 	public String buildHtmlTables() {
 		String tablesHtml = buildTables().render();
 		LOGGER.debug("built tables html: " + tablesHtml);
@@ -193,7 +197,7 @@ public class HealthQualReportBuilder {
 		
 		getRows()[1].with(th(translateLabel("activePatients")).attr("colspan", "3").withClass("label"));
 		
-		buildIndicatorSummary(createSummaryArray(11, 22));
+		buildIndicatorSummary(createSummaryArray(malePatients, femalePatients));
 	}
 	
 	private void buildIndicator(DataSet data) {
@@ -224,6 +228,10 @@ public class HealthQualReportBuilder {
 	
 	private Integer[] createSummaryArray(Integer males, Integer females) {
 		return new Integer[] { males, females, males + females };
+	}
+
+	private Long[] createSummaryArray(Long males, Long females) {
+		return new Long[] { males, females, males + females };
 	}
 	
 	private String[] createPercentageArray(Integer[] dividend, Integer[] factor) {
@@ -337,5 +345,21 @@ public class HealthQualReportBuilder {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
+	}
+
+	public Long getFemalePatients() {
+		return femalePatients;
+	}
+
+	public void setFemalePatients(Long femalePatients) {
+		this.femalePatients = femalePatients;
+	}
+
+	public Long getMalePatients() {
+		return malePatients;
+	}
+
+	public void setMalePatients(Long malePatients) {
+		this.malePatients = malePatients;
 	}
 }

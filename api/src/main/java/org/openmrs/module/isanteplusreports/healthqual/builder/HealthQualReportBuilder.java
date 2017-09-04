@@ -201,7 +201,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	private void buildIndicator(DataSet data) {
-		getRows()[0].with(th(data.getDefinition().getName()).attr("colspan", "9").withClass("indicatorLabel"));
+		getRows()[0].with(th(MessageUtil.translate(data.getDefinition().getName())).attr("colspan", "9").withClass("indicatorLabel"));
 		getRows()[1].with(td(translateLabel("numerator")).attr("colspan", "3").withClass("label"),
 		    td(translateLabel("denominator")).attr("colspan", "3").withClass("label"), td(translateLabel("percentage"))
 		            .attr("colspan", "3").withClass("label"));

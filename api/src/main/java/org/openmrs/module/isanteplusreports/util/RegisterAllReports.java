@@ -1365,15 +1365,22 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void indicatorTest() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("indicatorTest.sql", "Test HealthQualIndicator",
-				"Test HealthQualIndicator");
-
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("indicatorTest.sql", "isanteplusreports.indicatorTest",
+				"");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
 		ReportDefinition repDefinition = reportDefinition("isanteplusreports.indicatorTest", "", "UUID_indicatorTest");
-		ReportService rs = Context.getService(ReportService.class);
-		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
-		rs.saveReportDesign(rDesign);
-		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
-		rs.saveReportDesign(rDes);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {

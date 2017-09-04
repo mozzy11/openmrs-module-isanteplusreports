@@ -18,9 +18,7 @@ import org.openmrs.api.LocationService;
 import org.openmrs.api.ProviderService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.context.SessionContext;
-import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.appui.UiSessionContext;
-import org.openmrs.module.appui.rest.SessionController;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsUtil;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusOtherHtmlReportRenderer;
@@ -37,20 +35,13 @@ import org.openmrs.module.reporting.report.ReportRequest;
 import org.openmrs.module.reporting.report.ReportRequest.Status;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
-import org.openmrs.module.reporting.report.manager.ReportManager;
-import org.openmrs.module.reporting.report.manager.ReportManagerUtil;
 import org.openmrs.module.reporting.report.renderer.ExcelTemplateRenderer;
 import org.openmrs.module.reporting.report.renderer.ReportRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.module.reporting.web.renderers.WebReportRenderer;
-import org.openmrs.ui.framework.WebConstants;
-import org.openmrs.ui.framework.annotation.SpringBean;
-import org.openmrs.ui.framework.fragment.action.FragmentActionResult;
-import org.openmrs.ui.framework.fragment.action.ObjectResult;
 /*import org.openmrs.ui.framework.session.SessionFactory;*/
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public class RegisterAllReports extends SessionContext {
 	
@@ -1379,6 +1370,29 @@ public class RegisterAllReports extends SessionContext {
 		ReportDefinition repDefinition = reportDefinition("isanteplusreports.indicatorTest", "", "UUID_indicatorTest");
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	public void healthQualChildrenRegularlyFollowedOnArt() {
+		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualChildrenRegularlyFollowedOnArt.sql",
+				"isanteplusreports.pediatric1",
+				"Proportion of children regularly followed on ART");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(period);
+		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(period);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("period", "${period}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric1",
+				"Proportion of children regularly followed on ART",
+				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(period);
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}

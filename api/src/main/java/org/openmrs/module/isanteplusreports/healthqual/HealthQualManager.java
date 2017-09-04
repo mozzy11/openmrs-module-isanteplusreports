@@ -1,5 +1,6 @@
 package org.openmrs.module.isanteplusreports.healthqual;
 
+import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicator;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicatorOption;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
@@ -18,7 +19,9 @@ public class HealthQualManager {
 	
 	private static final String[] adultIndicatorsUuid = { "UUID_indicatorTest" };
 	
-	private static final String[] pediatricIndicatorsUuid = {};
+	private static final String[] pediatricIndicatorsUuid = {
+			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART
+	};
 	
 	private Map<String, HealthQualIndicatorOption> options = new HashMap<String, HealthQualIndicatorOption>();
 	
@@ -50,8 +53,8 @@ public class HealthQualManager {
 	}
 	
 	private void createIndicatorOptions() {
-		String[] periodMonthsValues = { "6", "12", "24", "48" };
+		String[] periodMonthsValues = { "6", "12", "24", "48", "60" };
 		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
-		options.put("UUID_indicatorTest", period);
+		options.put(IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART, period);
 	}
 }

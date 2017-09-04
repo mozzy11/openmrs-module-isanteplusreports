@@ -74,6 +74,7 @@ public class RegisterReports {
 				Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
 
 				register.indicatorTest();
+				register.healthQualChildrenRegularlyFollowedOnArt();
 			//}
 		}
 		catch (Exception ex) {

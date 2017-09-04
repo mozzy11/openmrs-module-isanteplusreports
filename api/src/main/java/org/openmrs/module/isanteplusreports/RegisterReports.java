@@ -75,6 +75,7 @@ public class RegisterReports {
 
 				register.indicatorTest();
 				register.healthQualChildrenRegularlyFollowedOnArt();
+				register.healthQualChildrenHivAndPlacedOnArt();
 			//}
 		}
 		catch (Exception ex) {

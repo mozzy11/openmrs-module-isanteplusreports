@@ -61,7 +61,7 @@ public class HealthQualReportBuilder {
 	
 	private static final String FEMALE_DENOMINATOR_COLUMN_NAME = "femaleDenominator";
 	
-	private static final String PERCENTAGE_STRING_FORMAT_PATTERN = "###.0";
+	private static final String PERCENTAGE_STRING_FORMAT_PATTERN = "##0.0";
 
 	private static final String PERIOD_DATE_FORMAT_PATTERN = "yyyy/MM/dd";
 

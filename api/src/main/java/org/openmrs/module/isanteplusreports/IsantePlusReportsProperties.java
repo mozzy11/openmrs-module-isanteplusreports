@@ -106,4 +106,7 @@ public class IsantePlusReportsProperties{
 	public static final String HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART = "aa8b29c6-6c2c-4161-8990-ccdcceb92e3e";
 
 	public static final String HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART = "85df69ec-f4bf-4711-8a19-d961aae4728d";
+
+	public static final String HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY = "41f24149-455b-40f4-89d4-0d8f3d752ab5";
+
 }

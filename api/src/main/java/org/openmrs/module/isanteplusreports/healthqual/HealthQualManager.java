@@ -21,7 +21,8 @@ public class HealthQualManager {
 	
 	private static final String[] pediatricIndicatorsUuid = {
 			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART,
-			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART
+			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY
 	};
 	
 	private Map<String, HealthQualIndicatorOption> options = new HashMap<String, HealthQualIndicatorOption>();

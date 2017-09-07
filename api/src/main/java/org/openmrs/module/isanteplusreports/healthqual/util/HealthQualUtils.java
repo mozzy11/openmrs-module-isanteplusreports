@@ -31,6 +31,8 @@ public abstract class HealthQualUtils {
                 parameterValues.put("startDate", startDate);
             } else if (parameter.getName().equals("endDate")) {
                 parameterValues.put("endDate", endDate);
+            } else if (parameter.getName().equals("currentDate")) { // in case of indicators with period option
+                parameterValues.put("currentDate", startDate);
             } else if (additionalOptions != null && additionalOptions.containsKey(parameter.getName())) {
                 parameterValues.put(parameter.getName(), additionalOptions.get(parameter.getName()));
             } else {

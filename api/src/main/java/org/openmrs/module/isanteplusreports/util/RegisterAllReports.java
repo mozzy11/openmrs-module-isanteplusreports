@@ -74,7 +74,7 @@ public class RegisterAllReports extends SessionContext {
 	Parameter endDate = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
 	
 	Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);
-	
+
 	/*private SessionFactory sessionFactory;
 	private HttpSession httpSession;
 	public HttpSession getHttpSession()
@@ -1370,6 +1370,29 @@ public class RegisterAllReports extends SessionContext {
 		ReportDefinition repDefinition = reportDefinition("isanteplusreports.indicatorTest", "", "UUID_indicatorTest");
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	public void healthQualRetentionOfPatientsOnArt() {
+		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
+		Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
+
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualRetentionOfPatientsOnArt.sql",
+			"isanteplusreports.adult1",
+			"Retention of patients on antiretroviral treatment (ART)");
+		sqlData.addParameter(currentDate);
+		sqlData.addParameter(period);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("currentDate", "${currentDate}");
+		mappings.put("period", "${period}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult1",
+		"Retention of patients on antiretroviral treatment (ART)",
+			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART);
+		repDefinition.addParameter(currentDate);
+		repDefinition.addParameter(period);
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}

@@ -17,10 +17,12 @@ import java.util.Map;
 @Component
 public class HealthQualManager {
 	
-	private static final String[] adultIndicatorsUuid = { "UUID_indicatorTest" };
+	private static final String[] adultIndicatorsUuid = {
+			"UUID_indicatorTest",
+			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART,
+	};
 	
 	private static final String[] pediatricIndicatorsUuid = {
-			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART,
 			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART,
 			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY
@@ -59,7 +61,9 @@ public class HealthQualManager {
 		String[] periodMonthsValues = { "6", "12", "24", "48", "60" };
 		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
 
+		// adult options
 		options.put(IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART, period);
+		// pediatric options
 		options.put(IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART, period);
 	}
 }

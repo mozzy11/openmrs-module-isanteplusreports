@@ -240,7 +240,11 @@ public class HealthQualReportBuilder {
 		final int SIZE = 3;
 		String result[] = new String[SIZE];
 		for (int i = 0; i < SIZE; ++i) {
-			result[i] = df.format(100.0f * dividend[i] / factor[i]);
+			if (factor[i] != 0) {
+				result[i] = df.format(100.0f * dividend[i] / factor[i]);
+			} else {
+				result[i] = df.format(0);
+			}
 		}
 		return result;
 	}

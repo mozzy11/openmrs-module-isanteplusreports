@@ -2,7 +2,7 @@ package org.openmrs.module.isanteplusreports.page.controller;
 
 import org.apache.commons.lang.time.DateUtils;
 import org.openmrs.Location;
-import org.openmrs.api.LocationService;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
@@ -16,6 +16,7 @@ import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
 import java.util.Iterator;
@@ -28,6 +29,8 @@ public class HealthQualReportPageController {
 	public static final String NUMBER_OF_MALES_COLUMN_NAME = "Homme";
 
 	public static final String NUMBER_OF_FEMALES_COLUMN_NAME = "Femme";
+
+	public final static String LOCATION_SESSION_ATTRIBUTE = "emrContext.sessionLocationId";
 
 	public void get(@SpringBean HealthQualManager healthQualManager,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
@@ -50,11 +53,10 @@ public class HealthQualReportPageController {
 	}
 	
 	public void post(@SpringBean HealthQualManager healthQualManager,
-			@SpringBean("locationService") LocationService locationService,
 	        @RequestParam(value = "indicatorList") List<HealthQualSelectedIndicator> indicators,
 	        @RequestParam(required = false, value = "startDate") Date startDate,
-	        @RequestParam(required = false, value = "endDate") Date endDate, PageModel model) throws IOException,
-	        EvaluationException {
+	        @RequestParam(required = false, value = "endDate") Date endDate,
+			PageModel model, HttpSession session) throws IOException {
 		
 		if (startDate == null) {
 			startDate = DateUtils.addDays(new Date(), -21);
@@ -67,7 +69,7 @@ public class HealthQualReportPageController {
 		endDate = DateUtil.getEndOfDay(endDate);
 		
 		HealthQualReportBuilder builder = new HealthQualReportBuilder();
-		Location location = locationService.getDefaultLocation();
+		Location location = getSessionLocation(session);
 		builder.setClinic(location.getDisplayString());
 		builder.setClinicDepartment(location.getStateProvince());
 		builder.setStartDate(startDate);
@@ -84,6 +86,18 @@ public class HealthQualReportPageController {
 		model.addAttribute("endDate", endDate);
 		model.addAttribute("htmlResult", builder.buildHtmlTables());
 		model.addAttribute("pdfResult", builder.buildPdf());
+	}
+
+	private Location getSessionLocation(HttpSession session) {
+		Integer locationId = (Integer) session.getAttribute(LOCATION_SESSION_ATTRIBUTE);
+		if (locationId == null) {
+			return Context.getLocationService().getDefaultLocation();
+		}
+		Location childLocation = Context.getLocationService().getLocation(locationId);
+		if (childLocation == null || childLocation.getParentLocation() == null) {
+			return Context.getLocationService().getDefaultLocation();
+		}
+		return Context.getLocationService().getLocation(locationId).getParentLocation(); // to get clinic data
 	}
 
 	private void setNumberOfPatients(Date startDate, Date endDate, HealthQualReportBuilder builder) {

@@ -73,7 +73,6 @@ public class RegisterReports {
 				register.ListVisitsByPregnantWomenToClinic();
 				Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
 
-				register.indicatorTest();
 				register.healthQualRetentionOfPatientsOnArt();
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();

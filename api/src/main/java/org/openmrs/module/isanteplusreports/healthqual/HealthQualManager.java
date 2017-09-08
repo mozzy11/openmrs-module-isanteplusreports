@@ -18,7 +18,6 @@ import java.util.Map;
 public class HealthQualManager {
 	
 	private static final String[] adultIndicatorsUuid = {
-			"UUID_indicatorTest",
 			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART,
 	};
 	

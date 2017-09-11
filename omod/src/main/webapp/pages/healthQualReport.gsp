@@ -133,6 +133,10 @@ th, td {
     border-bottom-width: 1px;
 }
 
+#divWithReportTables th, #divWithReportTables td {
+    white-space: normal;
+}
+
 .indicatorLabel {
     text-align: center;
     color: blue;

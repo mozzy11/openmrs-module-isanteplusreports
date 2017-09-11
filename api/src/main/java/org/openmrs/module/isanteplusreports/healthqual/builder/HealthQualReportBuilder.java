@@ -201,7 +201,7 @@ public class HealthQualReportBuilder {
 	}
 	
 	private void buildIndicator(DataSet data) {
-		getRows()[0].with(th(MessageUtil.translate(data.getDefinition().getName())).attr("colspan", "9").withClass("indicatorLabel"));
+		getRows()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "9").withClass("indicatorLabel"));
 		getRows()[1].with(td(translateLabel("numerator")).attr("colspan", "3").withClass("label"),
 		    td(translateLabel("denominator")).attr("colspan", "3").withClass("label"), td(translateLabel("percentage"))
 		            .attr("colspan", "3").withClass("label"));
@@ -332,7 +332,12 @@ public class HealthQualReportBuilder {
 	}
 	
 	private static String translateLabel(String labelName) {
-		return MessageUtil.translate("isanteplusreports.healthqual.result." + labelName + ".label");
+		return translate("isanteplusreports.healthqual.result." + labelName + ".label");
+	}
+
+	private static String translate(String code) {
+		return MessageUtil.translate(code).replaceAll("&nbsp;", " ") // to let space-wrapping
+				.replace(' ',' ').trim(); // replace non-breaking spaces with regular space
 	}
 
 	public Date getStartDate() {

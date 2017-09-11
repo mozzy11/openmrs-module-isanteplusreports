@@ -1400,6 +1400,26 @@ public class RegisterAllReports extends SessionContext {
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
+	public void healthQualArvEnrollment() {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualArvEnrollment.sql",
+				"isanteplusreports.adult3",
+				"ARV Enrolment (Proportion of eligible HIV+ patients placed on ARVs during the selected period)");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult3",
+				"ARV Enrolment (Proportion of eligible HIV+ patients placed on ARVs during the selected period)",
+				IsantePlusReportsProperties.HEALTH_QUAL_ARV_ENROLLMENT);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
 	public void healthQualChildrenRegularlyFollowedOnArt() {
 		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
 		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualChildrenRegularlyFollowedOnArt.sql",

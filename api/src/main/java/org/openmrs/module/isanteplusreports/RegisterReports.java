@@ -75,6 +75,7 @@ public class RegisterReports {
 
 				register.healthQualRetentionOfPatientsOnArt();
 				register.healthQualCd4AssessmentAtEnrolment();
+				register.healthQualArvEnrollment();
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();
 				register.healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis();

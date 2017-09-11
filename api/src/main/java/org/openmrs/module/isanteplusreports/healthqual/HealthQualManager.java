@@ -19,6 +19,7 @@ public class HealthQualManager {
 	
 	private static final String[] adultIndicatorsUuid = {
 			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART,
+			IsantePlusReportsProperties.HEALTH_QUAL_CD4_ASSESSMENT_AT_ENROLMENT
 	};
 	
 	private static final String[] pediatricIndicatorsUuid = {

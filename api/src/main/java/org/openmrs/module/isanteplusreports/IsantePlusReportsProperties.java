@@ -105,6 +105,8 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART = "43f9c7f2-01b9-45c4-9da0-5776bee49c3f";
 
+	public static final String HEALTH_QUAL_CD4_ASSESSMENT_AT_ENROLMENT = "3fe2c0a0-0b4a-4a51-8ccb-95052fdb83c4";
+
 	public static final String HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART = "aa8b29c6-6c2c-4161-8990-ccdcceb92e3e";
 
 	public static final String HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART = "85df69ec-f4bf-4711-8a19-d961aae4728d";

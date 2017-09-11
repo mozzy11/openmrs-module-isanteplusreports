@@ -74,6 +74,7 @@ public class RegisterReports {
 				Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
 
 				register.healthQualRetentionOfPatientsOnArt();
+				register.healthQualCd4AssessmentAtEnrolment();
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();
 				register.healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis();

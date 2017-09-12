@@ -81,6 +81,7 @@ public class RegisterReports {
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();
 				register.healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis();
+				register.healthQualProportionOfHIVChildrenTestedForTB();
 			//}
 		}
 		catch (Exception ex) {

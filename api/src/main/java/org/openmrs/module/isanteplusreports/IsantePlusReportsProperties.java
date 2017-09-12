@@ -117,4 +117,6 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY = "41f24149-455b-40f4-89d4-0d8f3d752ab5";
 
+	public static final String HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB = "d73c965f-8cdd-4996-bbca-a65d8a19db42";
+
 }

@@ -121,4 +121,6 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB = "d73c965f-8cdd-4996-bbca-a65d8a19db42";
 
+	public static final String HEALTH_QUAL_PEDIATRIC_HIV_AND_ART_PROPHY = "5cd16174-7acb-4978-ab0f-735cec42b703";
+
 }

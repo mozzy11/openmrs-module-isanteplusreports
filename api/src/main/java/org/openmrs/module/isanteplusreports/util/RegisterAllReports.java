@@ -1467,10 +1467,8 @@ public class RegisterAllReports extends SessionContext {
 				"Proportion of children regularly followed on ART");
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(period);
-		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-		ds.addParameter(startDate);
-		ds.addParameter(period);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
 		Map<String, Object> mappings = new HashMap<String, Object>();
 		mappings.put("startDate", "${startDate}");
 		mappings.put("period", "${period}");
@@ -1489,10 +1487,8 @@ public class RegisterAllReports extends SessionContext {
 				"Proportion of children tested positive for HIV and placed on ART during the selected period.");
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
-		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-		ds.addParameter(startDate);
-		ds.addParameter(endDate);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
 		Map<String, Object> mappings = new HashMap<String, Object>();
 		mappings.put("startDate", "${startDate}");
 		mappings.put("endDate", "${endDate}");
@@ -1511,10 +1507,8 @@ public class RegisterAllReports extends SessionContext {
 				"Proportion of children exposed to or infected with HIV who received cotrimoxazole prophylaxis during the selected period.");
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
-		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-		ds.addParameter(startDate);
-		ds.addParameter(endDate);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
 		Map<String, Object> mappings = new HashMap<String, Object>();
 		mappings.put("startDate", "${startDate}");
 		mappings.put("endDate", "${endDate}");
@@ -1533,16 +1527,34 @@ public class RegisterAllReports extends SessionContext {
 				"Proportion of HIV+ children tested for TB at enrolment during the selected period.");
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
-		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-		ds.addParameter(startDate);
-		ds.addParameter(endDate);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
 		Map<String, Object> mappings = new HashMap<String, Object>();
 		mappings.put("startDate", "${startDate}");
 		mappings.put("endDate", "${endDate}");
 		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric6",
 				"Proportion of HIV+ children tested for TB at enrolment during the selected period .",
 				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	public void healthQualPediatricHivAndArtProphy() {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricHivAndArtProphy.sql",
+				"isanteplusreports.pediatric11",
+				"Proportion of HIV‐exposed infants who received ART prophylaxis during the selected period.");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric11",
+				"Proportion of HIV‐exposed infants who received ART prophylaxis during the selected period.",
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_ART_PROPHY);
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
 		repDefinition.addDataSetDefinition(sqlData, mappings);

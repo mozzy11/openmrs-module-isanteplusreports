@@ -43,10 +43,13 @@ import org.openmrs.module.reporting.web.renderers.WebReportRenderer;
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.FULL_DATA_EXPORTS_RESOURCE_PATH;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.HEALTH_QUAL_REPORTS_RESOURCE_PATH;
+
 public class RegisterAllReports extends SessionContext {
 	
 	private static Log log = LogFactory.getLog(RegisterAllReports.class);
-	
+
 	private Integer locationId;
 	
 	private SessionFactory sessionFactory;
@@ -1359,9 +1362,10 @@ public class RegisterAllReports extends SessionContext {
 		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
 		Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
 
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualRetentionOfPatientsOnArt.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualRetentionOfPatientsOnArt.sql",
 			"isanteplusreports.adult1",
-			"Retention of patients on antiretroviral treatment (ART)");
+			"Retention of patients on antiretroviral treatment (ART)",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(currentDate);
 		sqlData.addParameter(period);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1379,10 +1383,11 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualCd4AssessmentAtEnrolment() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualCd4AssessmentAtEnrolment.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualCd4AssessmentAtEnrolment.sql",
 			"isanteplusreports.adult2",
 			"CD4 Assessment at Enrolment (Proportion of HIV+ patients who have had a CD4 count completed " +
-					"at enrolment)");
+					"at enrolment)",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1401,9 +1406,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualArvEnrollment() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualArvEnrollment.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualArvEnrollment.sql",
 				"isanteplusreports.adult3",
-				"ARV Enrolment (Proportion of eligible HIV+ patients placed on ARVs during the selected period)");
+				"ARV Enrolment (Proportion of eligible HIV+ patients placed on ARVs during the selected period)",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1421,9 +1427,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualAdultHivAndCortimixazoleProphy() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualAdultHivAndCortimixazoleProphy.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualAdultHivAndCortimixazoleProphy.sql",
 				"isanteplusreports.adult4",
-				"Proportion of adult persons living with HIV (PLHIV) who have received cotrimoxazole prophylaxis during the selected period");
+				"Proportion of adult persons living with HIV (PLHIV) who have received cotrimoxazole prophylaxis during the selected period",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1441,9 +1448,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualAdultPlhivAndInh() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualAdultPlhivAndInh.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualAdultPlhivAndInh.sql",
 				"isanteplusreports.adult8",
-				"Proportion of PLHIV who received INH chemoprophylaxis during the selected period");
+				"Proportion of PLHIV who received INH chemoprophylaxis during the selected period",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1461,9 +1469,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualProportionOfHIVPregnantWithHAART() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualProportionOfHIVPregnantWithHAART.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHIVPregnantWithHAART.sql",
 				"isanteplusreports.adult12",
-				"Proportion of HIV+ pregnant women who received triple‐drug therapy (HAART) during the selected period");
+				"Proportion of HIV+ pregnant women who received triple‐drug therapy (HAART) during the selected period",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1481,9 +1490,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualProportionOfHIVPatientsWithNutritionalAssessment() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualProportionOfHIVPatientsWithNutritionalAssessment.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHIVPatientsWithNutritionalAssessment.sql",
 				"isanteplusreports.adult9",
-				"Proportion of HIV+ patients who have had a nutritional assessment during the selected period.");
+				"Proportion of HIV+ patients who have had a nutritional assessment during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1501,9 +1511,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualProportionOfUndernourishedHIVPatients() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualProportionOfUndernourishedHIVPatients.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfUndernourishedHIVPatients.sql",
 				"isanteplusreports.adult10",
-				"Proportion of HIV+ patients identified as severely undernourished during the selected period.");
+				"Proportion of HIV+ patients identified as severely undernourished during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1521,9 +1532,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualProportionOfHivWomenUsingFamilyPlanning() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualProportionOfHivWomenUsingFamilyPlanning.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHivWomenUsingFamilyPlanning.sql",
 				"isanteplusreports.adult11",
-				"Proportion of HIV+ women who use a family planning method during the selected period.");
+				"Proportion of HIV+ women who use a family planning method during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
@@ -1542,9 +1554,10 @@ public class RegisterAllReports extends SessionContext {
 
 	public void healthQualChildrenRegularlyFollowedOnArt() {
 		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualChildrenRegularlyFollowedOnArt.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualChildrenRegularlyFollowedOnArt.sql",
 				"isanteplusreports.pediatric1",
-				"Proportion of children regularly followed on ART");
+				"Proportion of children regularly followed on ART",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(period);
 
@@ -1562,9 +1575,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualChildrenHivAndPlacedOnArt() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualChildrenHivAndPlacedOnArt.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualChildrenHivAndPlacedOnArt.sql",
 				"isanteplusreports.pediatric2",
-				"Proportion of children tested positive for HIV and placed on ART during the selected period.");
+				"Proportion of children tested positive for HIV and placed on ART during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 
@@ -1582,9 +1596,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis.sql",
 				"isanteplusreports.pediatric3",
-				"Proportion of children exposed to or infected with HIV who received cotrimoxazole prophylaxis during the selected period.");
+				"Proportion of children exposed to or infected with HIV who received cotrimoxazole prophylaxis during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 
@@ -1603,9 +1618,10 @@ public class RegisterAllReports extends SessionContext {
 
     public void healthQualPediatricBenefitedFromAnAdherence() {
         Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
-        SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricBenefitedFromAnAdherence.sql",
+        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricBenefitedFromAnAdherence.sql",
                 "isanteplusreports.pediatric4",
-                "Proportion of HIV+ children on ART who have had an adherence evaluation during the last 3 months.");
+                "Proportion of HIV+ children on ART who have had an adherence evaluation during the last 3 months.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
         sqlData.addParameter(currentDate);
         Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
 
@@ -1620,9 +1636,10 @@ public class RegisterAllReports extends SessionContext {
     }
 
 	public void healthQualProportionOfHIVChildrenTestedForTB() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualProportionOfHIVChildrenTestedForTB.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHIVChildrenTestedForTB.sql",
 				"isanteplusreports.pediatric6",
-				"Proportion of HIV+ children tested for TB at enrolment during the selected period.");
+				"Proportion of HIV+ children tested for TB at enrolment during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 
@@ -1640,9 +1657,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualPediatricHivAndArtProphy() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricHivAndArtProphy.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricHivAndArtProphy.sql",
 				"isanteplusreports.pediatric11",
-				"Proportion of HIV‐exposed infants who received ART prophylaxis during the selected period.");
+				"Proportion of HIV‐exposed infants who received ART prophylaxis during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 
@@ -1660,9 +1678,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualPediatricRecivedPcrTest() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricRecivedPcrTest.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricRecivedPcrTest.sql",
 				"isanteplusreports.pediatric12",
-				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period");
+				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 
@@ -1680,9 +1699,10 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualPediatricNegativePcrTest() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricNegativePcrTest.sql",
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricNegativePcrTest.sql",
 				"isanteplusreports.pediatric13",
-				"Proportion of HIV‐exposed infants who had a negative PCR test result during the selected period.");
+				"Proportion of HIV‐exposed infants who had a negative PCR test result during the selected period.",
+				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 
@@ -1715,12 +1735,16 @@ public class RegisterAllReports extends SessionContext {
 	*/
 	
 	private SqlDataSetDefinition sqlDataSetDefinition(String resourceName, String name, String description) {
-		String sql = IsantePlusReportsUtil.getStringFromResource("org/openmrs/module/isanteplusreports/sql/fullDataExports/"
-		        + resourceName);
+		return sqlDataSetDefinitionWithResourcePath(resourceName, name, description, FULL_DATA_EXPORTS_RESOURCE_PATH);
+	}
+
+	private SqlDataSetDefinition sqlDataSetDefinitionWithResourcePath(String resourceName, String name, String description, String resourcePath) {
+		String sql = IsantePlusReportsUtil.getStringFromResource(resourcePath + resourceName);
 		SqlDataSetDefinition definition = new SqlDataSetDefinition();
 		definition.setSqlQuery(sql);
 		definition.setName(name);
 		definition.setDescription(description);
+
 		return definition;
 	}
 	

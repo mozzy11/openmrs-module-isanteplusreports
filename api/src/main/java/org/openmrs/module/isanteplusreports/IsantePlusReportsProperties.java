@@ -128,4 +128,7 @@ public class IsantePlusReportsProperties{
 	public static final String HEALTH_QUAL_PEDIATRIC_RECEIVED_PCR_TEST = "2baddb89-084b-4152-b9ce-3b9826e79495";
 
 	public static final String HEALTH_QUAL_PEDIATRIC_NEGATIVE_PCR_TEST = "28a71811-5511-40eb-8ca5-79464cd3448a";
+
+    public static final String HEALTH_QUAL_PEDIATRIC_BENEFITED_FROM_AN_ADHERENCE = "bb6f1ccb-33f7-4013-a17f-771a3ff43d23";
+
 }

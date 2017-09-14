@@ -31,5 +31,3 @@ WHERE
 	AND p.patient_id NOT IN (SELECT plab.patient_id
 	                        FROM isanteplus.patient_laboratory plab
 	                        WHERE plab.test_done = 1 AND plab.test_id = 844 AND plab.test_result = 1302);
-
-

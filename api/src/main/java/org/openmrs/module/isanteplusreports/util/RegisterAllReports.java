@@ -43,8 +43,42 @@ import org.openmrs.module.reporting.web.renderers.WebReportRenderer;
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_10_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_10_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_11_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_11_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_12_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_12_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_1_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_1_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_2_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_2_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_3_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_3_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_8_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_8_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_9_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_9_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.FULL_DATA_EXPORTS_RESOURCE_PATH;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.HEALTH_QUAL_REPORTS_RESOURCE_PATH;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_11_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_11_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_12_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_12_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_13_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_13_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_1_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_1_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_2_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_2_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_3_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_3_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_4_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_4_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_6_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_6_INDICATOR_SQL;
 
 public class RegisterAllReports extends SessionContext {
 	
@@ -1359,364 +1393,88 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualRetentionOfPatientsOnArt() {
-		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
-		Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
-
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualRetentionOfPatientsOnArt.sql",
-			"isanteplusreports.adult1",
-			"Retention of patients on antiretroviral treatment (ART)",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(currentDate);
-		sqlData.addParameter(period);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("currentDate", "${currentDate}");
-		mappings.put("period", "${period}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult1",
-		"Retention of patients on antiretroviral treatment (ART)",
-			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART);
-		repDefinition.addParameter(currentDate);
-		repDefinition.addParameter(period);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		registerHealthEqualReportWithCurrentDateAndPeriodParams(ADULT_1_INDICATOR_SQL, ADULT_1_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART);
 	}
 
 	public void healthQualCd4AssessmentAtEnrolment() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualCd4AssessmentAtEnrolment.sql",
-			"isanteplusreports.adult2",
-			"CD4 Assessment at Enrolment (Proportion of HIV+ patients who have had a CD4 count completed " +
-					"at enrolment)",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult2",
-				"CD4 Assessment at Enrolment (Proportion of HIV+ patients who have had a CD4 count completed " +
-						"at enrolment)",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_2_INDICATOR_SQL, ADULT_2_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_CD4_ASSESSMENT_AT_ENROLMENT);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualArvEnrollment() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualArvEnrollment.sql",
-				"isanteplusreports.adult3",
-				"ARV Enrolment (Proportion of eligible HIV+ patients placed on ARVs during the selected period)",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult3",
-				"ARV Enrolment (Proportion of eligible HIV+ patients placed on ARVs during the selected period)",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_3_INDICATOR_SQL, ADULT_3_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_ARV_ENROLLMENT);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualAdultHivAndCortimixazoleProphy() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualAdultHivAndCortimixazoleProphy.sql",
-				"isanteplusreports.adult4",
-				"Proportion of adult persons living with HIV (PLHIV) who have received cotrimoxazole prophylaxis during the selected period",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult4",
-				"Proportion of adult persons living with HIV (PLHIV) who have received cotrimoxazole prophylaxis during the selected period",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_4_INDICATOR_SQL, ADULT_4_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_HIV_AND_COTRIMOXAZOLE_PROPHY);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualAdultPlhivAndInh() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualAdultPlhivAndInh.sql",
-				"isanteplusreports.adult8",
-				"Proportion of PLHIV who received INH chemoprophylaxis during the selected period",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult8",
-				"Proportion of PLHIV who received INH chemoprophylaxis during the selected period",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_8_INDICATOR_SQL, ADULT_8_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_PLHIV_AND_INH);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-	}
-
-	public void healthQualProportionOfHIVPregnantWithHAART() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHIVPregnantWithHAART.sql",
-				"isanteplusreports.adult12",
-				"Proportion of HIV+ pregnant women who received triple‐drug therapy (HAART) during the selected period",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult12",
-				"Proportion of HIV+ pregnant women who received triple‐drug therapy (HAART) during the selected period",
-				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualProportionOfHIVPatientsWithNutritionalAssessment() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHIVPatientsWithNutritionalAssessment.sql",
-				"isanteplusreports.adult9",
-				"Proportion of HIV+ patients who have had a nutritional assessment during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult9",
-				"Proportion of HIV+ patients who have had a nutritional assessment during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_9_INDICATOR_SQL, ADULT_9_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualProportionOfUndernourishedHIVPatients() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfUndernourishedHIVPatients.sql",
-				"isanteplusreports.adult10",
-				"Proportion of HIV+ patients identified as severely undernourished during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult10",
-				"Proportion of HIV+ patients identified as severely undernourished during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_10_INDICATOR_SQL, ADULT_10_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualProportionOfHivWomenUsingFamilyPlanning() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHivWomenUsingFamilyPlanning.sql",
-				"isanteplusreports.adult11",
-				"Proportion of HIV+ women who use a family planning method during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.adult11",
-				"Proportion of HIV+ women who use a family planning method during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_11_INDICATOR_SQL, ADULT_11_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_WOMEN_USING_FAMILY_PLANNING_METHOD);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	public void healthQualProportionOfHIVPregnantWithHAART() {
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_12_INDICATOR_SQL, ADULT_12_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART);
 	}
 
 	public void healthQualChildrenRegularlyFollowedOnArt() {
-		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualChildrenRegularlyFollowedOnArt.sql",
-				"isanteplusreports.pediatric1",
-				"Proportion of children regularly followed on ART",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(period);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("period", "${period}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric1",
-				"Proportion of children regularly followed on ART",
+		registerHealthEqualReportWithStartDateAndPeriodParams(PEDIATRIC_1_INDICATOR_SQL, PEDIATRIC_1_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(period);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualChildrenHivAndPlacedOnArt() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualChildrenHivAndPlacedOnArt.sql",
-				"isanteplusreports.pediatric2",
-				"Proportion of children tested positive for HIV and placed on ART during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric2",
-				"Proportion of children tested positive for HIV and placed on ART during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_2_INDICATOR_SQL, PEDIATRIC_2_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis.sql",
-				"isanteplusreports.pediatric3",
-				"Proportion of children exposed to or infected with HIV who received cotrimoxazole prophylaxis during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric3",
-				"Proportion of children exposed to or infected with HIV who received cotrimoxazole prophylaxis during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_3_INDICATOR_SQL, PEDIATRIC_3_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
     public void healthQualPediatricBenefitedFromAnAdherence() {
-        Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricBenefitedFromAnAdherence.sql",
-                "isanteplusreports.pediatric4",
-                "Proportion of HIV+ children on ART who have had an adherence evaluation during the last 3 months.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-        sqlData.addParameter(currentDate);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
-        Map<String, Object> mappings = new HashMap<String, Object>();
-        mappings.put("currentDate", "${currentDate}");
-        ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric4",
-                "Proportion of HIV+ children on ART who have had an adherence evaluation during the last 3 months.",
-                IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_BENEFITED_FROM_AN_ADHERENCE);
-        repDefinition.addParameter(currentDate);
-        repDefinition.addDataSetDefinition(sqlData, mappings);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+		registerHealthEqualReportWithCurrentDateParam(PEDIATRIC_4_INDICATOR_SQL, PEDIATRIC_4_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_BENEFITED_FROM_AN_ADHERENCE);
     }
 
 	public void healthQualProportionOfHIVChildrenTestedForTB() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualProportionOfHIVChildrenTestedForTB.sql",
-				"isanteplusreports.pediatric6",
-				"Proportion of HIV+ children tested for TB at enrolment during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric6",
-				"Proportion of HIV+ children tested for TB at enrolment during the selected period .",
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_6_INDICATOR_SQL, PEDIATRIC_6_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualPediatricHivAndArtProphy() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricHivAndArtProphy.sql",
-				"isanteplusreports.pediatric11",
-				"Proportion of HIV‐exposed infants who received ART prophylaxis during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric11",
-				"Proportion of HIV‐exposed infants who received ART prophylaxis during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_11_INDICATOR_SQL, PEDIATRIC_11_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_ART_PROPHY);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualPediatricRecivedPcrTest() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricRecivedPcrTest.sql",
-				"isanteplusreports.pediatric12",
-				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric12",
-				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period",
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_12_INDICATOR_SQL, PEDIATRIC_12_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_RECEIVED_PCR_TEST);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 
 	public void healthQualPediatricNegativePcrTest() {
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath("healthQualPediatricNegativePcrTest.sql",
-				"isanteplusreports.pediatric13",
-				"Proportion of HIV‐exposed infants who had a negative PCR test result during the selected period.",
-				HEALTH_QUAL_REPORTS_RESOURCE_PATH);
-		sqlData.addParameter(startDate);
-		sqlData.addParameter(endDate);
-
-		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric13",
-				"Proportion of HIV‐exposed infants who had a negative PCR test result during the selected period.",
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_13_INDICATOR_SQL, PEDIATRIC_13_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_NEGATIVE_PCR_TEST);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(sqlData, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
 	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {
@@ -1763,5 +1521,71 @@ public class RegisterAllReports extends SessionContext {
 		rDesign.setRendererType(rendererType);
 		return rDesign;
 	}
-	
+
+	private void registerHealthEqualReportWithStartAndEndDateParams(String sql, String messageProperties, String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	private void registerHealthEqualReportWithStartDateAndPeriodParams(String sql, String messageProperties, String uuid) {
+		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(period);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("period", "${period}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(period);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	private void registerHealthEqualReportWithCurrentDateAndPeriodParams(String sql, String messageProperties, String uuid) {
+		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
+		Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
+
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(currentDate);
+		sqlData.addParameter(period);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("currentDate", "${currentDate}");
+		mappings.put("period", "${period}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(currentDate);
+		repDefinition.addParameter(period);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	private void registerHealthEqualReportWithCurrentDateParam(String sql, String messageProperties, String uuid) {
+		Parameter currentDate = new Parameter("currentDate", "isanteplusreports.healthqual.currentDate.label", Date.class);
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(currentDate);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("currentDate", "${currentDate}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(currentDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
 }

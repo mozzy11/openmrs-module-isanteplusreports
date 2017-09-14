@@ -1580,6 +1580,26 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
+
+	public void healthQualPediatricRecivedPcrTest() {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricRecivedPcrTest.sql",
+				"isanteplusreports.pediatric12",
+				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric12",
+				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period",
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIV_RECEIVED_PCR_TEST);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
 	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {
 	        String sql = IsantePlusReportsUtil.getStringFromResource("org/openmrs/module/isanteplusreports/sql/fullDataExports/" + resourceName);

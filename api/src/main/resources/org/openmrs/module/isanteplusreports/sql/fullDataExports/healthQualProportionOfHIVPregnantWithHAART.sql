@@ -31,11 +31,7 @@ WHERE
   AND p.patient_id IN ( -- Pregnant
       SELECT ppreg.patient_id
       FROM isanteplus.patient_pregnancy ppreg
-      WHERE ppreg.start_date BETWEEN '2016-10-10' AND '2017-09-13'
-  )
-  AND p.patient_id IN ( -- Patient on ART
-      SELECT poa.patient_id
-      FROM isanteplus.patient_on_arv poa
+      WHERE ppreg.end_date IS NULL OR (ppreg.end_date BETWEEN :startDate AND :endDate)
   )
   AND p.patient_id NOT IN ( -- Exclude deceased (159), discontinuations (1667), transfer (159492)
 		  SELECT discon.patient_id

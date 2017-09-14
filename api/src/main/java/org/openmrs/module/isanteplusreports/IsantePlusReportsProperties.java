@@ -119,6 +119,8 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT = "4a7a39b4-f2d1-4adf-b883-cd348c8f278f";
 
+	public static final String HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS = "a1b6c965-8779-4ea8-965c-02bccb4d56e4";
+
 	public static final String HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART = "85df69ec-f4bf-4711-8a19-d961aae4728d";
 
 	public static final String HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY = "41f24149-455b-40f4-89d4-0d8f3d752ab5";

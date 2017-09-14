@@ -1,22 +1,22 @@
 SELECT
 	COUNT(
 		DISTINCT CASE WHEN (
-			p.gender = 'F' and
-			p.patient_id IN ( -- BMI is filled
-				SELECT pv.patient_id FROM isanteplus.patient_visit pv
-				WHERE pv.patient_bmi IS NOT NULL
-				AND pv.visit_date BETWEEN :startDate AND :endDate
-			)
+			p.gender = 'F' AND
+			p.patient_id IN (
+        SELECT pv.patient_id FROM isanteplus.patient_visit pv
+        WHERE pv.patient_bmi <= 16
+        AND pv.visit_date BETWEEN :startDate AND :endDate
+      )
 		) THEN p.patient_id else null END
 	) AS 'femaleNumerator',
     COUNT(
 		DISTINCT CASE WHEN (
 			p.gender = 'M' AND
-			p.patient_id IN ( -- BMI is filled
-				SELECT pv.patient_id FROM isanteplus.patient_visit pv
-				WHERE pv.patient_bmi IS NOT NULL
-				AND pv.visit_date BETWEEN :startDate AND :endDate
-			)
+			p.patient_id IN (
+        SELECT pv.patient_id FROM isanteplus.patient_visit pv
+        WHERE pv.patient_bmi <= 16
+        AND pv.visit_date BETWEEN :startDate AND :endDate
+      )
 		) THEN p.patient_id else null END
 	) AS 'maleNumerator',
 	COUNT(
@@ -39,6 +39,11 @@ WHERE
     WHERE
       pv.encounter_type IN ('1', '9')
       AND pv.visit_date BETWEEN :startDate AND :endDate
+  )
+  AND p.patient_id IN ( -- BMI is filled
+    SELECT pv.patient_id FROM isanteplus.patient_visit pv
+    WHERE pv.patient_bmi IS NOT NULL
+    AND pv.visit_date BETWEEN :startDate AND :endDate
   )
   AND p.patient_id NOT IN ( -- Exclude deceased (159), discontinuations (1667), transfer (159492)
       SELECT discon.patient_id

@@ -80,6 +80,7 @@ public class RegisterReports {
 				register.healthQualAdultPlhivAndInh();
 				register.healthQualProportionOfHIVPregnantWithHAART();
 				register.healthQualProportionOfHIVPatientsWithNutritionalAssessment();
+				register.healthQualProportionOfUndernourishedHIVPatients();
 
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();

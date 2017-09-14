@@ -23,7 +23,8 @@ public class HealthQualManager {
 			IsantePlusReportsProperties.HEALTH_QUAL_ARV_ENROLLMENT,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_HIV_AND_COTRIMOXAZOLE_PROPHY,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_PLHIV_AND_INH,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART
+			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART,
+			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT
 	};
 	
 	private static final String[] pediatricIndicatorsUuid = {

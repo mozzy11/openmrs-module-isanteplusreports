@@ -79,6 +79,7 @@ public class RegisterReports {
 				register.healthQualAdultHivAndCortimixazoleProphy();
 				register.healthQualAdultPlhivAndInh();
 				register.healthQualProportionOfHIVPregnantWithHAART();
+				register.healthQualProportionOfHIVPatientsWithNutritionalAssessment();
 
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();

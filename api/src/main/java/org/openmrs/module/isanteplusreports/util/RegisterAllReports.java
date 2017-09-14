@@ -1594,7 +1594,27 @@ public class RegisterAllReports extends SessionContext {
 		mappings.put("endDate", "${endDate}");
 		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric12",
 				"Proportion of HIV‐exposed infants between 4 weeks old and 12 months old who have received a PCR test during the selected period",
-				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIV_RECEIVED_PCR_TEST);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_RECEIVED_PCR_TEST);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+	}
+
+	public void healthQualPediatricNegativePcrTest() {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinition("healthQualPediatricNegativePcrTest.sql",
+				"isanteplusreports.pediatric13",
+				"Proportion of HIV‐exposed infants who had a negative PCR test result during the selected period.");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+
+		Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition("isanteplusreports.pediatric13",
+				"Proportion of HIV‐exposed infants who had a negative PCR test result during the selected period.",
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_NEGATIVE_PCR_TEST);
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
 		repDefinition.addDataSetDefinition(sqlData, mappings);

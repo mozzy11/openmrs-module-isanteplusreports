@@ -86,6 +86,7 @@ public class RegisterReports {
 				register.healthQualProportionOfHIVChildrenTestedForTB();
 				register.healthQualPediatricHivAndArtProphy();
 				register.healthQualPediatricRecivedPcrTest();
+				register.healthQualPediatricNegativePcrTest();
 			//}
 		}
 		catch (Exception ex) {

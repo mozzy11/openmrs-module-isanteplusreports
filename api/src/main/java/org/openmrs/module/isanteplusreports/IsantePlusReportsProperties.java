@@ -103,46 +103,47 @@ public class IsantePlusReportsProperties{
 	
 	public final String LIST_VISITS_BY_PREGNANT_WOMEN_UUID = "a3d743f9-fc42-429e-bd71-e2b9e375cc61";
 
-	public static final String HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART = "43f9c7f2-01b9-45c4-9da0-5776bee49c3f";
+	public static final String HEALTH_QUAL_ADULT_1_INDICATOR_UUID = "43f9c7f2-01b9-45c4-9da0-5776bee49c3f";
 
-	public static final String HEALTH_QUAL_CD4_ASSESSMENT_AT_ENROLMENT = "3fe2c0a0-0b4a-4a51-8ccb-95052fdb83c4";
+	public static final String HEALTH_QUAL_ADULT_2_INDICATOR_UUID = "3fe2c0a0-0b4a-4a51-8ccb-95052fdb83c4";
 
-	public static final String HEALTH_QUAL_ARV_ENROLLMENT = "cb263f8d-680f-4487-a36b-afe5af355d18";
+	public static final String HEALTH_QUAL_ADULT_3_INDICATOR_UUID = "cb263f8d-680f-4487-a36b-afe5af355d18";
 
-	public static final String HEALTH_QUAL_ADULT_HIV_AND_COTRIMOXAZOLE_PROPHY = "abc01b2b-f296-4cfb-bf22-ad09686b1cff";
+	public static final String HEALTH_QUAL_ADULT_4_INDICATOR_UUID = "abc01b2b-f296-4cfb-bf22-ad09686b1cff";
 
-	public static final String HEALTH_QUAL_ADULT_PLHIV_AND_INH = "08e3581e-3d3e-4145-8a34-7b750fd928d3";
+	public static final String HEALTH_QUAL_ADULT_8_INDICATOR_UUID = "08e3581e-3d3e-4145-8a34-7b750fd928d3";
 
-	public static final String HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_6_MONTHS = "8de6b6df-3a33-4928-be52-8738ad7ba918";
+	public static final String HEALTH_QUAL_ADULT_9_INDICATOR_UUID = "4a7a39b4-f2d1-4adf-b883-cd348c8f278f";
 
-	public static final String HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_18_MONTHS = "25d30ec8-26d2-4fd8-9216-e66bb78cc164";
+	public static final String HEALTH_QUAL_ADULT_10_INDICATOR_UUID = "a1b6c965-8779-4ea8-965c-02bccb4d56e4";
 
-	public static final String HEALTH_QUAL_HIV_ON_ART_UNDETECTABLE_VIRAL_LOAD_TEST_6_MONTHS = "ccf71a0a-a866-4d4c-ab25-89aad6a194fe";
+	public static final String HEALTH_QUAL_ADULT_11_INDICATOR_UUID = "ec6b6a7d-3583-4063-8d13-d5ae896b143b";
 
-	public static final String HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART = "aa8b29c6-6c2c-4161-8990-ccdcceb92e3e";
+	public static final String HEALTH_QUAL_ADULT_12_INDICATOR_UUID = "cc351cca-c6ea-4fb6-a9b8-859860cbc4db";
 
-	public static final String HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART = "cc351cca-c6ea-4fb6-a9b8-859860cbc4db";
+	public static final String HEALTH_QUAL_ADULT_13_INDICATOR_UUID = "90706f98-e32e-4ae6-b4e4-ed05ef8b27bb";
 
-	public static final String HEALTH_QUAL_PROPORTION_OF_PREGNANT_WITH_PRENATALE_CARE_OR_LD = "90706f98-e32e-4ae6-b4e4-ed05ef8b27bb";
+	public static final String HEALTH_QUAL_ADULT_14_INDICATOR_UUID = "8de6b6df-3a33-4928-be52-8738ad7ba918";
 
-	public static final String HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT = "4a7a39b4-f2d1-4adf-b883-cd348c8f278f";
+	public static final String HEALTH_QUAL_ADULT_15_INDICATOR_UUID = "25d30ec8-26d2-4fd8-9216-e66bb78cc164";
 
-	public static final String HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS = "a1b6c965-8779-4ea8-965c-02bccb4d56e4";
+	public static final String HEALTH_QUAL_ADULT_16_INDICATOR_UUID = "ccf71a0a-a866-4d4c-ab25-89aad6a194fe";
 
-	public static final String HEALTH_QUAL_PROPORTION_OF_HIV_WOMEN_USING_FAMILY_PLANNING_METHOD = "ec6b6a7d-3583-4063-8d13-d5ae896b143b";
+	public static final String HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID = "aa8b29c6-6c2c-4161-8990-ccdcceb92e3e";
 
-	public static final String HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART = "85df69ec-f4bf-4711-8a19-d961aae4728d";
+	public static final String HEALTH_QUAL_PEDIATRIC_2_INDICATOR_UUID = "85df69ec-f4bf-4711-8a19-d961aae4728d";
 
-	public static final String HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY = "41f24149-455b-40f4-89d4-0d8f3d752ab5";
+	public static final String HEALTH_QUAL_PEDIATRIC_3_INDICATOR_UUID = "41f24149-455b-40f4-89d4-0d8f3d752ab5";
 
-	public static final String HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB = "d73c965f-8cdd-4996-bbca-a65d8a19db42";
+	public static final String HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID = "bb6f1ccb-33f7-4013-a17f-771a3ff43d23";
 
-	public static final String HEALTH_QUAL_PEDIATRIC_HIV_AND_ART_PROPHY = "5cd16174-7acb-4978-ab0f-735cec42b703";
+	public static final String HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID = "d73c965f-8cdd-4996-bbca-a65d8a19db42";
 
-	public static final String HEALTH_QUAL_PEDIATRIC_RECEIVED_PCR_TEST = "2baddb89-084b-4152-b9ce-3b9826e79495";
+	public static final String HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID = "5cd16174-7acb-4978-ab0f-735cec42b703";
 
-	public static final String HEALTH_QUAL_PEDIATRIC_NEGATIVE_PCR_TEST = "28a71811-5511-40eb-8ca5-79464cd3448a";
+	public static final String HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID = "2baddb89-084b-4152-b9ce-3b9826e79495";
 
-        public static final String HEALTH_QUAL_PEDIATRIC_BENEFITED_FROM_AN_ADHERENCE = "bb6f1ccb-33f7-4013-a17f-771a3ff43d23";
+	public static final String HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID = "28a71811-5511-40eb-8ca5-79464cd3448a";
+
 
 }

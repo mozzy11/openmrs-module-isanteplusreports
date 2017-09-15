@@ -1402,107 +1402,107 @@ public class RegisterAllReports extends SessionContext {
 
 	public void healthQualRetentionOfPatientsOnArt() {
 		registerHealthEqualReportWithCurrentDateAndPeriodParams(ADULT_1_INDICATOR_SQL, ADULT_1_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_1_INDICATOR_UUID);
 	}
 
 	public void healthQualCd4AssessmentAtEnrolment() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_2_INDICATOR_SQL, ADULT_2_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_CD4_ASSESSMENT_AT_ENROLMENT);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_2_INDICATOR_UUID);
 	}
 
 	public void healthQualArvEnrollment() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_3_INDICATOR_SQL, ADULT_3_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_ARV_ENROLLMENT);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_3_INDICATOR_UUID);
 	}
 
 	public void healthQualAdultHivAndCortimixazoleProphy() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_4_INDICATOR_SQL, ADULT_4_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_HIV_AND_COTRIMOXAZOLE_PROPHY);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_4_INDICATOR_UUID);
 	}
 
 	public void healthQualAdultPlhivAndInh() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_8_INDICATOR_SQL, ADULT_8_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_PLHIV_AND_INH);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_8_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfHIVPatientsWithNutritionalAssessment() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_9_INDICATOR_SQL, ADULT_9_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_9_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfUndernourishedHIVPatients() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_10_INDICATOR_SQL, ADULT_10_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_10_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfHivWomenUsingFamilyPlanning() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_11_INDICATOR_SQL, ADULT_11_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_WOMEN_USING_FAMILY_PLANNING_METHOD);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_11_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfHIVPregnantWithHAART() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_12_INDICATOR_SQL, ADULT_12_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_12_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfPregnantWithPrenataleCareOrLD() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_13_INDICATOR_SQL, ADULT_13_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_PREGNANT_WITH_PRENATALE_CARE_OR_LD);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_13_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfHivOnArtViralLoadTest6Months() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_14_INDICATOR_SQL, ADULT_14_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_6_MONTHS);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_14_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfHivOnArtViralLoadTest18Months() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_15_INDICATOR_SQL, ADULT_15_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_18_MONTHS);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_15_INDICATOR_UUID);
 	}
 
 	public void healthQualProportionOfHivOnArtUndetectableViralLoadTest6Months() {
 		registerHealthEqualReportWithStartDateAndPeriodParams(ADULT_16_INDICATOR_SQL, ADULT_16_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_UNDETECTABLE_VIRAL_LOAD_TEST_6_MONTHS);
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_16_INDICATOR_UUID);
 	}
 
 	public void healthQualChildrenRegularlyFollowedOnArt() {
 		registerHealthEqualReportWithStartDateAndPeriodParams(PEDIATRIC_1_INDICATOR_SQL, PEDIATRIC_1_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID);
 	}
 
 	public void healthQualChildrenHivAndPlacedOnArt() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_2_INDICATOR_SQL, PEDIATRIC_2_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_2_INDICATOR_UUID);
 	}
 
 	public void healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_3_INDICATOR_SQL, PEDIATRIC_3_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_3_INDICATOR_UUID);
 	}
 
     public void healthQualPediatricBenefitedFromAnAdherence() {
 		registerHealthEqualReportWithCurrentDateParam(PEDIATRIC_4_INDICATOR_SQL, PEDIATRIC_4_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_BENEFITED_FROM_AN_ADHERENCE);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID);
     }
 
 	public void healthQualProportionOfHIVChildrenTestedForTB() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_6_INDICATOR_SQL, PEDIATRIC_6_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID);
 	}
 
 	public void healthQualPediatricHivAndArtProphy() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_11_INDICATOR_SQL, PEDIATRIC_11_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_ART_PROPHY);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID);
 	}
 
 	public void healthQualPediatricRecivedPcrTest() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_12_INDICATOR_SQL, PEDIATRIC_12_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_RECEIVED_PCR_TEST);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID);
 	}
 
 	public void healthQualPediatricNegativePcrTest() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_13_INDICATOR_SQL, PEDIATRIC_13_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_NEGATIVE_PCR_TEST);
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID);
 	}
 	
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {

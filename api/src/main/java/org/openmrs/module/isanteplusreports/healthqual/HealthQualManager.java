@@ -18,30 +18,31 @@ import java.util.Map;
 public class HealthQualManager {
 	
 	private static final String[] adultIndicatorsUuid = {
-			IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART,
-			IsantePlusReportsProperties.HEALTH_QUAL_CD4_ASSESSMENT_AT_ENROLMENT,
-			IsantePlusReportsProperties.HEALTH_QUAL_ARV_ENROLLMENT,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_HIV_AND_COTRIMOXAZOLE_PROPHY,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_PLHIV_AND_INH,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_WOMEN_USING_FAMILY_PLANNING_METHOD,
-			IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_6_MONTHS,
-			IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_18_MONTHS,
-			IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_UNDETECTABLE_VIRAL_LOAD_TEST_6_MONTHS,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_PREGNANT_WITH_PRENATALE_CARE_OR_LD
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_1_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_2_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_3_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_4_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_8_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_9_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_10_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_11_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_12_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_13_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_14_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_15_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_16_INDICATOR_UUID
 	};
 	
 	private static final String[] pediatricIndicatorsUuid = {
-			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART,
-			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_AND_PLACED_ON_ART,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_COTRIMOXAZOLE_PROPHY,
-			IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_HIV_TESTED_FOR_TB,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_HIV_AND_ART_PROPHY,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_RECEIVED_PCR_TEST,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_NEGATIVE_PCR_TEST,
-                        IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_BENEFITED_FROM_AN_ADHERENCE
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_2_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_3_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
+
 	};
 	
 	private Map<String, HealthQualIndicatorOption> options = new HashMap<String, HealthQualIndicatorOption>();
@@ -78,8 +79,8 @@ public class HealthQualManager {
 		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
 
 		// adult options
-		options.put(IsantePlusReportsProperties.HEALTH_QUAL_RETENTION_OF_PATIENTS_ON_ART, period);
+		options.put(IsantePlusReportsProperties.HEALTH_QUAL_ADULT_1_INDICATOR_UUID, period);
 		// pediatric options
-		options.put(IsantePlusReportsProperties.HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART, period);
+		options.put(IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID, period);
 	}
 }

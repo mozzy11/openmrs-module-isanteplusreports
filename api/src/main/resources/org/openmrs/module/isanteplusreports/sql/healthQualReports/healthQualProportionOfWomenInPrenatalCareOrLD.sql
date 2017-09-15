@@ -4,7 +4,7 @@ SELECT
 			p.gender = 'F' AND
 			p.patient_id IN (
 				SELECT pl.patient_id FROM isanteplus.patient_laboratory pl
-				WHERE pl.test_id IN (1042)
+				WHERE pl.test_id IN (1042, 163722)
 				AND test_done IN (1)
 				AND pl.date_test_done BETWEEN :startDate AND :endDate
 			)

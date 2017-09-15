@@ -87,6 +87,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_4_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_6_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_6_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_9_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_9_INDICATOR_SQL;
 
 public class RegisterAllReports extends SessionContext {
 	
@@ -1488,6 +1490,11 @@ public class RegisterAllReports extends SessionContext {
 	public void healthQualProportionOfHIVChildrenTestedForTB() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_6_INDICATOR_SQL, PEDIATRIC_6_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID);
+	}
+
+	public void healthQualProportionOfChildrenWithNutritionalAssessment() {
+		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_9_INDICATOR_SQL, PEDIATRIC_9_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID);
 	}
 
 	public void healthQualPediatricHivAndArtProphy() {

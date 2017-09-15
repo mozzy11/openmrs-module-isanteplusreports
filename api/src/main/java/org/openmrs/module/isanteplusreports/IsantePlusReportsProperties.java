@@ -123,6 +123,8 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART = "cc351cca-c6ea-4fb6-a9b8-859860cbc4db";
 
+	public static final String HEALTH_QUAL_PROPORTION_OF_PREGNANT_WITH_PRENATALE_CARE_OR_LD = "90706f98-e32e-4ae6-b4e4-ed05ef8b27bb";
+
 	public static final String HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT = "4a7a39b4-f2d1-4adf-b883-cd348c8f278f";
 
 	public static final String HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS = "a1b6c965-8779-4ea8-965c-02bccb4d56e4";

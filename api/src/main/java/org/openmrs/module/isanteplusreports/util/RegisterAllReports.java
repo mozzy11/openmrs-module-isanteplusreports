@@ -55,6 +55,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_15_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_16_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_16_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_13_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_13_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_1_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_1_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_2_INDICATOR_MESSAGE;
@@ -1441,6 +1443,11 @@ public class RegisterAllReports extends SessionContext {
 	public void healthQualProportionOfHIVPregnantWithHAART() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_12_INDICATOR_SQL, ADULT_12_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART);
+	}
+
+	public void healthQualProportionOfPregnantWithPrenataleCareOrLD() {
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_13_INDICATOR_SQL, ADULT_13_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_PREGNANT_WITH_PRENATALE_CARE_OR_LD);
 	}
 
 	public void healthQualProportionOfHivOnArtViralLoadTest6Months() {

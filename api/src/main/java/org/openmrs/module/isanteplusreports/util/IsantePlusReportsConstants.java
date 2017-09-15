@@ -27,6 +27,8 @@ public class IsantePlusReportsConstants {
 
     protected static final String ADULT_12_INDICATOR_SQL = "healthQualProportionOfHIVPregnantWithHAART.sql";
 
+    protected static final String ADULT_13_INDICATOR_SQL = "healthQualProportionOfWomenInPrenatalCareOrLD.sql";
+
     protected static final String ADULT_14_INDICATOR_SQL = "healthQualProportionOfHivOnArtViralLoadTest6Months.sql";
 
     protected static final String ADULT_15_INDICATOR_SQL = "healthQualProportionOfHivOnArtViralLoadTest18Months.sql";
@@ -71,6 +73,8 @@ public class IsantePlusReportsConstants {
     protected static final String ADULT_11_INDICATOR_MESSAGE = ADULT + 11;
 
     protected static final String ADULT_12_INDICATOR_MESSAGE = ADULT + 12;
+
+    protected static final String ADULT_13_INDICATOR_MESSAGE = ADULT + 13;
 
     protected static final String ADULT_14_INDICATOR_MESSAGE = ADULT + 14;
 

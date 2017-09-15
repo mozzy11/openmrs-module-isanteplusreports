@@ -113,7 +113,7 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_ADULT_PLHIV_AND_INH = "08e3581e-3d3e-4145-8a34-7b750fd928d3";
 
-	public static final String HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_6_MONTHS = "1a7c03c5-46d6-46a5-92b0-0df783008e6a";
+	public static final String HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_6_MONTHS = "8de6b6df-3a33-4928-be52-8738ad7ba918";
 
 	public static final String HEALTH_QUAL_CHILDREN_REGULARLY_FOLLOWED_ON_ART = "aa8b29c6-6c2c-4161-8990-ccdcceb92e3e";
 

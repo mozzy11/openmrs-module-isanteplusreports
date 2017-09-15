@@ -26,7 +26,8 @@ public class HealthQualManager {
 			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PREGNANT_WITH_HAART,
 			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_PATIENTS_WITH_NUTRITIONAL_ASSESSMENT,
 			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_UNDERNOURISHED_HIV_PATIENTS,
-			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_WOMEN_USING_FAMILY_PLANNING_METHOD
+			IsantePlusReportsProperties.HEALTH_QUAL_PROPORTION_OF_HIV_WOMEN_USING_FAMILY_PLANNING_METHOD,
+			IsantePlusReportsProperties.HEALTH_QUAL_HIV_ON_ART_VIRAL_LOAD_TEST_6_MONTHS
 	};
 	
 	private static final String[] pediatricIndicatorsUuid = {

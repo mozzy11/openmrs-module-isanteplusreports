@@ -82,6 +82,7 @@ public class RegisterReports {
 				register.healthQualProportionOfHIVPatientsWithNutritionalAssessment();
 				register.healthQualProportionOfUndernourishedHIVPatients();
 				register.healthQualProportionOfHivWomenUsingFamilyPlanning();
+				register.healthQualProportionOfHivOnArtViralLoadTest6Months();
 
 				register.healthQualChildrenRegularlyFollowedOnArt();
 				register.healthQualChildrenHivAndPlacedOnArt();

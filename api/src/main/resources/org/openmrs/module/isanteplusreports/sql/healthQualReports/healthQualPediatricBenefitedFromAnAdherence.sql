@@ -2,14 +2,14 @@ SELECT
     COUNT(DISTINCT CASE WHEN (
                         p.gender = 'F'
                         AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
-						AND p.patient_id IN (SELECT vt.patient_id FROM isanteplus.visit_type vt
-												WHERE vt.concept_id = 163710)
+						AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
+												WHERE pv.adherence_evaluation IS NOT NULL)
                     ) THEN p.patient_id else null END) AS 'femaleNumerator',
     COUNT(DISTINCT CASE WHEN (
                         p.gender = 'M'
                         AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
-						AND p.patient_id IN (SELECT vt.patient_id FROM isanteplus.visit_type vt
-												WHERE vt.concept_id = 163710)
+						AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
+												WHERE pv.adherence_evaluation IS NOT NULL)
                     ) THEN p.patient_id else null END) AS 'maleNumerator',
     COUNT(DISTINCT CASE WHEN (p.gender = 'F') THEN p.patient_id else null END) AS 'femaleDenominator',
     COUNT(DISTINCT CASE WHEN (p.gender = 'M') THEN p.patient_id else null END) AS 'maleDenominator'

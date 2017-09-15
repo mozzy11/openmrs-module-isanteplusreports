@@ -1461,7 +1461,7 @@ public class RegisterAllReports extends SessionContext {
 	}
 
 	public void healthQualProportionOfHivOnArtUndetectableViralLoadTest6Months() {
-		registerHealthEqualReportWithStartDateAndPeriodParams(ADULT_16_INDICATOR_SQL, ADULT_16_INDICATOR_MESSAGE,
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_16_INDICATOR_SQL, ADULT_16_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_16_INDICATOR_UUID);
 	}
 

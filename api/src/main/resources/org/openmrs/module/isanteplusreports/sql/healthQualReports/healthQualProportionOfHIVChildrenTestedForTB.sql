@@ -1,61 +1,59 @@
 SELECT
-  COUNT(
-    DISTINCT CASE WHEN (
-      p.gender = 'F'
-      AND p.patient_id
-      AND (pp.visit_date BETWEEN :startDate AND :endDate)
-      AND ptd.status_tb_treatment = 1
-		) THEN p.patient_id
-		ELSE null
-		END
-	) AS 'femaleNumerator',
-
-  COUNT(
-    DISTINCT CASE WHEN (
-      p.gender = 'M'
-      AND p.patient_id
-      AND (pp.visit_date BETWEEN :startDate AND :endDate)
-      AND ptd.status_tb_treatment = 1
-		) THEN p.patient_id
-		ELSE null
-		END
-	) AS 'maleNumerator',
-
 	COUNT(
-	  DISTINCT CASE WHEN (
-	    p.gender = 'F'
-	  ) THEN p.patient_id
-	  ELSE null
-	  END
-	) AS 'femaleDenominator',
-
-  COUNT(
-    DISTINCT CASE WHEN (
+		DISTINCT CASE WHEN (
+			p.gender = 'F'
+			AND p.patient_id IN (
+        SELECT pv.patient_id FROM isanteplus.patient_visit pv
+        WHERE pv.evaluated_of_tb is true
+        AND pv.visit_date BETWEEN :startDate AND :endDate
+      )
+		) THEN p.patient_id else null END
+	) AS 'femaleNumerator',
+    COUNT(
+		DISTINCT CASE WHEN (
 			p.gender = 'M'
-		) THEN p.patient_id
-		ELSE null
-		END
+			AND p.patient_id IN (
+        SELECT pv.patient_id FROM isanteplus.patient_visit pv
+        WHERE pv.evaluated_of_tb is true
+        AND pv.visit_date BETWEEN :startDate AND :endDate
+      )
+		) THEN p.patient_id else null END
+	) AS 'maleNumerator',
+	COUNT(
+		DISTINCT CASE WHEN (
+			p.gender = 'F'
+		) THEN p.patient_id else null END
+	) AS 'femaleDenominator',
+    COUNT(
+		DISTINCT CASE WHEN (
+			p.gender = 'M'
+		) THEN p.patient_id else null END
 	) AS 'maleDenominator'
-FROM isanteplus.patient p
-LEFT JOIN isanteplus.patient_prescription pp ON p.patient_id = pp.patient_id
-LEFT JOIN isanteplus.patient_tb_diagnosis ptd ON p.patient_id = ptd.patient_id
+FROM
+	isanteplus.patient p
+	LEFT JOIN isanteplus.patient_prescription pp
+	ON p.patient_id = pp.patient_id
 WHERE
-    p.patient_id IN (
-      SELECT phv.patient_id
-		  FROM isanteplus.pediatric_hiv_visit phv
-      WHERE DATE(phv.encounter_date) BETWEEN :startDate AND :endDate
-    )
-	  AND p.patient_id NOT IN (
-	    SELECT discon.patient_id
-	    FROM isanteplus.discontinuation_reason discon
-	    WHERE discon.reason IN (159, 1667, 159492)
-	  )
-	  AND p.patient_id NOT IN (
-	    SELECT plab.patient_id
-	    FROM isanteplus.patient_laboratory plab
-	    WHERE
-	      plab.test_done = 1 AND
-	      plab.test_id = 844 AND
-	      plab.test_result = 1302
-	  )
-	  AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) >= 6;
+	p.vih_status = 1
+  AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) >= 6
+  AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) <= 14
+  AND p.patient_id IN (
+		SELECT pv.patient_id
+        FROM isanteplus.patient_visit pv
+        WHERE
+			pv.encounter_type IN ('9') -- pediatric first HIV visit
+            AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
+	)
+	AND p.patient_id NOT IN (
+		SELECT discon.patient_id
+        FROM isanteplus.discontinuation_reason discon
+        WHERE discon.reason IN (159,1667,159492) -- 159-deceased, 1667- Discontinuations, 159492- Transfer
+	)
+	AND p.patient_id NOT IN ( -- negative PCR result
+		SELECT plab.patient_id
+		FROM isanteplus.patient_laboratory plab
+		WHERE
+			plab.test_done = 1
+			AND plab.test_id = 844
+			AND plab.test_result = 1302
+	);

@@ -37,8 +37,7 @@ WHERE
     SELECT pv.patient_id
     FROM isanteplus.patient_visit pv
     WHERE
-      pv.encounter_type IN ('1', '9')
-      AND pv.visit_date BETWEEN :startDate AND :endDate
+      pv.visit_date BETWEEN :startDate AND :endDate
   )
   AND p.patient_id NOT IN ( -- Exclude deceased (159), discontinuations (1667), transfer (159492)
       SELECT discon.patient_id

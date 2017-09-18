@@ -22,6 +22,7 @@ public class HealthQualManager {
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_2_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_3_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_4_INDICATOR_UUID,
+			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_6_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_7_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_8_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_9_INDICATOR_UUID,

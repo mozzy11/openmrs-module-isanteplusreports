@@ -67,6 +67,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_7_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_7_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_6_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_6_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_8_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_8_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_9_INDICATOR_MESSAGE;
@@ -1429,6 +1431,11 @@ public class RegisterAllReports extends SessionContext {
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_7_INDICATOR_UUID);
 	}
 
+        public void healthQualAdultHivOnArtAdherentToTreatment() {
+            registerHealthEqualReportWithCurrentDateParam(ADULT_6_INDICATOR_SQL, ADULT_6_INDICATOR_MESSAGE,
+                                IsantePlusReportsProperties.HEALTH_QUAL_ADULT_6_INDICATOR_UUID);
+        }
+
 	public void healthQualAdultPlhivAndInh() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_8_INDICATOR_SQL, ADULT_8_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_8_INDICATOR_UUID);
@@ -1489,10 +1496,10 @@ public class RegisterAllReports extends SessionContext {
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_3_INDICATOR_UUID);
 	}
 
-    public void healthQualPediatricBenefitedFromAnAdherence() {
+        public void healthQualPediatricBenefitedFromAnAdherence() {
 		registerHealthEqualReportWithCurrentDateParam(PEDIATRIC_4_INDICATOR_SQL, PEDIATRIC_4_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID);
-    }
+        }
 
 	public void healthQualProportionOfHIVChildrenTestedForTB() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_6_INDICATOR_SQL, PEDIATRIC_6_INDICATOR_MESSAGE,

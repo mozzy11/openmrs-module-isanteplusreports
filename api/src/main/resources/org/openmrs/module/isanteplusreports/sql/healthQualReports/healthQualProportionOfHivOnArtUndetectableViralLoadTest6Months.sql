@@ -42,7 +42,7 @@ WHERE
         FROM isanteplus.patient_dispensing pd
         WHERE
 			pd.drug_id IN ( SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
-			AND pd.dispensation_date <= DATE_SUB(:startDate, INTERVAL 18 MONTH)
+			AND pd.dispensation_date <= DATE_SUB(:startDate, INTERVAL 6 MONTH)
     )
     AND (
 		p.patient_id IN (

@@ -86,6 +86,7 @@ public class RegisterReports {
 			register.healthQualProportionOfHivOnArtViralLoadTest6Months();
 			register.healthQualProportionOfHivOnArtViralLoadTest18Months();
 			register.healthQualProportionOfHivOnArtUndetectableViralLoadTest6Months();
+			register.healthQualProportionOfPLHIVTestedForTB();
 
 			register.healthQualChildrenRegularlyFollowedOnArt();
 			register.healthQualChildrenHivAndPlacedOnArt();

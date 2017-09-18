@@ -65,6 +65,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_3_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_7_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_7_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_8_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_8_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_9_INDICATOR_MESSAGE;
@@ -1420,6 +1422,11 @@ public class RegisterAllReports extends SessionContext {
 	public void healthQualAdultHivAndCortimixazoleProphy() {
 		registerHealthEqualReportWithStartAndEndDateParams(ADULT_4_INDICATOR_SQL, ADULT_4_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_4_INDICATOR_UUID);
+	}
+
+	public void healthQualProportionOfPLHIVTestedForTB() {
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_7_INDICATOR_SQL, ADULT_7_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_7_INDICATOR_UUID);
 	}
 
 	public void healthQualAdultPlhivAndInh() {

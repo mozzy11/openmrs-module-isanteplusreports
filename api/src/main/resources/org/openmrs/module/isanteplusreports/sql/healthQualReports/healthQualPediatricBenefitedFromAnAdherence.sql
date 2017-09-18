@@ -1,24 +1,16 @@
 SELECT
     COUNT(DISTINCT CASE WHEN (
                         p.gender = 'F'
-                        AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
-			AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
+                        AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
 					     WHERE pv.adherence_evaluation IS NOT NULL)
                     ) THEN p.patient_id else null END) AS 'femaleNumerator',
     COUNT(DISTINCT CASE WHEN (
                         p.gender = 'M'
-                        AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
-			AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
+                        AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
 					     WHERE pv.adherence_evaluation IS NOT NULL)
                     ) THEN p.patient_id else null END) AS 'maleNumerator',
-    COUNT(DISTINCT CASE WHEN (
-                        p.gender = 'F'
-                        AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
-                        ) THEN p.patient_id else null END) AS 'femaleDenominator',
-    COUNT(DISTINCT CASE WHEN (
-                        p.gender = 'M'
-                        AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
-                        ) THEN p.patient_id else null END) AS 'maleDenominator'
+    COUNT(DISTINCT CASE WHEN (p.gender = 'F') THEN p.patient_id else null END) AS 'femaleDenominator',
+    COUNT(DISTINCT CASE WHEN (p.gender = 'M') THEN p.patient_id else null END) AS 'maleDenominator'
 FROM
 	isanteplus.patient p
 WHERE
@@ -30,6 +22,7 @@ WHERE
 			DATE(phv.encounter_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
                         OR (DATE(pp.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
 							AND pp.rx_or_prophy = 138405))
+	AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
 	AND p.patient_id NOT IN (SELECT discon.patient_id
 	                        FROM isanteplus.discontinuation_reason discon
 	                        WHERE discon.reason IN (159,1667,159492))

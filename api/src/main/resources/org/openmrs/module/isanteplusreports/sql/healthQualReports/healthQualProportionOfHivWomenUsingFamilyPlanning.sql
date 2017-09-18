@@ -9,21 +9,13 @@ SELECT
       )
 		) THEN p.patient_id else null END
 	) AS 'femaleNumerator',
-    COUNT(
-		DISTINCT CASE WHEN (
-			p.gender = 'M'
-		) THEN p.patient_id else null END
-	) AS 'maleNumerator',
+  0 AS 'maleNumerator',
 	COUNT(
 		DISTINCT CASE WHEN (
 			p.gender = 'F'
 		) THEN p.patient_id else null END
 	) AS 'femaleDenominator',
-    COUNT(
-		DISTINCT CASE WHEN (
-			p.gender = 'M'
-		) THEN p.patient_id else null END
-	) AS 'maleDenominator'
+  0 AS 'maleDenominator'
 FROM
   isanteplus.patient p
 WHERE
@@ -34,8 +26,7 @@ WHERE
     SELECT pv.patient_id
     FROM isanteplus.patient_visit pv
     WHERE
-      pv.encounter_type IN ('1', '9')
-      AND pv.visit_date BETWEEN :startDate AND :endDate
+      pv.visit_date BETWEEN :startDate AND :endDate
   )
   AND p.patient_id NOT IN ( -- Exclude deceased (159), discontinuations (1667), transfer (159492)
       SELECT discon.patient_id

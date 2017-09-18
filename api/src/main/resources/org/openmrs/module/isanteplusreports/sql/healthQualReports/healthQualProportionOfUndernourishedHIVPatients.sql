@@ -37,8 +37,7 @@ WHERE
     SELECT pv.patient_id
     FROM isanteplus.patient_visit pv
     WHERE
-      pv.encounter_type IN ('1', '9')
-      AND pv.visit_date BETWEEN :startDate AND :endDate
+      pv.visit_date BETWEEN :startDate AND :endDate
   )
   AND p.patient_id IN ( -- BMI is filled
     SELECT pv.patient_id FROM isanteplus.patient_visit pv

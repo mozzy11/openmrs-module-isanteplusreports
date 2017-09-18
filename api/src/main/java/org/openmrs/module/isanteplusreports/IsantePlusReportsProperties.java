@@ -111,6 +111,8 @@ public class IsantePlusReportsProperties{
 
 	public static final String HEALTH_QUAL_ADULT_4_INDICATOR_UUID = "abc01b2b-f296-4cfb-bf22-ad09686b1cff";
 
+	public static final String HEALTH_QUAL_ADULT_5_INDICATOR_UUID = "f38c0a9b-e27d-4eed-b71a-e8829b7cc36f";
+
 	public static final String HEALTH_QUAL_ADULT_6_INDICATOR_UUID = "68dfcc2f-0d4c-4f0d-af07-c0475f6ed981";
 
 	public static final String HEALTH_QUAL_ADULT_7_INDICATOR_UUID = "1a261933-d626-4a63-a18a-a94e189871a5";

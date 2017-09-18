@@ -65,6 +65,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_3_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_4_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_5_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_5_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_7_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_7_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_6_INDICATOR_MESSAGE;
@@ -1426,14 +1428,19 @@ public class RegisterAllReports extends SessionContext {
 				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_4_INDICATOR_UUID);
 	}
 
-	public void healthQualProportionOfPLHIVTestedForTB() {
-		registerHealthEqualReportWithStartAndEndDateParams(ADULT_7_INDICATOR_SQL, ADULT_7_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_7_INDICATOR_UUID);
+	public void healthQualAdultHivOnArtWithAdherentEvaluation() {
+        registerHealthEqualReportWithCurrentDateParam(ADULT_5_INDICATOR_SQL, ADULT_5_INDICATOR_MESSAGE,
+                IsantePlusReportsProperties.HEALTH_QUAL_ADULT_5_INDICATOR_UUID);
 	}
 
 	public void healthQualAdultHivOnArtAdherentToTreatment() {
-		registerHealthEqualReportWithCurrentDateParam(ADULT_6_INDICATOR_SQL, ADULT_6_INDICATOR_MESSAGE,
-				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_6_INDICATOR_UUID);
+	    registerHealthEqualReportWithCurrentDateParam(ADULT_6_INDICATOR_SQL, ADULT_6_INDICATOR_MESSAGE,
+                IsantePlusReportsProperties.HEALTH_QUAL_ADULT_6_INDICATOR_UUID);
+	}
+
+	public void healthQualProportionOfPLHIVTestedForTB() {
+		registerHealthEqualReportWithStartAndEndDateParams(ADULT_7_INDICATOR_SQL, ADULT_7_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_ADULT_7_INDICATOR_UUID);
 	}
 
 	public void healthQualAdultPlhivAndInh() {

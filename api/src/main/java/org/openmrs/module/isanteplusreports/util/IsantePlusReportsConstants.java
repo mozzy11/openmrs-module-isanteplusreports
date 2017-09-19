@@ -9,57 +9,57 @@ public class IsantePlusReportsConstants {
     protected static final String HEALTH_QUAL_REPORTS_RESOURCE_PATH = REPORTS_SQL_PATH + "healthQualReports/";
 
     // SQL files
-    protected static final String ADULT_1_INDICATOR_SQL = "healthQualRetentionOfPatientsOnArt.sql";
+    protected static final String ADULT_1_INDICATOR_SQL = "retentionOfPatientsOnArt.sql";
 
-    protected static final String ADULT_2_INDICATOR_SQL = "healthQualCd4AssessmentAtEnrolment.sql";
+    protected static final String ADULT_2_INDICATOR_SQL = "cd4AssessmentAtEnrolment.sql";
 
-    protected static final String ADULT_3_INDICATOR_SQL = "healthQualArvEnrollment.sql";
+    protected static final String ADULT_3_INDICATOR_SQL = "arvEnrollment.sql";
 
-    protected static final String ADULT_4_INDICATOR_SQL = "healthQualAdultHivAndCortimixazoleProphy.sql";
+    protected static final String ADULT_4_INDICATOR_SQL = "adultHivAndCortimixazoleProphy.sql";
 
-    protected static final String ADULT_5_INDICATOR_SQL = "healthQualAdultHivOnArtWithAdherentEvaluation.sql";
+    protected static final String ADULT_5_INDICATOR_SQL = "adultHivOnArtWithAdherentEvaluation.sql";
 
-    protected static final String ADULT_6_INDICATOR_SQL = "healthQualAdultHivOnArtAdherentToTreatment.sql";
+    protected static final String ADULT_6_INDICATOR_SQL = "adultHivOnArtAdherentToTreatment.sql";
 
     protected static final String ADULT_7_INDICATOR_SQL = "proportionOfPLHIVTestedForTB.sql";
 
-    protected static final String ADULT_8_INDICATOR_SQL = "healthQualAdultPlhivAndInh.sql";
+    protected static final String ADULT_8_INDICATOR_SQL = "adultPlhivAndInh.sql";
 
-    protected static final String ADULT_9_INDICATOR_SQL = "healthQualProportionOfHIVPatientsWithNutritionalAssessment.sql";
+    protected static final String ADULT_9_INDICATOR_SQL = "proportionOfHIVPatientsWithNutritionalAssessment.sql";
 
-    protected static final String ADULT_10_INDICATOR_SQL = "healthQualProportionOfUndernourishedHIVPatients.sql";
+    protected static final String ADULT_10_INDICATOR_SQL = "proportionOfUndernourishedHIVPatients.sql";
 
-    protected static final String ADULT_11_INDICATOR_SQL = "healthQualProportionOfHivWomenUsingFamilyPlanning.sql";
+    protected static final String ADULT_11_INDICATOR_SQL = "proportionOfHivWomenUsingFamilyPlanning.sql";
 
-    protected static final String ADULT_12_INDICATOR_SQL = "healthQualProportionOfHIVPregnantWithHAART.sql";
+    protected static final String ADULT_12_INDICATOR_SQL = "proportionOfHIVPregnantWithHAART.sql";
 
-    protected static final String ADULT_13_INDICATOR_SQL = "healthQualProportionOfWomenInPrenatalCareOrLD.sql";
+    protected static final String ADULT_13_INDICATOR_SQL = "proportionOfWomenInPrenatalCareOrLD.sql";
 
-    protected static final String ADULT_14_INDICATOR_SQL = "healthQualProportionOfHivOnArtViralLoadTest6Months.sql";
+    protected static final String ADULT_14_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest6Months.sql";
 
-    protected static final String ADULT_15_INDICATOR_SQL = "healthQualProportionOfHivOnArtViralLoadTest18Months.sql";
+    protected static final String ADULT_15_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest18Months.sql";
 
-    protected static final String ADULT_16_INDICATOR_SQL = "healthQualProportionOfHivOnArtUndetectableViralLoadTest6Months.sql";
+    protected static final String ADULT_16_INDICATOR_SQL = "proportionOfHivOnArtUndetectableViralLoadTest6Months.sql";
 
-    protected static final String PEDIATRIC_1_INDICATOR_SQL = "healthQualChildrenRegularlyFollowedOnArt.sql";
+    protected static final String PEDIATRIC_1_INDICATOR_SQL = "childrenRegularlyFollowedOnArt.sql";
 
-    protected static final String PEDIATRIC_2_INDICATOR_SQL = "healthQualChildrenHivAndPlacedOnArt.sql";
+    protected static final String PEDIATRIC_2_INDICATOR_SQL = "childrenHivAndPlacedOnArt.sql";
 
-    protected static final String PEDIATRIC_3_INDICATOR_SQL = "healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis.sql";
+    protected static final String PEDIATRIC_3_INDICATOR_SQL = "pediatricHivAndReceivedCotrimoxazoleProphylaxis.sql";
 
-    protected static final String PEDIATRIC_4_INDICATOR_SQL = "healthQualPediatricBenefitedFromAnAdherence.sql";
+    protected static final String PEDIATRIC_4_INDICATOR_SQL = "pediatricBenefitedFromAnAdherence.sql";
 
-    protected static final String PEDIATRIC_6_INDICATOR_SQL = "healthQualProportionOfHIVChildrenTestedForTB.sql";
+    protected static final String PEDIATRIC_6_INDICATOR_SQL = "proportionOfHIVChildrenTestedForTB.sql";
 
-    protected static final String PEDIATRIC_7_INDICATOR_SQL = "healthQualProportionOfHIVChildrenOlderThanOneYearOfAgeReveivedINH.sql";
+    protected static final String PEDIATRIC_7_INDICATOR_SQL = "proportionOfHIVChildrenOlderThanOneYearOfAgeReveivedINH.sql";
 
-    protected static final String PEDIATRIC_9_INDICATOR_SQL = "healthQualProportionOfChildrenWithNutritionalAssessment.sql";
+    protected static final String PEDIATRIC_9_INDICATOR_SQL = "proportionOfChildrenWithNutritionalAssessment.sql";
 
-    protected static final String PEDIATRIC_11_INDICATOR_SQL = "healthQualPediatricHivAndArtProphy.sql";
+    protected static final String PEDIATRIC_11_INDICATOR_SQL = "pediatricHivAndArtProphy.sql";
 
-    protected static final String PEDIATRIC_12_INDICATOR_SQL = "healthQualPediatricRecivedPcrTest.sql";
+    protected static final String PEDIATRIC_12_INDICATOR_SQL = "pediatricRecivedPcrTest.sql";
 
-    protected static final String PEDIATRIC_13_INDICATOR_SQL = "healthQualPediatricNegativePcrTest.sql";
+    protected static final String PEDIATRIC_13_INDICATOR_SQL = "pediatricNegativePcrTest.sql";
 
     // Indicator message properties
     protected static final String ADULT = "isanteplusreports.adult";

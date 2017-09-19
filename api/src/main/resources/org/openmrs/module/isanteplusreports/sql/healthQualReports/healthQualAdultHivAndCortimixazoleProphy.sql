@@ -34,17 +34,19 @@ FROM
 WHERE
 	p.vih_status = 1
 	AND p.patient_id IN (
-	                SELECT poa.patient_id
-					FROM isanteplus.patient_on_arv poa
-                    WHERE
-						DATE(poa.visit_date) BETWEEN :startDate AND :endDate
-                        OR (
-                            DATE(pp.visit_date) BETWEEN :startDate AND :endDate
-                            AND pp.drug_id IN (SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
-                        )
-					)
+		SELECT pv.patient_id
+		FROM isanteplus.patient_visit pv
+		WHERE
+			DATE(pv.visit_date) BETWEEN :startDate AND :endDate
+			OR DATE(pp.visit_date) BETWEEN :startDate AND :endDate
+	)
+    AND p.patient_id IN (
+		SELECT poa.patient_id
+        FROM isanteplus.patient_on_arv poa
+	)
 	AND p.patient_id NOT IN (
-	                SELECT discon.patient_id
-	                FROM isanteplus.discontinuation_reason discon
-	                WHERE discon.reason IN (159,1667,159492))
+		SELECT discon.patient_id
+        FROM isanteplus.discontinuation_reason discon
+        WHERE discon.reason IN (159,1667,159492)
+	)
     AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) > 14; -- adult

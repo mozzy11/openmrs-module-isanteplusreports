@@ -2,7 +2,6 @@ SELECT
 	COUNT(
 		DISTINCT CASE WHEN (
 			p.gender = 'F'
-      AND p.patient_id
       AND pp.rx_or_prophy = 163768 -- prophy
       AND pp.drug_id = 78280 -- INH chemoprophylaxis 
       AND (pp.visit_date BETWEEN :startDate AND :endDate)
@@ -11,7 +10,6 @@ SELECT
     COUNT(
 		DISTINCT CASE WHEN (
 			p.gender = 'M'
-      AND p.patient_id
       AND pp.rx_or_prophy = 163768 -- prophy
       AND pp.drug_id = 78280 -- INH chemoprophylaxis 
       AND (pp.visit_date BETWEEN :startDate AND :endDate)

@@ -2,12 +2,14 @@ SELECT
     COUNT(DISTINCT CASE WHEN (
                         p.gender = 'F'
                         AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
-					     WHERE pv.adherence_evaluation IS NOT NULL)
+                                             WHERE pv.adherence_evaluation IS NOT NULL
+                                             AND pv.visit_date BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate)
                     ) THEN p.patient_id else null END) AS 'femaleNumerator',
     COUNT(DISTINCT CASE WHEN (
                         p.gender = 'M'
                         AND p.patient_id IN (SELECT pv.patient_id FROM isanteplus.patient_visit pv
-					     WHERE pv.adherence_evaluation IS NOT NULL)
+                                             WHERE pv.adherence_evaluation IS NOT NULL
+                                             AND pv.visit_date BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate)
                     ) THEN p.patient_id else null END) AS 'maleNumerator',
     COUNT(DISTINCT CASE WHEN (p.gender = 'F') THEN p.patient_id else null END) AS 'femaleDenominator',
     COUNT(DISTINCT CASE WHEN (p.gender = 'M') THEN p.patient_id else null END) AS 'maleDenominator'

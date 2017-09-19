@@ -99,7 +99,8 @@ public class RegisterReports {
 			register.healthQualPediatricNegativePcrTest();
 			register.healthQualPediatricBenefitedFromAnAdherence();
 			register.healthQualProportionOfChildrenWithNutritionalAssessment();
-			register.healthQualProportionOfHIVChildrenOlderThanOneYearOfAgeReveivedINH();
+			register.healthQualProportionOfHIVChildrenOlderThanOneYearOfAgeReceivedINH();
+			register.healthQualProportionOfHIVChildrenYoungerThanOneYearOfAgeReceivedINH();
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

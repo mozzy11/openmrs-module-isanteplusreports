@@ -31,8 +31,6 @@ SELECT
 	) AS 'maleDenominator'
 FROM
 	isanteplus.patient p
-	LEFT JOIN isanteplus.patient_prescription pp
-	ON p.patient_id = pp.patient_id
 WHERE
 	p.vih_status = 1
     AND p.patient_id IN (

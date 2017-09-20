@@ -45,7 +45,7 @@ public class HealthQualReportBuilder {
 
 	private final Log LOGGER = LogFactory.getLog(getClass());
 
-	private static final int ROWS = 5;
+	private static final int ROWS = 4;
 	
 	private static final ContainerTag MALE_LABEL = th(translateLabel("male")).withClass("label");
 	
@@ -162,7 +162,7 @@ public class HealthQualReportBuilder {
 			buildIndicator(iterator.next());
 		}
 		
-		return table().with(getNotEmptyRows());
+		return table().with(getRows());
 	}
 	
 	private void buildClinicInfoTable() {
@@ -263,16 +263,6 @@ public class HealthQualReportBuilder {
 			}
 		}
 		return rows;
-	}
-
-	private ContainerTag[] getNotEmptyRows() {
-		LinkedList<ContainerTag> filteredRows = new LinkedList<ContainerTag>();
-		for (ContainerTag row : getRows()) {
-			if (row.getNumChildren() > 0) {
-				filteredRows.add(row);
-			}
-		}
-		return filteredRows.toArray(new ContainerTag[filteredRows.size()]);
 	}
 
 	private void clearRows() {

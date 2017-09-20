@@ -45,7 +45,7 @@ public class HealthQualReportBuilder {
 
 	private final Log LOGGER = LogFactory.getLog(getClass());
 
-	private static final int ROWS = 7; // TODO: to refactor
+	private static final int ROWS = 5;
 	
 	private static final ContainerTag MALE_LABEL = th(translateLabel("male")).withClass("label");
 	
@@ -130,15 +130,11 @@ public class HealthQualReportBuilder {
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes())); // TODO to remove
+		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes()));
 
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(doc, null);
 
-		// FIXME
-		// renderer.getFontResolver().addFont("C:/Windows/Fonts/CALIBRI.TTF",
-		// true);
-		
 		renderer.layout();
 		renderer.createPDF(out);
 		out.flush();
@@ -152,15 +148,14 @@ public class HealthQualReportBuilder {
 		Iterator<DataSet> iterator = getDataSets().iterator();
 		while (iterator.hasNext()) {
 			tables.with(buildOneTable(iterator));
-			setRows(null); // clear already built table
+			clearRows();
 		}
 		
 		return tables;
 	}
-	
+
 	private ContainerTag buildOneTable(Iterator<DataSet> iterator) {
 		buildClinicInfoTable();
-		// buildLegend();
 		buildPatientsInfo();
 		
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
@@ -179,18 +174,8 @@ public class HealthQualReportBuilder {
 		
 		labels.with(th(translateLabel("department")).withClass("label"), th(translateLabel("clinic")).withClass("label"));
 		
-		data.with(td(getClinicDepartment()).attr("rowspan", "3"), td(getClinic()).attr("rowspan", "3"));
+		data.with(td(getClinicDepartment()), td(getClinic()));
 	}
-	
-	//	private void buildLegend() { // TODO: to refactor
-	//		fillEmptyRow(getRows()[0], 1);
-	//		fillEmptyRow(getRows()[1], 1);
-	//
-	//		getRows()[2].with(th("<Type>").withClass("label"));
-	//		getRows()[3].with(td("<Adult>").withClass("label"));
-	//		getRows()[4].with(td("<Ped>").withClass("label"));
-	//		getRows()[5].with(td("<Total>").withClass("label").withClass("total"));
-	//	}
 	
 	private void buildPatientsInfo() {
 		fillEmptyRow(getRows()[0], 3);
@@ -221,9 +206,9 @@ public class HealthQualReportBuilder {
 		getRows()[2].with(MALE_LABEL, FEMALE_LABEL, TOTAL_LABEL);
 		
 		final int ROW = 3;
-		getRows()[ROW].with(td(dataArray[0].toString()).attr("rowspan", "3"));
-		getRows()[ROW].with(td(dataArray[1].toString()).attr("rowspan", "3"));
-		getRows()[ROW].with(td(dataArray[2].toString()).attr("rowspan", "3").withClass("total"));
+		getRows()[ROW].with(td(dataArray[0].toString()));
+		getRows()[ROW].with(td(dataArray[1].toString()));
+		getRows()[ROW].with(td(dataArray[2].toString()).withClass("total"));
 	}
 	
 	private Integer[] createSummaryArray(Integer males, Integer females) {
@@ -289,7 +274,11 @@ public class HealthQualReportBuilder {
 		}
 		return filteredRows.toArray(new ContainerTag[filteredRows.size()]);
 	}
-	
+
+	private void clearRows() {
+		setRows(null);
+	}
+
 	public void setRows(ContainerTag[] rows) {
 		this.rows = rows;
 	}

@@ -38,7 +38,7 @@
         var worksheet = "";
         jq("#divWithReportTables").find("table").each(function(i, table) {
             worksheet += jq(this).html();
-            worksheet += "<tr></tr><tr></tr><tr></tr><tr></tr>"; // table separation
+            worksheet += "<tr></tr>"; // table separation
         });
 
         saveToExcel(worksheet, 'workbenchName', generateExcelName());

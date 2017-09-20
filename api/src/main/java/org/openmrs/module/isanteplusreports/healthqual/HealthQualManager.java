@@ -49,7 +49,6 @@ public class HealthQualManager {
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
-
 	};
 	
 	private Map<String, HealthQualIndicatorOption> options = new HashMap<String, HealthQualIndicatorOption>();

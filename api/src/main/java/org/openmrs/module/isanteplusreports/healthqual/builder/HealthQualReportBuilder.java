@@ -40,6 +40,7 @@ import static j2html.TagCreator.td;
 import static j2html.TagCreator.th;
 import static j2html.TagCreator.tr;
 import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.getStringFromResource;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.replaceNonBreakingSpaces;
 
 public class HealthQualReportBuilder {
 
@@ -315,8 +316,7 @@ public class HealthQualReportBuilder {
 	}
 
 	private static String translate(String code) {
-		return MessageUtil.translate(code).replaceAll("&nbsp;", " ") // to let space-wrapping
-				.replace(' ',' ').trim(); // replace non-breaking spaces with regular space
+		return replaceNonBreakingSpaces(MessageUtil.translate(code));
 	}
 
 	public Date getStartDate() {

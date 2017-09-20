@@ -5,7 +5,7 @@
     <td>
         ${ indicator.getName() }
     </td>
-    <td style="text-align: center;">
+    <td style="white-space: nowrap; text-align: center;">
         <% if (indicator.getOption() != null) { %>
             <label style="display:inline-block;">
                 ${ indicator.getOption().getLabel() }:

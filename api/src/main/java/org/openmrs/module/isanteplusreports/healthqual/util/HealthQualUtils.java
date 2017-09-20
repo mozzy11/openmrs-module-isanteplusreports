@@ -49,4 +49,9 @@ public abstract class HealthQualUtils {
             throw new HealthQualException("Report cannot be evaluated", e);
         } return reportData;
     }
+
+    public static String replaceNonBreakingSpaces(String stringToClean) {
+        return stringToClean.replaceAll("&nbsp;", " ") // to let space-wrapping
+            .replace(' ',' ').trim(); // replace non-breaking space with regular space
+    }
 }

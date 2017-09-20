@@ -111,10 +111,6 @@
     background-color: #fdf59a;
 }
 
-th, td {
-    white-space: nowrap;
-}
-
 #divWithReportTables th, #divWithReportTables td {
     padding: 5pt;
     border-color: black;

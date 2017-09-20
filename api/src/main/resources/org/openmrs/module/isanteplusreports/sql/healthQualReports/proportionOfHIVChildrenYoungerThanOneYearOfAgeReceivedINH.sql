@@ -31,7 +31,7 @@ FROM
 	ON p.patient_id = pp.patient_id
 WHERE
 	p.vih_status = 1
-  AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) <= 12
+  AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) < 12
   AND p.patient_id IN (
 	  SELECT phv.patient_id
     FROM isanteplus.pediatric_hiv_visit phv

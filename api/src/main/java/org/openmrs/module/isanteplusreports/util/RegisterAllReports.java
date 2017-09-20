@@ -91,6 +91,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_3_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_4_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_4_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_5_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_5_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_6_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_6_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_7_INDICATOR_MESSAGE;
@@ -1512,6 +1514,11 @@ public class RegisterAllReports extends SessionContext {
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID);
 	}
 
+	public void healthQualChildrenOnArtWhoAreConsideredAdherent() {
+		registerHealthEqualReportWithCurrentDateParam(PEDIATRIC_5_INDICATOR_SQL, PEDIATRIC_5_INDICATOR_MESSAGE,
+				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_5_INDICATOR_UUID);
+	}
+
 	public void healthQualProportionOfHIVChildrenTestedForTB() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_6_INDICATOR_SQL, PEDIATRIC_6_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID);
@@ -1537,7 +1544,7 @@ public class RegisterAllReports extends SessionContext {
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID);
 	}
 
-	public void healthQualPediatricRecivedPcrTest() {
+	public void healthQualPediatricReceivedPcrTest() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_12_INDICATOR_SQL, PEDIATRIC_12_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID);
 	}

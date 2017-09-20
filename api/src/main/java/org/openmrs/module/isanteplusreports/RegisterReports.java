@@ -94,8 +94,9 @@ public class RegisterReports {
 			register.healthQualChildrenHivAndPlacedOnArt();
 			register.healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis();
 			register.healthQualProportionOfHIVChildrenTestedForTB();
+			register.healthQualChildrenOnArtWhoAreConsideredAdherent();
 			register.healthQualPediatricHivAndArtProphy();
-			register.healthQualPediatricRecivedPcrTest();
+			register.healthQualPediatricReceivedPcrTest();
 			register.healthQualPediatricNegativePcrTest();
 			register.healthQualPediatricBenefitedFromAnAdherence();
 			register.healthQualProportionOfChildrenWithNutritionalAssessment();

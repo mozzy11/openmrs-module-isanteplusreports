@@ -39,7 +39,7 @@ import static j2html.TagCreator.table;
 import static j2html.TagCreator.td;
 import static j2html.TagCreator.th;
 import static j2html.TagCreator.tr;
-import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.readResource;
+import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.getStringFromResource;
 
 public class HealthQualReportBuilder {
 
@@ -122,7 +122,7 @@ public class HealthQualReportBuilder {
 	}
 
 	private ContainerTag getStyleForPdf() {
-		return style().withType("text/css").withText(readResource("healthQualPdfStyle.css"));
+		return style().withType("text/css").withText(getStringFromResource("healthQualPdfStyle.css"));
 	}
 	
 	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,

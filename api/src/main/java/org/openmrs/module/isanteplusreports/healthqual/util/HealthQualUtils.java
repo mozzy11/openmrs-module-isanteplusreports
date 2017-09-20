@@ -51,18 +51,4 @@ public abstract class HealthQualUtils {
             throw new HealthQualException("Report cannot be evaluated", e);
         } return reportData;
     }
-
-    public static String readResource(String file) {
-        InputStream in = HealthQualUtils.class.getClassLoader().getResourceAsStream(file);
-        try {
-            try {
-                return IOUtils.toString(in);
-            } finally {
-                in.close();
-            }
-        } catch (Exception ex) {
-            LOGGER.error("Cannot read '" + file + "' resource");
-            throw new HealthQualException("Cannot read '" + file + "' resource", ex);
-        }
-    }
 }

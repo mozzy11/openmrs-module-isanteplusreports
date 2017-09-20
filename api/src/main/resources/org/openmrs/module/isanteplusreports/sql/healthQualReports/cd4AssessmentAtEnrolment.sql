@@ -5,8 +5,7 @@ SELECT
             AND pl.test_id IN ('730', '5497') 	-- CD4 test (in % || in count unit)
             AND pl.date_test_done IS NOT NULL 	-- make sure that the test is not NULL test
             AND pl.test_result IS NOT NULL		-- make sure that the test is not NULL test
-			-- TODO: make sure that we don't need to compare date only with the last first HIV visit
-            AND pl.date_test_done BETWEEN pv.visit_date AND ADDDATE(pv.visit_date, INTERVAL 60 DAY)
+            AND TIMESTAMPDIFF(DAY, pv.visit_date, pl.date_test_done) <= 60
         ) THEN p.patient_id ELSE null END
     ) AS 'femaleNumerator',
     COUNT(
@@ -15,8 +14,7 @@ SELECT
 			AND pl.test_id IN ('730', '5497') 	-- CD4 test (in % || in count unit)
             AND pl.date_test_done IS NOT NULL 	-- make sure that the test is not NULL test
             AND pl.test_result IS NOT NULL		-- make sure that the test is not NULL test
-			-- TODO: make sure that we don't need to compare date only with the last first HIV visit
-            AND pl.date_test_done BETWEEN pv.visit_date AND ADDDATE(pv.visit_date, INTERVAL 60 DAY)
+            AND TIMESTAMPDIFF(DAY, pv.visit_date, pl.date_test_done) <= 60
         ) THEN p.patient_id ELSE null END
     ) AS 'maleNumerator',
     COUNT(

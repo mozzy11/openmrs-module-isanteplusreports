@@ -18,8 +18,10 @@ import org.apache.commons.io.IOUtils;
 import org.openmrs.module.reporting.common.ContentType;
 import org.openmrs.module.reporting.dataset.DataSet;
 import org.openmrs.module.reporting.dataset.DataSetRow;
+import org.openmrs.module.reporting.dataset.definition.SqlDataSetDefinition;
 import org.openmrs.module.reporting.report.ReportDesign;
 import org.openmrs.module.reporting.report.ReportDesignResource;
+import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.renderer.ExcelTemplateRenderer;
 import org.openmrs.module.reporting.report.renderer.RenderingMode;
 import org.openmrs.module.reporting.report.renderer.ReportRenderer;
@@ -32,6 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.FULL_DATA_EXPORTS_RESOURCE_PATH;
 
 /**
  * Utility methods used by the module
@@ -112,7 +116,37 @@ public class IsantePlusReportsUtil {
 		}
 		return new RenderingMode(renderer, label, extension, null);
 	}
-	
+
+	public static SqlDataSetDefinition sqlDataSetDefinition(String resourceName, String name, String description) {
+		return sqlDataSetDefinitionWithResourcePath(resourceName, name, description, FULL_DATA_EXPORTS_RESOURCE_PATH);
+	}
+
+	public static SqlDataSetDefinition sqlDataSetDefinitionWithResourcePath(String resourceName, String name, String description, String resourcePath) {
+		String sql = IsantePlusReportsUtil.getStringFromResource(resourcePath + resourceName);
+		SqlDataSetDefinition definition = new SqlDataSetDefinition();
+		definition.setSqlQuery(sql);
+		definition.setName(name);
+		definition.setDescription(description);
+
+		return definition;
+	}
+
+	public static ReportDefinition reportDefinition(String name, String description, String uuid) {
+		ReportDefinition rDefinition = new ReportDefinition();
+		rDefinition.setName(name);
+		rDefinition.setDescription(description);
+		rDefinition.setUuid(uuid);
+		return rDefinition;
+	}
+
+	public static ReportDesign reportDesign(String name, ReportDefinition rDefinition, Class<? extends ReportRenderer> rendererType) {
+		ReportDesign rDesign = new ReportDesign();
+		rDesign.setName(name);
+		rDesign.setReportDefinition(rDefinition);
+		rDesign.setRendererType(rendererType);
+		return rDesign;
+	}
+
 	// has been moved to ReportUtil in reporting module, use the one there
 	/*@Deprecated
 	public static List<Map<String, Object>> simplify(DataSet dataSet) {

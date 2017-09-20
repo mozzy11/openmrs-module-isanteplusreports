@@ -5,6 +5,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.ModuleFactory;
+import org.openmrs.module.isanteplusreports.healthqual.util.RegisterAllHealthQualReports;
 import org.openmrs.module.isanteplusreports.util.RegisterAllReports;
 
 public class RegisterReports {
@@ -73,37 +74,8 @@ public class RegisterReports {
 			register.ListVisitsByPregnantWomenToClinic();
 			Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
 
-			register.healthQualRetentionOfPatientsOnArt();
-			register.healthQualCd4AssessmentAtEnrolment();
-			register.healthQualArvEnrollment();
-			register.healthQualAdultHivAndCortimixazoleProphy();
-			register.healthQualAdultPlhivAndInh();
-			register.healthQualAdultHivOnArtAdherentToTreatment();
-			register.healthQualAdultHivOnArtWithAdherentEvaluation();
-			register.healthQualProportionOfHIVPregnantWithHAART();
-			register.healthQualProportionOfHIVPatientsWithNutritionalAssessment();
-			register.healthQualProportionOfUndernourishedHIVPatients();
-			register.healthQualProportionOfHivWomenUsingFamilyPlanning();
-			register.healthQualProportionOfPregnantWithPrenataleCareOrLD();
-			register.healthQualProportionOfHivOnArtViralLoadTest6Months();
-			register.healthQualProportionOfHivOnArtViralLoadTest18Months();
-			register.healthQualProportionOfHivOnArtUndetectableViralLoadTest6Months();
-			register.healthQualProportionOfPLHIVTestedForTB();
-
-			register.healthQualChildrenRegularlyFollowedOnArt();
-			register.healthQualChildrenHivAndPlacedOnArt();
-			register.healthQualPediatricHivAndReceivedCotrimoxazoleProphylaxis();
-			register.healthQualProportionOfHIVChildrenTestedForTB();
-			register.healthQualChildrenOnArtWhoAreConsideredAdherent();
-			register.healthQualPediatricHivAndArtProphy();
-			register.healthQualPediatricReceivedPcrTest();
-			register.healthQualPediatricNegativePcrTest();
-			register.healthQualPediatricBenefitedFromAnAdherence();
-			register.healthQualProportionOfChildrenWithNutritionalAssessment();
-			register.healthQualProportionOfHIVChildrenOlderThanOneYearOfAgeReceivedINH();
-			register.healthQualProportionOfHIVChildrenYoungerThanOneYearOfAgeReceivedINH();
-		}
-		catch (Exception ex) {
+			RegisterAllHealthQualReports.registerAll();
+		} catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");
 			ex.printStackTrace();
 		}

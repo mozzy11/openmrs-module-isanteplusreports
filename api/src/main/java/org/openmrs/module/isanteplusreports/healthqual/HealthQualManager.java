@@ -44,6 +44,7 @@ public class HealthQualManager {
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_7_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID,
+            IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
 			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
@@ -83,9 +84,13 @@ public class HealthQualManager {
 		String[] periodMonthsValues = { "6", "12", "24", "48", "60" };
 		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
 
+		String[] ageDaysValues = { "45", "75", "105", "270" };
+		HealthQualIndicatorOption age = new HealthQualIndicatorOption("ageDays", "age", ageDaysValues);
+
 		// adult options
 		options.put(IsantePlusReportsProperties.HEALTH_QUAL_ADULT_1_INDICATOR_UUID, period);
 		// pediatric options
 		options.put(IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID, period);
+		options.put(IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID, age);
 	}
 }

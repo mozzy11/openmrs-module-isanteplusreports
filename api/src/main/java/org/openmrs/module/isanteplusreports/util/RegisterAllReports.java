@@ -77,6 +77,8 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.ADULT_9_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.FULL_DATA_EXPORTS_RESOURCE_PATH;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.HEALTH_QUAL_REPORTS_RESOURCE_PATH;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_10_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_10_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_11_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_11_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.PEDIATRIC_12_INDICATOR_MESSAGE;
@@ -1525,6 +1527,11 @@ public class RegisterAllReports extends SessionContext {
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID);
 	}
 
+    public void healthQualProportionOfHIVChildrenWithAppropriateImmunizations() {
+        registerHealthEqualReportWithStartDateEndDateAndAgeParams(PEDIATRIC_10_INDICATOR_SQL, PEDIATRIC_10_INDICATOR_MESSAGE,
+                IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID);
+    }
+
 	public void healthQualPediatricHivAndArtProphy() {
 		registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_11_INDICATOR_SQL, PEDIATRIC_11_INDICATOR_MESSAGE,
 				IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID);
@@ -1617,6 +1624,26 @@ public class RegisterAllReports extends SessionContext {
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 	}
+
+    private void registerHealthEqualReportWithStartDateEndDateAndAgeParams(String sql, String messageProperties, String uuid) {
+        Parameter age = new Parameter("age", "isanteplusreports.healthqual.option.label.ageDays", Integer.class);
+        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
+        sqlData.addParameter(startDate);
+        sqlData.addParameter(endDate);
+        sqlData.addParameter(age);
+
+        Context.getService(SerializedDefinitionService.class).saveDefinition(sqlData);
+        Map<String, Object> mappings = new HashMap<String, Object>();
+        mappings.put("startDate", "${startDate}");
+        mappings.put("endDate", "${endDate}");
+        mappings.put("age", "${age}");
+        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+        repDefinition.addParameter(startDate);
+        repDefinition.addParameter(endDate);
+        repDefinition.addParameter(age);
+        repDefinition.addDataSetDefinition(sqlData, mappings);
+        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+    }
 
 	private void registerHealthEqualReportWithCurrentDateAndPeriodParams(String sql, String messageProperties, String uuid) {
 		Parameter period = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);

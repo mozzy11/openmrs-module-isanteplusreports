@@ -55,6 +55,8 @@ public class IsantePlusReportsConstants {
 
     protected static final String PEDIATRIC_9_INDICATOR_SQL = "proportionOfChildrenWithNutritionalAssessment.sql";
 
+    protected static final String PEDIATRIC_10_INDICATOR_SQL = "proportionOfHIVChildrenWithAppropriateImmunizations.sql";
+
     protected static final String PEDIATRIC_11_INDICATOR_SQL = "pediatricHivAndArtProphy.sql";
 
     protected static final String PEDIATRIC_12_INDICATOR_SQL = "pediatricRecivedPcrTest.sql";
@@ -111,6 +113,8 @@ public class IsantePlusReportsConstants {
     protected static final String PEDIATRIC_7_INDICATOR_MESSAGE = PEDIATRIC + 7;
 
     protected static final String PEDIATRIC_9_INDICATOR_MESSAGE = PEDIATRIC + 9;
+
+    protected static final String PEDIATRIC_10_INDICATOR_MESSAGE = PEDIATRIC + 10;
 
     protected static final String PEDIATRIC_11_INDICATOR_MESSAGE = PEDIATRIC + 11;
 

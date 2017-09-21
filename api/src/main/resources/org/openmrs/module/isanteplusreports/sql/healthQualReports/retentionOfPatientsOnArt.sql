@@ -32,4 +32,4 @@ WHERE pd.drug_id IN (SELECT drug_id FROM isanteplus.arv_drugs)  -- ART treatment
 		SELECT patient_id
         FROM isanteplus.patient_status_ARV
         WHERE start_date BETWEEN SUBDATE(:currentDate, INTERVAL :period MONTH) AND :currentDate
-	);
+	) AND TIMESTAMPDIFF(YEAR, p.birthdate, :currentDate) > 14; -- adult

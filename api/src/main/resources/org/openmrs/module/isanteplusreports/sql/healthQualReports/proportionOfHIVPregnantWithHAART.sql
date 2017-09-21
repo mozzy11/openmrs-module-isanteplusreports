@@ -37,4 +37,4 @@ WHERE
 		  SELECT discon.patient_id
       FROM isanteplus.discontinuation_reason discon
       WHERE discon.reason IN (159,1667,159492)
-  );
+  ) AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) > 14; -- adult

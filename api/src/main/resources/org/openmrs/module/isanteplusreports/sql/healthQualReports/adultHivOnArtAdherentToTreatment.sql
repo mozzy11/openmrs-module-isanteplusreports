@@ -34,4 +34,5 @@ WHERE p.vih_status = '1'
 	AND p.patient_id NOT IN (
 		SELECT discon.patient_id
                 FROM isanteplus.discontinuation_reason discon
-                WHERE discon.reason IN ('159', '1667', '159492'));
+                WHERE discon.reason IN ('159', '1667', '159492')
+    ) AND TIMESTAMPDIFF(YEAR, p.birthdate, :currentDate) > 14; -- adult

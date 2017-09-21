@@ -37,4 +37,4 @@ WHERE p.vih_status = '1' -- HIV+ patient
 		SELECT discon.patient_id
         FROM isanteplus.discontinuation_reason discon
         WHERE discon.reason IN ('159', '1667', '159492') -- not deceased, discontinued and transferred
-	)
+	) AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) > 14; -- adult

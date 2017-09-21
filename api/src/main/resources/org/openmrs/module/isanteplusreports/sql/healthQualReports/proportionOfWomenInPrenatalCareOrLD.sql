@@ -32,4 +32,4 @@ WHERE
       SELECT ppreg.patient_id
       FROM isanteplus.patient_pregnancy ppreg
       WHERE ppreg.end_date IS NULL OR (ppreg.end_date BETWEEN :startDate AND :endDate)
-  );
+  ) AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) > 14; -- adult

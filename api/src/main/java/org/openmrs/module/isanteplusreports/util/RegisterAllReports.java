@@ -20,7 +20,6 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.context.SessionContext;
 import org.openmrs.module.appui.UiSessionContext;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
-import org.openmrs.module.isanteplusreports.IsantePlusReportsUtil;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusOtherHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleHtmlReportRenderer;
 import org.openmrs.module.reporting.dataset.definition.DataSetDefinition;
@@ -36,10 +35,8 @@ import org.openmrs.module.reporting.report.ReportRequest.Status;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
 import org.openmrs.module.reporting.report.renderer.ExcelTemplateRenderer;
-import org.openmrs.module.reporting.report.renderer.ReportRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.module.reporting.web.renderers.WebReportRenderer;
-/*import org.openmrs.ui.framework.session.SessionFactory;*/
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 

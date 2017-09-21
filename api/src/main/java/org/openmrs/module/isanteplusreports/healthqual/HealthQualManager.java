@@ -1,8 +1,8 @@
 package org.openmrs.module.isanteplusreports.healthqual;
 
-import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicator;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualIndicatorOption;
+import org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,40 +18,40 @@ import java.util.Map;
 public class HealthQualManager {
 	
 	private static final String[] adultIndicatorsUuid = {
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_1_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_2_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_3_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_4_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_5_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_6_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_7_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_8_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_9_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_10_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_11_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_12_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_13_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_14_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_15_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_ADULT_16_INDICATOR_UUID
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_1_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_2_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_3_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_4_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_5_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_6_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_7_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_8_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_9_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_10_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_11_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_12_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_13_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_14_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_15_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_ADULT_16_INDICATOR_UUID
 	};
 	
 	private static final String[] pediatricIndicatorsUuid = {
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_2_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_3_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_5_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_7_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_8_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
-			IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_2_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_3_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_4_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_5_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_6_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_7_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_8_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
 	};
 	
-	private Map<String, HealthQualIndicatorOption> options = new HashMap<String, HealthQualIndicatorOption>();
+	private Map<String, HealthQualIndicatorOption> options = new HashMap<>();
 	
 	@Autowired
 	private ReportDefinitionService reportDefinitionService;
@@ -85,8 +85,8 @@ public class HealthQualManager {
 		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
 
 		// adult options
-		options.put(IsantePlusReportsProperties.HEALTH_QUAL_ADULT_1_INDICATOR_UUID, period);
+		options.put(HealthQualReportsConstants.HEALTH_QUAL_ADULT_1_INDICATOR_UUID, period);
 		// pediatric options
-		options.put(IsantePlusReportsProperties.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID, period);
+		options.put(HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID, period);
 	}
 }

@@ -57,4 +57,9 @@ table {
     empty-cells: hide;
     margin: 41pt 0;
     margin-right: 1.1in; /* setting proper right page margin */
+    page-break-inside: avoid;
+}
+
+tr {
+    page-break-inside: avoid;
 }

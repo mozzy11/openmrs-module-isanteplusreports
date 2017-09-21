@@ -28,9 +28,12 @@
     <% if (pdfResult != null) { %>
         function savePdf() {
             var link = document.createElement('a');
-            link.setAttribute('href', 'data:text/plain;base64, <%= pdfResult %>');
+            link.setAttribute('href', 'data:application/pdf;base64, <%= pdfResult %>');
             link.setAttribute('download', generatePdfName());
+
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
         }
     <% } %>
     

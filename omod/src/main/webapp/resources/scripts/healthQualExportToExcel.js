@@ -15,6 +15,9 @@ var saveToExcel = (function () {
         var downloadLink = document.createElement("a");
         downloadLink.href = uri + base64(format(template, ctx));
         downloadLink.download = filename;
+
+        document.body.appendChild(downloadLink);
         downloadLink.click();
+        document.body.removeChild(downloadLink);
     }
   })()

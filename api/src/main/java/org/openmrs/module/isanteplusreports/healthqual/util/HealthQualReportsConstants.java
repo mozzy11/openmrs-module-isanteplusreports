@@ -7,6 +7,8 @@ public final class HealthQualReportsConstants {
     static final String HEALTH_QUAL_REPORTS_RESOURCE_PATH = REPORTS_SQL_PATH + "healthQualReports/";
 
     // SQL files
+    static final String NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_SQL = "numberOfActivePatientsBySex.sql";
+
     static final String ADULT_1_INDICATOR_SQL = "retentionOfPatientsOnArt.sql";
 
     static final String ADULT_2_INDICATOR_SQL = "cd4AssessmentAtEnrolment.sql";
@@ -68,6 +70,8 @@ public final class HealthQualReportsConstants {
 
     static final String PEDIATRIC = "isanteplusreports.pediatric";
 
+    static final String NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_MESSAGE = "isanteplusreports.numberOfActivePatientsBySex";
+
     static final String ADULT_1_INDICATOR_MESSAGE = ADULT + 1;
 
     static final String ADULT_2_INDICATOR_MESSAGE = ADULT + 2;
@@ -125,6 +129,8 @@ public final class HealthQualReportsConstants {
     static final String PEDIATRIC_13_INDICATOR_MESSAGE = PEDIATRIC + 13;
 
     // indicators' UUIDs
+    public static final String NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID = "69679207-04a8-4fb9-b3ad-75a8dd5c0a58";
+
     public static final String HEALTH_QUAL_ADULT_1_INDICATOR_UUID = "43f9c7f2-01b9-45c4-9da0-5776bee49c3f";
 
     public static final String HEALTH_QUAL_ADULT_2_INDICATOR_UUID = "3fe2c0a0-0b4a-4a51-8ccb-95052fdb83c4";

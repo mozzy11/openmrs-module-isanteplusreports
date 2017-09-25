@@ -1,7 +1,5 @@
 package org.openmrs.module.isanteplusreports;
 
-//import org.openmrs.module.emrapi.EmrApiProperties;
-
 public class IsantePlusReportsProperties{
 	
 	//***** PRIVILEGES ******
@@ -27,7 +25,7 @@ public class IsantePlusReportsProperties{
 	
 	public final String NUMBERVISITSBYMONTH = "68023435-7e82-4e95-af6b-c137476f0f02";
 	
-	public static final String NUMBERPATIENTBYSEX = "892661ed-f096-4580-a2de-abcf8a13658d";
+	public final String NUMBERPATIENTBYSEX = "892661ed-f096-4580-a2de-abcf8a13658d";
 	
 	public final String DISPENSINGMEDICATIONS = "bdd40a99-1727-43a3-b155-71b73bf681b9";
 	

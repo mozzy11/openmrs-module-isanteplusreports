@@ -47,6 +47,9 @@ import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualRep
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.ADULT_9_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.HEALTH_QUAL_ADULT_1_INDICATOR_UUID;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.HEALTH_QUAL_REPORTS_RESOURCE_PATH;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_MESSAGE;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_11_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_11_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_12_INDICATOR_MESSAGE;
@@ -83,6 +86,8 @@ public class RegisterAllHealthQualReports {
     private final static Parameter PERIOD = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
 
     public static void registerAll() {
+        numberOfPatientsBySex();
+
         // adult
         healthQualRetentionOfPatientsOnArt();
         healthQualCd4AssessmentAtEnrolment();
@@ -114,6 +119,11 @@ public class RegisterAllHealthQualReports {
         healthQualPediatricHivAndArtProphy();
         healthQualPediatricReceivedPcrTest();
         healthQualPediatricNegativePcrTest();
+    }
+
+    private static void numberOfPatientsBySex() {
+        registerHealthEqualReportWithStartAndEndDateParams(NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_SQL, NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_MESSAGE,
+                NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID);
     }
 
     private static void healthQualRetentionOfPatientsOnArt() {

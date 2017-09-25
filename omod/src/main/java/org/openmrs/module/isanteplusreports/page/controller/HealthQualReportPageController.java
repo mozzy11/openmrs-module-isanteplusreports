@@ -3,14 +3,13 @@ package org.openmrs.module.isanteplusreports.page.controller;
 import org.apache.commons.lang.time.DateUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.exception.HealthQualException;
 import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
 import org.openmrs.module.isanteplusreports.healthqual.builder.HealthQualReportBuilder;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualSelectedIndicator;
+import org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants;
 import org.openmrs.module.reporting.common.DateUtil;
 import org.openmrs.module.reporting.dataset.DataSetRow;
-import org.openmrs.module.reporting.evaluation.EvaluationException;
 import org.openmrs.module.reporting.report.ReportData;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
@@ -26,9 +25,9 @@ import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUti
 
 public class HealthQualReportPageController {
 
-	public static final String NUMBER_OF_MALES_COLUMN_NAME = "Homme";
+	public static final String NUMBER_OF_MALES_COLUMN_NAME = "M";
 
-	public static final String NUMBER_OF_FEMALES_COLUMN_NAME = "Femme";
+	public static final String NUMBER_OF_FEMALES_COLUMN_NAME = "F";
 
 	public final static String LOCATION_SESSION_ATTRIBUTE = "emrContext.sessionLocationId";
 
@@ -101,7 +100,7 @@ public class HealthQualReportPageController {
 	}
 
 	private void setNumberOfPatients(Date startDate, Date endDate, HealthQualReportBuilder builder) {
-		ReportData numberOfPatientsReportData = getReportData(IsantePlusReportsProperties.NUMBERPATIENTBYSEX, startDate, endDate, null);
+		ReportData numberOfPatientsReportData = getReportData(HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID, startDate, endDate, null);
 		if (numberOfPatientsReportData.getDataSets().isEmpty()) {
 			throw new HealthQualException("Cannot read number of patients - reportData is empty");
 		}

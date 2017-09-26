@@ -50,6 +50,8 @@ import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualRep
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_MESSAGE;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_SQL;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_10_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_10_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_11_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_11_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_12_INDICATOR_MESSAGE;
@@ -85,6 +87,8 @@ public class RegisterAllHealthQualReports {
 
     private final static Parameter PERIOD = new Parameter("period", "isanteplusreports.healthqual.option.label.periodMonths", Integer.class);
 
+    private final static Parameter AGE = new Parameter("age", "isanteplusreports.healthqual.option.label.ageDays", Integer.class);
+
     public static void registerAll() {
         numberOfPatientsBySex();
 
@@ -116,6 +120,7 @@ public class RegisterAllHealthQualReports {
         healthQualProportionOfHIVChildrenOlderThanOneYearOfAgeReceivedINH();
         healthQualProportionOfHIVChildrenYoungerThanOneYearOfAgeReceivedINH();
         healthQualProportionOfChildrenWithNutritionalAssessment();
+        healthQualChildrenImmunizationAndVaccination();
         healthQualPediatricHivAndArtProphy();
         healthQualPediatricReceivedPcrTest();
         healthQualPediatricNegativePcrTest();
@@ -251,6 +256,11 @@ public class RegisterAllHealthQualReports {
             HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID);
     }
 
+    private static void healthQualChildrenImmunizationAndVaccination() {
+        registerHealthEqualReportWithAgeAndStartAndEndDateParams(PEDIATRIC_10_INDICATOR_SQL, PEDIATRIC_10_INDICATOR_MESSAGE,
+                HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID);
+    }
+
     private static void healthQualPediatricHivAndArtProphy() {
         registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_11_INDICATOR_SQL, PEDIATRIC_11_INDICATOR_MESSAGE,
             HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID);
@@ -281,6 +291,27 @@ public class RegisterAllHealthQualReports {
         repDefinition.addDataSetDefinition(sqlData, mappings);
         Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
     }
+
+    private static void registerHealthEqualReportWithAgeAndStartAndEndDateParams(String sql, String messageProperties, String uuid) {
+        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
+        sqlData.addParameter(START_DATE);
+        sqlData.addParameter(END_DATE);
+        sqlData.addParameter(AGE);
+        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+        Map<String, Object> mappings = new HashMap<String, Object>();
+        mappings.put("startDate", "${startDate}");
+        mappings.put("endDate", "${endDate}");
+        mappings.put("age", "${age}");
+
+        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+        repDefinition.addParameter(START_DATE);
+        repDefinition.addParameter(END_DATE);
+        repDefinition.addParameter(AGE);
+        repDefinition.addDataSetDefinition(sqlData, mappings);
+        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+    }
+
 
     private static void registerHealthEqualReportWithStartDateAndPeriodParams(String sql, String messageProperties, String uuid) {
         SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);

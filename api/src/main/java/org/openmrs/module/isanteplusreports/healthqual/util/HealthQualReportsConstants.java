@@ -59,6 +59,8 @@ public final class HealthQualReportsConstants {
 
     static final String PEDIATRIC_9_INDICATOR_SQL = "proportionOfChildrenWithNutritionalAssessment.sql";
 
+    static final String PEDIATRIC_10_INDICATOR_SQL = "healthQualChildrenImmunizationAndVaccination.sql";
+
     static final String PEDIATRIC_11_INDICATOR_SQL = "pediatricHivAndArtProphy.sql";
 
     static final String PEDIATRIC_12_INDICATOR_SQL = "pediatricReceivedPcrTest.sql";
@@ -122,6 +124,8 @@ public final class HealthQualReportsConstants {
 
     static final String PEDIATRIC_9_INDICATOR_MESSAGE = PEDIATRIC + 9;
 
+    static final String PEDIATRIC_10_INDICATOR_MESSAGE = PEDIATRIC + 10;
+
     static final String PEDIATRIC_11_INDICATOR_MESSAGE = PEDIATRIC + 11;
 
     static final String PEDIATRIC_12_INDICATOR_MESSAGE = PEDIATRIC + 12;
@@ -180,6 +184,8 @@ public final class HealthQualReportsConstants {
     public static final String HEALTH_QUAL_PEDIATRIC_8_INDICATOR_UUID = "b40f7761-69c2-4a8b-8f0d-0cda0d131b5e";
 
     public static final String HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID = "0bc15688-6906-44f3-8b32-a2d0d148ad2f";
+
+    public static final String HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID = "58861622-d479-4b23-9b07-7c3bea1b84c7";
 
     public static final String HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID = "5cd16174-7acb-4978-ab0f-735cec42b703";
 

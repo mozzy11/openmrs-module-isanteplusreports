@@ -46,6 +46,7 @@ public class HealthQualManager {
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_7_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_8_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_9_INDICATOR_UUID,
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
@@ -82,11 +83,16 @@ public class HealthQualManager {
 	
 	private void createIndicatorOptions() {
 		String[] periodMonthsValues = { "6", "12", "24", "48", "60" };
+		String[] ageDaysValues = { "45", "75", "105", "270"};
+
 		HealthQualIndicatorOption period = new HealthQualIndicatorOption("periodMonths", "period", periodMonthsValues);
+		HealthQualIndicatorOption age = new HealthQualIndicatorOption("ageDays", "age", ageDaysValues);
 
 		// adult options
 		options.put(HealthQualReportsConstants.HEALTH_QUAL_ADULT_1_INDICATOR_UUID, period);
 		// pediatric options
 		options.put(HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID, period);
+
+		options.put(HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID, age);
 	}
 }

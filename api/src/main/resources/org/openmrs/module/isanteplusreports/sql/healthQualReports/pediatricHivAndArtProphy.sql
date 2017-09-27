@@ -33,9 +33,9 @@ FROM
 	ON p.patient_id = pp.patient_id
 WHERE
 	p.patient_id IN (SELECT phv.patient_id
-					FROM isanteplus.pediatric_hiv_visit phv
+					FROM isanteplus.health_qual_patient_visit phv
                     WHERE
-						DATE(phv.encounter_date) BETWEEN :startDate AND :endDate
+						DATE(phv.visit_date) BETWEEN :startDate AND :endDate
                         OR (
 							DATE(pp.visit_date) BETWEEN :startDate AND :endDate
                             AND pp.rx_or_prophy = 138405

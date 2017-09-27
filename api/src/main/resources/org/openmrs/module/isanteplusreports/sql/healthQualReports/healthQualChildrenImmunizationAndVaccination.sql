@@ -32,11 +32,11 @@ FROM
 WHERE
 	p.patient_id IN (
 	  SELECT phv.patient_id
-    FROM isanteplus.pediatric_hiv_visit phv
+    FROM isanteplus.health_qual_patient_visit phv
 	  LEFT JOIN isanteplus.patient_prescription pp
 	  ON phv.patient_id = pp.patient_id
     WHERE
-      DATE(phv.encounter_date) BETWEEN :startDate AND :endDate
+      DATE(phv.visit_date) BETWEEN :startDate AND :endDate
       OR (
         DATE(pp.visit_date) BETWEEN :startDate AND :endDate
         AND pp.rx_or_prophy = 138405
@@ -71,4 +71,5 @@ WHERE
 					THEN 270
 				ELSE null
 			END
-	);
+	)
+	AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) < 14; -- child;

@@ -37,15 +37,15 @@ WHERE
   AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) <= 14
   AND p.patient_id IN (
 		SELECT pv.patient_id
-        FROM isanteplus.health_qual_patient_visit pv
-        WHERE
-			pv.encounter_type IN ('9') -- pediatric first HIV visit
-            AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
+    FROM isanteplus.health_qual_patient_visit pv
+    WHERE
+      pv.encounter_type IN ('9') -- pediatric first HIV visit
+      AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
 	)
 	AND p.patient_id NOT IN (
 		SELECT discon.patient_id
-        FROM isanteplus.discontinuation_reason discon
-        WHERE discon.reason IN (159,1667,159492) -- 159-deceased, 1667- Discontinuations, 159492- Transfer
+      FROM isanteplus.discontinuation_reason discon
+      WHERE discon.reason IN (159,1667,159492) -- 159-deceased, 1667- Discontinuations, 159492- Transfer
 	)
 	AND p.patient_id NOT IN ( -- negative PCR result
 		SELECT plab.patient_id

@@ -57,4 +57,5 @@ WHERE
 			plab.test_done = 1
 			AND plab.test_id = 844
 			AND plab.test_result = 1302
-	);
+	)
+  AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) < 14; -- child;

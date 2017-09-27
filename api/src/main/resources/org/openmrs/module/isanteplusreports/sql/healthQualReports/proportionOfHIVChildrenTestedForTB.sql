@@ -3,7 +3,7 @@ SELECT
 		DISTINCT CASE WHEN (
 			p.gender = 'F'
 			AND p.patient_id IN (
-        SELECT pv.patient_id FROM isanteplus.patient_visit pv
+        SELECT pv.patient_id FROM isanteplus.health_qual_patient_visit pv
         WHERE pv.evaluated_of_tb is true
         AND pv.visit_date BETWEEN :startDate AND :endDate
       )
@@ -13,7 +13,7 @@ SELECT
 		DISTINCT CASE WHEN (
 			p.gender = 'M'
 			AND p.patient_id IN (
-        SELECT pv.patient_id FROM isanteplus.patient_visit pv
+        SELECT pv.patient_id FROM isanteplus.health_qual_patient_visit pv
         WHERE pv.evaluated_of_tb is true
         AND pv.visit_date BETWEEN :startDate AND :endDate
       )
@@ -37,7 +37,7 @@ WHERE
   AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) <= 14
   AND p.patient_id IN (
 		SELECT pv.patient_id
-        FROM isanteplus.patient_visit pv
+        FROM isanteplus.health_qual_patient_visit pv
         WHERE
 			pv.encounter_type IN ('9') -- pediatric first HIV visit
             AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit

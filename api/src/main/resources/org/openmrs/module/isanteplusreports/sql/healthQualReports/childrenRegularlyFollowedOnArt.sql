@@ -35,19 +35,19 @@ SELECT
 	) AS 'maleDenominator'
 FROM
 	isanteplus.patient p
-	INNER JOIN isanteplus.patient_on_arv poa	#patient on arv
+	INNER JOIN isanteplus.patient_on_arv poa	-- patient on arv
     ON p.patient_id = poa.patient_id
-    INNER JOIN isanteplus.pediatric_hiv_visit phv #pediatric first visit
+    INNER JOIN isanteplus.pediatric_hiv_visit phv -- pediatric first visit
     ON p.patient_id = phv.patient_id
     LEFT JOIN isanteplus.patient_prescription pp
     ON poa.patient_id = pp.patient_id
 WHERE
-    p.patient_id NOT IN (		#excluding 
+    p.patient_id NOT IN (		-- excluding 
 		SELECT discon.patient_id
         FROM isanteplus.discontinuation_reason discon
         WHERE discon.reason IN (159,1667,159492)
 	)
-	AND poa.patient_id NOT IN (	# negative PCR result
+	AND poa.patient_id NOT IN (	-- negative PCR result
 		SELECT plab.patient_id
         FROM isanteplus.patient_laboratory plab
         WHERE

@@ -28,7 +28,7 @@ SELECT
         ) THEN p.patient_id ELSE null END
 	) AS 'maleDenominator'
 FROM isanteplus.patient p
-	INNER JOIN isanteplus.patient_visit pv ON p.patient_id = pv.patient_id
+	INNER JOIN isanteplus.health_qual_patient_visit pv ON p.patient_id = pv.patient_id
     LEFT JOIN isanteplus.patient_laboratory pl ON p.patient_id = pl.patient_id -- join by patient_id, so that we can look for the first HIV visit (numerator)
 WHERE p.vih_status = '1' -- HIV+ patient
 	AND pv.encounter_type IN ('1', '9') -- adult or pediatric first HIV visit

@@ -33,12 +33,12 @@ WHERE
 	p.vih_status = 1
   AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) BETWEEN 1 AND 14
   AND p.patient_id IN (
-	  SELECT phv.patient_id
-    FROM isanteplus.pediatric_hiv_visit phv
+	  SELECT pv.patient_id
+    FROM isanteplus.health_qual_patient_visit pv
     WHERE
-    phv.is_active_tb IS true
+    pv.is_active_tb IS true
 	  AND (
-		  DATE(phv.encounter_date) BETWEEN :startDate AND :endDate
+		  DATE(pv.visit_date) BETWEEN :startDate AND :endDate
 		  OR (
 			  DATE(pp.visit_date) BETWEEN :startDate AND :endDate
 			  AND pp.rx_or_prophy = 138405

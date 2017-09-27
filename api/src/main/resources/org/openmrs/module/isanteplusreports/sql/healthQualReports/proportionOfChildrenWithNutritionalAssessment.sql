@@ -3,9 +3,9 @@ SELECT
 		DISTINCT CASE WHEN (
 			p.gender = 'F' AND
 			p.patient_id IN (
-        SELECT pv.patient_id FROM isanteplus.pediatric_hiv_visit pv
-        WHERE pv.nutritional_assessment_completed IS TRUE
-          AND pv.encounter_date BETWEEN :startDate AND :endDate
+        SELECT hqpv.patient_id FROM isanteplus.health_qual_patient_visit hqpv
+        WHERE hqpv.nutritional_assessment_completed IS TRUE
+          AND hqpv.visit_date BETWEEN :startDate AND :endDate
       )
 		) THEN p.patient_id else null END
 	) AS 'femaleNumerator',
@@ -13,9 +13,9 @@ SELECT
 		DISTINCT CASE WHEN (
 			p.gender = 'M' AND
 			p.patient_id IN (
-        SELECT pv.patient_id FROM isanteplus.pediatric_hiv_visit pv
-        WHERE pv.nutritional_assessment_completed IS TRUE
-          AND pv.encounter_date BETWEEN :startDate AND :endDate
+        SELECT hqpv.patient_id FROM isanteplus.health_qual_patient_visit hqpv
+        WHERE hqpv.nutritional_assessment_completed IS TRUE
+          AND hqpv.visit_date BETWEEN :startDate AND :endDate
       )
 		) THEN p.patient_id else null END
 	) AS 'maleNumerator',

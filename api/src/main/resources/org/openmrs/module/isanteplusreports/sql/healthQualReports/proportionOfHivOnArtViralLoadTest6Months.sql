@@ -51,7 +51,7 @@ WHERE
     AND (
 		p.patient_id IN (
 			SELECT pv.patient_id
-			FROM isanteplus.patient_visit pv
+			FROM isanteplus.health_qual_patient_visit pv
 			WHERE
 				DATE(pv.visit_date) BETWEEN :startDate AND :endDate
 		)

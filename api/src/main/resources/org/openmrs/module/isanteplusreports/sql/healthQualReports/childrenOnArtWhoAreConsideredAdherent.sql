@@ -19,7 +19,7 @@ SELECT
 	) AS 'maleDenominator'
 FROM
 	isanteplus.patient p
-    INNER JOIN isanteplus.patient_visit pv
+    INNER JOIN isanteplus.health_qual_patient_visit pv
     ON p.patient_id = pv.patient_id
     LEFT JOIN isanteplus.patient_prescription pp
     ON p.patient_id = pp.patient_id

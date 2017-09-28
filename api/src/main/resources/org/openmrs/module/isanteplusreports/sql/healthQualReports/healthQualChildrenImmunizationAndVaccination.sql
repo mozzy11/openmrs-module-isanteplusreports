@@ -58,23 +58,19 @@ WHERE
 	AND p.patient_id IN (
 	  SELECT pv.patient_id
     FROM isanteplus.health_qual_patient_visit pv
-	  WHERE :age =
-	  			CASE
-				WHEN (
-					TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 0 AND 45
-				) THEN 45
-				WHEN TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 46 AND 75
-					THEN 75
-				WHEN TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 76 AND 105
-					THEN 105
-				WHEN TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 106 AND 270
-					THEN 270
-				ELSE null
-			END
-	)
-	AND p.patient_id IN ( -- An child in a given period
-    SELECT hqpv.patient_id
-    FROM isanteplus.health_qual_patient_visit hqpv
-    WHERE hqpv.age_in_years <= 14
-    AND DATE(hqpv.visit_date) BETWEEN :startDate AND :endDate
+	  WHERE
+	    pv.age_in_years <= 14
+      AND :age =
+        CASE
+      WHEN (
+        TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 0 AND 45
+      ) THEN 45
+      WHEN TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 46 AND 75
+        THEN 75
+      WHEN TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 76 AND 105
+        THEN 105
+      WHEN TIMESTAMPDIFF(DAY, p.birthdate, pv.visit_date) BETWEEN 106 AND 270
+        THEN 270
+      ELSE null
+    END
 	);

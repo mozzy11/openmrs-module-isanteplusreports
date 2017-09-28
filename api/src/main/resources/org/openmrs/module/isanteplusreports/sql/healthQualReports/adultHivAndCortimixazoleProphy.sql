@@ -36,9 +36,11 @@ WHERE
 	AND p.patient_id IN (
 		SELECT pv.patient_id
 		FROM isanteplus.health_qual_patient_visit pv
-		WHERE
-			DATE(pv.visit_date) BETWEEN :startDate AND :endDate
-			OR DATE(pp.visit_date) BETWEEN :startDate AND :endDate
+		WHERE (
+			  DATE(pv.visit_date) BETWEEN :startDate AND :endDate
+			  OR DATE(pp.visit_date) BETWEEN :startDate AND :endDate
+		  )
+		  AND pv.age_in_years > 14
 	)
     AND p.patient_id IN (
 		SELECT poa.patient_id
@@ -48,10 +50,4 @@ WHERE
 		SELECT discon.patient_id
     FROM isanteplus.discontinuation_reason discon
     WHERE discon.reason IN (159,1667,159492)
-	)
-	AND p.patient_id IN ( -- An adult in a given period
-    SELECT hqpv.patient_id
-    FROM isanteplus.health_qual_patient_visit hqpv
-    WHERE hqpv.age_in_years > 14
-    AND DATE(hqpv.visit_date) BETWEEN :startDate AND :endDate
 	);

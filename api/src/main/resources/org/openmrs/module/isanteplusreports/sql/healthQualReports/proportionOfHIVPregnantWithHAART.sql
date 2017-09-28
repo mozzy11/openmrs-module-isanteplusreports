@@ -42,5 +42,4 @@ WHERE
     SELECT hqpv.patient_id
     FROM isanteplus.health_qual_patient_visit hqpv
     WHERE hqpv.age_in_years > 14
-    AND DATE(hqpv.visit_date) BETWEEN :startDate AND :endDate
 	);

@@ -17,9 +17,11 @@ WHERE
     FROM isanteplus.health_qual_patient_visit phv
     LEFT JOIN isanteplus.patient_prescription pp
     ON phv.patient_id = pp.patient_id
-    WHERE
-      DATE(phv.visit_date) BETWEEN :startDate AND :endDate
-      OR (DATE(pp.visit_date) BETWEEN :startDate AND :endDate AND pp.rx_or_prophy = 138405)
+    WHERE (
+        DATE(phv.visit_date) BETWEEN :startDate AND :endDate
+        OR (DATE(pp.visit_date) BETWEEN :startDate AND :endDate AND pp.rx_or_prophy = 138405)
+      )
+      AND phv.age_in_years <= 14
   )
   AND p.patient_id NOT IN (
     SELECT discon.patient_id
@@ -29,10 +31,4 @@ WHERE
     SELECT plab.patient_id
     FROM isanteplus.patient_laboratory plab
     WHERE plab.test_done = 1 AND plab.test_id = 844 AND plab.test_result = 1302
-  )
- 	AND p.patient_id IN ( -- An child in a given period
-    SELECT hqpv.patient_id
-    FROM isanteplus.health_qual_patient_visit hqpv
-    WHERE hqpv.age_in_years <= 14
-    AND DATE(hqpv.visit_date) BETWEEN :startDate AND :endDate
-	);
+  );

@@ -37,9 +37,11 @@ WHERE
   AND p.patient_id IN (
 		SELECT pv.patient_id
     FROM isanteplus.health_qual_patient_visit pv
-    WHERE
-      pv.encounter_type IN ('9') -- pediatric first HIV visit
-      AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
+    WHERE (
+        pv.encounter_type IN ('9') -- pediatric first HIV visit
+        AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
+	    )
+	    AND pv.age_in_years <= 14;
 	)
 	AND p.patient_id NOT IN (
 		SELECT discon.patient_id
@@ -53,10 +55,4 @@ WHERE
 			plab.test_done = 1
 			AND plab.test_id = 844
 			AND plab.test_result = 1302
-	)
- 	AND p.patient_id IN ( -- An child in a given period
-    SELECT hqpv.patient_id
-    FROM isanteplus.health_qual_patient_visit hqpv
-    WHERE hqpv.age_in_years <= 14
-    AND DATE(hqpv.visit_date) BETWEEN :startDate AND :endDate
 	);

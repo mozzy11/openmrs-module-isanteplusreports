@@ -55,4 +55,9 @@ WHERE
 	)
   AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) <= 12
   AND TIMESTAMPDIFF(WEEK, p.birthdate, :endDate) >= 4
-  AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) < 14; -- child;
+ 	AND p.patient_id IN ( -- An child in a given period
+    SELECT hqpv.patient_id
+    FROM isanteplus.health_qual_patient_visit hqpv
+    WHERE hqpv.age_in_years <= 14
+    AND DATE(hqpv.visit_date) BETWEEN :startDate AND :endDate
+	);

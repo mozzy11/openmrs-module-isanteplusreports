@@ -33,6 +33,7 @@ WHERE p.vih_status = '1'
     AND pv.visit_date BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
 	AND p.patient_id NOT IN (
 		SELECT discon.patient_id
-                FROM isanteplus.discontinuation_reason discon
-                WHERE discon.reason IN ('159', '1667', '159492')
-    ) AND TIMESTAMPDIFF(YEAR, p.birthdate, :currentDate) > 14; -- adult
+    FROM isanteplus.discontinuation_reason discon
+    WHERE discon.reason IN ('159', '1667', '159492')
+  )
+  AND pv.age_in_years > 14; -- An adult

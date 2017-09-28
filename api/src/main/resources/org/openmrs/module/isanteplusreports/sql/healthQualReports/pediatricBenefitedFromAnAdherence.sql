@@ -31,12 +31,14 @@ WHERE
     FROM isanteplus.health_qual_patient_visit phv
     LEFT JOIN isanteplus.patient_prescription pp
     ON phv.patient_id = pp.patient_id
-    WHERE
-      DATE(phv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
-      OR (
-        DATE(pp.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
-        AND pp.rx_or_prophy = 138405
+    WHERE (
+        DATE(phv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
+        OR (
+          DATE(pp.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
+          AND pp.rx_or_prophy = 138405
+        )
       )
+      AND phv.age_in_years <= 14 -- An child
   )
   AND p.patient_id IN (SELECT poa.patient_id FROM isanteplus.patient_on_arv poa)
   AND p.patient_id NOT IN (
@@ -51,5 +53,4 @@ WHERE
       plab.test_done = 1
       AND plab.test_id = 844
       AND plab.test_result = 1302
-  )
-  AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) < 14; -- child
+  );

@@ -24,8 +24,7 @@ ON p.patient_id = pv.patient_id
 LEFT JOIN isanteplus.patient_prescription pp
 ON p.patient_id = pp.patient_id
 WHERE
-  TIMESTAMPDIFF(YEAR, p.birthdate, :currentDate) <= 14
-  AND pv.adherence_evaluation IS NOT NULL
+  pv.adherence_evaluation IS NOT NULL
   AND (
       DATE(pv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
     OR (
@@ -51,4 +50,5 @@ WHERE
       plab.test_done = 1
       AND plab.test_id = 844
       AND plab.test_result = 1302
-  );
+  )
+  AND pv.age_in_years <= 14; -- An child

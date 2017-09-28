@@ -54,7 +54,7 @@ WHERE
 			FROM isanteplus.health_qual_patient_visit pv
 			WHERE
 				DATE(pv.visit_date) BETWEEN :startDate AND :endDate
-				AND pv.age_in_years > 14;
+				AND pv.age_in_years > 14
 		)
         OR p.patient_id IN (
 			SELECT pp.patient_id

@@ -41,7 +41,7 @@ WHERE
         pv.encounter_type IN ('9') -- pediatric first HIV visit
         AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
 	    )
-	    AND pv.age_in_years <= 14;
+	    AND pv.age_in_years <= 14
 	)
 	AND p.patient_id NOT IN (
 		SELECT discon.patient_id

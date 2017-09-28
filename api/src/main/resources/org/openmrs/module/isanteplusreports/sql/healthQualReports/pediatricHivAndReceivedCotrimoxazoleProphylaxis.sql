@@ -35,7 +35,7 @@ WHERE
         DATE(phv.visit_date) BETWEEN :startDate AND :endDate
         OR (DATE(pp.visit_date) BETWEEN :startDate AND :endDate AND pp.rx_or_prophy = 138405)
       )
-      AND pv.age_in_years <= 14
+      AND phv.age_in_years <= 14
   )
   AND p.patient_id NOT IN (
     SELECT discon.patient_id

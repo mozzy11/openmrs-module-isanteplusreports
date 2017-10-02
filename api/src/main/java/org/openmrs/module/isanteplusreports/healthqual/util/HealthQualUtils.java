@@ -16,9 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class HealthQualUtils {
-
-    private static final Log LOGGER = LogFactory.getLog(HealthQualUtils.class);
-
+    
     public static ReportData getReportData(String reportUuid, Date startDate, Date endDate, Map<String, Object> additionalOptions) {
         ReportDefinitionService reportDefinitionService = Context.getService(ReportDefinitionService.class);
         ReportDefinition reportDefinition = reportDefinitionService.getDefinitionByUuid(reportUuid);
@@ -34,7 +32,6 @@ public abstract class HealthQualUtils {
             } else if (additionalOptions != null && additionalOptions.containsKey(parameter.getName())) {
                 parameterValues.put(parameter.getName(), additionalOptions.get(parameter.getName()));
             } else {
-                LOGGER.error("Report cannot be evaluated - missing '" + parameter.getName() + "' parameter'");
                 throw new HealthQualException("Report cannot be evaluated - missing '" + parameter.getName() + "' parameter'");
             }
         }
@@ -45,7 +42,6 @@ public abstract class HealthQualUtils {
         try {
             reportData = reportDefinitionService.evaluate(reportDefinition, evaluationContext);
         } catch (EvaluationException e) {
-            LOGGER.error("Report evaluation exception was thrown");
             throw new HealthQualException("Report cannot be evaluated", e);
         } return reportData;
     }

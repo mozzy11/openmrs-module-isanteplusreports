@@ -70,7 +70,7 @@ public class HealthQualReportBuilder {
 
 	private static final String STRING_IF_EMPTY = "-";
 	
-	private int numberOfIndicatorsInOneTable = 3; // if there are too many indicators the table will be splitted
+	private int numberOfIndicatorsInOneTable = 2; // if there are too many indicators the table will be splitted
 	
 	private ContainerTag[] rows;
 	

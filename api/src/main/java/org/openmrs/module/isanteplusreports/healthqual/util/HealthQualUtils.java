@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class HealthQualUtils {
-    
+
     public static ReportData getReportData(String reportUuid, Date startDate, Date endDate, Map<String, Object> additionalOptions) {
         ReportDefinitionService reportDefinitionService = Context.getService(ReportDefinitionService.class);
         ReportDefinition reportDefinition = reportDefinitionService.getDefinitionByUuid(reportUuid);

@@ -1,34 +1,34 @@
 SELECT
-	COUNT(
-		DISTINCT CASE WHEN (
-			p.gender = 'F' AND
-			p.patient_id IN (
+    COUNT(
+        DISTINCT CASE WHEN (
+            p.gender = 'F' AND
+            p.patient_id IN (
         SELECT pv.patient_id FROM isanteplus.health_qual_patient_visit pv
         WHERE pv.patient_bmi <= 16
         AND pv.visit_date BETWEEN :startDate AND :endDate
       )
-		) THEN p.patient_id else null END
-	) AS 'femaleNumerator',
+        ) THEN p.patient_id else null END
+    ) AS 'femaleNumerator',
     COUNT(
-		DISTINCT CASE WHEN (
-			p.gender = 'M' AND
-			p.patient_id IN (
+        DISTINCT CASE WHEN (
+            p.gender = 'M' AND
+            p.patient_id IN (
         SELECT pv.patient_id FROM isanteplus.health_qual_patient_visit pv
         WHERE pv.patient_bmi <= 16
         AND pv.visit_date BETWEEN :startDate AND :endDate
       )
-		) THEN p.patient_id else null END
-	) AS 'maleNumerator',
-	COUNT(
-		DISTINCT CASE WHEN (
-			p.gender = 'F'
-		) THEN p.patient_id else null END
-	) AS 'femaleDenominator',
+        ) THEN p.patient_id else null END
+    ) AS 'maleNumerator',
     COUNT(
-		DISTINCT CASE WHEN (
-			p.gender = 'M'
-		) THEN p.patient_id else null END
-	) AS 'maleDenominator'
+        DISTINCT CASE WHEN (
+            p.gender = 'F'
+        ) THEN p.patient_id else null END
+    ) AS 'femaleDenominator',
+    COUNT(
+        DISTINCT CASE WHEN (
+            p.gender = 'M'
+        ) THEN p.patient_id else null END
+    ) AS 'maleDenominator'
 FROM
   isanteplus.patient p
 WHERE

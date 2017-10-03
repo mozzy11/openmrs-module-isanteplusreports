@@ -20,9 +20,9 @@ SELECT
 FROM
 isanteplus.patient p
 INNER JOIN isanteplus.health_qual_patient_visit pv
-ON p.patient_id = pv.patient_id
+  ON p.patient_id = pv.patient_id
 LEFT JOIN isanteplus.patient_prescription pp
-ON p.patient_id = pp.patient_id
+  ON p.patient_id = pp.patient_id
 WHERE
   pv.adherence_evaluation IS NOT NULL
   AND (

@@ -32,11 +32,11 @@ SELECT
 FROM
     isanteplus.patient p
     INNER JOIN isanteplus.patient_on_arv poa    -- patient on arv
-    ON p.patient_id = poa.patient_id
+        ON p.patient_id = poa.patient_id
     INNER JOIN isanteplus.health_qual_patient_visit pv -- pediatric first visit
-    ON p.patient_id = pv.patient_id
+        ON p.patient_id = pv.patient_id
     LEFT JOIN isanteplus.patient_prescription pp
-    ON poa.patient_id = pp.patient_id
+        ON poa.patient_id = pp.patient_id
 WHERE
     p.patient_id NOT IN (        -- excluding 
         SELECT discon.patient_id

@@ -23,8 +23,7 @@ SELECT
       p.gender = 'M'
     ) THEN p.patient_id else null END
   ) AS 'maleDenominator'
-FROM
-isanteplus.patient p
+FROM isanteplus.patient p
 LEFT JOIN isanteplus.patient_prescription pp
 ON p.patient_id = pp.patient_id
 WHERE
@@ -43,7 +42,7 @@ WHERE
     WHERE discon.reason IN (159,1667,159492)
   )
   AND (
-    TIMESTAMPDIFF(MONTH,p.birthdate,:endDate) <= 18
+    TIMESTAMPDIFF(MONTH, p.birthdate,:endDate) <= 18
     OR p.patient_id NOT IN (
       SELECT plab.patient_id
       FROM isanteplus.patient_laboratory plab

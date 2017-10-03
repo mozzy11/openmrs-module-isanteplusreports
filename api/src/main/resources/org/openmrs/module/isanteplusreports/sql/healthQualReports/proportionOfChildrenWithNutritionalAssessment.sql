@@ -33,10 +33,10 @@ FROM
     isanteplus.patient p
 WHERE
     p.patient_id IN (
-      SELECT phv.patient_id
-    FROM isanteplus.health_qual_patient_visit phv
-      LEFT JOIN isanteplus.patient_prescription pp
-      ON phv.patient_id = pp.patient_id
+        SELECT phv.patient_id
+        FROM isanteplus.health_qual_patient_visit phv
+        LEFT JOIN isanteplus.patient_prescription pp
+            ON phv.patient_id = pp.patient_id
     WHERE (
         DATE(phv.visit_date) BETWEEN :startDate AND :endDate
         OR (

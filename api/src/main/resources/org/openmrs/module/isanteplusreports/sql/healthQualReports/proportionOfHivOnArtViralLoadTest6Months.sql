@@ -41,6 +41,11 @@ FROM
     isanteplus.patient p
 WHERE
     p.vih_status = 1 -- HIV+ patient
+    AND p.patient_id IN (
+        SELECT pv.patient_id
+        FROM isanteplus.health_qual_patient_visit pv
+        WHERE pv.age_in_years > 14
+    )
     AND p.patient_id IN (    -- on ART for at least 6 months
         SELECT pd.patient_id
         FROM isanteplus.patient_dispensing pd
@@ -52,9 +57,7 @@ WHERE
         p.patient_id IN (
             SELECT pv.patient_id
             FROM isanteplus.health_qual_patient_visit pv
-            WHERE
-                DATE(pv.visit_date) BETWEEN :startDate AND :endDate
-                AND pv.age_in_years > 14
+            WHERE DATE(pv.visit_date) BETWEEN :startDate AND :endDate
         )
         OR p.patient_id IN (
             SELECT pp.patient_id

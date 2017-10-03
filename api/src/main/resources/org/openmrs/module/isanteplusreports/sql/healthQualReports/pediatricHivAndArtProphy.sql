@@ -3,18 +3,18 @@ SELECT
         DISTINCT CASE WHEN (
             p.gender = 'F'
             AND p.patient_id
-      AND pp.rx_or_prophy = 163768
-      AND pp.drug_id IN (SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
-      AND (pp.visit_date BETWEEN :startDate AND :endDate)
+            AND pp.rx_or_prophy = 163768
+            AND pp.drug_id IN (SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
+            AND (pp.visit_date BETWEEN :startDate AND :endDate)
         ) THEN p.patient_id else null END
     ) AS 'femaleNumerator',
     COUNT(
         DISTINCT CASE WHEN (
             p.gender = 'M'
-      AND p.patient_id
-      AND pp.rx_or_prophy = 163768
-      AND pp.drug_id IN (SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
-      AND (pp.visit_date BETWEEN :startDate AND :endDate)
+            AND p.patient_id
+            AND pp.rx_or_prophy = 163768
+            AND pp.drug_id IN (SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
+            AND (pp.visit_date BETWEEN :startDate AND :endDate)
         ) THEN p.patient_id else null END
     ) AS 'maleNumerator',
     COUNT(

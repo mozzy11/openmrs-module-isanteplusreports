@@ -1,7 +1,5 @@
 package org.openmrs.module.isanteplusreports;
 
-//import org.openmrs.module.emrapi.EmrApiProperties;
-
 public class IsantePlusReportsProperties{
 	
 	//***** PRIVILEGES ******

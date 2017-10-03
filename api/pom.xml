@@ -121,6 +121,13 @@
 		</dependency>
 				
 		<!-- End OpenMRS core -->
-		
+		<dependency>
+			<groupId>com.j2html</groupId>
+			<artifactId>j2html</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.xhtmlrenderer</groupId>
+			<artifactId>flying-saucer-pdf-itext5</artifactId>
+		</dependency>
 	</dependencies>
 </project>

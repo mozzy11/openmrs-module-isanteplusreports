@@ -18,11 +18,8 @@ import org.openmrs.api.LocationService;
 import org.openmrs.api.ProviderService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.context.SessionContext;
-import org.openmrs.module.appframework.service.AppFrameworkService;
 import org.openmrs.module.appui.UiSessionContext;
-import org.openmrs.module.appui.rest.SessionController;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
-import org.openmrs.module.isanteplusreports.IsantePlusReportsUtil;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusOtherHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleHtmlReportRenderer;
 import org.openmrs.module.reporting.dataset.definition.DataSetDefinition;
@@ -37,25 +34,20 @@ import org.openmrs.module.reporting.report.ReportRequest;
 import org.openmrs.module.reporting.report.ReportRequest.Status;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
 import org.openmrs.module.reporting.report.definition.service.ReportDefinitionService;
-import org.openmrs.module.reporting.report.manager.ReportManager;
-import org.openmrs.module.reporting.report.manager.ReportManagerUtil;
 import org.openmrs.module.reporting.report.renderer.ExcelTemplateRenderer;
-import org.openmrs.module.reporting.report.renderer.ReportRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.module.reporting.web.renderers.WebReportRenderer;
-import org.openmrs.ui.framework.WebConstants;
-import org.openmrs.ui.framework.annotation.SpringBean;
-import org.openmrs.ui.framework.fragment.action.FragmentActionResult;
-import org.openmrs.ui.framework.fragment.action.ObjectResult;
-/*import org.openmrs.ui.framework.session.SessionFactory;*/
 import org.openmrs.util.OpenmrsConstants;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.reportDefinition;
+import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.reportDesign;
+import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.sqlDataSetDefinition;
 
 public class RegisterAllReports extends SessionContext {
 	
 	private static Log log = LogFactory.getLog(RegisterAllReports.class);
-	
+
 	private Integer locationId;
 	
 	private SessionFactory sessionFactory;
@@ -83,7 +75,7 @@ public class RegisterAllReports extends SessionContext {
 	Parameter endDate = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
 	
 	Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);
-	
+
 	/*private SessionFactory sessionFactory;
 	private HttpSession httpSession;
 	public HttpSession getHttpSession()
@@ -1229,7 +1221,7 @@ public class RegisterAllReports extends SessionContext {
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
 	}
-	
+
 	@DocumentedDefinition("fullDataExports")
 	public void numberWomenFirstPrenatalVisitFirstTrimester() throws Exception {
 		SqlDataSetDefinition sqlData = sqlDataSetDefinition("number_women_seen_first_prenatal_visit_first_trimester.sql",
@@ -1363,7 +1355,7 @@ public class RegisterAllReports extends SessionContext {
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
 	}
-	
+
 	/*private SqlDataSetDefinition sqlDataSetDefinition1(String resourceName, Replacements replacements) {
 	        String sql = IsantePlusReportsUtil.getStringFromResource("org/openmrs/module/isanteplusreports/sql/fullDataExports/" + resourceName);
 	        if (replacements != null) {
@@ -1378,31 +1370,4 @@ public class RegisterAllReports extends SessionContext {
 	        return definition;
 	    }
 	*/
-	
-	private SqlDataSetDefinition sqlDataSetDefinition(String resourceName, String name, String description) {
-		String sql = IsantePlusReportsUtil.getStringFromResource("org/openmrs/module/isanteplusreports/sql/fullDataExports/"
-		        + resourceName);
-		SqlDataSetDefinition definition = new SqlDataSetDefinition();
-		definition.setSqlQuery(sql);
-		definition.setName(name);
-		definition.setDescription(description);
-		return definition;
-	}
-	
-	private ReportDefinition reportDefinition(String name, String description, String uuid) {
-		ReportDefinition rDefinition = new ReportDefinition();
-		rDefinition.setName(name);
-		rDefinition.setDescription(description);
-		rDefinition.setUuid(uuid);
-		return rDefinition;
-	}
-	
-	private ReportDesign reportDesign(String name, ReportDefinition rDefinition, Class<? extends ReportRenderer> rendererType) {
-		ReportDesign rDesign = new ReportDesign();
-		rDesign.setName(name);
-		rDesign.setReportDefinition(rDefinition);
-		rDesign.setRendererType(rendererType);
-		return rDesign;
-	}
-	
 }

@@ -42,6 +42,15 @@
                 "featureToggle": "reportingui_adHocAnalysis"
             },
             {
+              "id": "isanteplusreports.healthqual_report",
+              "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+              "type": "link",
+              "label": "isanteplusreports.healthqual.label",
+              "url": "isanteplusreports/healthQualReport.page",
+              "order": 3,
+              "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
                 "id": "Hospitalization Diagnosis Report",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
                 "type": "link",

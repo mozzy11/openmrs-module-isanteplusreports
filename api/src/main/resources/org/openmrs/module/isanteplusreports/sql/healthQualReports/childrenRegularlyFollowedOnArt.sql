@@ -2,7 +2,7 @@ SELECT
     COUNT( DISTINCT CASE WHEN (
         p.gender = 'F'
         AND (
-            pv.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND:startDate
+            pv.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
             OR (    -- Pediatric Rx
                 pp.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
                 AND pp.rx_or_prophy = 138405
@@ -13,7 +13,7 @@ SELECT
     COUNT( DISTINCT CASE WHEN (
         p.gender = 'M'
         AND (
-            pv.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND:startDate
+            pv.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
             OR (    -- Pediatric Rx
                 pp.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
                 AND pp.rx_or_prophy = 138405
@@ -43,7 +43,7 @@ WHERE
         FROM isanteplus.discontinuation_reason discon
         WHERE discon.reason IN (159,1667,159492)
     )
-    AND poa.patient_id NOT IN (    -- negative PCR result
+    AND poa.patient_id NOT IN (    -- negative PCR result
         SELECT plab.patient_id
         FROM isanteplus.patient_laboratory plab
         WHERE

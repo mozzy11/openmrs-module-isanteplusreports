@@ -30,6 +30,6 @@ WHERE pd.drug_id IN (SELECT drug_id FROM isanteplus.arv_drugs)  -- ART treatment
         WHERE discon.reason IN (159, 159492)
     ) AND p.patient_id IN (
         SELECT patient_id
-        FROM isanteplus.patient_status_ARV
+        FROM isanteplus.patient_status_arv
         WHERE start_date BETWEEN SUBDATE(:currentDate, INTERVAL :period MONTH) AND :currentDate
     ) AND TIMESTAMPDIFF(YEAR, p.birthdate, :currentDate) > 14; -- adult

@@ -131,8 +131,8 @@ public class HealthQualReportBuilder {
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes()));
-
+		//Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes()));
+		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes("UTF-8")));
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(doc, null);
 

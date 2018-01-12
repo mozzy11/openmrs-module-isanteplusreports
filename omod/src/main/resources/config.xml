@@ -36,11 +36,11 @@
 	   	<require_module version="${reportingVersion}">org.openmrs.module.reporting</require_module>
 		<require_module version="${webservicesRestVersion}">org.openmrs.module.webservices.rest</require_module>
 	    <require_module version="${coreappsVersion}">org.openmrs.module.coreapps</require_module>
-	      <require_module version="${metadatamappingVersion}">
+	    <require_module version="${metadatamappingVersion}">
             org.openmrs.module.metadatamapping
         </require_module>
+        <require_module version="${metadatadeployVersion}">org.openmrs.module.metadatadeploy</require_module>
 	</require_modules>
-	
 	<!-- Extensions -->
 	<extension>
 		<point>org.openmrs.admin.list</point>

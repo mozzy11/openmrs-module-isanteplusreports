@@ -46,6 +46,7 @@
 		<isanteplusVersion>1.2-SNAPSHOT</isanteplusVersion>
 		<j2htmlVesion>1.1.0</j2htmlVesion>
 		<flyingSaucerPdfItext5Version>9.1.6</flyingSaucerPdfItext5Version>
+		<metadatadeployVersion>1.8.1</metadatadeployVersion>
 	</properties>
 
 	<dependencyManagement>
@@ -239,6 +240,12 @@
             <version>${isanteplusVersion}</version>
             <scope>provided</scope>
         </dependency>
+         <dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>metadatadeploy-api</artifactId>
+				<version>${metadatadeployVersion}</version>
+				<scope>provided</scope>
+		</dependency>
       
         <!-- End OpenMRS modules -->
         

@@ -53,6 +53,7 @@
                 <th>${ ui.message("isanteplusreports.sixty_one_ninety") }</th>
                 <th>${ ui.message("isanteplusreports.ninety_one") }</th>
                 <th>${ ui.message("isanteplusreports.one_hundred_twenty") }</th>
+                 <th>${ ui.message("isanteplusreports.patient_unique") }</th>
             </tr>
         </thead>
         <tbody>
@@ -86,6 +87,9 @@
                     <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=121&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
                       ${ ui.format(it.getColumnValue(">120")) }
                     </a>
+                </td>
+                 <td>
+                    ${ ui.format(it.getColumnValue("patient_unique")) }
                 </td>
             </tr>
         <% } %>

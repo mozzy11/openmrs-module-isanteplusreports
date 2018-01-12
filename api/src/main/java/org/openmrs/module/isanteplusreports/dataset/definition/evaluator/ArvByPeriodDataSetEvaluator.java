@@ -130,6 +130,7 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 			row.addColumnValue(new DataSetColumn("61-90 jours", "61-90 jours", String.class), o[2]);
 			row.addColumnValue(new DataSetColumn("91-120 jours", "91-120 jours", String.class), o[3]);
 			row.addColumnValue(new DataSetColumn(">120", ">120", String.class), o[4]);
+			row.addColumnValue(new DataSetColumn("patient_unique", "patient_unique", String.class), o[5]);
 			dataSet.addRow(row);
 		}
 		return dataSet;

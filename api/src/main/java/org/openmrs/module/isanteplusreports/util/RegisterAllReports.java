@@ -197,11 +197,20 @@ public class RegisterAllReports extends SessionContext {
 	public void patientAgeGroup() throws Exception {
 		SqlDataSetDefinition sqlData = sqlDataSetDefinition("patientAgeGroup.sql", "Groupe patient par age",
 		    "Groupe patient par age");
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
 		Definition ds = Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ds.addParameter(startDate);
+		ds.addParameter(endDate);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(ds);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
 		ReportDefinition repDefinition = reportDefinition("isanteplusreports.patByAge", "",
 		    props.PATIENT_AGE_GROUP_REPORT_DEFINITION_UUID);
-		repDefinition.addDataSetDefinition(sqlData, null);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusOtherHtmlReportRenderer.class);

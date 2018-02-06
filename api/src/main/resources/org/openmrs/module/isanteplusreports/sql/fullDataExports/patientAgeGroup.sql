@@ -14,4 +14,6 @@ select
         		COUNT(CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,now())) between 121 AND 130 THEN p.patient_id else null END) AS '121-130',
         		COUNT(CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,now())) > 130 THEN p.patient_id else null END) AS '>130',
                 count(p.patient_id) as 'Nombre total de patients'
-        FROM isanteplus.patient p;
+        FROM isanteplus.patient p
+        WHERE p.birthdate between :startDate AND :endDate
+        AND (p.birthdate <>'' AND p.birthdate is not null);

@@ -51,15 +51,6 @@
               "requiredPrivilege": "App: reportingui.reports"
             },
             {
-                "id": "Hospitalization Diagnosis Report",
-                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
-                "type": "link",
-                "label": "isanteplusreports.patByAge",
-                "url": "reportingui/runReport.page?reportDefinition=5c40612b-bd9b-4cb7-8c30-1ae89fcdf038",
-                "order": 4,
-                "requiredPrivilege": "App: reportingui.reports"
-            },
-             {
                 "id": "Address and Diagnosis",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
                 "type": "link",
@@ -167,22 +158,13 @@
                 "order": 17,
                 "requiredPrivilege": "App: reportingui.reports"
             },
-             {
-                "id": "Address and Diagnosis",
-                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
-                "type": "link",
-                "label": "isanteplusreports.patientArvByPeriod",
-                "url": "reportingui/runReport.page?reportDefinition=ead22ae8-c3ab-4c27-ab8d-e63ec8658e50",
-                "order": 18,
-                "requiredPrivilege": "App: reportingui.reports"
-            },
             {
-		        "id": "isanteplusreports.overview.dailyRegistrations",
-		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "id": "isanteplusreports.patientArvByPeriod",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
 		        "type": "link",
 		        "label": "isanteplusreports.patientArvByPeriod",
 		        "url": "isanteplusreports/arvByPeriodReport.page",
-		        "order": 22,
+		        "order": 18,
 		        "requiredPrivilege": "App: reportingui.reports"
 		    },
 		     {
@@ -489,15 +471,6 @@
 		        "label": "isanteplusreports.list_pregnancy_women_receiving_in_clinic",
 		      	"url": "reportingui/runReport.page?reportDefinition=a3d743f9-fc42-429e-bd71-e2b9e375cc61",
 		        "order": 61,
-		        "requiredPrivilege": "App: reportingui.reports"
-		    },
-            {
-		        "id": "isanteplusreports.monitoring.monitoring_reports",
-		        "extensionPointId": "org.openmrs.module.reportingui.reports.monitoring",
-		        "type": "link",
-		        "label": "isanteplusreports.monitoring_reports",
-		        "url": "../isante",
-		        "order": 62,
 		        "requiredPrivilege": "App: reportingui.reports"
 		    }
            

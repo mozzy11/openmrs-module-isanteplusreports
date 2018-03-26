@@ -6,7 +6,8 @@ import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.isanteplusreports.healthqual.util.RegisterAllHealthQualReports;
-import org.openmrs.module.isanteplusreports.util.RegisterAllReports;
+import org.openmrs.module.isanteplusreports.util.RegisterAllOtherReports;
+import org.openmrs.module.isanteplusreports.util.RegisterPatientsArvStatusReports;
 
 public class RegisterReports {
 	
@@ -23,58 +24,10 @@ public class RegisterReports {
 			String oldversion = Context.getAdministrationService().getGlobalProperty("reports.moduleVersion");
 
 			if (!version.equals(oldversion)) {
-				RegisterAllReports register = new RegisterAllReports();
-				register.cleanTables();
-				register.cleanReportsRequest();
-				register.nextVisitSevenDays();
-				register.nextVisitFourteenDays();
-				register.patientAgeGroup();
-				register.firstVisitAge();
-				register.patientsCrachatAnormalWithoutTbDiagnostic();
-				register.patientsWithTbDiagnosticsWithoutTreatment();
-				register.patientsWithCompletedTbTreatment();
-				register.patientsWithTbSymptomsignWithoutCrachat();
-				register.consultationByDay();
-				register.numberVisitsByMonth();
-				register.numberPatientBySex();
-				register.dispensingMedications();
-				register.patientsStatusList();
-				register.patientsReceivingARVByPeriod();
-				register.drugsPrescription();
-				register.labPrescription();
-				register.labPerfomed();
-				register.patientArvThirtyDay();
-				register.patientStartingArv();
-				register.patientNextArvArrives();
-				register.institutionFrequentingByUser();
-				register.institutionFrequentingByUserAndDate();
-				register.institutionFrequenting();
-				register.institutionFrequentingByDate();
-				register.saveAlertReport();
-				register.patientWithOnlyRegisterForm();
-				register.hivPatientWithoutFirstVisit();
-				register.hivPatientWithActivityAfterDisc();
-				register.numberPregnancyWomenHivTested();
-				register.numberPregnancyWomenHivPositive();
-				register.communityArvDistribution();
-				register.pregnancyWomenOnHaart();
-				register.pregnancyWomenTestedForSyphilis();
-				register.pregnancyWomenDiagnosedWithSyphilis();
-				register.numberPrenatalVisitBySite();
-				register.numberPregnancyWomenHadFirstPrenatalCons();
-				register.numberHivPregnancyWomenGaveBirthAtHospital();
-				register.exposedInfantsWithMotherInPtmeProgram();
-				register.numberInfantsFromMotherOnProphylaxis();
-				register.frequencyPrenatalVisitsPerPatient();
-				register.numberExposedInfantsTestedByPcr();
-				register.numberExposedInfantsConfirmedHiv();
-				register.numberWomenFirstPrenatalVisitFirstTrimester();
-				register.numberPatientsByArvStatus();
-				register.hivTransmissionRisksFactor();
-				register.numberVisitsByPregnantWomenToClinic();
-				register.ListVisitsByPregnantWomenToClinic();
-
+				RegisterAllOtherReports.registerOtherReports();
 				RegisterAllHealthQualReports.registerAll();
+				RegisterPatientsArvStatusReports.registerAllPatientsArvStatusReports();
+				
 				Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
 			}
 		}

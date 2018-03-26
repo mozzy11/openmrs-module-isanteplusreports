@@ -115,20 +115,20 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		EvaluationContext context = new EvaluationContext();
 		SqlDataSetDefinition dataSetDefinition = new SqlDataSetDefinition();
 		String result = null;
-		if (id == 30) {
-			result = " between 0 AND 30";
-		}
-		if (id == 60) {
-			result = " between 31 AND 60";
+		if (id == 35) {
+			result = " between 0 AND 35";
 		}
 		if (id == 90) {
-			result = " between 61 AND 90";
+			result = " between 36 AND 89";
 		}
 		if (id == 120) {
-			result = " between 91 AND 120";
+			result = " between 90 AND 120";
 		}
-		if (id == 121) {
-			result = " > 120";
+		if (id == 180) {
+			result = " between 121 AND 180";
+		}
+		if (id == 181) {
+			result = " > 180";
 		}
 		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder("select "

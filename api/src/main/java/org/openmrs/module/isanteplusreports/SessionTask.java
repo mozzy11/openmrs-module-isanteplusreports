@@ -1,6 +1,5 @@
 package org.openmrs.module.isanteplusreports;
 
-import org.openmrs.api.context.Context;
 import org.openmrs.scheduler.tasks.AbstractTask;
 
 public abstract class SessionTask extends AbstractTask {

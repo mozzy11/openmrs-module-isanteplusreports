@@ -53,6 +53,7 @@
                 <th>${ ui.message("isanteplusreports.sixty_one_ninety") }</th>
                 <th>${ ui.message("isanteplusreports.ninety_one") }</th>
                 <th>${ ui.message("isanteplusreports.one_hundred_twenty") }</th>
+                 <th>${ ui.message("isanteplusreports.patient_unique") }</th>
             </tr>
         </thead>
         <tbody>
@@ -61,31 +62,34 @@
                 <td colspan="3"></td>
             </tr>
         <% } else nonCodedRows.each { %>
-            <tr id="obs-id-${ it.getColumnValue("0-30 jours") }">
+            <tr id="obs-id-${ it.getColumnValue("0-35 jours") }">
                 <td>
-                    <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=30&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
-                      ${ ui.format(it.getColumnValue("0-30 jours")) }
-                    </a>
-                </td>
-                 <td>
-                    <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=60&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
-                      ${ ui.format(it.getColumnValue("31-60 jours")) }
+                    <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=35&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+                      ${ ui.format(it.getColumnValue("0-35 jours")) }
                     </a>
                 </td>
                  <td>
                     <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=90&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
-                      ${ ui.format(it.getColumnValue("61-90 jours")) }
+                      ${ ui.format(it.getColumnValue("36-89 jours")) }
+                    </a>
+                </td>
+                 <td>
+                    <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=120&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+                      ${ ui.format(it.getColumnValue("90-120 jours")) }
                     </a>
                 </td>
                 <td>
-                     <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=120&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
-                      ${ ui.format(it.getColumnValue("91-120 jours")) }
+                     <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=180&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+                      ${ ui.format(it.getColumnValue("121-180 jours")) }
                     </a>
                 </td>
                 <td>
-                    <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=121&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
-                      ${ ui.format(it.getColumnValue(">120")) }
+                    <a href="${ "/" + contextPath + "/" }isanteplusreports/arvByPeriodReportPatientList.page?id=181&startDate=${ ui.format(date_debut) }&endDate=${ ui.format(date_fin) }" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+                      ${ ui.format(it.getColumnValue(">180")) }
                     </a>
+                </td>
+                 <td>
+                    ${ ui.format(it.getColumnValue("patient_unique")) }
                 </td>
             </tr>
         <% } %>

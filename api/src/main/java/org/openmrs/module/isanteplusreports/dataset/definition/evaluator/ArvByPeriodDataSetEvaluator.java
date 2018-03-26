@@ -97,14 +97,15 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder(
 		        "select "
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 0 AND 30 THEN p.patient_id END) as '0-30 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 31 AND 60 THEN p.patient_id END) as '31-60 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 61 AND 90 THEN p.patient_id END) as '61-90 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 91 AND 120 THEN p.patient_id END) as '91-120 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) > 120 THEN p.patient_id END) as '>120 jours',count(distinct p.patient_id) as 'Patient unique'");
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 0 AND 35 THEN p.patient_id END) as '0-35 jours',"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 36 AND 89 THEN p.patient_id END) as '36-89 jours',"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 90 AND 120 THEN p.patient_id END) as '90-120 jours',"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 121 AND 180 THEN p.patient_id END) as '121-180 jours',"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) > 180 THEN p.patient_id END) as '>180 jours',count(distinct p.patient_id) as 'Patient unique'");
 		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv");
 		sqlQuery.append(" WHERE p.patient_id=pdis.patient_id");
 		sqlQuery.append(" AND pdis.visit_id=parv.visit_id");
+		sqlQuery.append(" AND (pdis.next_dispensation_date<>'' AND pdis.next_dispensation_date is not null)");
 		if (startDate != null) {
 			sqlQuery.append(" AND pdis.visit_date >= :startDate");
 		}
@@ -125,11 +126,12 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		SimpleDataSet dataSet = new SimpleDataSet(dataSetDefinition, context);
 		for (Object[] o : list) {
 			DataSetRow row = new DataSetRow();
-			row.addColumnValue(new DataSetColumn("0-30 jours", "0-30 jours", String.class), o[0]);
-			row.addColumnValue(new DataSetColumn("31-60 jours", "31-60 jours", String.class), o[1]);
-			row.addColumnValue(new DataSetColumn("61-90 jours", "61-90 jours", String.class), o[2]);
-			row.addColumnValue(new DataSetColumn("91-120 jours", "91-120 jours", String.class), o[3]);
-			row.addColumnValue(new DataSetColumn(">120", ">120", String.class), o[4]);
+			row.addColumnValue(new DataSetColumn("0-35 jours", "0-35 jours", String.class), o[0]);
+			row.addColumnValue(new DataSetColumn("36-89 jours", "36-89 jours", String.class), o[1]);
+			row.addColumnValue(new DataSetColumn("90-120 jours", "90-120 jours", String.class), o[2]);
+			row.addColumnValue(new DataSetColumn("121-180 jours", "121-180 jours", String.class), o[3]);
+			row.addColumnValue(new DataSetColumn(">180", ">180", String.class), o[4]);
+			row.addColumnValue(new DataSetColumn("patient_unique", "patient_unique", String.class), o[5]);
 			dataSet.addRow(row);
 		}
 		return dataSet;
@@ -146,20 +148,20 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		/*EvaluationContext context = new EvaluationContext();
 		SqlDataSetDefinition dataSetDefinition = new SqlDataSetDefinition();*/
 		String result = null;
-		if (id == 30) {
-			result = " between 0 AND 30";
-		}
-		if (id == 60) {
-			result = " between 31 AND 60";
+		if (id == 35) {
+			result = " between 0 AND 35";
 		}
 		if (id == 90) {
-			result = " between 61 AND 90";
+			result = " between 36 AND 89";
 		}
 		if (id == 120) {
-			result = " between 91 AND 120";
+			result = " between 90 AND 120";
 		}
-		if (id == 121) {
-			result = " > 120";
+		if (id == 180) {
+			result = " between 121 AND 180";
+		}
+		if (id == 181) {
+			result = " > 180";
 		}
 		
 		StringBuilder sqlQuery = new StringBuilder("select "

@@ -7,4 +7,5 @@ count(distinct p.patient_id) as 'Patient unique'
 FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv
 WHERE p.patient_id=pdis.patient_id
 AND pdis.visit_id=parv.visit_id
+AND (pdis.next_dispensation_date<>'' AND pdis.next_dispensation_date is not null)
 AND pdis.visit_date between :startDate AND :endDate;

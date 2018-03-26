@@ -41,11 +41,7 @@
         </require_module>
         <require_module version="${metadatadeployVersion}">org.openmrs.module.metadatadeploy</require_module>
 	</require_modules>
-	<!-- Extensions -->
-	<extension>
-		<point>org.openmrs.admin.list</point>
-		<class>org.openmrs.module.isanteplusreports.extension.html.AdminList</class>
-	</extension>
+	
 	<aware_of_modules>
 		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
 	</aware_of_modules>

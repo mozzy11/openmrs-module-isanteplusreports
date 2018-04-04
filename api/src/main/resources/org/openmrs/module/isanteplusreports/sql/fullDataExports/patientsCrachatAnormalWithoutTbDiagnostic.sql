@@ -6,7 +6,7 @@ stat.name_fr as 'Status de patient', p.last_visit_date as 'Dernière date'
 from isanteplus.patient p
 INNER JOIN isanteplus.patient_imagerie pi
 ON pi.patient_id=p.patient_id
-LEFT OUTER JOIN isanteplus.ARV_status_loockup stat
+LEFT OUTER JOIN isanteplus.arv_status_loockup stat
 ON stat.id=p.arv_status
 WHERE pi.patient_id NOT IN (SELECT pdiag.patient_id FROM isanteplus.patient_tb_diagnosis pdiag
 WHERE pdiag.visit_date between :startDate AND :endDate)

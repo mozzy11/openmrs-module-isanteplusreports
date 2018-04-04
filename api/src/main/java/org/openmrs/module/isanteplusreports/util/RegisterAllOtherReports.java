@@ -271,7 +271,7 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void communityArvDistribution() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_prenancy_women_vih_positive.sql","isanteplusreports.community_arv_distribution",
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("community_arv_distribution.sql","isanteplusreports.community_arv_distribution",
 		           "Rapport de distribution des ARVs en communauté (DAC)", IsantePlusReportsProperties.COMMUNITY_ARV_DISTRIBUTION_UUID);
 	}
 	

@@ -131,4 +131,12 @@ public class IsantePlusReportsProperties{
 	
 	public static final String LIST_PATIENTS_RECEIVING_ARV_IN_HOSPITAL = "90ef295f-4d58-4b73-b477-f3798093a1f0";
 	
+	public static final String LIST_PATIENTS_BENEFICIE_PCR_UUID = "8176506e-b027-4735-bcc8-ce39182dbc7e";
+	
+	public static final String NUMBER_PATIENTS_BENEFICIE_PCR_UUID = "5a5543d5-98d3-480c-b193-2bbe4dcb1c9d";
+	
+	public static final String LIST_ELIGIBLE_CHILDREN_FOR_PCR_UUID = "164be26a-d7d8-4efd-9f86-2656d781b275";
+	
+	public static final String NUMBER_ELIGIBLE_CHILDREN_FOR_PCR_UUID= "cb18f36f-befa-4abb-b932-e99dcf7176bb";
+	
 }

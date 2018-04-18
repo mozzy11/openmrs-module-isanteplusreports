@@ -72,6 +72,10 @@ public class RegisterAllOtherReports extends SessionContext {
 		listVisitsByPregnantWomenToClinic();
 		listPatientsReceivingArtInCommunity();
 		listPatientsReceivingArtInHospital();
+		listPatientsBeneficiePcr();
+		numberPatientsBeneficiePcr();
+		listEligibleChildrenPcr();
+		numberEligibleChildrenPcr();
 	
 	}
 	
@@ -357,6 +361,27 @@ public class RegisterAllOtherReports extends SessionContext {
 	private static void listPatientsReceivingArtInHospital() {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_receiving_arv_in_hospital.sql","isanteplusreports.list_patients_receiving_arv_in_hospital",
 		           "Liste des patients ayant reçu des ARVs en milieu hospitalier", IsantePlusReportsProperties.LIST_PATIENTS_RECEIVING_ARV_IN_HOSPITAL);
+	}
+	
+	private static void listPatientsBeneficiePcr() {
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patient_beneficie_pcr.sql","isanteplusreports.list_patients_beneficie_pcr",
+		           "Liste des patients ayant bénéficié d'un PCR", IsantePlusReportsProperties.LIST_PATIENTS_BENEFICIE_PCR_UUID);
+	}
+	private static void numberPatientsBeneficiePcr() {
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_patient_beneficie_pcr.sql","isanteplusreports.number_patients_beneficie_pcr",
+		           "Nombre de patients ayant bénéficié d'un PCR", IsantePlusReportsProperties.NUMBER_PATIENTS_BENEFICIE_PCR_UUID);
+	}
+	
+	private static void listEligibleChildrenPcr(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("list_eligible_children_for_pcr.sql","isanteplusreports.list_eligible_children_for_pcr",
+		       "Liste des enfants éligibles pour un PCR", IsantePlusReportsProperties.LIST_ELIGIBLE_CHILDREN_FOR_PCR_UUID);
+	
+	}
+	
+	private static void numberEligibleChildrenPcr(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("number_eligible_children_for_pcr.sql","isanteplusreports.number_eligible_children_for_pcr",
+		       "Nombre d'enfants éligibles pour un PCR", IsantePlusReportsProperties.NUMBER_ELIGIBLE_CHILDREN_FOR_PCR_UUID);
+	
 	}
 
 }

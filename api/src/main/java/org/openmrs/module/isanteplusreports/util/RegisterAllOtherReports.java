@@ -76,7 +76,9 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberPatientsBeneficiePcr();
 		listEligibleChildrenPcr();
 		numberEligibleChildrenPcr();
-	
+		numberChargeViraleByResultDate();
+		listPatChargeViraleMoinsMilleByResultDate();
+		listPatChargeViralePlusMilleByResultDate();
 	}
 	
 	
@@ -382,6 +384,21 @@ public class RegisterAllOtherReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithoutParams("number_eligible_children_for_pcr.sql","isanteplusreports.number_eligible_children_for_pcr",
 		       "Nombre d'enfants éligibles pour un PCR", IsantePlusReportsProperties.NUMBER_ELIGIBLE_CHILDREN_FOR_PCR_UUID);
 	
+	}
+	
+	private static void numberChargeViraleByResultDate(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_patients_charge_virale_moins_plus_mille.sql","isanteplusreports.number_charge_virale_by_result_date",
+		           "Charge virale en fonction du nombre de copies/ml (selon la date du résultat)", IsantePlusReportsProperties.CHARGE_VIRALE_SELON_DATE_RESULTAT);
+	}
+	
+	private static void listPatChargeViraleMoinsMilleByResultDate(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_moins_mille_by_result_date.sql","isanteplusreports.list_patients_charge_virale_moins_mille_by_result_date",
+		           "Liste des patients avec charge virale < 1000 copies/ml (selon la date du résultat)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_MOINS_MILLE_RES_DATE);
+	}
+	
+	private static void listPatChargeViralePlusMilleByResultDate(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_plus_mille_by_result_date.sql","isanteplusreports.list_patients_charge_virale_plus_mille_by_result_date",
+		           "Liste des patients avec charge virale >= 1000 copies/ml (selon la date du résultat)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_RES_DATE);
 	}
 
 }

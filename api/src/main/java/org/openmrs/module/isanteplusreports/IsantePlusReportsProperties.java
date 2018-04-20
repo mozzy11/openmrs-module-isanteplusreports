@@ -145,4 +145,10 @@ public class IsantePlusReportsProperties{
 	
 	public static final String LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_RES_DATE =	"bce4c112-6313-401c-a298-38f1d9abc2aa";
 	
+	public static final String CHARGE_VIRALE_SELON_DATE_DEMAND = "d01f6bb5-28b2-48b6-88bd-0486cf9ff3e7";
+	
+	public static final String LIST_PAT_CHARGE_VIRALE_MOINS_MILLE_DEMAND_DATE = "dba66308-7358-41f5-8806-001efe60dd13";
+	
+	public static final String LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_DEMAND_DATE =	"2126a49e-3a7b-48b2-bb92-12292cbb02f8";
+	
 }

@@ -79,6 +79,9 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberChargeViraleByResultDate();
 		listPatChargeViraleMoinsMilleByResultDate();
 		listPatChargeViralePlusMilleByResultDate();
+		numberChargeViraleByDemandDate();
+		listPatChargeViraleMoinsMilleByDemandDate();
+		listPatChargeViralePlusMilleByDemandDate();
 	}
 	
 	
@@ -400,5 +403,19 @@ public class RegisterAllOtherReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_plus_mille_by_result_date.sql","isanteplusreports.list_patients_charge_virale_plus_mille_by_result_date",
 		           "Liste des patients avec charge virale >= 1000 copies/ml (selon la date du résultat)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_RES_DATE);
 	}
-
+	
+	private static void numberChargeViraleByDemandDate(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_patients_charge_virale_moins_plus_mille_demand.sql","isanteplusreports.number_charge_virale_by_demand_date",
+		           "Charge virale en fonction du nombre de copies/ml (selon la date de la demande)", IsantePlusReportsProperties.CHARGE_VIRALE_SELON_DATE_DEMAND);
+	}
+	private static void listPatChargeViraleMoinsMilleByDemandDate(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_moins_mille_by_demand_date.sql","isanteplusreports.list_patients_charge_virale_moins_mille_by_demand_date",
+		           "Liste des patients avec charge virale < 1000 copies/ml (selon la date de la demande)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_MOINS_MILLE_DEMAND_DATE);
+	}
+	
+	private static void listPatChargeViralePlusMilleByDemandDate(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_plus_mille_by_demand_date.sql","isanteplusreports.list_patients_charge_virale_plus_mille_by_demand_date",
+		           "Liste des patients avec charge virale >= 1000 copies/ml (selon la date de la demande)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_DEMAND_DATE);
+	}
+	
 }

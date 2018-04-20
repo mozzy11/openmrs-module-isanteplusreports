@@ -652,6 +652,33 @@
 		      	"url": "reportingui/runReport.page?reportDefinition=bce4c112-6313-401c-a298-38f1d9abc2aa",
 		        "order": 104,
 		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_charge_virale_by_demand_date",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.number_charge_virale_by_demand_date",
+		      	"url": "reportingui/runReport.page?reportDefinition=d01f6bb5-28b2-48b6-88bd-0486cf9ff3e7",
+		        "order": 110,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.list_patients_charge_virale_moins_mille_by_demand_date",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.list_patients_charge_virale_moins_mille_by_demand_date",
+		      	"url": "reportingui/runReport.page?reportDefinition=dba66308-7358-41f5-8806-001efe60dd13",
+		        "order": 112,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.list_patients_charge_virale_plus_mille_by_demand_date",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.list_patients_charge_virale_plus_mille_by_demand_date",
+		      	"url": "reportingui/runReport.page?reportDefinition=2126a49e-3a7b-48b2-bb92-12292cbb02f8",
+		        "order": 114,
+		        "requiredPrivilege": "App: reportingui.reports"
 		    }
 		    
            

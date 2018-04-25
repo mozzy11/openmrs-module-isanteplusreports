@@ -1,4 +1,5 @@
-select distinct MIN(DATE(pdis.visit_date)) as 'Date Visite',p.national_id,p.given_name as Nom,
+select distinct MIN(DATE(pdis.visit_date)) as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
+p.national_id as 'Numéro d\'identité national',p.given_name as Nom,
 p.family_name as Prénom, p.birthdate as 'Date de naissance'
 FROM isanteplus.patient p,isanteplus.patient_dispensing pdis
 WHERE p.patient_id=pdis.patient_id

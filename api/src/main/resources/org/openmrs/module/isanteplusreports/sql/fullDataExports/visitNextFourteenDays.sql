@@ -1,4 +1,4 @@
-select pa.national_id as identifier, pa.identifier as patient_id,pa.given_name as Prenom,
+select DISTINCT pa.national_id as identifier, pa.identifier as patient_id,pa.given_name as Prenom,
 pa.family_name as Nom, pa.gender as Sexe,pa.birthdate as 'Date de naissance',
 pa.telephone as Telephone,f.name as 'fiches',pv.next_visit_date as 'Prochaine visite' 
 from isanteplus.patient pa, isanteplus.patient_visit pv, openmrs.form f 

@@ -1,4 +1,4 @@
-select  Communautaire,Institution,Communautaire /(Institution+Communautaire) as pourcentage, Patient_unique as 'Patient unique'  from(
+select  Communautaire,Institution,CONCAT(ROUND(((Communautaire /(Institution+Communautaire)) * 100),2)," %") as pourcentage, Patient_unique as 'Patient unique'  from(
 select 
 COUNT(DISTINCT CASE WHEN (pdisp.dispensation_location=1755) THEN pdisp.patient_id else null END) AS Communautaire,
 COUNT(DISTINCT CASE WHEN (pdisp.dispensation_location=0) THEN pdisp.patient_id else null END) AS Institution,

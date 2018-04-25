@@ -131,4 +131,24 @@ public class IsantePlusReportsProperties{
 	
 	public static final String LIST_PATIENTS_RECEIVING_ARV_IN_HOSPITAL = "90ef295f-4d58-4b73-b477-f3798093a1f0";
 	
+	public static final String LIST_PATIENTS_BENEFICIE_PCR_UUID = "8176506e-b027-4735-bcc8-ce39182dbc7e";
+	
+	public static final String NUMBER_PATIENTS_BENEFICIE_PCR_UUID = "5a5543d5-98d3-480c-b193-2bbe4dcb1c9d";
+	
+	public static final String LIST_ELIGIBLE_CHILDREN_FOR_PCR_UUID = "164be26a-d7d8-4efd-9f86-2656d781b275";
+	
+	public static final String NUMBER_ELIGIBLE_CHILDREN_FOR_PCR_UUID = "cb18f36f-befa-4abb-b932-e99dcf7176bb";
+	
+	public static final String CHARGE_VIRALE_SELON_DATE_RESULTAT = "09816079-aca6-4659-94b9-3ec619328b82";
+	
+	public static final String LIST_PAT_CHARGE_VIRALE_MOINS_MILLE_RES_DATE = "4e0475de-1c07-4465-a042-ea25c7d699a4";
+	
+	public static final String LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_RES_DATE =	"bce4c112-6313-401c-a298-38f1d9abc2aa";
+	
+	public static final String CHARGE_VIRALE_SELON_DATE_DEMAND = "d01f6bb5-28b2-48b6-88bd-0486cf9ff3e7";
+	
+	public static final String LIST_PAT_CHARGE_VIRALE_MOINS_MILLE_DEMAND_DATE = "dba66308-7358-41f5-8806-001efe60dd13";
+	
+	public static final String LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_DEMAND_DATE =	"2126a49e-3a7b-48b2-bb92-12292cbb02f8";
+	
 }

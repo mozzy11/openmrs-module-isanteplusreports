@@ -8,7 +8,7 @@ stat.name_fr as 'Status de patient', p.last_visit_date as 'Dernière date'
 from isanteplus.patient p
 INNER JOIN isanteplus.patient_tb_diagnosis pdiag
 ON pdiag.patient_id=p.patient_id
-LEFT OUTER JOIN isanteplus.ARV_status_loockup stat
+LEFT OUTER JOIN isanteplus.arv_status_loockup stat
 ON stat.id=p.arv_status
 WHERE pdiag.visit_date between :startDate AND :endDate
 AND pdiag.cough_for_2wks_or_more=1

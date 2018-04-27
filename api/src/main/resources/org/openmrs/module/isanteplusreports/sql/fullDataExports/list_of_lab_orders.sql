@@ -1,17 +1,6 @@
-select DISTINCT pa.national_id as identifier, pa.identifier as patient_id,pa.given_name as Prenom,
-pa.family_name as Nom, pa.gender as Sexe,pa.birthdate as 'Date de naissance',
-pa.telephone as Telephone,f.name as 'fiches',pv.next_visit_date as 'Prochaine visite' 
-from isanteplus.patient pa, isanteplus.patient_visit pv, openmrs.form f 
-where pa.patient_id=pv.patient_id AND pv.form_id=f.form_id 
-and pv.next_visit_date between date(now()) and date_add(date(now()),interval 14 day)
-
-UNION ALL
-
-select DISTINCT pa.national_id as identifier, pa.identifier as patient_id,pa.given_name as Prenom,
-pa.family_name as Nom, pa.gender as Sexe,pa.birthdate as 'Date de naissance',
-pa.telephone as Telephone,f.name as 'fiches',pd.next_dispensation_date as 'Prochaine visite' 
-from isanteplus.patient pa, isanteplus.patient_dispensing pd, openmrs.encounter enc, openmrs.form f 
-where pa.patient_id=pd.patient_id 
-AND pd.encounter_id=enc.encounter_id
-AND enc.form_id=f.form_id 
-and pd.next_dispensation_date between date(now()) and date_add(date(now()),interval 14 day)
+SELECT p.identifier as Identifier, p.given_name as Prenom, p.family_name as Nom, lab.visit_date Date, lab.order_destination as Destination, lab.test_name as Test
+FROM isanteplus.patient_laboratory lab
+LEFT JOIN isanteplus.patient p
+ON lab.patient_id = p.patient_id
+WHERE lab.order_destination<>''
+AND lab.visit_date BETWEEN :startDate AND :endDate;

@@ -51,6 +51,8 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 		Writer w = new OutputStreamWriter(out, "UTF-8");
 		w.write("<html>");
 		w.write("<head>");
+		w.write("<meta charset=\"utf-8\">");
+		w.write("</head>");
 		w.write("<body>");
 		w.write("<script type=\"text/javascript\"> ui.includeJavascript(\"isanteplusreports\"',' \"print.js\"</script>");
 		w.write("<div id=\"DivIdToPrint\">");
@@ -124,7 +126,6 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 		w.write("</table>");
 		w.write("</div>");
 		w.write("</body>");
-		w.write("</head>");
 		w.write("</html>");
 		w.flush();
 	}

@@ -82,6 +82,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberChargeViraleByDemandDate();
 		listPatChargeViraleMoinsMilleByDemandDate();
 		listPatChargeViralePlusMilleByDemandDate();
+		listOfLabOrders();
 	}
 	
 	
@@ -416,6 +417,11 @@ public class RegisterAllOtherReports extends SessionContext {
 	private static void listPatChargeViralePlusMilleByDemandDate(){
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_plus_mille_by_demand_date.sql","isanteplusreports.list_patients_charge_virale_plus_mille_by_demand_date",
 		           "Liste des patients avec charge virale >= 1000 copies/ml (selon la date de la demande)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_DEMAND_DATE);
+	}
+	
+	private static void listOfLabOrders(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_of_lab_orders.sql","isanteplusreports.list_of_lab_orders",
+				"isanteplusreports.list_of_lab_orders", IsantePlusReportsProperties.LIST_OF_LAB_ORDERS);
 	}
 	
 }

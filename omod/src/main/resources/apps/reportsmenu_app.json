@@ -679,6 +679,24 @@
 		      	"url": "reportingui/runReport.page?reportDefinition=2126a49e-3a7b-48b2-bb92-12292cbb02f8",
 		        "order": 114,
 		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.list_patients_eligible_for_charge_virale",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.list_patients_eligible_for_charge_virale",
+		      	"url": "reportingui/runReport.page?reportDefinition=af612ab5-9e33-4911-a23d-dd4c7eeaef14",
+		        "order": 116,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.list_patients_eligible_for_charge_virale_controle",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.list_patients_eligible_for_charge_virale_controle",
+		      	"url": "reportingui/runReport.page?reportDefinition=dceb09ed-7f54-4ebb-be45-76ac69a67b59",
+		        "order": 120,
+		        "requiredPrivilege": "App: reportingui.reports"
 		    }
 		    
            

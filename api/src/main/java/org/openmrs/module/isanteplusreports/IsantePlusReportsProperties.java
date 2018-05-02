@@ -153,4 +153,8 @@ public class IsantePlusReportsProperties{
 	
 	public static final String LIST_OF_LAB_ORDERS = "f37fa532-2f50-4d84-a1f0-a7abb2c29417";
 	
+	public static final String LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE = "af612ab5-9e33-4911-a23d-dd4c7eeaef14";
+	
+	public static final String LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE_CONTROL = "dceb09ed-7f54-4ebb-be45-76ac69a67b59";
+	
 }

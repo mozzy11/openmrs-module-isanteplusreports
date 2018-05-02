@@ -10,5 +10,5 @@ select count(DISTINCT CASE WHEN p.gender='F' THEN p.patient_id
             						openmrs.encounter enc, openmrs.encounter_type enct
             						WHERE enc.encounter_type = enct.encounter_type_id
             						AND enct.uuid = '9d0113c6-f23a-4461-8428-7e9a7344f2ba'
-            						AND enc.date_created between :startDate AND :endDate;)
+            						AND enc.date_created between :startDate AND :endDate)
             AND p.date_created between :startDate AND :endDate;

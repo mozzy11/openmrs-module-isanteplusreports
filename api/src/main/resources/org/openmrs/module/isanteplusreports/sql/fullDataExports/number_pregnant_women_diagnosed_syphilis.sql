@@ -12,3 +12,4 @@ SELECT COUNT(DISTINCT ppr.patient_id) as Total
     AND pdiag.encounter_date BETWEEN :startDate AND :endDate
     ))
 	AND ppr.start_date BETWEEN :startDate AND :endDate
+	AND ((ppr.end_date is null) OR (ppr.end_date >= :endDate));

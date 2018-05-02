@@ -460,10 +460,19 @@
 		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
 		        "type": "link",
 		        "label": "isanteplusreports.list_pregnancy_women_receiving_in_clinic",
-		      	"url": "reportingui/runReport.page?reportDefinition=a3d743f9-fc42-429e-bd71-e2b9e375cc61",
+		        "url": "reportingui/runReport.page?reportDefinition=a3d743f9-fc42-429e-bd71-e2b9e375cc61",
 		        "order": 61,
 		        "requiredPrivilege": "App: reportingui.reports"
-		    }, 
+		    },
+		    {
+		        "id": "isanteplusreports.list_of_lab_orders",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.list_of_lab_orders",
+		        "url": "reportingui/runReport.page?reportDefinition=f37fa532-2f50-4d84-a1f0-a7abb2c29417",
+		        "order": 62,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    },
 		    {
 		        "id": "isanteplusreports.number_patient_by_arv_status",
 		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",

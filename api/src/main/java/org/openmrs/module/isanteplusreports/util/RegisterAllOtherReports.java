@@ -82,6 +82,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberChargeViraleByDemandDate();
 		listPatChargeViraleMoinsMilleByDemandDate();
 		listPatChargeViralePlusMilleByDemandDate();
+		listOfLabOrders();
 		listPatientsEligibleForChargeVirale();
 		listPatientsEligibleForChargeViraleControl();
 	}
@@ -419,7 +420,11 @@ public class RegisterAllOtherReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_charge_virale_plus_mille_by_demand_date.sql","isanteplusreports.list_patients_charge_virale_plus_mille_by_demand_date",
 		           "Liste des patients avec charge virale >= 1000 copies/ml (selon la date de la demande)", IsantePlusReportsProperties.LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_DEMAND_DATE);
 	}
-	
+
+	private static void listOfLabOrders(){
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_of_lab_orders.sql","isanteplusreports.list_of_lab_orders",
+				"Liste des commandes de laboratoire", IsantePlusReportsProperties.LIST_OF_LAB_ORDERS);
+	}
 	private static void listPatientsEligibleForChargeVirale(){
 		IsantePlusReportsUtil.registerReportsWithoutParams("list_patients_eligible_for_charge_virale.sql","isanteplusreports.list_patients_eligible_for_charge_virale",
 		           "Liste des patients éligible pour charge virale mais n'en ayant pas", IsantePlusReportsProperties.LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE);

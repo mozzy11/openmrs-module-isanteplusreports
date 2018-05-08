@@ -152,9 +152,11 @@ public class IsantePlusReportsProperties{
 	public static final String LIST_PAT_CHARGE_VIRALE_PLUS_MILLE_DEMAND_DATE =	"2126a49e-3a7b-48b2-bb92-12292cbb02f8";
 	
 	public static final String LIST_OF_LAB_ORDERS = "f37fa532-2f50-4d84-a1f0-a7abb2c29417";
+
+	public static final String LIST_OF_LAB_ORDERS_RESULTS = "62f8e200-38de-4faa-a0c9-d807f2c3a2db";
 	
 	public static final String LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE = "af612ab5-9e33-4911-a23d-dd4c7eeaef14";
 	
 	public static final String LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE_CONTROL = "dceb09ed-7f54-4ebb-be45-76ac69a67b59";
-	
+
 }

@@ -34,8 +34,10 @@ import org.openmrs.module.reporting.report.renderer.TextTemplateRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.util.OpenmrsClassLoader;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +58,7 @@ public class IsantePlusReportsUtil {
 	static Parameter endDate = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
 	
 	static Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);
-	
+
 	/**
 	 * Given a location on the classpath, return the contents of this resource as a String
 	 */
@@ -243,9 +245,42 @@ public class IsantePlusReportsUtil {
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
     }
-	
-	
-	
+
+	public static void registerLabOrderReportWithResults(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
+		Parameter orderResult = createLabOrderResultParameter();
+
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		sqlData.addParameter(orderResult);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		mappings.put("result", "${result}");
+
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addParameter(orderResult);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
+		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
+		rs.saveReportDesign(rDesign);
+		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
+		rs.saveReportDesign(rDes);
+	}
+
+	private static Parameter createLabOrderResultParameter() {
+		Properties widgetConfiguration = new Properties();
+		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
+		widgetConfiguration.put("uiframeworkFragment", "labOrderResultDropDown");
+		return new Parameter("result", "isanteplusreports.parameters.order_result", String.class, widgetConfiguration);
+	}
+
 	// has been moved to ReportUtil in reporting module, use the one there
 	/*@Deprecated
 	public static List<Map<String, Object>> simplify(DataSet dataSet) {

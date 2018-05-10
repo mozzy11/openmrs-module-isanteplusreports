@@ -427,7 +427,7 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 
 	private static void listOfLabOrdersResults() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_of_lab_orders_results.sql","isanteplusreports.list_of_lab_orders_results",
+		IsantePlusReportsUtil.registerLabOrderReportWithResults("list_of_lab_orders_results.sql","isanteplusreports.list_of_lab_orders_results",
 				"Liste des résultats des commandes de laboratoire", IsantePlusReportsProperties.LIST_OF_LAB_ORDERS_RESULTS);
 	}
 

@@ -474,6 +474,15 @@
 		        "requiredPrivilege": "App: reportingui.reports"
 		    },
 		    {
+		        "id": "isanteplusreports.list_of_lab_orders_results",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.list_of_lab_orders_results",
+		        "url": "reportingui/runReport.page?reportDefinition=62f8e200-38de-4faa-a0c9-d807f2c3a2db",
+		        "order": 63,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    },
+		    {
 		        "id": "isanteplusreports.number_patient_by_arv_status",
 		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
 		        "type": "link",

@@ -83,11 +83,11 @@ public class RegisterAllOtherReports extends SessionContext {
 		listPatChargeViraleMoinsMilleByDemandDate();
 		listPatChargeViralePlusMilleByDemandDate();
 		listOfLabOrders();
+		listOfLabOrdersResults();
 		listPatientsEligibleForChargeVirale();
 		listPatientsEligibleForChargeViraleControl();
 	}
-	
-	
+
 	private static void cleanTables() {
 		List<DataSetDefinition> defService = Context.getService(DataSetDefinitionService.class).getAllDefinitions(true);
 		for (DataSetDefinition dataSetDef : defService) {
@@ -425,6 +425,12 @@ public class RegisterAllOtherReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_of_lab_orders.sql","isanteplusreports.list_of_lab_orders",
 				"Liste des commandes de laboratoire", IsantePlusReportsProperties.LIST_OF_LAB_ORDERS);
 	}
+
+	private static void listOfLabOrdersResults() {
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_of_lab_orders_results.sql","isanteplusreports.list_of_lab_orders_results",
+				"Liste des résultats des commandes de laboratoire", IsantePlusReportsProperties.LIST_OF_LAB_ORDERS_RESULTS);
+	}
+
 	private static void listPatientsEligibleForChargeVirale(){
 		IsantePlusReportsUtil.registerReportsWithoutParams("list_patients_eligible_for_charge_virale.sql","isanteplusreports.list_patients_eligible_for_charge_virale",
 		           "Liste des patients éligible pour charge virale mais n'en ayant pas", IsantePlusReportsProperties.LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE);

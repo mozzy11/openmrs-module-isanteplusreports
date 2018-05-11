@@ -34,10 +34,8 @@ import org.openmrs.module.reporting.report.renderer.TextTemplateRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.util.OpenmrsClassLoader;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -247,23 +245,27 @@ public class IsantePlusReportsUtil {
     }
 
 	public static void registerLabOrderReportWithResults(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-		Parameter orderResult = createLabOrderResultParameter();
+		Parameter resultStatus = createLabOrderResultParameter();
+		Parameter orderByDate = createLabOrderSortByDateParameter();
 
 		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
-		sqlData.addParameter(orderResult);
+		sqlData.addParameter(resultStatus);
+		sqlData.addParameter(orderByDate);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
 
 		Map<String, Object> mappings = new HashMap<String, Object>();
 		mappings.put("startDate", "${startDate}");
 		mappings.put("endDate", "${endDate}");
 		mappings.put("result", "${result}");
+		mappings.put("sortByDate", "${sortByDate}");
 
 		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
-		repDefinition.addParameter(orderResult);
+		repDefinition.addParameter(resultStatus);
+		repDefinition.addParameter(orderByDate);
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 
@@ -277,8 +279,15 @@ public class IsantePlusReportsUtil {
 	private static Parameter createLabOrderResultParameter() {
 		Properties widgetConfiguration = new Properties();
 		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
-		widgetConfiguration.put("uiframeworkFragment", "labOrderResultDropDown");
-		return new Parameter("result", "isanteplusreports.parameters.order_result", String.class, widgetConfiguration);
+		widgetConfiguration.put("uiframeworkFragment", "laborder/parameters/orderResultDropDown");
+		return new Parameter("result", "isanteplusreports.parameters.lab_order.result", String.class, widgetConfiguration);
+	}
+
+	private static Parameter createLabOrderSortByDateParameter() {
+		Properties widgetConfiguration = new Properties();
+		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
+		widgetConfiguration.put("uiframeworkFragment", "laborder/parameters/sortByDateDropDown");
+		return new Parameter("sortByDate", "isanteplusreports.parameters.lab_order.order_by", String.class, widgetConfiguration);
 	}
 
 	// has been moved to ReportUtil in reporting module, use the one there

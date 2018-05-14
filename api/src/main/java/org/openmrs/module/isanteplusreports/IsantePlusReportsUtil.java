@@ -247,12 +247,14 @@ public class IsantePlusReportsUtil {
 	public static void registerLabOrderReportWithResults(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
 		Parameter resultStatus = createLabOrderResultParameter();
 		Parameter orderByDate = createLabOrderSortByDateParameter();
+		Parameter testType = createLabOrderTestTypeParameter();
 
 		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		sqlData.addParameter(resultStatus);
 		sqlData.addParameter(orderByDate);
+		sqlData.addParameter(testType);
 		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
 
 		Map<String, Object> mappings = new HashMap<String, Object>();
@@ -260,12 +262,14 @@ public class IsantePlusReportsUtil {
 		mappings.put("endDate", "${endDate}");
 		mappings.put("result", "${result}");
 		mappings.put("sortByDate", "${sortByDate}");
+		mappings.put("testType", "${testType}");
 
 		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
 		repDefinition.addParameter(startDate);
 		repDefinition.addParameter(endDate);
 		repDefinition.addParameter(resultStatus);
 		repDefinition.addParameter(orderByDate);
+		repDefinition.addParameter(testType);
 		repDefinition.addDataSetDefinition(sqlData, mappings);
 		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
 
@@ -274,6 +278,13 @@ public class IsantePlusReportsUtil {
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
+	}
+
+	private static Parameter createLabOrderTestTypeParameter() {
+		Properties widgetConfiguration = new Properties();
+		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
+		widgetConfiguration.put("uiframeworkFragment", "laborder/parameters/testTypeDropDown");
+		return new Parameter("testType", "isanteplusreports.parameters.lab_order.test_type", String.class, widgetConfiguration);
 	}
 
 	private static Parameter createLabOrderResultParameter() {

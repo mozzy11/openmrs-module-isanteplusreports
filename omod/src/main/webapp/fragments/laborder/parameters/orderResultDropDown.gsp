@@ -4,7 +4,7 @@
 %>
 
 <label for="resultStatus-field">
-        ${ ui.message(config.label) }
+    ${ ui.message(config.label) }
 </label>
 <select id="resultStatus-field" name="${ config.formFieldName }" >
     <option value="ALL">${ ui.message("isanteplusreports.parameters.lab_order.all_result") }</option>

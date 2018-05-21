@@ -132,10 +132,13 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		}
 		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder("select "
-		        + "distinct p.patient_id, p.national_id as national_id, p.given_name as Prénom, p.family_name as Nom");
-		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv");
+		        + "distinct p.st_id as st_id, p.patient_id, p.national_id as national_id, p.given_name as Prénom, p.family_name as Nom, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Age, p.gender as Sexe");
+		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv, (select pdisp.patient_id, MAX(pdisp.visit_date) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.visit_date BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY 1) B  ");
 		sqlQuery.append(" WHERE p.patient_id=pdis.patient_id");
-		sqlQuery.append(" AND pdis.visit_id=parv.visit_id");
+		sqlQuery.append(" AND pdis.patient_id=parv.patient_id");
+		sqlQuery.append(" AND pdis.patient_id=B.patient_id");
+		sqlQuery.append(" AND pdis.visit_date=B.visit_date");
+		sqlQuery.append(" AND p.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)");
 		sqlQuery.append(" AND DATEDIFF(pdis.next_dispensation_date,pdis.visit_date)" + result);
 		if (startDate != null) {
 			sqlQuery.append(" AND DATE(pdis.visit_date) >= '" + startDate + "'");
@@ -151,10 +154,13 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		SimpleDataSet dataSet = new SimpleDataSet(dataSetDefinition, context);
 		for (Object[] o : list) {
 			DataSetRow row = new DataSetRow();
-			row.addColumnValue(new DataSetColumn("patient_id", "patient_id", String.class), o[0]);
-			row.addColumnValue(new DataSetColumn("ID_National", "ID_National", String.class), o[1]);
-			row.addColumnValue(new DataSetColumn("Nom", "Nom", String.class), o[2]);
-			row.addColumnValue(new DataSetColumn("Prenom", "Prenom", String.class), o[3]);
+			row.addColumnValue(new DataSetColumn("st_id", "st_id", String.class), o[0]);
+			row.addColumnValue(new DataSetColumn("patient_id", "patient_id", String.class), o[1]);
+			row.addColumnValue(new DataSetColumn("ID_National", "ID_National", String.class), o[2]);
+			row.addColumnValue(new DataSetColumn("Nom", "Nom", String.class), o[3]);
+			row.addColumnValue(new DataSetColumn("Prenom", "Prenom", String.class), o[4]);
+			row.addColumnValue(new DataSetColumn("Age", "Age", String.class), o[5]);
+			row.addColumnValue(new DataSetColumn("Sexe", "Sexe", String.class), o[6]);
 			dataSet.addRow(row);
 		}
 		return dataSet;

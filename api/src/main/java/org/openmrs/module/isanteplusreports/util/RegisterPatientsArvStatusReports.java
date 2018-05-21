@@ -62,7 +62,7 @@ public class RegisterPatientsArvStatusReports extends SessionContext {
            "Liste des patients Réguliers (actifs sous ARV)", IsantePlusReportsProperties.LIST_PATIENTS_REGULAR_ACTIVE_ON_ART);
     }
 	private static void listPatientsRecentOnPreArt(){
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_regular_active_on_arv.sql","isanteplusreports.recent_on_pre_art",
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_recent_on_pre_art.sql","isanteplusreports.recent_on_pre_art",
 	           "Liste des patients récents en Pré-ARV", IsantePlusReportsProperties.LIST_PATIENTS_RECENT_ON_PRE_ART);
 	}
 	private static void listPatientsMissingAppointmentOnArt(){

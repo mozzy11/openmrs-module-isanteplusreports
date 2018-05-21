@@ -9,4 +9,5 @@ WHERE plab.test_id = 856 AND plab.test_done = 1 group by 1)B
     AND pl.test_id = 856
 	AND pl.test_done = 1
 	AND pl.test_result >= 1000
+    AND pat.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)
     AND pl.visit_date BETWEEN :startDate AND :endDate;

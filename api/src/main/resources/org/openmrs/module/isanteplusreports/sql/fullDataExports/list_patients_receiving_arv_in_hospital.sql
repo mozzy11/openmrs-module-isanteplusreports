@@ -8,4 +8,5 @@ WHERE pat.patient_id=pdisp.patient_id
 AND pdisp.dispensation_location=0
 AND pdisp.patient_id = B.patient_id
 AND pdisp.dispensation_date = B.dispensation_date
+AND pdisp.patient_id IN(SELECT parv.patient_id FROM isanteplus.patient_on_arv parv)
 AND pdisp.dispensation_date BETWEEN :startDate AND :endDate;

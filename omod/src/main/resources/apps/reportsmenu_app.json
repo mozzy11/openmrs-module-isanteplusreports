@@ -149,15 +149,6 @@
                 "order": 16,
                 "requiredPrivilege": "App: reportingui.reports"
             },
-             {
-                "id": "Address and Diagnosis",
-                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
-                "type": "link",
-                "label": "isanteplusreports.patientStatus",
-                "url": "reportingui/runReport.page?reportDefinition=b5a70371-3ef5-4d6b-a3e1-1a2cfde6a66d",
-                "order": 17,
-                "requiredPrivilege": "App: reportingui.reports"
-            },
             {
 		        "id": "isanteplusreports.patientArvByPeriod",
 		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",

@@ -1,5 +1,5 @@
 select DISTINCT pat.st_id as 'NO. de patient attribué par le site', pat.national_id as 'Numéro d\'identité national',
-pat.given_name as Prénom,pat.family_name as Nom, pat.gender as Sexe,
+pat.given_name as Prénom,pat.family_name as Nom,pat.gender as Sexe,
 TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as Age, arv.name_fr as 'Status de patient',
 MAX(patstatus.start_date) as 'Dernière date', pat.last_address as Adresse, pat.telephone as Téléphone,
 pat.mother_name as Contact,

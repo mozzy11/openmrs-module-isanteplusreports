@@ -11,5 +11,5 @@ select count(distinct B.patient_id) AS Total
 	AND stests.answer_concept_id IN(163722,1042)
     AND stests.test_result = 703
     AND (TIMESTAMPDIFF(MONTH, pat.birthdate,DATE(now())) BETWEEN 12 AND 18)
-    AND pat.patient_id NOT IN (select ppcr.patient_id FROM patient_pcr ppcr)
+    AND pat.patient_id NOT IN (select ppcr.patient_id FROM isanteplus.patient_pcr ppcr)
     ) B;

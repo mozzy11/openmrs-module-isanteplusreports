@@ -81,13 +81,22 @@
 	 ${ ui.message("isanteplusreports.patientArvByPeriodList") } ${ ui.message("isanteplusreports.from") } ${ ui.format(startDate) } ${ ui.message("isanteplusreports.to") } ${ ui.format(endDate) } <br/><br/>
 	<div id="excel_div">
 	<table id="tab_excel">
-	    <tr><th>${ ui.message("isanteplusreports.identifier") }</th>
+	    <tr> 
+	    	<th>${ ui.message("isanteplusreports.code_st") }</th>
+	    	<th>${ ui.message("isanteplusreports.identifier") }</th>
 	    	<th>${ ui.message("isanteplusreports.name") }</th>
 	    	<th>${ ui.message("isanteplusreports.familyName") }</th>
+	    	<th>${ ui.message("isanteplusreports.age") }</th>
+	    	<th>${ ui.message("isanteplusreports.sex") }</th>
 	    </tr>
 	    <div class="info-body">	
 	    	<% columnsValues.each { %>
 	    		<tr>
+			    		<td>
+			    			<a target="_blank" href="${ "/" + contextPath + dashboardUrlWithoutQueryParams }?patientId=${ui.format(it.getColumnValue("patient_id"))}">
+			    				${ui.format(it.getColumnValue("st_id"))}
+			    		    </a>
+			    		</td>
 			    		<td>
 			    			<a target="_blank" href="${ "/" + contextPath + dashboardUrlWithoutQueryParams }?patientId=${ui.format(it.getColumnValue("patient_id"))}">
 			    				${ui.format(it.getColumnValue("ID_National"))}
@@ -101,6 +110,16 @@
 			    		<td>
 			    			<a target="_blank" href="${ "/" + contextPath + dashboardUrlWithoutQueryParams }?patientId=${ui.format(it.getColumnValue("patient_id"))}">
 			    				${ui.format(it.getColumnValue("Prenom"))}
+			    		    </a>
+			    		</td>
+			    		<td>
+			    			<a target="_blank" href="${ "/" + contextPath + dashboardUrlWithoutQueryParams }?patientId=${ui.format(it.getColumnValue("patient_id"))}">
+			    				${ui.format(it.getColumnValue("Age"))}
+			    		    </a>
+			    		</td>
+			    		<td>
+			    			<a target="_blank" href="${ "/" + contextPath + dashboardUrlWithoutQueryParams }?patientId=${ui.format(it.getColumnValue("patient_id"))}">
+			    				${ui.format(it.getColumnValue("Sexe"))}
 			    		    </a>
 			    		</td>
 		    	</tr>

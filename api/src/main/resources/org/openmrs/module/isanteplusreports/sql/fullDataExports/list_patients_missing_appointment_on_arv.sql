@@ -2,7 +2,7 @@ select DISTINCT pat.st_id as 'NO. de patient attribué par le site', pat.nationa
 pat.given_name as Prénom,pat.family_name as Nom, pat.gender as Sexe,
 TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as Age, arv.name_fr as 'Status de patient',
 MAX(patstatus.start_date) as 'Dernière date', pat.last_address as Adresse, pat.telephone as Téléphone,
-pat.mother_name as Contact,
+pat.mother_name as Contact,DATE_FORMAT(pat.next_visit_date, "%d-%m-%Y") as 'Date de prochaine visite',
       CASE WHEN(patstatus.dis_reason=5240) THEN 'Perdu de vue'
 		    WHEN (patstatus.dis_reason=159492) THEN 'Transfert'
 			WHEN (patstatus.dis_reason=159) THEN 'Décès'
@@ -15,5 +15,5 @@ ON pat.patient_id=patstatus.patient_id
 INNER JOIN isanteplus.arv_status_loockup arv
 ON patstatus.id_status=arv.id
 WHERE patstatus.id_status = 8
-AND patstatus.start_date BETWEEN :startDate AND :endDate 
+AND patstatus.start_date BETWEEN :startDate AND :endDate
 GROUP BY pat.patient_id;

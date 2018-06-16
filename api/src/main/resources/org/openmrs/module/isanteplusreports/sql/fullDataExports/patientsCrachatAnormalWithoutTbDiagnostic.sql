@@ -1,7 +1,7 @@
 /*Patients avec des analyses de crachats ou radiographe pulmonaires anormales, mais sans aucun diagnostic de TB
  Patients with abnormal sputum or x-ray test results, but no established TB diagnosis*/
 select distinct p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,
-p.family_name as nom,p.gender as sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Age,
+p.family_name as nom,p.gender as sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Âge,
 stat.name_fr as 'Status de patient', p.last_visit_date as 'Dernière date'
 from isanteplus.patient p
 INNER JOIN isanteplus.patient_imagerie pi

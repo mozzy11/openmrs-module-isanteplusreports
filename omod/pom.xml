@@ -96,6 +96,10 @@
 		  <artifactId>metadatadeploy-api</artifactId>
 		    <scope>provided</scope>
 		</dependency>
+		<dependency>
+		  <groupId>org.openmrs.module</groupId>
+		  <artifactId>isanteplus-api</artifactId>
+		</dependency>
 	</dependencies>
     
 		

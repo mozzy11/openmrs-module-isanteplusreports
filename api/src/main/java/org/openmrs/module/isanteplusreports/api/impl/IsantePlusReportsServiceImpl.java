@@ -9,18 +9,25 @@
  */
 package org.openmrs.module.isanteplusreports.api.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
+import org.openmrs.Concept;
+import org.openmrs.Obs;
+import org.openmrs.Patient;
 import org.openmrs.PatientIdentifierType;
 import org.openmrs.api.APIException;
 import org.openmrs.api.UserService;
+import org.openmrs.api.context.Context;
 import org.openmrs.api.db.hibernate.DbSession;
 import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.emrapi.EmrApiProperties;
+import org.openmrs.module.isanteplus.IsantePlusObs;
+import org.openmrs.module.isanteplusreports.IsantePlusReportsObs;
 import org.openmrs.module.isanteplusreports.Item;
 import org.openmrs.module.isanteplusreports.api.IsantePlusReportsService;
 import org.openmrs.module.isanteplusreports.api.dao.IsantePlusReportsDao;
@@ -36,6 +43,7 @@ import org.openmrs.module.reporting.definition.library.DefinitionLibrary;
 import org.openmrs.module.reporting.evaluation.Definition;
 import org.openmrs.module.reporting.evaluation.EvaluationContext;
 import org.openmrs.module.reporting.evaluation.EvaluationException;
+import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.indicator.Indicator;
 import org.openmrs.module.reporting.indicator.dimension.Dimension;
 import org.openmrs.util.HandlerUtil;
@@ -46,6 +54,11 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 	IsantePlusReportsDao dao;
 	
 	UserService userService;
+	
+	static Parameter id = new Parameter("id", "id", Integer.class);
+	
+	//EvaluationContext context = new EvaluationContext();
+	//SqlDataSetDefinition dataSetDefinition = new SqlDataSetDefinition();
 	
 	@Autowired
 	private DbSessionFactory sessionFactory;
@@ -164,6 +177,90 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 			dataSet.addRow(row);
 		}
 		return dataSet;
+	}
+	
+	@Override
+	public DataSet lastSixForms(Patient p) {
+		EvaluationContext context = new EvaluationContext();
+		SqlDataSetDefinition dataSetDefinition = new SqlDataSetDefinition();
+		 id.setDefaultValue(p.getPatientId());
+		StringBuilder sqlQuery = new StringBuilder(
+		        "select distinct"
+		                + " DATE_FORMAT(enc.date_created, '%d-%m-%Y') as 'Date de création',"
+		                + " entype.name as Type");
+		sqlQuery.append(" FROM openmrs.encounter enc, openmrs.encounter_type entype");
+		sqlQuery.append(" WHERE enc.encounter_type = entype.encounter_type_id");
+		sqlQuery.append(" AND TIMESTAMPDIFF(MONTH, DATE(enc.date_created),DATE(now())) <= 6");
+		sqlQuery.append(" AND entype.uuid NOT IN('17536ba6-dd7c-4f58-8014-08c7cb798ac7',"
+				+ "'349ae0b4-65c1-4122-aa06-480f186c8350','709610ff-5e39-4a47-9c27-a60e740b0944',"
+				+ "'5c312603-25c1-4dbe-be18-1a167eb85f97','873f968a-73a8-4f9c-ac78-9f4778b751b6','12f4d7c3-e047-4455-a607-47a40fe32460')");
+		sqlQuery.append(" AND enc.patient_id = '" + p.getPatientId() + "'");
+		sqlQuery.append(" ORDER BY DATE(enc.date_created) DESC");
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
+		//query.setInteger("primaryIdentifierType", primaryIdentifierType.getId());
+		List<Object[]> list = query.list();
+		SimpleDataSet dataSet = new SimpleDataSet(dataSetDefinition, context);
+		for (Object[] o : list) {
+			DataSetRow row = new DataSetRow();
+			row.addColumnValue(new DataSetColumn("creation", "creation", String.class), o[0]);
+			row.addColumnValue(new DataSetColumn("fiches", "fiches", String.class), o[1]);
+			dataSet.addRow(row);
+		}
+		return dataSet;
+	}
+	
+	@Override
+	public DataSet firstVisitForms(Patient p) {
+		EvaluationContext context = new EvaluationContext();
+		SqlDataSetDefinition dataSetDefinition = new SqlDataSetDefinition();
+		 id.setDefaultValue(p.getPatientId());
+		StringBuilder sqlQuery = new StringBuilder(
+		        "select distinct"
+		                + " DATE_FORMAT(enc.date_created, '%d-%m-%Y') as 'Date de création',"
+		                + " entype.name as Type");
+		sqlQuery.append(" FROM openmrs.encounter enc, openmrs.encounter_type entype");
+		sqlQuery.append(" WHERE enc.encounter_type = entype.encounter_type_id");
+		sqlQuery.append(" AND entype.uuid IN('17536ba6-dd7c-4f58-8014-08c7cb798ac7',"
+				+ "'349ae0b4-65c1-4122-aa06-480f186c8350','709610ff-5e39-4a47-9c27-a60e740b0944',"
+				+ "'5c312603-25c1-4dbe-be18-1a167eb85f97','12f4d7c3-e047-4455-a607-47a40fe32460')");
+		sqlQuery.append(" AND enc.patient_id = '" + p.getPatientId() + "'");
+		sqlQuery.append(" ORDER BY DATE(enc.date_created) DESC");
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
+		//query.setInteger("primaryIdentifierType", primaryIdentifierType.getId());
+		List<Object[]> list = query.list();
+		SimpleDataSet dataSet = new SimpleDataSet(dataSetDefinition, context);
+		for (Object[] o : list) {
+			DataSetRow row = new DataSetRow();
+			row.addColumnValue(new DataSetColumn("creationDate", "creationDate", String.class), o[0]);
+			row.addColumnValue(new DataSetColumn("ficheName", "ficheName", String.class), o[1]);
+			dataSet.addRow(row);
+		}
+		return dataSet;
+	}
+	@Override
+	public List<IsantePlusReportsObs> getLabsResult(Patient patient) {
+		// TESTS ORDERED = 1271
+		List<IsantePlusReportsObs> labHistory = new ArrayList<IsantePlusReportsObs>();
+		Integer labConceptId = 1271;
+		Concept testsOrdered = Context.getConceptService().getConcept(labConceptId);
+
+		for (Obs obs : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), testsOrdered)) {
+			if (obs != null) {
+
+				//Integer result = Integer.parseInt(obs.getValueCoded().toString());
+				Integer result = obs.getValueCoded().getConceptId();
+				Concept resultTest = Context.getConceptService().getConcept(result);
+
+				for (Obs obs1 : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), resultTest)) {
+					if (obs.getEncounter().getEncounterId() == obs1.getEncounter().getEncounterId()) {
+						IsantePlusReportsObs obsres = new IsantePlusReportsObs(obs1);
+						labHistory.add(obsres);
+
+					}
+				}
+			}
+		}
+		return labHistory;
 	}
 	
 }

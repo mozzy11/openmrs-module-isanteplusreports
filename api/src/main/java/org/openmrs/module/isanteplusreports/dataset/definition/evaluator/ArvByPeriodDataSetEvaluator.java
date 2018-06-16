@@ -102,19 +102,20 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 90 AND 120 THEN p.patient_id END) as '90-120 jours',"
 		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 121 AND 180 THEN p.patient_id END) as '121-180 jours',"
 		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) > 180 THEN p.patient_id END) as '>180 jours',count(distinct p.patient_id) as 'Patient unique'");
-		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv, (select pdisp.patient_id, MAX(pdisp.visit_date) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.visit_date BETWEEN :startDate AND :endDate GROUP BY 1) B ");
+		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, (select pdisp.patient_id, MAX(pdisp.visit_date) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.visit_date BETWEEN :startDate AND :endDate GROUP BY 1) B ");
 		sqlQuery.append(" WHERE p.patient_id=pdis.patient_id");
-		sqlQuery.append(" AND pdis.patient_id=parv.patient_id");
 		sqlQuery.append(" AND pdis.patient_id=B.patient_id");
 		sqlQuery.append(" AND pdis.visit_date=B.visit_date");
 		sqlQuery.append(" AND (pdis.next_dispensation_date<>'' AND pdis.next_dispensation_date is not null)");
 		sqlQuery.append(" AND p.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)");
-		if (startDate != null) {
+		sqlQuery.append(" AND pdis.drug_id NOT IN (select pp.drug_id FROM isanteplus.patient_prescription pp WHERE pp.patient_id = pdis.patient_id"
+				+ " AND pp.encounter_id = pdis.encounter_id AND pp.drug_id = pdis.drug_id AND pp.rx_or_prophy = 163768)");
+		/*if (startDate != null) {
 			sqlQuery.append(" AND pdis.visit_date >= :startDate");
 		}
 		if (endDate != null) {
 			sqlQuery.append(" AND pdis.visit_date <= :endDate");
-		}
+		}*/
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
 		//query.setInteger("primaryIdentifierType", primaryIdentifierType.getId());

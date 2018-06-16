@@ -9,6 +9,8 @@ public class IsantePlusReportsProperties{
 	
 	public final String ISANTEPLUS_REPORTS_RESOURCE_PATH = REPORTS_SQL_PATH + "fullDataExports/";
 	
+	public final String ISANTEPLUS_SUMMARY_RESOURCE_PATH = REPORTS_SQL_PATH + "patientSummary/";
+	
 	public static final String SEVEN_DAYS_REPORT_DEFINITION_UUID = "1c52d6ee-7cc1-4bae-a303-ffa2bdd0a8e2";
 	
 	public static final String FOURTEEN_DAYS_REPORT_DEFINITION_UUID = "d5ced5d1-bbc7-4679-9020-51e732b69dfd";
@@ -17,9 +19,9 @@ public class IsantePlusReportsProperties{
 	
 	public static final String PATIENTCRACHATANORMALWITHOUTTBDIAGNOSTIC = "54ecf434-5978-4826-b049-d965fe1f81ed";
 	
-	public static final String PATIENTWITHCOMPLETEDTBTREATMENT = "7acca9bf-ee7c-49bd-9444-faf2e66aaeb9";
+	public static final String PATIENTWITHCOMPLETEDTBTREATMENT = "5c4201e3-83c1-421a-8bc1-f23ecb67cf60";
 	
-	public static final String PATIENTSWITHTBDIAGNOSTICWITHOUTTREATMENT = "5c4201e3-83c1-421a-8bc1-f23ecb67cf60";
+	public static final String PATIENTSWITHTBDIAGNOSTICWITHOUTTREATMENT = "7acca9bf-ee7c-49bd-9444-faf2e66aaeb9";
 	
 	public static final String PATIENTSWITHTBDIAGNOSTICWITHOUTCRACHAT = "73173f96-69fc-4c74-b31c-c7ffb9a37d69";
 	

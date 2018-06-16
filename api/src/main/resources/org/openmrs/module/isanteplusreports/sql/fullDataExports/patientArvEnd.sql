@@ -1,10 +1,14 @@
-select distinct parv.visit_date as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
+select distinct DATE(pdisp.visit_date) as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
 p.national_id as 'Numéro d\'identité national',p.given_name as Nom,
 p.family_name as Prénom, p.birthdate as 'Date de naissance',pdisp.next_dispensation_date as 'Date de dispensation'
-FROM isanteplus.patient p, isanteplus.patient_dispensing pdisp, isanteplus.patient_on_arv parv
-WHERE p.patient_id=pdisp.patient_id
-AND pdisp.visit_id=parv.visit_id
-AND pdisp.next_dispensation_date<=now()
+FROM isanteplus.patient p, isanteplus.patient_dispensing pdisp,
+(SELECT pad.patient_id, MAX(pad.next_dispensation_date) as next_dispensation_date FROM isanteplus.patient_dispensing pad GROUP BY 1) B
+WHERE p.patient_id = pdisp.patient_id
+AND pdisp.patient_id = B.patient_id
+AND pdisp.next_dispensation_date = B.next_dispensation_date
+AND (TIMESTAMPDIFF(DAY,pdisp.next_dispensation_date,DATE(now())) BETWEEN 0 AND 90)
 AND p.patient_id NOT IN(SELECT dreason.patient_id FROM isanteplus.discontinuation_reason dreason WHERE dreason.reason IN(159,1667,159492))
-AND DATE(pdisp.visit_date) <= (SELECT MAX(reason.visit_date) 
-FROM isanteplus.discontinuation_reason reason WHERE reason.patient_id = pdisp.patient_id);
+AND pdisp.arv_drug = 1065
+AND pdisp.drug_id NOT IN (select pp.drug_id FROM isanteplus.patient_prescription pp WHERE pp.patient_id = pdisp.patient_id
+ AND pp.encounter_id = pdisp.encounter_id AND pp.drug_id = pdisp.drug_id AND pp.rx_or_prophy = 163768)
+GROUP BY 1,2,3,4,5,6,7;

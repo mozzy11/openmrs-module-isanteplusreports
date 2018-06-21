@@ -9,5 +9,6 @@ ON pdiag.patient_id=p.patient_id
 LEFT OUTER JOIN isanteplus.arv_status_loockup stat
 ON stat.id = p.arv_status
 WHERE pdiag.visit_date between :startDate AND :endDate
+AND (pdiag.tb_diag = 1 OR pdiag.mdr_tb_diag = 1)
 AND pdiag.patient_id NOT IN (SELECT patdisp.patient_id FROM isanteplus.patient_dispensing patdisp
-WHERE patdisp.drug_id IN (75948,78280,82900,767,84360) AND patdisp.dispensation_date between :startDate AND :endDate);
+WHERE patdisp.drug_id IN (75948,78280,82900,767,84360) AND patdisp.dispensation_date between :startDate AND :endDate)

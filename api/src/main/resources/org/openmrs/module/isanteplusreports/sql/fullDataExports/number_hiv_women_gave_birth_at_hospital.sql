@@ -10,4 +10,4 @@ WHERE ((p.vih_status=1) OR ((plab.test_id=1042 OR plab.test_id=1040)
 AND plab.test_result=703 AND plab.date_test_done BETWEEN :startDate AND :endDate))
 AND ppr.start_date BETWEEN :startDate AND :endDate
 AND (pdel.delivery_location=163266 OR pdel.delivery_location=1502)
-AND DATE(pdel.delivery_date) BETWEEN :startDate AND :endDate;
+AND DATE(pdel.delivery_date) BETWEEN :startDate AND :endDate

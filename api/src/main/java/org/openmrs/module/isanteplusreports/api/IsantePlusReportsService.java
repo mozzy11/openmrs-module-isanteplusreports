@@ -12,6 +12,7 @@ package org.openmrs.module.isanteplusreports.api;
 import java.util.Date;
 import java.util.List;
 
+import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.annotation.Authorized;
 import org.openmrs.api.APIException;
@@ -83,6 +84,15 @@ public interface IsantePlusReportsService extends OpenmrsService {
 	DataSet firstVisitForms(Patient p);
 
 	List<IsantePlusReportsObs> getLabsResult(Patient patient);
+
+	List<Obs> getMotifsConsultattionLastSixMonths(
+			Patient patient);
+
+	List<Obs> getImpressionsCliniques(Patient patient);
+
+	List<Obs> getDispensingDrugs(Patient patient);
+
+	DataSet clinicExams(Patient p);
 	
 	//DataSet patientListArvByPeriod(int parseInt, Date startDate, Date endDate);
 	

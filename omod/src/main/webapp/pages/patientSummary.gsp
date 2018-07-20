@@ -49,16 +49,29 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
 		   		<center><b>****************** ${ ui.message("isanteplusreports.lastSixForms") } ******************</b></center><br/>
 		   		${ ui.includeFragment("isanteplusreports", "lastSixForms", [ patientId: patient.patientId ]) }
 		   </div><br/>
+		   <div id="weightCurve" width="50%">
+				${ ui.includeFragment("isanteplus", "weightGraph", [ patientId: patient.patientId ]) }
+			</div><br/>
+			<div id="clinicExams" width="50%">
+				${ ui.includeFragment("isanteplusreports", "clinicExams", [ patientId: patient.patientId ]) }
+			</div><br/>
 		   <div id="labsResult" width="50%">
 		   		<center><b>****************** ${ ui.message("isanteplusreports.labsResult") } ******************</b></center><br/>
 		   		${ ui.includeFragment("isanteplusreports", "labsResult", [ patientId: patient.patientId ]) }
 		   </div><br/>
+		   <div id="motifsConsultation" width="50%">
+				${ ui.includeFragment("isanteplusreports", "dispensingDrugs", [ patientId: patient.patientId ]) }
+			</div><br/>
 		   <div id="lastVitals" width="50%">
 		   		<center><b>****************** ${ ui.message("isanteplusreports.lastVitals") } ******************</b></center><br/>
 		   		${ ui.includeFragment("isanteplus", "isantePlusMostRecentVitals", [ patientId: patient.patientId ]) }
 		   </div><br/>
-			<div id="weightCurve" width="50%">
-				${ ui.includeFragment("isanteplus", "weightGraph", [ patientId: patient.patientId ]) }
+			
+			<div id="motifsConsultation" width="50%">
+				${ ui.includeFragment("isanteplusreports", "motifsConsultation", [ patientId: patient.patientId ]) }
+			</div><br/>
+			<div id="impressionsCliniques" width="50%">
+				${ ui.includeFragment("isanteplusreports", "impressionsCliniques", [ patientId: patient.patientId ]) }
 			</div><br/>
 			<div id="lastViralLoad">
 				${ ui.includeFragment("isanteplus", "lastViralLoadTest", [ patientId: patient.patientId ]) }

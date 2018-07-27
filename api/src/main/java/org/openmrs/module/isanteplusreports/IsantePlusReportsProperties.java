@@ -160,5 +160,15 @@ public class IsantePlusReportsProperties{
 	public static final String LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE = "af612ab5-9e33-4911-a23d-dd4c7eeaef14";
 	
 	public static final String LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE_CONTROL = "dceb09ed-7f54-4ebb-be45-76ac69a67b59";
+	
+	public static final String PATIENTSWITHOUTPCORST_UUID = "3f78a306-3755-4960-8bf2-15a7ae4cb262";
+	
+	public static final String PATIENTSWITHNOGENDER_UUID = "3099cda4-b906-42fc-af4c-0a1d51da53a3";
+	
+	public static final String POSSIBLEDUPLICATEREGISTRATIONS_UUID = "f344beaa-634f-4ce3-8a9c-dfd1788b5de2";
+	
+	public static final String PATIENTWITHMULTIPLEARTREGIMENS_UUID = "4910f32f-1dfc-4e8d-a431-269a8b215b93";
+	
+	public static final String WOMENENROLLEDBECAMEPREGNANT_UUID = "c1c3838d-80bb-44c3-963d-2283078bf274";
 
 }

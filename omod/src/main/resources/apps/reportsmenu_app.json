@@ -706,6 +706,51 @@
 		      	"url": "reportingui/runReport.page?reportDefinition=dceb09ed-7f54-4ebb-be45-76ac69a67b59",
 		        "order": 120,
 		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.patientWithoutPCOrST",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataquality",
+		        "type": "link",
+		        "label": "isanteplusreports.patientWithoutPCOrST",
+		        "url": "reportingui/runReport.page?reportDefinition=3f78a306-3755-4960-8bf2-15a7ae4cb262",
+		        "order": 125,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.patientsWithNoGender",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataquality",
+		        "type": "link",
+		        "label": "isanteplusreports.patientsWithNoGender",
+		        "url": "reportingui/runReport.page?reportDefinition=3099cda4-b906-42fc-af4c-0a1d51da53a3",
+		        "order": 130,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    },
+		    {
+		        "id": "isanteplusreports.patientsWithMultipleARTRegimens",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataquality",
+		        "type": "link",
+		        "label": "isanteplusreports.patientsWithMultipleARTRegimens",
+		        "url": "reportingui/runReport.page?reportDefinition=4910f32f-1dfc-4e8d-a431-269a8b215b93",
+		        "order": 135,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.possibleDuplicateRegistrations",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataquality",
+		        "type": "link",
+		        "label": "isanteplusreports.possibleDuplicateRegistrations",
+		        "url": "reportingui/runReport.page?reportDefinition=f344beaa-634f-4ce3-8a9c-dfd1788b5de2",
+		        "order": 140,
+		        "requiredPrivilege": "App: reportingui.reports"
+		    },
+		    {
+		        "id": "isanteplusreports.womenEnrolledBecamePregnant",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+		        "type": "link",
+		        "label": "isanteplusreports.womenEnrolledBecamePregnant",
+		        "url": "reportingui/runReport.page?reportDefinition=c1c3838d-80bb-44c3-963d-2283078bf274",
+		        "order": 145,
+		        "requiredPrivilege": "App: reportingui.reports"
 		    }
 		    
            

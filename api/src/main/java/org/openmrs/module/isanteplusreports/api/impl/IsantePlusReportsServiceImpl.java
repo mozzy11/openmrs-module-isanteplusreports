@@ -9,6 +9,10 @@
  */
 package org.openmrs.module.isanteplusreports.api.impl;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +20,7 @@ import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
 import org.openmrs.Concept;
+import org.openmrs.Encounter;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
 import org.openmrs.PatientIdentifierType;
@@ -243,7 +248,7 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		List<IsantePlusReportsObs> labHistory = new ArrayList<IsantePlusReportsObs>();
 		Integer labConceptId = 1271;
 		Concept testsOrdered = Context.getConceptService().getConcept(labConceptId);
-
+		int i = 0;
 		for (Obs obs : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), testsOrdered)) {
 			if (obs != null) {
 
@@ -254,13 +259,114 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 				for (Obs obs1 : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), resultTest)) {
 					if (obs.getEncounter().getEncounterId() == obs1.getEncounter().getEncounterId()) {
 						IsantePlusReportsObs obsres = new IsantePlusReportsObs(obs1);
-						labHistory.add(obsres);
-
+						if(i <= 25){
+							labHistory.add(obsres);
+						}
+						i = i + 1;
 					}
+					
 				}
 			}
 		}
 		return labHistory;
+	}
+	
+	@Override
+	public List<Obs> getMotifsConsultattionLastSixMonths(Patient patient) {
+		List<Obs> motifsConsultationList = new ArrayList<Obs>();
+		Integer motifsConsultation = 159614;
+		int i = 0;
+		Concept testsOrdered = Context.getConceptService().getConcept(motifsConsultation);
+		for (Obs obs : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), testsOrdered)) {
+			if (obs != null) {
+					if(i <= 25){
+						motifsConsultationList.add(obs);
+					}
+					i = i + 1;
+				}
+			}
+		return motifsConsultationList;
+	}
+	
+	@Override
+	public List<Obs> getImpressionsCliniques(Patient patient) {
+		List<Obs> impressionsCliniquesList = new ArrayList<Obs>();
+		Integer impressionsCliniques = 1284;
+		int i = 0;
+		Concept testsOrdered = Context.getConceptService().getConcept(impressionsCliniques);
+		for (Obs obs : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), testsOrdered)) {
+			if (obs != null && obs.getObsGroup().getConcept().getConceptId() == 159947) {
+					if(i <= 25){
+					 impressionsCliniquesList.add(obs);
+					}
+					i = i + 1;
+				}
+			}
+		return impressionsCliniquesList;
+	}
+	
+	@Override
+	public List<Obs> getDispensingDrugs(Patient patient) {
+		List<Obs> drugsHistory = new ArrayList<Obs>();
+		Integer drugsConceptId = 1282;
+		Integer dateDrugsConceptId = 1276;
+		Concept drugsDispensed = Context.getConceptService().getConcept(drugsConceptId);
+		Concept dateDispensed = Context.getConceptService().getConcept(dateDrugsConceptId);
+		int i = 0;
+		for (Obs obs0 : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), drugsDispensed)) {
+			
+			if (obs0 != null && obs0.getObsGroup().getConcept().getConceptId() == 163711) {
+				Obs obs = Obs.newInstance(obs0);
+				for (Obs obs1 : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), dateDispensed)) {
+					if (obs1 != null) {
+						if (obs0.getObsGroup() == obs1.getObsGroup()) {
+							obs.setObsDatetime(obs1.getObsDatetime());
+							
+						} 
+					}
+				}
+				if(i <= 25){
+					drugsHistory.add(obs);
+				}
+				
+				i = i + 1;
+			}
+		}
+		return drugsHistory;
+	}
+	
+	@Override
+	public DataSet clinicExams(Patient p) {
+		EvaluationContext context = new EvaluationContext();
+		SqlDataSetDefinition dataSetDefinition = new SqlDataSetDefinition();
+		 id.setDefaultValue(p.getPatientId());
+		StringBuilder sqlQuery = new StringBuilder(
+		        "select distinct"
+		                + " DATE_FORMAT(DATE(ob.obs_datetime), '%d-%m-%Y') as 'Date examen', cn.name as 'Nom du test',"
+		                + " CASE WHEN ob.value_coded=1115 THEN 'Normal'"
+		                + " WHEN ob.value_coded=1116 THEN 'Anormal'"
+		                + " WHEN ob.value_coded=1118 THEN 'Pas conduit'"
+		                + " END as Résultat");
+		sqlQuery.append(" FROM openmrs.obs ob, openmrs.concept_name cn");
+		sqlQuery.append(" WHERE cn.concept_id = ob.concept_id");
+		sqlQuery.append(" AND ob.value_coded IN (1115,1116,1118)");
+		sqlQuery.append(" AND cn.locale='fr'");
+		sqlQuery.append(" AND ob.person_id = '" + p.getPatientId() + "'");
+		sqlQuery.append(" GROUP BY 1,2,3");
+		sqlQuery.append(" ORDER BY ob.obs_datetime DESC");
+		sqlQuery.append(" LIMIT 20");
+		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
+		//query.setInteger("primaryIdentifierType", primaryIdentifierType.getId());
+		List<Object[]> list = query.list();
+		SimpleDataSet dataSet = new SimpleDataSet(dataSetDefinition, context);
+		for (Object[] o : list) {
+			DataSetRow row = new DataSetRow();
+			row.addColumnValue(new DataSetColumn("date_exams", "date_exams", String.class), o[0]);
+			row.addColumnValue(new DataSetColumn("clinic_exams", "clinic_exams", String.class), o[1]);
+			row.addColumnValue(new DataSetColumn("resultat", "resultat", String.class), o[2]);
+			dataSet.addRow(row);
+		}
+		return dataSet;
 	}
 	
 }

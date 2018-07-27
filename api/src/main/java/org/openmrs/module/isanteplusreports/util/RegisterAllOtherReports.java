@@ -86,6 +86,11 @@ public class RegisterAllOtherReports extends SessionContext {
 		listOfLabOrdersResults();
 		listPatientsEligibleForChargeVirale();
 		listPatientsEligibleForChargeViraleControl();
+		listPatientsWithoutPcOrSt();
+		listPatientsWithNoGender();
+		patientsWithMultipleARTRegimens();
+		possibleDuplicateRegistrations();
+		numberWomenEnrolledBecamePregnant();
 	}
 
 	private static void cleanTables() {
@@ -439,5 +444,30 @@ public class RegisterAllOtherReports extends SessionContext {
 	private static void listPatientsEligibleForChargeViraleControl(){
 		IsantePlusReportsUtil.registerReportsWithoutParams("list_patients_eligible_for_charge_virale_controle.sql","isanteplusreports.list_patients_eligible_for_charge_virale_controle",
 		           "Liste des patients éligibles pour une charge virale de contrôle", IsantePlusReportsProperties.LIST_PATIENTS_ELIGIBLE_FOR_CHARGE_VIRALE_CONTROL);
+	}
+	
+	private static void listPatientsWithoutPcOrSt(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("patientsWithoutPCST.sql","isanteplusreports.patientWithoutPCOrST",
+		           "Patients sans PC, ST", IsantePlusReportsProperties.PATIENTSWITHOUTPCORST_UUID);
+	}
+	
+	private static void listPatientsWithNoGender(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("patientsWithNoGender.sql","isanteplusreports.patientsWithNoGender",
+		           "Patients sans désignation de sexe", IsantePlusReportsProperties.PATIENTSWITHNOGENDER_UUID);
+	}
+	
+	private static void patientsWithMultipleARTRegimens(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("patientsWithMultipleARTRegimens.sql","isanteplusreports.patientsWithMultipleARTRegimens",
+		           "Les patients ayant de multiples régimes VIH prescrits / distribués le même jour", IsantePlusReportsProperties.PATIENTWITHMULTIPLEARTREGIMENS_UUID);
+	}
+	
+	private static void possibleDuplicateRegistrations(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("possibleDuplicateRegistrations.sql","isanteplusreports.possibleDuplicateRegistrations",
+		           "Éventualité de duplication d'enregistrement de patients", IsantePlusReportsProperties.POSSIBLEDUPLICATEREGISTRATIONS_UUID);
+	}
+	
+	private static void numberWomenEnrolledBecamePregnant() {
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("womenEnrolledBecamePregnant.sql","isanteplusreports.womenEnrolledBecamePregnant",
+		           "Nombre de femmes VIH(+) enrôlées en soins devenues enceintes", IsantePlusReportsProperties.WOMENENROLLEDBECAMEPREGNANT_UUID);
 	}
 }

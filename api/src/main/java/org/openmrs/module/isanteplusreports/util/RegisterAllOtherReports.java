@@ -91,6 +91,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		patientsWithMultipleARTRegimens();
 		possibleDuplicateRegistrations();
 		numberWomenEnrolledBecamePregnant();
+		numberHivPatient();
 	}
 
 	private static void cleanTables() {
@@ -470,4 +471,11 @@ public class RegisterAllOtherReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("womenEnrolledBecamePregnant.sql","isanteplusreports.womenEnrolledBecamePregnant",
 		           "Nombre de femmes VIH(+) enrôlées en soins devenues enceintes", IsantePlusReportsProperties.WOMENENROLLEDBECAMEPREGNANT_UUID);
 	}
+	
+	private static void numberHivPatient() {
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_hiv_patient.sql","isanteplusreports.number_hiv_patient",
+		           "Nombre de patients VIH", IsantePlusReportsProperties.NUMBER_HIV_PATIENT_UUID);
+	}
+	
+	
 }

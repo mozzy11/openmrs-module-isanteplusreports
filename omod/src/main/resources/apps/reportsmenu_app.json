@@ -751,6 +751,15 @@
 		        "url": "reportingui/runReport.page?reportDefinition=c1c3838d-80bb-44c3-963d-2283078bf274",
 		        "order": 145,
 		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.number_hiv_patient",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.number_hiv_patient",
+		      	"url": "reportingui/runReport.page?reportDefinition=b6973c26-e4a2-46c6-9446-f993cad52efe",
+		        "order": 150,
+		        "requiredPrivilege": "App: reportingui.reports"
 		    }
 		    
            

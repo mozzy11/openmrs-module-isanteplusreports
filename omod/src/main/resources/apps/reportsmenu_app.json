@@ -69,6 +69,15 @@
                 "requiredPrivilege": "App: reportingui.reports"
             },
              {
+                "id": "isanteplusreports.patByAge",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+                "type": "link",
+                "label": "isanteplusreports.patByAge",
+                "url": "reportingui/runReport.page?reportDefinition=5c40612b-bd9b-4cb7-8c30-1ae89fcdf038",
+                "order": 7,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+             {
                 "id": "Address and Diagnosis",
                 "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
                 "type": "link",

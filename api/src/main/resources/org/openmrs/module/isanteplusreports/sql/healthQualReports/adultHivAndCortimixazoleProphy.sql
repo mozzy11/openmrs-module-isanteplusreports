@@ -41,9 +41,4 @@ WHERE
     AND p.patient_id IN (
         SELECT poa.patient_id
         FROM isanteplus.patient_on_arv poa
-	)
-    AND p.patient_id NOT IN (
-        SELECT discon.patient_id
-        FROM isanteplus.discontinuation_reason discon
-        WHERE discon.reason IN (159,1667,159492)
-    );
+	);

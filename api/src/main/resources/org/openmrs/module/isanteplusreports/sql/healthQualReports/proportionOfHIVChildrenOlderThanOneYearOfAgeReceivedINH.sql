@@ -32,18 +32,24 @@ FROM
 WHERE
     p.vih_status = 1
     AND TIMESTAMPDIFF(YEAR, p.birthdate, :endDate) BETWEEN 1 AND 14
-    AND p.patient_id IN (
+    AND p.patient_id IN ( -- Pediatric Rx
+        SELECT patient_id
+        FROM isanteplus.patient_prescription AS innerpp
+        WHERE
+        DATE(innerpp.visit_date) BETWEEN :startDate AND :endDate
+        AND innerpp.rx_or_prophy = 138405
+    )
+    AND p.patient_id IN ( -- ‌HIV First Pediatric Visit OR Pediatric Follow‐up‌
+        SELECT phv.patient_id
+        FROM isanteplus.pediatric_hiv_visit phv, isanteplus.health_qual_patient_visit pv
+        WHERE pv.encounter_id = phv.encounter_id
+        AND DATE(pv.visit_date) BETWEEN :startDate AND :endDate
+    )
+    AND p.patient_id NOT IN ( -- exclude active TB
         SELECT pv.patient_id
         FROM isanteplus.health_qual_patient_visit pv
-        WHERE
-            pv.is_active_tb IS true
-            AND (
-                DATE(pv.visit_date) BETWEEN :startDate AND :endDate
-                OR (
-                    DATE(pp.visit_date) BETWEEN :startDate AND :endDate
-                    AND pp.rx_or_prophy = 138405
-                )
-          )
+        WHERE pv.is_active_tb IS true
+        AND DATE(pv.visit_date) BETWEEN :startDate AND :endDate
     )
     AND p.patient_id NOT IN (
         SELECT discon.patient_id

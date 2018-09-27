@@ -35,7 +35,7 @@ WHERE
         WHERE
             pv.encounter_type IN ('1', '9') -- adult or pediatric first HIV visit
             AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
-            pv.is_active_tb IS false -- excluding patients with active TB
+            AND pv.is_active_tb IS false -- excluding patients with active TB
             AND pv.age_in_years > 14
     )
     AND p.patient_id NOT IN (

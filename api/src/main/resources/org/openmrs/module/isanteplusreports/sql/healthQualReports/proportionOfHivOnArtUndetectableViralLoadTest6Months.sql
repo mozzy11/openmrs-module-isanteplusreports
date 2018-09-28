@@ -58,8 +58,8 @@ WHERE
                 DATE(pp.visit_date) BETWEEN :startDate AND :endDate
                 AND pp.rx_or_prophy = 138405
         )
-    ) AND p.patient_id NOT IN ( -- Exclude deceased (159), discontinuations (1667), transfer (159492)
+    ) AND p.patient_id NOT IN ( -- Exclude deceased (159), transfer (159492)
         SELECT discon.patient_id
         FROM isanteplus.discontinuation_reason discon
-        WHERE discon.reason IN (159, 1667, 159492)
+        WHERE discon.reason IN (159, 159492)
 	);

@@ -26,7 +26,7 @@ LEFT JOIN isanteplus.patient_prescription pp
 ON p.patient_id = pp.patient_id
 WHERE
     p.vih_status = 1
-    AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) < 12
+    AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) < 14
     AND p.patient_id IN (
         SELECT pv.patient_id
         FROM isanteplus.health_qual_patient_visit pv

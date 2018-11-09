@@ -157,6 +157,7 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		sqlQuery.append(" AND pdis.patient_id=B.patient_id");
 		sqlQuery.append(" AND pdis.visit_date=B.visit_date");
 		sqlQuery.append(" AND p.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)");
+		sqlQuery.append(" AND pdis.rx_or_prophy <> 163768");
 		sqlQuery.append(" AND DATEDIFF(pdis.next_dispensation_date,pdis.visit_date)" + result);
 		if (startDate != null) {
 			sqlQuery.append(" AND DATE(pdis.visit_date) >= '" + startDate + "'");

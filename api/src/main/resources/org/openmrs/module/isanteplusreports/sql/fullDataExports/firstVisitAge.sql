@@ -1,5 +1,5 @@
 select 
-        		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime)))<15 THEN p.patient_id else null END) AS '0-14',
+        		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) between 0 AND 14 THEN p.patient_id else null END) AS '0-14',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) between 15 AND 20 THEN p.patient_id else null END) AS '15-20',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) between 21 AND 30 THEN p.patient_id else null END) AS '21-30',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) between 31 AND 40 THEN p.patient_id else null END) AS '31-40',
@@ -13,6 +13,7 @@ select
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) between 111 AND 120 THEN p.patient_id else null END) AS '111-120',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) between 121 AND 130 THEN p.patient_id else null END) AS '121-130',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) > 130 THEN p.patient_id else null END) AS '>130',
+        		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) < 0 THEN p.patient_id else null END) AS 'inconnu',
                 COUNT(DISTINCT p.patient_id) as 'Total'
         FROM isanteplus.patient p, openmrs.encounter enc, 
         (SELECT en.patient_id, MIN(DATE(en.encounter_datetime)) AS encounter_date FROM openmrs.encounter en GROUP BY 1) B

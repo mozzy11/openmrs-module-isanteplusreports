@@ -3,6 +3,8 @@ select count(DISTINCT CASE WHEN p.gender='F' THEN p.patient_id
 			END) as Femme,
 	count(DISTINCT CASE WHEN p.gender='M' THEN p.patient_id
 			END) as Homme, 
+	count(DISTINCT CASE WHEN p.gender NOT IN ('F','M') THEN p.patient_id
+			END) as Autre,
     count(DISTINCT p.patient_id) as total
             FROM isanteplus.patient p
             WHERE p.vih_status=1

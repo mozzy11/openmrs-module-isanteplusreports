@@ -108,14 +108,13 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		sqlQuery.append(" AND pdis.visit_date=B.visit_date");
 		sqlQuery.append(" AND (pdis.next_dispensation_date<>'' AND pdis.next_dispensation_date is not null)");
 		sqlQuery.append(" AND p.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)");
-		sqlQuery.append(" AND pdis.drug_id NOT IN (select pp.drug_id FROM isanteplus.patient_prescription pp WHERE pp.patient_id = pdis.patient_id"
-				+ " AND pp.encounter_id = pdis.encounter_id AND pp.drug_id = pdis.drug_id AND pp.rx_or_prophy = 163768)");
-		/*if (startDate != null) {
+		sqlQuery.append(" AND pdis.rx_or_prophy <> 163768");
+		if (startDate != null) {
 			sqlQuery.append(" AND pdis.visit_date >= :startDate");
 		}
 		if (endDate != null) {
 			sqlQuery.append(" AND pdis.visit_date <= :endDate");
-		}*/
+		}
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
 		//query.setInteger("primaryIdentifierType", primaryIdentifierType.getId());

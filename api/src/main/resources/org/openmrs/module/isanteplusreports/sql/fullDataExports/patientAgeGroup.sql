@@ -15,7 +15,7 @@ select
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,:endDate)) between 111 AND 120 THEN p.patient_id else null END) AS '111-120',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,:endDate)) between 121 AND 130 THEN p.patient_id else null END) AS '121-130',
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,:endDate)) > 130 THEN p.patient_id else null END) AS '>130',
-        		COUNT(DISTINCT CASE WHEN (p.birthdate = '' AND p.birthdate is null) THEN p.patient_id else null END) AS Inconnu,
+        		COUNT(DISTINCT CASE WHEN (p.birthdate = '' OR p.birthdate is null) THEN p.patient_id else null END) AS Inconnu,
                 count(DISTINCT p.patient_id) as 'Nombre total de patients'
         FROM isanteplus.patient p
         WHERE p.vih_status = 1

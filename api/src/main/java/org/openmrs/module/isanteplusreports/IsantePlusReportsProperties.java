@@ -172,5 +172,7 @@ public class IsantePlusReportsProperties{
 	public static final String WOMENENROLLEDBECAMEPREGNANT_UUID = "c1c3838d-80bb-44c3-963d-2283078bf274";
 	
 	public static final String NUMBER_HIV_PATIENT_UUID = "b6973c26-e4a2-46c6-9446-f993cad52efe";
+	
+	public static final String LIST_OF_EXPOSED_INFANTS_UUID = "3d6ee8cc-cfea-4ce7-b84b-3c6893ce6a2c";
 
 }

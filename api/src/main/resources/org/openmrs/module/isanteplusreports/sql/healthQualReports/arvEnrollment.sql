@@ -29,8 +29,8 @@ WHERE p.vih_status = '1' -- HIV+ patient
     AND pv.encounter_type IN ('1', '9') -- adult or pediatric first HIV visit
     AND pv.visit_date BETWEEN :startDate AND :endDate -- the date of first visit
     AND p.patient_id NOT IN (
-        SELECT discon.patient_id
-        FROM isanteplus.discontinuation_reason discon
-        WHERE discon.reason IN ('159', '1667', '159492') -- not deceased, discontinued and transferred
-    )
+            SELECT discon.patient_id
+            FROM isanteplus.discontinuation_reason discon
+            WHERE discon.reason IN ('159', '159492') -- not deceased and transferred
+        )
     AND pv.age_in_years > 14;

@@ -37,7 +37,7 @@ public final class HealthQualReportsConstants {
 
     static final String ADULT_14_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest6Months.sql";
 
-    static final String ADULT_15_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest18Months.sql";
+    static final String ADULT_15_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest.sql";
 
     static final String ADULT_16_INDICATOR_SQL = "proportionOfHivOnArtUndetectableViralLoadTest6Months.sql";
 

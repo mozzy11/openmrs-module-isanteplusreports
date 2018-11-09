@@ -30,17 +30,55 @@ SELECT
 FROM
     isanteplus.patient p
 WHERE
-    p.patient_id IN (
+    (p.vih_status = 1 -- Include HIV patients
+    OR p.patient_id IN ( -- Include exposed children
+      SELECT DISTINCT pv.patient_id
+        FROM isanteplus.health_qual_patient_visit pv
+        WHERE
+        pv.patient_id NOT IN (    -- Condition E
+          SELECT DISTINCT plab.patient_id
+          FROM isanteplus.patient_laboratory plab
+          WHERE
+            plab.test_done = 1
+            AND plab.test_id = 844  -- PCR
+            AND plab.test_result = 1301 -- positive
+            AND plab.date_test_done BETWEEN :startDate AND :endDate)
+        AND pv.patient_id NOT IN ( -- Condition E positive virology test
+            SELECT DISTINCT pvt.patient_id
+            FROM isanteplus.virological_tests pvt
+            WHERE answer_concept_id = 1030
+            AND test_result = 703
+            AND pvt.encounter_date BETWEEN :startDate AND :endDate)
+        AND pv.age_in_years < 14 -- An child
+        AND ( pv.patient_id IN (  -- Condition D
+            SELECT DISTINCT pp.patient_id
+            FROM isanteplus.patient_prescription pp
+            WHERE pp.rx_or_prophy = 163768 -- prophylaxis
+            AND drug_id IN (SELECT drug_id FROM isanteplus.arv_drugs))
+          OR pv.patient_id IN ( -- Condition B
+            SELECT DISTINCT patient_id
+            FROM isanteplus.pediatric_hiv_visit
+            WHERE actual_vih_status = 1405) -- HIV EXPOSED
+          OR pv.patient_id IN ( -- Condition A PCR result
+            SELECT DISTINCT plab.patient_id
+            FROM isanteplus.patient_laboratory plab
+            WHERE plab.test_done = 1
+              AND plab.test_id = 844  -- PCR
+              AND plab.test_result = 1302 -- negative
+              AND plab.date_test_done < :endDate)
+          OR pv.patient_id IN ( -- Condition A virology test
+            SELECT DISTINCT pvt.patient_id
+            FROM isanteplus.virological_tests pvt
+            WHERE answer_concept_id = 1030
+            AND test_result = 664
+            AND pvt.encounter_date  < :endDate)
+      )
+    )
+    )
+    AND p.patient_id IN (
          SELECT phv.patient_id
          FROM isanteplus.health_qual_patient_visit phv
-         LEFT JOIN isanteplus.patient_prescription pp
-         ON phv.patient_id = pp.patient_id
-         WHERE
-             DATE(phv.visit_date) BETWEEN :startDate AND :endDate
-             OR (
-                 DATE(pp.visit_date) BETWEEN :startDate AND :endDate
-                 AND pp.rx_or_prophy = 138405
-             )
+         WHERE DATE(phv.visit_date) BETWEEN :startDate AND :endDate
     )
     AND p.patient_id NOT IN ( -- excludes
         SELECT discon.patient_id

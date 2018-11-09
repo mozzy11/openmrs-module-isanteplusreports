@@ -769,6 +769,15 @@
 		      	"url": "reportingui/runReport.page?reportDefinition=b6973c26-e4a2-46c6-9446-f993cad52efe",
 		        "order": 150,
 		        "requiredPrivilege": "App: reportingui.reports"
+		    }, 
+		     {
+		        "id": "isanteplusreports.list_of_exposed_infants",
+		        "extensionPointId": "org.openmrs.module.reportingui.reports.dataexport",
+		        "type": "link",
+		        "label": "isanteplusreports.list_of_exposed_infants",
+		      	"url": "reportingui/runReport.page?reportDefinition=3d6ee8cc-cfea-4ce7-b84b-3c6893ce6a2c",
+		        "order": 155,
+		        "requiredPrivilege": "App: reportingui.reports"
 		    }
 		    
            

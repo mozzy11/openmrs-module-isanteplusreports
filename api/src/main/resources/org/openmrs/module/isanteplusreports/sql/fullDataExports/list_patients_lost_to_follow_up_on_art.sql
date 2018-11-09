@@ -15,5 +15,5 @@ ON pat.patient_id=patstatus.patient_id
 INNER JOIN isanteplus.arv_status_loockup arv
 ON patstatus.id_status=arv.id
 WHERE patstatus.id_status = 9
-AND patstatus.start_date BETWEEN :startDate AND :endDate 
+AND patstatus.start_date <= :endDate 
 GROUP BY pat.patient_id;

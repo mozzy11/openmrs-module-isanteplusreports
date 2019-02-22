@@ -9,6 +9,6 @@ AND pdisp.next_dispensation_date = B.next_dispensation_date
 AND (TIMESTAMPDIFF(DAY,pdisp.next_dispensation_date,DATE(now())) BETWEEN 0 AND 90)
 AND p.patient_id NOT IN(SELECT dreason.patient_id FROM isanteplus.discontinuation_reason dreason WHERE dreason.reason IN(159,1667,159492))
 AND pdisp.arv_drug = 1065
-AND pdisp.drug_id NOT IN (select pp.drug_id FROM isanteplus.patient_prescription pp WHERE pp.patient_id = pdisp.patient_id
- AND pp.encounter_id = pdisp.encounter_id AND pp.drug_id = pdisp.drug_id AND pp.rx_or_prophy = 163768)
+AND pdisp.rx_or_prophy <> 163768
+AND pdisp.voided <> 1
 GROUP BY 1,2,3,4,5,6,7;

@@ -9,5 +9,5 @@ GROUP BY pa.given_name, pa.family_name, pa.birthdate, pa.mother_name
 having count(distinct pa.patient_id) > 1) p, isanteplus.patient pat
 WHERE p.given_name = pat.given_name AND p.family_name = pat.family_name
 AND p.birthdate = pat.birthdate AND (p.mother_name = pat.mother_name OR 
-(p.mother_name is null AND pat.mother_name is null))
+(p.mother_name is null AND pat.mother_name is null)) AND pat.voided <> 1
 order by 3,4,6;

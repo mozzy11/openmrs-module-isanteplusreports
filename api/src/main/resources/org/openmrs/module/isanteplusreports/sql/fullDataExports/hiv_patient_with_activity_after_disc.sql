@@ -11,6 +11,7 @@ AND enc.patient_id=en.patient_id
 AND en.patient_id = B.patient_id
 AND en.encounter_datetime = B.encounter_date
 AND p.vih_status=1
+AND p.voided <> 1
 AND en.encounter_type=(select encounter_type_id FROM openmrs.encounter_type enct 
 WHERE enct.uuid='9d0113c6-f23a-4461-8428-7e9a7344f2ba')
 AND DATE(enc.encounter_datetime) > DATE(en.encounter_datetime)

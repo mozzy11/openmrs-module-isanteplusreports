@@ -8,4 +8,5 @@ FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patien
 WHERE p.patient_id=pdis.patient_id
 AND pdis.visit_id=parv.visit_id
 AND (pdis.next_dispensation_date<>'' AND pdis.next_dispensation_date is not null)
+AND pdis.voided <> 1
 AND pdis.visit_date between :startDate AND :endDate;

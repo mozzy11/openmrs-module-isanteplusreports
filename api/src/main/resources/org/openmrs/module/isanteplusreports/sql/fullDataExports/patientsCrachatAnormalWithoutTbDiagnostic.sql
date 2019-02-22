@@ -11,4 +11,5 @@ ON stat.id=p.arv_status
 WHERE pi.patient_id NOT IN (SELECT pdiag.patient_id FROM isanteplus.patient_tb_diagnosis pdiag
 WHERE pdiag.visit_date between :startDate AND :endDate)
 AND pi.visit_date between :startDate AND :endDate
-AND (pi.crachat_barr=703 OR pi.radiographie_pul NOT IN (1115,5158));
+AND (pi.crachat_barr=703 OR pi.radiographie_pul NOT IN (1115,5158))
+AND p.voided <> 1;

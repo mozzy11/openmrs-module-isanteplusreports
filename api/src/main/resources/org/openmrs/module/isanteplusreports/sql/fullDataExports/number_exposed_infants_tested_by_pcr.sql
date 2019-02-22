@@ -12,6 +12,7 @@ WHERE(
 		(vt.concept_group=1361 AND vt.test_id=162087 
 		AND vt.answer_concept_id=1030
 		AND vt.encounter_date BETWEEN :startDate AND :endDate)  
-		OR(plab.test_id=844 AND (plab.date_test_done is not null OR plab.date_test_done <> '') 
+		OR(plab.test_id=844 AND (plab.date_test_done is not null OR plab.date_test_done <> '')
+		AND plab.voided <> 1 
 		AND plab.date_test_done BETWEEN :startDate AND :endDate)
 	);

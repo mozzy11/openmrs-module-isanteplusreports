@@ -10,4 +10,5 @@ AND B.patient_id = pl.patient_id
 AND pl.visit_date = B.test_date
 AND pl.test_done = 1
 AND pl.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)
+AND pl.voided <> 1
 AND pl.visit_date BETWEEN :startDate AND :endDate) A;

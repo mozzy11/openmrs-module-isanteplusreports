@@ -16,4 +16,5 @@ COUNT(DISTINCT CASE WHEN ((p.vih_status = 1 OR p.vih_status = 0 ) AND DATE(enc.e
  ON p.patient_id = enc.patient_id
  WHERE ((DATE(enc.encounter_datetime) BETWEEN :startDate AND :endDate) OR ((p.date_created BETWEEN :startDate AND :endDate)))
  AND p.location_id = :location
+ AND p.voided <> 1
  GROUP BY 1;	

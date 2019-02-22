@@ -9,6 +9,8 @@
  */
 package org.openmrs.module.isanteplusreports.api.impl;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import liquibase.database.jvm.JdbcConnection;
+import liquibase.exception.DatabaseException;
 
 import org.hibernate.SQLQuery;
 import org.hibernate.SessionFactory;
@@ -151,7 +156,7 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder("select "
 		        + "distinct p.st_id as st_id, p.patient_id, p.national_id as national_id, p.given_name as Prénom, p.family_name as Nom, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Age, p.gender as Sexe");
-		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv, (select pdisp.patient_id, MAX(pdisp.visit_date) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.visit_date BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY 1) B  ");
+		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv, (select pdisp.patient_id, MAX(pdisp.visit_date) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.voided <> 1 AND pdisp.visit_date BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY 1) B  ");
 		sqlQuery.append(" WHERE p.patient_id=pdis.patient_id");
 		sqlQuery.append(" AND pdis.patient_id=parv.patient_id");
 		sqlQuery.append(" AND pdis.patient_id=B.patient_id");
@@ -368,6 +373,15 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 			dataSet.addRow(row);
 		}
 		return dataSet;
+	}
+	
+	@Override
+	public void setEventScheduler() {
+		StringBuilder sqlQuery2 = new StringBuilder(
+		        "CALL isanteplus.set_scheduler_and_lock_wait_variable()");
+		SQLQuery query2 = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery2.toString());
+		query2.executeUpdate();
+		
 	}
 	
 }

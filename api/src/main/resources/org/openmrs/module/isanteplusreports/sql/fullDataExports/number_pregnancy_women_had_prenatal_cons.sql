@@ -5,5 +5,7 @@ WHERE vtype.patient_id=pp.patient_id
 AND vtype.concept_id=160288 AND vtype.v_type=1622
 AND vtype.patient_id = B.patient_id
 AND vtype.encounter_date = B.encounter_date
+AND vtype.voided <> 1
+AND pp.voided <> 1
 AND vtype.encounter_date BETWEEN :startDate AND :endDate
 AND pp.start_date BETWEEN :startDate AND :endDate;

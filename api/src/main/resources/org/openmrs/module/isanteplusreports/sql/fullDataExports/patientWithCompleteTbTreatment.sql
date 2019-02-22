@@ -10,4 +10,5 @@ ON pdiag.patient_id=p.patient_id
 LEFT OUTER JOIN isanteplus.arv_status_loockup stat
 ON stat.id=p.arv_status
 WHERE pdiag.visit_date between :startDate AND :endDate
-AND pdiag.status_tb_treatment=2;
+AND pdiag.status_tb_treatment=2
+AND pdiag.voided <> 1;

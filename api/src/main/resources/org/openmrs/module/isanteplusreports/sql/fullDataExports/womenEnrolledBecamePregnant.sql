@@ -13,4 +13,5 @@ ON p.patient_id = A.patient_id
 WHERE ((p.vih_status=1) OR ((plab.test_id=1042 OR plab.test_id=1040)
 AND plab.test_result=703))
 AND A.visit_date < ppr.start_date
+AND ppr.voided <> 1
 AND ppr.start_date BETWEEN :startDate AND :endDate;

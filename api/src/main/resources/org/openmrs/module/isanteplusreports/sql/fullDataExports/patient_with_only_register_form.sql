@@ -4,4 +4,5 @@ from isanteplus.patient p, openmrs.encounter enc, openmrs.encounter_type entype
 WHERE p.patient_id=enc.patient_id
 AND enc.encounter_type=entype.encounter_type_id
 AND entype.uuid='873f968a-73a8-4f9c-ac78-9f4778b751b6'
-AND enc.encounter_id=(SELECT MAX(en.encounter_id) FROM openmrs.encounter en);
+AND enc.encounter_id=(SELECT MAX(en.encounter_id) FROM openmrs.encounter en)
+AND enc.voided <> 1;

@@ -6,7 +6,7 @@ CASE WHEN (pl.test_id = 1305 AND pl.test_result = 1306) THEN 'Indétectable'
 END AS Résultat
 FROM isanteplus.patient p, isanteplus.patient_laboratory pl, 
 (SELECT plab.patient_id, MAX(plab.date_test_done) AS date_test FROM isanteplus.patient_laboratory plab
-  WHERE plab.test_id = 856 OR plab.test_id = 1305 GROUP BY 1) B
+  WHERE plab.test_id = 856 OR plab.test_id = 1305 AND plab.voided <> 1 GROUP BY 1) B
 WHERE p.patient_id = pl.patient_id
 AND pl.patient_id = B.patient_id
 AND pl.date_test_done = B.date_test

@@ -3,7 +3,7 @@ pa.identifier as 'iSantéPlus ID',pa.given_name as Prénom,
 pa.family_name as Nom, pa.gender as Sexe,TIMESTAMPDIFF(YEAR, pa.birthdate,DATE(now())) as Âge,
 pa.telephone as Telephone,f.name as 'fiches', asl.name_fr as 'Statut du patient', DATE_FORMAT(pv.next_visit_date, "%d-%m-%Y") as 'Prochaine visite' 
 from isanteplus.patient pa, isanteplus.patient_visit pv, openmrs.form f, isanteplus.arv_status_loockup asl 
-where pa.patient_id=pv.patient_id AND pv.form_id=f.form_id and pa.arv_status = asl.id
+where pa.patient_id=pv.patient_id AND pv.form_id=f.form_id and pa.arv_status = asl.id and pv.voided <> 1
 and pv.next_visit_date between date(now()) and date_add(date(now()),interval 7 day)
 
 UNION
@@ -17,4 +17,5 @@ where pa.patient_id=pd.patient_id
 AND pd.encounter_id=enc.encounter_id
 AND enc.form_id=f.form_id 
 AND pa.arv_status = asl.id
+AND pd.voided <> 1
 and pd.next_dispensation_date between date(now()) and date_add(date(now()),interval 7 day)

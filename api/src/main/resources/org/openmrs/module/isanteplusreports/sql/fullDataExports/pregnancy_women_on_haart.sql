@@ -9,4 +9,5 @@ AND plab.test_result=703 AND plab.date_test_done BETWEEN :startDate AND :endDate
 AND ppr.patient_id IN (SELECT DISTINCT pdisp.patient_id from isanteplus.patient_dispensing pdisp
   WHERE pdisp.arv_drug=1065 AND pdisp.visit_date <= :endDate)
 AND p.gender <> 'M'
+AND ppr.voided <> 1
 AND ((ppr.start_date BETWEEN :startDate AND :endDate) OR (ppr.end_date BETWEEN :startDate AND :endDate))

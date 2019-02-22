@@ -11,4 +11,5 @@ AND pdisp.arv_drug = 1065
 AND p.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)
 AND pdisp.drug_id NOT IN (select pp.drug_id FROM isanteplus.patient_prescription pp WHERE pp.patient_id = pdisp.patient_id
 AND pp.encounter_id = pdisp.encounter_id AND pp.drug_id = pdisp.drug_id AND pp.rx_or_prophy = 163768)
-AND DATEDIFF(pdisp.next_dispensation_date,now()) between 0 and 30;
+AND DATEDIFF(pdisp.next_dispensation_date,now()) between 0 and 30
+AND pdisp.voided <> 1;

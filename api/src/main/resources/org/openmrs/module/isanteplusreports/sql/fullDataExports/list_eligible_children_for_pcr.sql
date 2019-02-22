@@ -6,6 +6,7 @@ pat.mother_name as Contact FROM isanteplus.patient pat, isanteplus.exposed_infan
     AND exp_inf.condition_exposee = 3
     AND (TIMESTAMPDIFF(DAY, pat.birthdate,DATE(now())) BETWEEN 28 AND 365)
     AND pat.patient_id NOT IN (select ppcr.patient_id FROM isanteplus.patient_pcr ppcr)
+	AND pat.voided <> 1
     
  UNION
  
@@ -18,4 +19,5 @@ pat.mother_name as Contact FROM isanteplus.patient pat,isanteplus.serological_te
 	AND stests.answer_concept_id IN(163722,1042)
     AND stests.test_result = 703
     AND (TIMESTAMPDIFF(MONTH, pat.birthdate,DATE(now())) BETWEEN 12 AND 18)
-    AND pat.patient_id NOT IN (select ppcr.patient_id FROM isanteplus.patient_pcr ppcr);
+    AND pat.patient_id NOT IN (select ppcr.patient_id FROM isanteplus.patient_pcr ppcr)
+    AND pat.voided <> 1;

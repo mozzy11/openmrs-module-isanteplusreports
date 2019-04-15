@@ -30,7 +30,7 @@ public class RegisterPatientsArvStatusReports extends SessionContext {
 	}
 	
 	private static void numberPatientsByArvStatus() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_patient_by_status.sql","isanteplusreports.number_patient_by_arv_status",
+		IsantePlusReportsUtil.registerReportsWithOtherStartAndEndDateParams("number_patient_by_status.sql","isanteplusreports.number_patient_by_arv_status",
 				MessageUtil.translate("isanteplusreports.number_patient_by_arv_status"), IsantePlusReportsProperties.NUMBER_PATIENTS_BY_ARV_STATUS_UUID);
 	}
 	

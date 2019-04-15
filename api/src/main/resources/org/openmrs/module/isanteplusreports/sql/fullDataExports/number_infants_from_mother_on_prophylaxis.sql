@@ -6,4 +6,5 @@ TIMESTAMPDIFF(YEAR, p.birthdate,DATE(now())) as Age
 FROM isanteplus.patient p, isanteplus.pediatric_hiv_visit pv
 WHERE p.patient_id = pv.patient_id
 AND pv.prophylaxie72h=1065
+AND pv.voided <> 1
 AND pv.encounter_date BETWEEN :startDate AND :endDate;

@@ -8,4 +8,5 @@ AND p.vih_status=1
 AND p.patient_id NOT IN (SELECT enco.patient_id FROM openmrs.encounter enco, openmrs.encounter_type enct
 	WHERE enco.encounter_type=enct.encounter_type_id
     AND enct.uuid IN ('17536ba6-dd7c-4f58-8014-08c7cb798ac7','349ae0b4-65c1-4122-aa06-480f186c8350'))
+AND p.voided <> 1
 GROUP BY p.patient_id;

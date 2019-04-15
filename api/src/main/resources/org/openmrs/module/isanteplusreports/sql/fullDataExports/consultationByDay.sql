@@ -8,6 +8,6 @@ FROM isanteplus.patient pat, openmrs.visit patvi, openmrs.location loc, openmrs.
  AND patvi.visit_id=enc.visit_id
  AND enc.location_id=loc.location_id
  AND enc.encounter_type=enct.encounter_type_id
+ AND patvi.voided <> 1
  AND DATE(patvi.date_started) BETWEEN :startDate AND :endDate
- AND enc.location_id = :location
  ORDER BY patvi.date_started DESC;

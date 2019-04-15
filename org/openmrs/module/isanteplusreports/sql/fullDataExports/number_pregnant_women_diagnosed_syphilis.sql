@@ -11,4 +11,5 @@ SELECT COUNT(DISTINCT ppr.patient_id) as Total
     OR (pdiag.concept_id=1284 AND pdiag.answer_concept_id=112493
     AND pdiag.encounter_date BETWEEN :startDate AND :endDate
     ))
+    AND ppr.voided <> 1
 	AND ppr.start_date BETWEEN :startDate AND :endDate

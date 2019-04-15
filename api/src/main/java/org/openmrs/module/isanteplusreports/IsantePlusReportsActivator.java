@@ -19,6 +19,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.service.AppFrameworkService;
+import org.openmrs.module.isanteplusreports.api.IsantePlusReportsService;
 import org.openmrs.module.metadatadeploy.api.MetadataDeployService;
 import org.openmrs.module.metadatadeploy.bundle.MetadataBundle;
 import org.openmrs.module.BaseModuleActivator;
@@ -47,9 +48,9 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 				    60 * 60 * 24l);
 				
 				returnIpAddress();
-				installReportsRoleAndPrivilege();
 			appFrameworkService.disableApp("reportingui.reports");
-			
+			Context.getService(IsantePlusReportsService.class).setEventScheduler();
+			installReportsRoleAndPrivilege();
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -117,11 +118,8 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 	 private void installReportsRoleAndPrivilege() {
 
 	        MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
-
-	        //Deploy metadata packages
-	       // deployService.installBundle(Context.getRegisteredComponents(AddRoleAndPrivilegeBundle.class).get(0));
 	        MetadataBundle reportsRolePrivilegeMetadata = Context.getRegisteredComponent("reportsRolePrivilegeMetadata", AddRoleAndPrivilegeBundle.class);
 	        deployService.installBundle(reportsRolePrivilegeMetadata);
-	    }
+	 }
 	
 }

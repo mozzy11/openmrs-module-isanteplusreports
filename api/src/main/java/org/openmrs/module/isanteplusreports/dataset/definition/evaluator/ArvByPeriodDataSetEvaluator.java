@@ -96,24 +96,26 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		endDate = DateUtil.getEndOfDay(endDate);
 		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder(
-		        "select "
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 0 AND 35 THEN p.patient_id END) as '0-35 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 36 AND 89 THEN p.patient_id END) as '36-89 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 90 AND 120 THEN p.patient_id END) as '90-120 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) between 121 AND 180 THEN p.patient_id END) as '121-180 jours',"
-		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,pdis.visit_date) > 180 THEN p.patient_id END) as '>180 jours',count(distinct p.patient_id) as 'Patient unique'");
-		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, (select pdisp.patient_id, MAX(pdisp.visit_date) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.visit_date BETWEEN :startDate AND :endDate GROUP BY 1) B ");
+				"SELECT C.d as '0-35 jours', C.e as '36-89 jours', C.f as '90-120 jours', C.g as '121-180 jours', C.h as '>180 jours', C.d + C.e + C.f + C.g + C.h as 'Patient unique' FROM ("
+		       + "select "
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date))) between 0 AND 35 THEN p.patient_id END) as d,"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date))) between 36 AND 89 THEN p.patient_id END) as e,"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date))) between 90 AND 120 THEN p.patient_id END) as f,"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date))) between 121 AND 180 THEN p.patient_id END) as g,"
+		                + "count(distinct case when DATEDIFF(pdis.next_dispensation_date,ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date))) > 180 THEN p.patient_id END) as h");
+		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, (select pdisp.patient_id, MAX(ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date))) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.voided <> 1 AND (pdisp.rx_or_prophy = 138405 OR pdisp.rx_or_prophy is null) AND ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date)) BETWEEN :startDate AND :endDate GROUP BY 1) B ");
 		sqlQuery.append(" WHERE p.patient_id=pdis.patient_id");
-		sqlQuery.append(" AND pdis.patient_id=B.patient_id");
-		sqlQuery.append(" AND pdis.visit_date=B.visit_date");
-		sqlQuery.append(" AND (pdis.next_dispensation_date<>'' AND pdis.next_dispensation_date is not null)");
-		sqlQuery.append(" AND p.patient_id NOT IN (SELECT ei.patient_id FROM isanteplus.exposed_infants ei)");
-		sqlQuery.append(" AND pdis.rx_or_prophy <> 163768");
+		sqlQuery.append(" AND pdis.patient_id = B.patient_id");
+		sqlQuery.append(" AND ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date)) = B.visit_date");
+		sqlQuery.append(" AND B.visit_date < pdis.next_dispensation_date");
+		sqlQuery.append(" AND pdis.arv_drug = 1065");
+		sqlQuery.append(" AND pdis.voided <> 1");
+		sqlQuery.append(" AND (pdis.rx_or_prophy = 138405 OR pdis.rx_or_prophy is null)");
 		if (startDate != null) {
-			sqlQuery.append(" AND pdis.visit_date >= :startDate");
+			sqlQuery.append(" AND ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date)) >= :startDate");
 		}
 		if (endDate != null) {
-			sqlQuery.append(" AND pdis.visit_date <= :endDate");
+			sqlQuery.append(" AND ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date)) <= :endDate) C");
 		}
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());

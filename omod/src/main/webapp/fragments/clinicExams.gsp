@@ -7,7 +7,7 @@
 	            	
 		                <th>${ ui.message("isanteplusreports.visitDate") }</th>
 		                <th>${ ui.message("isanteplusreports.clinicExams") }</th>
-	                 	<th>${ ui.message("isanteplusreports.result") }</th>
+	                 	<th>${ ui.message("isanteplusreports.numberPatResult") }</th>
 	                 	
 	           		 </tr>
 	      </thead>

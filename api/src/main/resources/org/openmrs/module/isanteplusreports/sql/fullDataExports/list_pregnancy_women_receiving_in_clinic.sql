@@ -4,6 +4,7 @@ p.given_name AS Prénom, p.family_name AS Nom, p.gender AS Sexe, TIMESTAMPDIFF(Y
 MAX(pp.start_date) AS 'Date visite'
 FROM isanteplus.patient p, isanteplus.patient_pregnancy pp
 WHERE p.patient_id=pp.patient_id
+AND pp.voided <> 1
 AND pp.start_date between :startDate AND :endDate
 GROUP BY 1,2,3,4,5,6
 ORDER BY pp.start_date DESC;

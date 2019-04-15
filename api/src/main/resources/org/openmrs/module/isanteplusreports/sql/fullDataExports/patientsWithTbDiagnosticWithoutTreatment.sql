@@ -11,5 +11,6 @@ AND pdiag.patient_id NOT IN (SELECT patdisp.patient_id FROM isanteplus.patient_d
 WHERE ((patdisp.drug_id IN (75948,82900,767,84360,78280) AND (patdisp.rx_or_prophy <> 163768))) 
 AND patdisp.dispensation_date between :startDate AND :endDate)
 AND pdiag.status_tb_treatment <> 1
+AND pdiag.voided <> 1
 AND pdiag.visit_date between :startDate AND :endDate
 ORDER BY 1 ASC;

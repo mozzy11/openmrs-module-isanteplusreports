@@ -1,5 +1,6 @@
 package org.openmrs.module.isanteplusreports;
 
+import org.openmrs.api.context.Context;
 import org.openmrs.module.metadatadeploy.bundle.AbstractMetadataBundle;
 import org.springframework.stereotype.Component;
 
@@ -23,11 +24,14 @@ public class AddRoleAndPrivilegeBundle extends AbstractMetadataBundle {
 	@Override
 	public void install() throws Exception {
 		// TODO Auto-generated method stub
-		install(privilege(_Privilege.REPORTS_PRIVILEGE, "Able to access reports"));
-		
-		install(role(_Role.REPORTS_ROLES, "Able to view reports", idSet(), idSet(
-                _Privilege.REPORTS_PRIVILEGE)));
-		
+		if(!Context.hasPrivilege("App: reportingui.reports"))
+        {
+			install(privilege(_Privilege.REPORTS_PRIVILEGE, "Able to access reports"));
+        }
+		if(Context.getUserService().getRole("Application: View reports") == null){
+			install(role(_Role.REPORTS_ROLES, "Able to view reports", idSet(), idSet(
+	                _Privilege.REPORTS_PRIVILEGE)));
+		}
 	}
 
 }

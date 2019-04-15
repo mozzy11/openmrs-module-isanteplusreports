@@ -16,11 +16,12 @@ select
         		COUNT(DISTINCT CASE WHEN (TIMESTAMPDIFF(YEAR,p.birthdate,DATE(enc.encounter_datetime))) < 0 THEN p.patient_id else null END) AS 'inconnu',
                 COUNT(DISTINCT p.patient_id) as 'Total'
         FROM isanteplus.patient p, openmrs.encounter enc, 
-        (SELECT en.patient_id, MIN(DATE(en.encounter_datetime)) AS encounter_date FROM openmrs.encounter en GROUP BY 1) B
+        (SELECT en.patient_id, MIN(DATE(en.encounter_datetime)) AS encounter_date FROM openmrs.encounter en WHERE en.voided <> 1 GROUP BY 1) B
         WHERE p.patient_id = enc.patient_id
         AND enc.patient_id = B.patient_id
         AND DATE(enc.encounter_datetime) = B.encounter_date
         AND p.vih_status = 1
+        AND p.voided <> 1
         AND enc.patient_id NOT IN (select e.patient_id from openmrs.encounter e, openmrs.encounter_type et
                                    WHERE e.encounter_type = et.encounter_type_id AND et.uuid = '9d0113c6-f23a-4461-8428-7e9a7344f2ba')
         AND DATE(enc.encounter_datetime) BETWEEN :startDate AND :endDate;

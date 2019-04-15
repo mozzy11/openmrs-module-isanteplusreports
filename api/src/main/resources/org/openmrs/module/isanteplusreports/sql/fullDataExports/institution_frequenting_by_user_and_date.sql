@@ -17,7 +17,6 @@ COUNT(DISTINCT CASE WHEN ((p.vih_status = 1 OR p.vih_status = 0 ) AND DATE(enc.e
   FROM openmrs.users usr INNER JOIN isanteplus.patient p ON usr.user_id = p.creator LEFT OUTER JOIN openmrs.encounter enc
  ON p.patient_id = enc.patient_id
  WHERE ((DATE(enc.encounter_datetime) BETWEEN :startDate AND :endDate) OR ((p.date_created BETWEEN :startDate AND :endDate)))
- AND p.location_id = :location
  AND p.voided <> 1
  GROUP BY 1, 2
  ORDER BY 2 DESC;

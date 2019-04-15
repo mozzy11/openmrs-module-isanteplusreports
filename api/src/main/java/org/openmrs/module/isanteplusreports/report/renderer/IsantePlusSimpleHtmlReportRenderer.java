@@ -92,8 +92,8 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 						w.write("</tr>");
 					}
 				}
-				w.write("</table><br/>");
-				
+				w.write("</table><br/><br/>");
+				int i = 0;
 				w.write("<table id=\"simple-html-dataset-" + key + "\" class=\"display simple-html-dataset" + key
 				        + "\" border=\"1" + key + "\" style=\"min-width:100px\"><tr>");
 				for (DataSetColumn column : columns) {
@@ -102,7 +102,8 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 				w.write("</tr>");
 				
 				for (DataSetRow row : dataset) {
-					w.write("<tr>");
+					i=i+1;
+					w.write("<tr>"); 
 					for (DataSetColumn column : columns) {
 						w.write("<td>");
 						Object colValue = row.getColumnValue(column.getName());
@@ -118,6 +119,11 @@ public class IsantePlusSimpleHtmlReportRenderer extends ReportDesignRenderer {
 					w.write("</tr>");
 				}
 				w.write("</table>");
+				if(i > 1){
+					w.write("<table><tr><td>");
+					w.write("<b>Total : " + i + "</b>"); 
+					w.write("</td></tr></table><br/>");
+				}
 			}
 		}
 		

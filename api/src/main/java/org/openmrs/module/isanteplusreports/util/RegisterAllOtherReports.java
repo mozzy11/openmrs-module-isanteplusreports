@@ -95,6 +95,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberWomenEnrolledBecamePregnant();
 		numberHivPatient();
 		listOfExposedInfants();
+		artDispensationFollowUp();
 	}
 
 	private static void cleanTables() {
@@ -140,12 +141,12 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void nextVisitSevenDays(){
-		IsantePlusReportsUtil.registerReportsWithoutParams("visitNextSevenDays.sql","isanteplusreports.septJoursLibelle",
+		IsantePlusReportsUtil.registerReportsWithoutParams("visitNextSevenDays.sql",MessageUtil.translate("isanteplusreports.septJoursLibelle"),
 				MessageUtil.translate("isanteplusreports.septJoursLibelle"), IsantePlusReportsProperties.SEVEN_DAYS_REPORT_DEFINITION_UUID);
 	
 	}
 	private static void nextVisitFourteenDays(){
-		IsantePlusReportsUtil.registerReportsWithoutParams("visitNextFourteenDays.sql","isanteplusreports.quatorzeJoursLibelle",
+		IsantePlusReportsUtil.registerReportsWithoutParams("visitNextFourteenDays.sql",MessageUtil.translate("isanteplusreports.quatorzeJoursLibelle"),
 				MessageUtil.translate("isanteplusreports.quatorzeJoursLibelle"), IsantePlusReportsProperties.FOURTEEN_DAYS_REPORT_DEFINITION_UUID);
 	}
 	private static void patientAgeGroup(){
@@ -185,7 +186,7 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void numberVisitsByMonth(){
-		IsantePlusReportsUtil.registerReportsWithoutParams("numberVisitsByMonth.sql","isanteplusreports.numberVisitByMonth",
+		IsantePlusReportsUtil.registerOtherReportsWithoutParams("numberVisitsByMonth.sql","isanteplusreports.numberVisitByMonth",
 				MessageUtil.translate("isanteplusreports.numberVisitByMonth"), IsantePlusReportsProperties.NUMBERVISITSBYMONTH);
 		
 	}
@@ -196,7 +197,7 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void dispensingMedications(){
-		IsantePlusReportsUtil.registerReportsWithoutParams("dispensingMedications.sql","isanteplusreports.dispensingMedications",
+		IsantePlusReportsUtil.registerOtherReportsWithoutParams("dispensingMedications.sql","isanteplusreports.dispensingMedications",
 				MessageUtil.translate("isanteplusreports.dispensingMedications"), IsantePlusReportsProperties.DISPENSINGMEDICATIONS);
 	}
 	
@@ -227,17 +228,17 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void drugsPrescription(){
-		IsantePlusReportsUtil.registerReportsWithoutParams("medicamentPrescrit.sql","isanteplusreports.drugsPrescriptionAmount",
+		IsantePlusReportsUtil.registerOtherReportsWithoutParams("medicamentPrescrit.sql","isanteplusreports.drugsPrescriptionAmount",
 				MessageUtil.translate("isanteplusreports.drugsPrescriptionAmount"), IsantePlusReportsProperties.DRUGS_PRESCRIPTION_UUID);
 	}
 	
 	private static void labPrescription() {
-		IsantePlusReportsUtil.registerReportsWithoutParams("analyses_laboratoire_prescrites.sql","isanteplusreports.labPrescription",
+		IsantePlusReportsUtil.registerOtherReportsWithoutParams("analyses_laboratoire_prescrites.sql","isanteplusreports.labPrescription",
 				MessageUtil.translate("isanteplusreports.labPrescription"), IsantePlusReportsProperties.LAB_PRESCRIPTION_UUID);
 	}
 	
 	private static void labPerfomed() {
-		IsantePlusReportsUtil.registerReportsWithoutParams("analyses_laboratoire_effectues.sql","isanteplusreports.labDone",
+		IsantePlusReportsUtil.registerOtherReportsWithoutParams("analyses_laboratoire_effectues.sql","isanteplusreports.labDone",
 				MessageUtil.translate("isanteplusreports.labDone"), IsantePlusReportsProperties.LAB_DONE_UUID);
 	}
 	
@@ -262,7 +263,7 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void saveAlertReport() {
-		IsantePlusReportsUtil.registerReportsWithoutParams("alert.sql","isanteplusreports.alert",
+		IsantePlusReportsUtil.registerOtherReportsWithoutParams("alert.sql","isanteplusreports.alert",
 				MessageUtil.translate("isanteplusreports.alert"), IsantePlusReportsProperties.ALERT_REPORT_DEFINITION_UUID);
 	}
 	
@@ -483,6 +484,12 @@ public class RegisterAllOtherReports extends SessionContext {
 	private static void listOfExposedInfants(){
 		IsantePlusReportsUtil.registerReportsWithoutParams("list_of_exposed_infants.sql","isanteplusreports.list_of_exposed_infants",
 				MessageUtil.translate("isanteplusreports.list_of_exposed_infants"), IsantePlusReportsProperties.LIST_OF_EXPOSED_INFANTS_UUID);
+	
+	}
+	
+	private static void artDispensationFollowUp(){
+		IsantePlusReportsUtil.registerReportsWithoutParams("ART_dispensation_follow_up.sql",MessageUtil.translate("isanteplusreports.art_dispensation_follow_up"),
+				MessageUtil.translate("isanteplusreports.art_dispensation_follow_up"), IsantePlusReportsProperties.ART_DISPENSATION_FOLLOW_UP_UUID);
 	
 	}
 	

@@ -14,4 +14,5 @@ WHERE (
 		((plab.test_id=1042 OR plab.test_id=1040)
 		AND plab.test_result=703 AND plab.date_test_done BETWEEN :startDate AND :endDate))
 AND phv.actual_vih_status=1405
+AND phv.voided <> 1
 AND phv.encounter_date BETWEEN :startDate AND :endDate;

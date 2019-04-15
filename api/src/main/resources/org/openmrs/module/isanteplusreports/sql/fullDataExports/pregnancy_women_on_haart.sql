@@ -1,4 +1,6 @@
-SELECT COUNT(DISTINCT ppr.patient_id) as Total 
+select DISTINCT p.st_id as 'NO. de patient attribué par le site', p.national_id as 'Numéro d\'identité national',
+p.given_name as Prénom,p.family_name as Nom, p.gender as Sexe,
+TIMESTAMPDIFF(YEAR, p.birthdate,DATE(now())) as Age,p.telephone as Téléphone
 FROM isanteplus.patient_pregnancy ppr
 LEFT OUTER JOIN  isanteplus.patient_laboratory plab
 ON ppr.patient_id=plab.patient_id

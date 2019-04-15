@@ -14,8 +14,7 @@ COUNT(DISTINCT CASE WHEN ((p.vih_status = 1 OR p.vih_status = 0 ) AND DATE(enc.e
 						THEN p.patient_id else null END) AS 'Total Patient'
   FROM isanteplus.patient p LEFT OUTER JOIN openmrs.encounter enc
  ON p.patient_id = enc.patient_id
- WHERE p.voided <> 1
- AND p.location_id = :location;				   
+ WHERE p.voided <> 1;				   
 						   
 						   
 						   

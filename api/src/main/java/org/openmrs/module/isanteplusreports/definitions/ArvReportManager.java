@@ -22,6 +22,7 @@ import org.openmrs.module.emrapi.EmrApiProperties;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 //import org.openmrs.module.isanteplusreports.IsanteplusReportsProperties;
 import org.openmrs.module.isanteplusreports.dataset.definitions.ArvByPeriodDataSetDefinition;
+import org.openmrs.module.reporting.common.MessageUtil;
 //import org.openmrs.module.pihcore.config.ConfigDescriptor;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.report.ReportDesign;
@@ -84,8 +85,8 @@ public class ArvReportManager extends BaseReportManager {
 	@Override
 	public List<Parameter> getParameters() {
 		List<Parameter> l = new ArrayList<Parameter>();
-		l.add(new Parameter("startDate", "From Date", Date.class));
-		l.add(new Parameter("endDate", "To Date", Date.class));
+		l.add(new Parameter("startDate", MessageUtil.translate("isanteplusreports.parameters.startdate"), Date.class));
+		l.add(new Parameter("endDate", MessageUtil.translate("isanteplusreports.parameters.enddate"), Date.class));
 		return l;
 	}
 	

@@ -24,7 +24,7 @@
   			
 	    	<% parameter.each { %>
 	    			<tr>
-			    		<td><b> ${ui.format(it.getName())} </b></td>
+			    		<td><b> ${ ui.format(it.getLabel()) } </b></td>
 			    		<td> ${ui.format(dataset.getContext().getParameterValue(it.getName()))} </td>
 			    		
 		    		</tr>

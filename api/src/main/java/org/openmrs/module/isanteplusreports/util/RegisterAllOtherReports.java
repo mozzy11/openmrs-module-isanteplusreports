@@ -38,7 +38,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberVisitsByMonth();
 		numberPatientBySex();
 		dispensingMedications();
-		patientsStatusList();
+		/*patientsStatusList();*/
 		patientsReceivingARVByPeriod();
 		drugsPrescription();
 		labPrescription();
@@ -201,11 +201,11 @@ public class RegisterAllOtherReports extends SessionContext {
 				MessageUtil.translate("isanteplusreports.dispensingMedications"), IsantePlusReportsProperties.DISPENSINGMEDICATIONS);
 	}
 	
-	private static void patientsStatusList() {
+	/*private static void patientsStatusList() {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("patient_status.sql","isanteplusreports.patientStatus",
 				MessageUtil.translate("isanteplusreports.patientStatus"), IsantePlusReportsProperties.PATIENTSTATUS);
 	}
-	
+	*/
 	private static void patientStartingArv(){
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("patientStartingArv.sql","isanteplusreports.patientStartedArv",
 				MessageUtil.translate("isanteplusreports.patientStartedArv"), IsantePlusReportsProperties.PATIENT_STARTED_ARV_REGIMEN_UUID);

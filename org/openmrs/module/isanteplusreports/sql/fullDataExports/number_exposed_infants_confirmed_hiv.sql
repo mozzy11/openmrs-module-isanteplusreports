@@ -1,6 +1,10 @@
 /*Nombre d'enfants exposés confirmés VIH (+) */
-SELECT COUNT(DISTINCT phv.patient_id) as Total 
-FROM isanteplus.pediatric_hiv_visit phv
+select DISTINCT pat.st_id as 'NO. de patient attribué par le site', pat.national_id as 'Numéro d\'identité national',
+pat.given_name as Prénom,pat.family_name as Nom, pat.gender as Sexe,
+TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as Âge, pat.telephone as Téléphone,
+pat.mother_name as Contact 
+FROM isanteplus.patient pat INNER JOIN isanteplus.pediatric_hiv_visit phv
+ON pat.patient_id = phv.patient_id
 LEFT OUTER JOIN  isanteplus.patient_laboratory plab
 ON plab.patient_id=phv.patient_id
 LEFT OUTER JOIN isanteplus.virological_tests vt

@@ -123,7 +123,7 @@ public class ArvByPeriodDataSetEvaluator implements DataSetEvaluator {
 		if (startDate != null) {
 			query.setTimestamp("startDate", startDate);
 		}
-		if (startDate != null) {
+		if (endDate != null) {
 			query.setTimestamp("endDate", endDate);
 		}
 		

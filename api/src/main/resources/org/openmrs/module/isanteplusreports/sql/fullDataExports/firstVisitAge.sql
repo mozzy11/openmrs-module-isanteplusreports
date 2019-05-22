@@ -24,5 +24,7 @@ select
         AND p.voided <> 1
         AND enc.patient_id NOT IN (select e.patient_id from openmrs.encounter e, openmrs.encounter_type et
                                    WHERE e.encounter_type = et.encounter_type_id AND et.uuid = '9d0113c6-f23a-4461-8428-7e9a7344f2ba')
-        AND DATE(enc.encounter_datetime) BETWEEN :startDate AND :endDate;
+        
+           AND p.birthdate is not null                        
+           AND DATE(enc.encounter_datetime) BETWEEN :startDate AND :endDate;
       

@@ -21,6 +21,7 @@ import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusOtherHtmlR
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleOtherHtmlReportRenderer;
 import org.openmrs.module.reporting.common.ContentType;
+import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.definition.SqlDataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.service.DataSetDefinitionService;
 import org.openmrs.module.reporting.definition.service.SerializedDefinitionService;
@@ -52,12 +53,12 @@ public class IsantePlusReportsUtil {
 	
 	static IsantePlusReportsProperties props = new IsantePlusReportsProperties();
 	
-	static Parameter startDate = new Parameter("startDate", "isanteplusreports.parameters.startdate", Date.class);
+	static Parameter startDate = new Parameter("startDate", MessageUtil.translate("isanteplusreports.parameters.startdate"), Date.class);
 	
-	static Parameter endDate = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
+	static Parameter endDate = new Parameter("endDate", MessageUtil.translate("isanteplusreports.parameters.enddate"), Date.class);
 	
-	static Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);
-
+	static Parameter location = new Parameter("location", MessageUtil.translate("isanteplusreports.parameters.location"), Location.class);
+	
 	/**
 	 * Given a location on the classpath, return the contents of this resource as a String
 	 */
@@ -317,7 +318,7 @@ public class IsantePlusReportsUtil {
         sqlData.addParameter(startDate);
         sqlData.addParameter(endDate);
         Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-
+        
         Map<String, Object> mappings = new HashMap<String, Object>();
         mappings.put("startDate", "${startDate}");
         mappings.put("endDate", "${endDate}");
@@ -347,7 +348,5 @@ public class IsantePlusReportsUtil {
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
     }
-	
-	
 	
 }

@@ -156,11 +156,10 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		//PatientIdentifierType primaryIdentifierType = emrApiProperties.getPrimaryIdentifierType();
 		StringBuilder sqlQuery = new StringBuilder("select "
 		        + "distinct p.st_id as st_id, p.patient_id, p.national_id as national_id, p.given_name as Prénom, p.family_name as Nom, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Age, p.gender as Sexe");
-		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_on_arv parv, (select pdisp.patient_id, MAX(ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date))) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.voided <> 1 AND (pdisp.rx_or_prophy = 138405 OR pdisp.rx_or_prophy is null) AND ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date)) BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY 1) B  ");
+		sqlQuery.append(" FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, (select pdisp.patient_id, MAX(ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date))) as visit_date FROM isanteplus.patient_dispensing pdisp WHERE pdisp.arv_drug=1065 AND pdisp.voided <> 1 AND (pdisp.rx_or_prophy = 138405 OR pdisp.rx_or_prophy is null) AND ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date)) BETWEEN '" + startDate + "' AND '" + endDate + "' GROUP BY 1) B  ");
 		sqlQuery.append(" WHERE p.patient_id=pdis.patient_id");
-		sqlQuery.append(" AND pdis.patient_id=parv.patient_id");
 		sqlQuery.append(" AND pdis.patient_id=B.patient_id");
-		sqlQuery.append(" AND pdis.visit_date=B.visit_date");
+		sqlQuery.append(" AND ifnull(DATE(pdis.dispensation_date),DATE(pdis.visit_date)) = B.visit_date");
 		sqlQuery.append(" AND (pdis.rx_or_prophy = 138405 OR pdis.rx_or_prophy is null)");
 		sqlQuery.append(" AND B.visit_date < pdis.next_dispensation_date");
 		sqlQuery.append(" AND pdis.arv_drug = 1065");

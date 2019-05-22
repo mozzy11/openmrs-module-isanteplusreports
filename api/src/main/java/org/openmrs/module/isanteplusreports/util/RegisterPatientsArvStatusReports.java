@@ -26,6 +26,7 @@ public class RegisterPatientsArvStatusReports extends SessionContext {
 		listPatientsLostToFollowUpOnArt();
 		listPatientsLostToFollowUpOnPreArt();
 		listPatientsActiveOnPreArt();
+		/*listPatientsActiveInactive();*/
 		
 	}
 	
@@ -35,7 +36,7 @@ public class RegisterPatientsArvStatusReports extends SessionContext {
 	}
 	
 	private static void listPatientsDeathOnArt(){
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_death_on_art.sql","isanteplusreports.death_on_art",
+		IsantePlusReportsUtil.registerReportsWithOtherStartAndEndDateParams("list_patients_death_on_art.sql","isanteplusreports.death_on_art",
 				MessageUtil.translate("isanteplusreports.death_on_art"), IsantePlusReportsProperties.LIST_PATIENTS_DEATH_ON_ART);
 	}
 	
@@ -82,6 +83,12 @@ public class RegisterPatientsArvStatusReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("list_patients_active_on_pre_art.sql","isanteplusreports.list_patients_active_on_pre_art",
 				MessageUtil.translate("isanteplusreports.list_patients_active_on_pre_art"), IsantePlusReportsProperties.LIST_PATIENTS_ACTIVE_ON_PRE_ART_UUID);
 	}
+	
+	/*private static void listPatientsActiveInactive(){
+		IsantePlusReportsUtil.registerHivStatus("patient_status.sql","isanteplusreports.patientStatus",
+				MessageUtil.translate("isanteplusreports.patientStatus"), IsantePlusReportsProperties.PATIENTSTATUS);
+	}
+     */
 
 
 }

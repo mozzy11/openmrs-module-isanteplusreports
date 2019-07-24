@@ -11,12 +11,10 @@ SELECT
     ) AS 'maleNumerator',
     COUNT(DISTINCT CASE WHEN (
             p.gender = 'F'
-            AND pv.adherence_evaluation IS NOT NULL
         ) THEN p.patient_id ELSE null END
     ) AS 'femaleDenominator',
     COUNT(DISTINCT CASE WHEN (
             p.gender = 'M'
-            AND pv.adherence_evaluation IS NOT NULL
         ) THEN p.patient_id ELSE null END
         ) AS 'maleDenominator'
 FROM isanteplus.patient p
@@ -31,6 +29,7 @@ WHERE p.vih_status = '1'
         AND pd.dispensation_date <= DATE_SUB(:currentDate, INTERVAL 3 MONTH)
     )
     AND pv.visit_date BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
+    AND pv.adherence_evaluation IS NOT NULL 
     AND p.patient_id NOT IN (
         SELECT discon.patient_id
         FROM isanteplus.discontinuation_reason discon

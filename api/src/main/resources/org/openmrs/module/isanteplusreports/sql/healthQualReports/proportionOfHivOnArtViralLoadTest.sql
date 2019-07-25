@@ -50,7 +50,7 @@ WHERE
         FROM isanteplus.patient_dispensing pd
         WHERE
             pd.drug_id IN ( SELECT arvd.drug_id FROM isanteplus.arv_drugs arvd)
-            AND pd.dispensation_date <= DATE_SUB(:startDate, INTERVAL 6 MONTH)
+            AND pd.dispensation_date <= DATE_SUB(:endDate, INTERVAL 6 MONTH)
     )
     AND (
         p.patient_id IN (
@@ -63,8 +63,12 @@ WHERE
             FROM isanteplus.patient_prescription pp
             WHERE
                 DATE(pp.visit_date) BETWEEN :startDate AND :endDate
-                AND pp.rx_or_prophy = 138405
         )
+        OR p.patient_id IN (
+			SELECT plab.patient_id
+            FROM isanteplus.patient_laboratory plab
+            WHERE DATE(plab.visit_date) BETWEEN :startDate AND :endDate
+        )        
     )
     AND p.patient_id NOT IN ( -- Exclude deceased (159), transfer (159492)
         SELECT discon.patient_id

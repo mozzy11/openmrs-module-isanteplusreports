@@ -2,10 +2,9 @@ SELECT
     COUNT( DISTINCT CASE WHEN (
         p.gender = 'F'
         AND (
-            pv.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
+            pv.visit_date BETWEEN DATE_SUB(:currentDate, INTERVAL :period MONTH) AND :currentDate  AND pv.encounter_type IN (9,10) -- Paeds initial and followup encounter types
             OR (    -- Pediatric Rx
-                pp.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
-                AND pp.rx_or_prophy = 138405
+                pp.visit_date BETWEEN DATE_SUB(:currentDate, INTERVAL :period MONTH) AND :currentDate
             )
         )
     ) THEN p.patient_id else null END
@@ -13,10 +12,9 @@ SELECT
     COUNT( DISTINCT CASE WHEN (
         p.gender = 'M'
         AND (
-            pv.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
+            pv.visit_date BETWEEN DATE_SUB(:currentDate, INTERVAL :period MONTH) AND :currentDate  AND pv.encounter_type IN (9,10) -- Paeds initial and followup encounter types
             OR (    -- Pediatric Rx
-                pp.visit_date BETWEEN DATE_SUB(:startDate, INTERVAL :period MONTH) AND :startDate
-                AND pp.rx_or_prophy = 138405
+                pp.visit_date BETWEEN DATE_SUB(:currentDate, INTERVAL :period MONTH) AND :currentDate
             )
         )
     ) THEN p.patient_id else null END
@@ -38,7 +36,8 @@ FROM
     LEFT JOIN isanteplus.patient_prescription pp
         ON poa.patient_id = pp.patient_id
 WHERE
-    p.patient_id NOT IN (        -- excluding 
+    p.vih_status = '1' -- HIV+ patient
+    AND p.patient_id NOT IN (        -- excluding 
         SELECT discon.patient_id
         FROM isanteplus.discontinuation_reason discon
         WHERE discon.reason IN (159,1667,159492)

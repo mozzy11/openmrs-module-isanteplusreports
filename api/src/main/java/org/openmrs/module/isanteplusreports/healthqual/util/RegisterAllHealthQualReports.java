@@ -212,7 +212,7 @@ public class RegisterAllHealthQualReports {
     }
 
     private static void healthQualChildrenRegularlyFollowedOnArt() {
-        registerHealthEqualReportWithStartDateAndPeriodParams(PEDIATRIC_1_INDICATOR_SQL, PEDIATRIC_1_INDICATOR_MESSAGE,
+        registerHealthEqualReportWithCurrentDateAndPeriodParams(PEDIATRIC_1_INDICATOR_SQL, PEDIATRIC_1_INDICATOR_MESSAGE,
             HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID);
     }
 

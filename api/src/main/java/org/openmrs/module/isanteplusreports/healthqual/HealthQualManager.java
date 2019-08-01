@@ -49,7 +49,8 @@ public class HealthQualManager {
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_10_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_11_INDICATOR_UUID,
 			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID,
-			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID
+			HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID,
+            HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_14_INDICATOR_UUID
 	};
 	
 	private Map<String, HealthQualIndicatorOption> options = new HashMap<>();

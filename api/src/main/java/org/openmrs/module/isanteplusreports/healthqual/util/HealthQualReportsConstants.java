@@ -67,6 +67,8 @@ public final class HealthQualReportsConstants {
 
     static final String PEDIATRIC_13_INDICATOR_SQL = "pediatricNegativePcrTest.sql";
 
+    static final String PEDIATRIC_14_INDICATOR_SQL = "earlyInfantDiagnosis.sql";
+    
     // Indicator message properties
     static final String ADULT = "isanteplusreports.adult";
 
@@ -132,6 +134,8 @@ public final class HealthQualReportsConstants {
 
     static final String PEDIATRIC_13_INDICATOR_MESSAGE = PEDIATRIC + 13;
 
+    static final String PEDIATRIC_14_INDICATOR_MESSAGE = PEDIATRIC + 14;
+    
     // indicators' UUIDs
     public static final String NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID = "69679207-04a8-4fb9-b3ad-75a8dd5c0a58";
 
@@ -192,4 +196,7 @@ public final class HealthQualReportsConstants {
     public static final String HEALTH_QUAL_PEDIATRIC_12_INDICATOR_UUID = "2baddb89-084b-4152-b9ce-3b9826e79495";
 
     public static final String HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID = "28a71811-5511-40eb-8ca5-79464cd3448a";
+    
+    public static final String HEALTH_QUAL_PEDIATRIC_14_INDICATOR_UUID = "1399880c-93cd-4c02-871b-80885ef8c0f2";
+    
 }

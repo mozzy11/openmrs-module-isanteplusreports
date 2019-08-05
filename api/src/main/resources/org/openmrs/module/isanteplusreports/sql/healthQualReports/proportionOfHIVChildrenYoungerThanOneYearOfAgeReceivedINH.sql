@@ -24,21 +24,24 @@ SELECT
 FROM isanteplus.patient p
 LEFT JOIN isanteplus.patient_prescription pp
 ON p.patient_id = pp.patient_id
+LEFT JOIN isanteplus.pediatric_hiv_visit phv 
+ON p.patient_id = phv.patient_id
 WHERE
-    p.vih_status = 1
-    AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) < 14
+    (p.vih_status = 1 -- HIV Positive
+    OR  phv.actual_vih_status = 1405)  -- HIV Exposed Infant
     AND p.patient_id IN (
         SELECT pv.patient_id
         FROM isanteplus.health_qual_patient_visit pv
         WHERE
-            pv.is_active_tb IS true
-            AND (
-                DATE(pv.visit_date) BETWEEN :startDate AND :endDate
-                OR (
-                    DATE(pp.visit_date) BETWEEN :startDate AND :endDate
-                    AND pp.rx_or_prophy = 138405
-                )
+            (
+	            pv.visit_date BETWEEN :startDate AND :endDate AND pv.encounter_type IN (9,10) -- Paeds initial and followup encounter types
+	            OR 
+	            pp.visit_date BETWEEN :startDate AND :endDate
+	            OR 
+	            phv.encounter_date BETWEEN :startDate AND :endDate
             )
+            AND pv.is_active_tb IS FALSE -- Exclude those with Active TB 
+    		AND TIMESTAMPDIFF(MONTH, p.birthdate, pv.visit_date) <= 12
     )
     AND p.patient_id NOT IN (
         SELECT discon.patient_id

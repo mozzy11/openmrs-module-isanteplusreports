@@ -96,6 +96,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberHivPatient();
 		listOfExposedInfants();
 		artDispensationFollowUp();
+		numberViralLoadByResultDate();
 	}
 
 	private static void cleanTables() {
@@ -405,6 +406,14 @@ public class RegisterAllOtherReports extends SessionContext {
 	private static void numberChargeViraleByResultDate(){
 		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_patients_charge_virale_moins_plus_mille.sql","isanteplusreports.number_charge_virale_by_result_date",
 				MessageUtil.translate("isanteplusreports.number_charge_virale_by_result_date"), IsantePlusReportsProperties.CHARGE_VIRALE_SELON_DATE_RESULTAT);
+	}
+	
+	/**
+	 * Indicator Report
+	 */
+	private static void numberViralLoadByResultDate(){
+		IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams("isanteplusreports.viral_load_by_result_date",
+				MessageUtil.translate("isanteplusreports.viral_load_by_result_date"), IsantePlusReportsProperties.VIRAL_LOAD_BY_RESULT_DATE);
 	}
 	
 	private static void listPatChargeViraleMoinsMilleByResultDate(){

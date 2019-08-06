@@ -36,6 +36,14 @@ public class RunIsantePlusReportPageRequestMapper implements PageRequestMapper {
 				log.info(request.toString());
 				return true;
 			}
+			else if (request.getPageName().equals("runIndicatorReport")) {
+				// change to the custom login provided by the module
+				request.setProviderNameOverride("isanteplusreports");
+				request.setPageNameOverride("runIsantePlusIndicatorReport");
+
+				log.info(request.toString());
+				return true;
+			} 
 		}
 		return false;
 	}

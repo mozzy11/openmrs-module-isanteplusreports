@@ -18,28 +18,18 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.isanteplusreports.library.indicator.ReportIndicators;
-import org.openmrs.module.isanteplusreports.library.queries.ReportQueries;
-import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusIndicatorReportHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusOtherHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleOtherHtmlReportRenderer;
-import org.openmrs.module.isanteplusreports.reporting.utils.ColumnParameters;
-import org.openmrs.module.isanteplusreports.reporting.utils.EmrReportingUtils;
-import org.openmrs.module.isanteplusreports.reporting.utils.ReportUtils;
 import org.openmrs.module.reporting.common.ContentType;
-import org.openmrs.module.reporting.dataset.definition.CohortIndicatorDataSetDefinition;
-import org.openmrs.module.reporting.dataset.definition.DataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.SqlDataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.service.DataSetDefinitionService;
 import org.openmrs.module.reporting.definition.service.SerializedDefinitionService;
@@ -209,47 +199,6 @@ public class IsantePlusReportsUtil {
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-	}
-
-	public static void registerIndicatorReportsWithStartAndEndDateParams(String messageProperties,
-			String messagePropertiesFr, String uuid) {
-
-		Map<String, Object> mappings = new HashMap<String, Object>();
-		mappings.put("startDate", "${startDate}");
-		mappings.put("endDate", "${endDate}");
-
-		String indParams = "startDate=${startDate},endDate=${endDate},location=${location}";
-
-		DataSetDefinition dsd = dataSettDefinition(indParams, messageProperties, messageProperties);
-		dsd.addParameter(startDate);
-		dsd.addParameter(endDate);
-		Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
-
-		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-		repDefinition.addParameter(startDate);
-		repDefinition.addParameter(endDate);
-		repDefinition.addDataSetDefinition(dsd, mappings);
-		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-	}
-
-	private static CohortIndicatorDataSetDefinition dataSettDefinition(String indParams, String name,
-			String description) {
-		CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
-
-		dsd.setName(name);
-		dsd.setDescription(description);
-
-		ColumnParameters total = new ColumnParameters("total", "total", "");
-
-		List<ColumnParameters> allColumns = Arrays.asList(total);
-
-		EmrReportingUtils.addRow(dsd, "VL_LESS", "VIRAL LOAD < 1000 COPIES",
-				ReportUtils.map(ReportIndicators.vlIndicator(ReportQueries.VL_LESS_1000), indParams), allColumns,
-				Arrays.asList("01"));
-		EmrReportingUtils.addRow(dsd, "VL_MORE", "VIRAL LOAD >= 1000 COPIES",
-				ReportUtils.map(ReportIndicators.vlIndicator(ReportQueries.VL_MORE_1000), indParams), allColumns,
-				Arrays.asList("01"));
-		return dsd;
 	}
 
 	public static void registerReportsWithStartAndEndDateParamsOtherRenderer(String sql, String messageProperties,

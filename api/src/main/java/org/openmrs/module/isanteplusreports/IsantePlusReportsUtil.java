@@ -14,6 +14,15 @@
 
 package org.openmrs.module.isanteplusreports;
 
+import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.FULL_DATA_EXPORTS_RESOURCE_PATH;
+
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+
 import org.apache.commons.io.IOUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
@@ -35,63 +44,52 @@ import org.openmrs.module.reporting.report.renderer.TextTemplateRenderer;
 import org.openmrs.module.reporting.report.service.ReportService;
 import org.openmrs.util.OpenmrsClassLoader;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
-
-import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstants.FULL_DATA_EXPORTS_RESOURCE_PATH;
-
 /**
  * Utility methods used by the module
  */
 
 public class IsantePlusReportsUtil {
-	
+
 	static IsantePlusReportsProperties props = new IsantePlusReportsProperties();
-	
+
 	static Parameter startDate = new Parameter("startDate", "isanteplusreports.parameters.startdate", Date.class);
-	
+
 	static Parameter endDate = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
-	
+
 	static Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);
 
 	/**
-	 * Given a location on the classpath, return the contents of this resource as a String
+	 * Given a location on the classpath, return the contents of this resource as a
+	 * String
 	 */
 	public static String getStringFromResource(String resourceName) {
 		InputStream is = null;
 		try {
 			is = OpenmrsClassLoader.getInstance().getResourceAsStream(resourceName);
 			return IOUtils.toString(is, "UTF-8");
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Unable to load resource: " + resourceName, e);
-		}
-		finally {
+		} finally {
 			IOUtils.closeQuietly(is);
 		}
 	}
-	
+
 	/**
-	 * Copied from the reporting module ReportUtil class. Using this one due to bug fix that will be
-	 * available in 0.7.8 Also added ability to specify properties Also, needed to remove the
-	 * character encoding specification here... :/
+	 * Copied from the reporting module ReportUtil class. Using this one due to bug
+	 * fix that will be available in 0.7.8 Also added ability to specify properties
+	 * Also, needed to remove the character encoding specification here... :/
 	 * 
 	 * @throws java.io.UnsupportedEncodingException
 	 */
 	public static RenderingMode renderingModeFromResource(String label, String resourceName, Properties properties) {
 		InputStreamReader reader;
-		
+
 		try {
 			reader = new InputStreamReader(OpenmrsClassLoader.getInstance().getResourceAsStream(resourceName));
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new IllegalArgumentException("Error reading template from stream", e);
 		}
-		
+
 		final ReportDesign design = new ReportDesign();
 		ReportDesignResource resource = new ReportDesignResource();
 		resource.setName("template");
@@ -107,23 +105,22 @@ public class IsantePlusReportsUtil {
 		ReportRenderer renderer = null;
 		try {
 			resource.setContents(IOUtils.toByteArray(reader));
-		}
-		catch (Exception e) {
+		} catch (Exception e) {
 			throw new RuntimeException("Error reading template from stream", e);
 		}
-		
+
 		design.getResources().add(resource);
 		design.setProperties(properties);
 		if ("xls".equals(extension)) {
 			renderer = new ExcelTemplateRenderer() {
-				
+
 				public ReportDesign getDesign(String argument) {
 					return design;
 				}
 			};
 		} else {
 			renderer = new TextTemplateRenderer() {
-				
+
 				public ReportDesign getDesign(String argument) {
 					return design;
 				}
@@ -136,7 +133,8 @@ public class IsantePlusReportsUtil {
 		return sqlDataSetDefinitionWithResourcePath(resourceName, name, description, FULL_DATA_EXPORTS_RESOURCE_PATH);
 	}
 
-	public static SqlDataSetDefinition sqlDataSetDefinitionWithResourcePath(String resourceName, String name, String description, String resourcePath) {
+	public static SqlDataSetDefinition sqlDataSetDefinitionWithResourcePath(String resourceName, String name,
+			String description, String resourcePath) {
 		String sql = IsantePlusReportsUtil.getStringFromResource(resourcePath + resourceName);
 		SqlDataSetDefinition definition = new SqlDataSetDefinition();
 		definition.setSqlQuery(sql);
@@ -154,103 +152,114 @@ public class IsantePlusReportsUtil {
 		return rDefinition;
 	}
 
-	public static ReportDesign reportDesign(String name, ReportDefinition rDefinition, Class<? extends ReportRenderer> rendererType) {
+	public static ReportDesign reportDesign(String name, ReportDefinition rDefinition,
+			Class<? extends ReportRenderer> rendererType) {
 		ReportDesign rDesign = new ReportDesign();
 		rDesign.setName(name);
 		rDesign.setReportDefinition(rDefinition);
 		rDesign.setRendererType(rendererType);
 		return rDesign;
 	}
-	
-	public static void registerReportsWithoutParams(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-        repDefinition.addDataSetDefinition(sqlData, null);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-        
-        ReportService rs = Context.getService(ReportService.class);
+
+	public static void registerReportsWithoutParams(String sql, String messageProperties, String messagePropertiesFr,
+			String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-    }
+	}
 
-	public static void registerReportsWithStartAndEndDateParams(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
-        sqlData.addParameter(startDate);
-        sqlData.addParameter(endDate);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+	public static void registerReportsWithStartAndEndDateParams(String sql, String messageProperties,
+			String messagePropertiesFr, String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
 
-        Map<String, Object> mappings = new HashMap<String, Object>();
-        mappings.put("startDate", "${startDate}");
-        mappings.put("endDate", "${endDate}");
-        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-        repDefinition.addParameter(startDate);
-        repDefinition.addParameter(endDate);
-        repDefinition.addDataSetDefinition(sqlData, mappings);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-        
-        ReportService rs = Context.getService(ReportService.class);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-    }
-	
-	public static void registerReportsWithStartAndEndDateParamsOtherRenderer(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
-        sqlData.addParameter(startDate);
-        sqlData.addParameter(endDate);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+	}
 
-        Map<String, Object> mappings = new HashMap<String, Object>();
-        mappings.put("startDate", "${startDate}");
-        mappings.put("endDate", "${endDate}");
-        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-        repDefinition.addParameter(startDate);
-        repDefinition.addParameter(endDate);
-        repDefinition.addDataSetDefinition(sqlData, mappings);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-        
-        ReportService rs = Context.getService(ReportService.class);
+	public static void registerReportsWithStartAndEndDateParamsOtherRenderer(String sql, String messageProperties,
+			String messagePropertiesFr, String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusOtherHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-    }
-	
-	public static void registerReportsWithStartAndEndDateAndLocationParams(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
-        sqlData.addParameter(startDate);
-        sqlData.addParameter(endDate);
-        sqlData.addParameter(location);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+	}
 
-        Map<String, Object> mappings = new HashMap<String, Object>();
-        mappings.put("startDate", "${startDate}");
-        mappings.put("endDate", "${endDate}");
-        mappings.put("location", "${location}");
-        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-        repDefinition.addParameter(startDate);
-        repDefinition.addParameter(endDate);
-        repDefinition.addParameter(location);
-        repDefinition.addDataSetDefinition(sqlData, mappings);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-        
-        ReportService rs = Context.getService(ReportService.class);
+	public static void registerReportsWithStartAndEndDateAndLocationParams(String sql, String messageProperties,
+			String messagePropertiesFr, String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		sqlData.addParameter(location);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		mappings.put("location", "${location}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addParameter(location);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-    }
+	}
 
-	public static void registerLabOrderReportWithResults(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
+	public static void registerLabOrderReportWithResults(String sql, String messageProperties,
+			String messagePropertiesFr, String uuid) {
 		Parameter resultStatus = createLabOrderResultParameter();
 		Parameter orderByDate = createLabOrderSortByDateParameter();
 		Parameter testType = createLabOrderTestTypeParameter();
 
-		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
 		sqlData.addParameter(startDate);
 		sqlData.addParameter(endDate);
 		sqlData.addParameter(resultStatus);
@@ -285,69 +294,72 @@ public class IsantePlusReportsUtil {
 		Properties widgetConfiguration = new Properties();
 		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
 		widgetConfiguration.put("uiframeworkFragment", "laborder/parameters/testTypeDropDown");
-		return new Parameter("testType", "isanteplusreports.parameters.lab_order.test_type", String.class, widgetConfiguration);
+		return new Parameter("testType", "isanteplusreports.parameters.lab_order.test_type", String.class,
+				widgetConfiguration);
 	}
 
 	private static Parameter createLabOrderResultParameter() {
 		Properties widgetConfiguration = new Properties();
 		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
 		widgetConfiguration.put("uiframeworkFragment", "laborder/parameters/orderResultDropDown");
-		return new Parameter("result", "isanteplusreports.parameters.lab_order.result", String.class, widgetConfiguration);
+		return new Parameter("result", "isanteplusreports.parameters.lab_order.result", String.class,
+				widgetConfiguration);
 	}
 
 	private static Parameter createLabOrderSortByDateParameter() {
 		Properties widgetConfiguration = new Properties();
 		widgetConfiguration.put("uiframeworkFragmentProvider", "isanteplusreports");
 		widgetConfiguration.put("uiframeworkFragment", "laborder/parameters/sortByDateDropDown");
-		return new Parameter("sortByDate", "isanteplusreports.parameters.lab_order.order_by", String.class, widgetConfiguration);
+		return new Parameter("sortByDate", "isanteplusreports.parameters.lab_order.order_by", String.class,
+				widgetConfiguration);
 	}
 
 	// has been moved to ReportUtil in reporting module, use the one there
-	/*@Deprecated
-	public static List<Map<String, Object>> simplify(DataSet dataSet) {
-		List<Map<String, Object>> simplified = new ArrayList<Map<String, Object>>();
-		for (DataSetRow row : dataSet) {
-			simplified.add(row.getColumnValuesByKey());
-		}
-		return simplified;
-	}*/
-	
-	public static void registerReportsWithOtherStartAndEndDateParams(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
-        sqlData.addParameter(startDate);
-        sqlData.addParameter(endDate);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+	/*
+	 * @Deprecated public static List<Map<String, Object>> simplify(DataSet dataSet)
+	 * { List<Map<String, Object>> simplified = new ArrayList<Map<String,
+	 * Object>>(); for (DataSetRow row : dataSet) {
+	 * simplified.add(row.getColumnValuesByKey()); } return simplified; }
+	 */
 
-        Map<String, Object> mappings = new HashMap<String, Object>();
-        mappings.put("startDate", "${startDate}");
-        mappings.put("endDate", "${endDate}");
-        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-        repDefinition.addParameter(startDate);
-        repDefinition.addParameter(endDate);
-        repDefinition.addDataSetDefinition(sqlData, mappings);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-        
-        ReportService rs = Context.getService(ReportService.class);
+	public static void registerReportsWithOtherStartAndEndDateParams(String sql, String messageProperties,
+			String messagePropertiesFr, String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		sqlData.addParameter(startDate);
+		sqlData.addParameter(endDate);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(startDate);
+		repDefinition.addParameter(endDate);
+		repDefinition.addDataSetDefinition(sqlData, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleOtherHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-    }
-	
-	public static void registerOtherReportsWithoutParams(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
-        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
-        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
-        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
-        repDefinition.addDataSetDefinition(sqlData, null);
-        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
-        
-        ReportService rs = Context.getService(ReportService.class);
+	}
+
+	public static void registerOtherReportsWithoutParams(String sql, String messageProperties,
+			String messagePropertiesFr, String uuid) {
+		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
+				messagePropertiesFr, props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+		Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addDataSetDefinition(sqlData, null);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+
+		ReportService rs = Context.getService(ReportService.class);
 		ReportDesign rDesign = reportDesign("Html", repDefinition, IsantePlusSimpleOtherHtmlReportRenderer.class);
 		rs.saveReportDesign(rDesign);
 		ReportDesign rDes = reportDesign("Excel", repDefinition, ExcelTemplateRenderer.class);
 		rs.saveReportDesign(rDes);
-    }
-	
-	
-	
+	}
+
 }

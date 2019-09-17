@@ -1,7 +1,7 @@
 /*Patients avec traitement contre la TB complété
   Patients having completed TB treatment
   */
-select distinct p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,
+select distinct  p.patient_id AS 'Patient Id', p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,
 p.family_name as nom,p.gender as sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Âge,
 stat.name_fr as 'Status de patient', p.last_visit_date as 'Dernière date'
 from isanteplus.patient p

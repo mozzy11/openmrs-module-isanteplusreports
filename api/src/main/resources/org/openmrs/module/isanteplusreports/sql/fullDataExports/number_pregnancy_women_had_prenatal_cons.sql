@@ -1,5 +1,5 @@
 /*Nombre de femmes enceintes vues en première consultation prénatale*/
-select DISTINCT pa.st_id as 'NO. de patient attribué par le site', pa.national_id as 'No. d\'identité nationale',
+select DISTINCT  pa.patient_id AS 'Patient Id', pa.st_id as 'NO. de patient attribué par le site', pa.national_id as 'No. d\'identité nationale',
 pa.given_name as Prénom,
 pa.family_name as Nom, pa.gender as Sexe,TIMESTAMPDIFF(YEAR, pa.birthdate,DATE(now())) as Âge,
 pa.telephone as Telephone FROM isanteplus.patient pa, isanteplus.visit_type vtype, isanteplus.patient_pregnancy pp,

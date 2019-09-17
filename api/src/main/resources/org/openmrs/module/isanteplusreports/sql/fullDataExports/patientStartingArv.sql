@@ -1,5 +1,5 @@
 /*Liste des patients ayant démarré un régime ARV*/
-select distinct DATE(pdis.visit_date) as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
+select distinct  p.patient_id AS 'Patient Id', DATE(pdis.visit_date) as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
 p.national_id as 'Numéro d\'identité national',p.given_name as Nom,
 p.family_name as Prénom, p.gender AS Sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) AS Âge
 FROM isanteplus.patient p,isanteplus.patient_dispensing pdis, 

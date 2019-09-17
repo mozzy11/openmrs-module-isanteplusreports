@@ -1,4 +1,4 @@
-select DISTINCT p.national_id as 'No. d\'identité nationale', p.identifier as 'iSantéPlus ID',p.given_name as Prénom,
+select DISTINCT  p.patient_id AS 'Patient Id', p.national_id as 'No. d\'identité nationale', p.identifier as 'iSantéPlus ID',p.given_name as Prénom,
 p.family_name as Nom, p.gender as Sexe,TIMESTAMPDIFF(YEAR, p.birthdate,DATE(now())) as Âge,
 p.telephone as Téléphone from isanteplus.patient p
 WHERE p.patient_id NOT IN (SELECT pi.patient_id FROM openmrs.patient_identifier pi, openmrs.patient_identifier_type ptype 

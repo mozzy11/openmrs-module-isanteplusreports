@@ -1,4 +1,4 @@
- select DISTINCT pat.st_id as 'NO. de patient attribué par le site', pat.national_id as 'Numéro d\'identité national',
+ select DISTINCT  pat.patient_id AS 'Patient Id', pat.st_id as 'NO. de patient attribué par le site', pat.national_id as 'Numéro d\'identité national',
 pat.given_name as Prénom,pat.family_name as Nom, pat.gender as Sexe,
 TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as Age, pat.last_address as Adresse, pat.telephone as Téléphone,
 pat.mother_name as Contact FROM isanteplus.patient pat, isanteplus.exposed_infants exp_inf
@@ -9,7 +9,7 @@ pat.mother_name as Contact FROM isanteplus.patient pat, isanteplus.exposed_infan
     
  UNION
  
-  select DISTINCT pat.st_id as 'NO. de patient attribué par le site', pat.national_id as 'Numéro d\'identité national',
+  select DISTINCT  pat.patient_id AS 'Patient Id', pat.st_id as 'NO. de patient attribué par le site', pat.national_id as 'Numéro d\'identité national',
 pat.given_name as Prénom,pat.family_name as Nom, pat.gender as Sexe,
 TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as Age, pat.last_address as Adresse, pat.telephone as Téléphone,
 pat.mother_name as Contact FROM isanteplus.patient pat,isanteplus.serological_tests stests

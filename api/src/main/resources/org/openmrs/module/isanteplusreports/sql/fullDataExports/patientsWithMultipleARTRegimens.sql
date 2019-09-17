@@ -1,5 +1,5 @@
 /*Les patients ayant de multiples régimes VIH prescrits / distribués le même jour*/
-select distinct f.name as Fiche, pa.st_id as 'Code ST', pa.national_id as 'Code national', pa.given_name as Prénom, 
+select distinct  p.patient_id AS 'Patient Id', f.name as Fiche, pa.st_id as 'Code ST', pa.national_id as 'Code national', pa.given_name as Prénom, 
 pa.family_name as Nom, pa.gender as Sexe, TIMESTAMPDIFF(YEAR, pa.birthdate,DATE(now())) as Âge, 
 pa.mother_name as 'Nom de la mère', pa.telephone as Téléphone, pa.visit_date as 'Date visite'
 FROM openmrs.encounter en, openmrs.form f, 

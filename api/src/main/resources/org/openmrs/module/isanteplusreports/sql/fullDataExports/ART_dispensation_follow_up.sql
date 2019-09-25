@@ -1,5 +1,5 @@
 /* Suivi dispensation ARV */
-SELECT distinct p.st_id as 'Code ST', p.national_id as 'Code National', p.family_name as Nom, p.given_name as Prénom,
+SELECT distinct  p.patient_id AS 'Patient Id', p.st_id as 'Code ST', p.national_id as 'Code National', p.family_name as Nom, p.given_name as Prénom,
 DATE_FORMAT(DATE(p.birthdate), "%d-%m-%Y") as 'Date de naissance', TIMESTAMPDIFF(YEAR,p.birthdate,now()) AS Âge, p.gender AS Sexe,
 DATE_FORMAT(DATE(p.date_started_arv), "%d-%m-%Y") as 'Date Initiation ARV',
 DATE_FORMAT(DATE(p.last_visit_date), "%d-%m-%Y") as 'Date de Dernière Visite',

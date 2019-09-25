@@ -1,6 +1,6 @@
 /*Patients avec des diagnostics de TB, mais sans traitement
  Patients with TB diagnosis, but no treatment */
-select distinct p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,
+select distinct  p.patient_id AS 'Patient Id', p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,
 p.family_name as nom,p.gender as sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Âge,
 DATE_FORMAT(DATE(p.last_visit_date), "%d-%m-%Y") as 'Dernière date'
 from isanteplus.patient p

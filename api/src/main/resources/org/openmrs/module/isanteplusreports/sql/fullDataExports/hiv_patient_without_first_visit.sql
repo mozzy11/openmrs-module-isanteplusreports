@@ -1,4 +1,4 @@
-select distinct p.st_id as 'No. de patient attribué par le site', p.national_id as 'No. d\'identité nationale',
+select distinct  p.patient_id AS 'Patient Id', p.st_id as 'No. de patient attribué par le site', p.national_id as 'No. d\'identité nationale',
 p.family_name as Nom,p.given_name as Prénom, MAX(DATE(enc.encounter_datetime)) as 'Dernière date'
 from isanteplus.patient p,
  openmrs.encounter enc, openmrs.encounter_type entype

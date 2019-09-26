@@ -1,9 +1,17 @@
 package org.openmrs.module.isanteplusreports.page.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.openmrs.module.isanteplusreports.reporting.utils.IsanteplusIndicatorReportingValue;
 import org.openmrs.module.reporting.ReportingConstants;
 import org.openmrs.module.reporting.dataset.DataSet;
+import org.openmrs.module.reporting.dataset.DataSetColumn;
+import org.openmrs.module.reporting.indicator.dimension.CohortIndicatorAndDimensionResult;
 import org.openmrs.module.reporting.report.ReportData;
 import org.openmrs.module.reporting.report.ReportRequest;
 import org.openmrs.module.reporting.report.renderer.RenderingMode;
@@ -44,11 +52,35 @@ public class ViewIsantePlusIndicatorReportRequestPageController {
 						dataset = reportData.getDataSets().get(key);
 					}
 					if (dataset != null) {
-						model.addAttribute("reportName", dataset.getDefinition().getName());
+                        Map<DataSetColumn, Object> columnValues = dataset.iterator().next().getColumnValues();
+                        HashMap<DataSetColumn, Object> reportingValues = new HashMap<DataSetColumn, Object>();
+                        columnValues.forEach((key, value) -> {
+                            if (value instanceof CohortIndicatorAndDimensionResult) {
+                                IsanteplusIndicatorReportingValue indicatorReportingValue = new IsanteplusIndicatorReportingValue();
+                                String pattern = "([0-9]+/[0-9]+)"; //Extract the numerator and denominator values
+                                Pattern r = Pattern.compile(pattern);
+                                Matcher m = r.matcher(value.toString().replace(" ", ""));
+                                if (m.find()) {
+                                    String values = m.group(0); //This should return something like 1/2 where 1 is the numerator and 2 is the denominator 
+                                    Integer numerator = Integer.parseInt(values.split("/")[0]);
+                                    Integer denominator = Integer.parseInt(values.split("/")[1]);
+                                    Integer percentage = denominator > 0
+                                            ? Math.round(((float) numerator / denominator) * 100)
+                                            : 0;
+                                    indicatorReportingValue.setNumerator(numerator);
+                                    indicatorReportingValue.setDenominator(denominator);
+                                    indicatorReportingValue.setPercentage(percentage);
+                                } else {
+                                    indicatorReportingValue.setNumerator(Integer.parseInt(value.toString()));
+                                }
+                                reportingValues.put(key, indicatorReportingValue);
+                            }
+                        });
+                        model.addAttribute("reportName", dataset.getDefinition().getName());
 						model.addAttribute("parameter", dataset.getDefinition().getParameters());
 						model.addAttribute("dataset", dataset);
 						model.addAttribute("columns", dataset.getMetaData().getColumns());
-						model.addAttribute("columnsvalues", dataset.iterator());
+                        model.addAttribute("reportingValues", reportingValues);
 						model.addAttribute("columnskeys", dataset.iterator().next().getColumnValuesByKey().keySet().toArray());
 						model.addAttribute("request", requestUuid);
 						model.addAttribute("i", 0);

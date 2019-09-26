@@ -15,7 +15,7 @@
 </script>
 
 <div class="result">
-  	<% if(columnsvalues != null) { %>
+  	<% if(reportingValues != null) { %>
   	   <% if(reportName != null) { %>
   	   		<b>${ui.message(reportName)}</b>
   	   <% } %>
@@ -33,21 +33,29 @@
 		</table>
 		<br>
   		<table>
-	    	<% columnsvalues.each { %>
-	    		<% i = 0 %>
-    			<% columns.each { colName -> %>
+	   		<% i = 0 %>
+	    	<% reportingValues.each { reportingValue -> %>
     				<tr>
 	    				<td>
-	    					${ui.format(colName)}
+	    					${ui.format(reportingValue.key)}
 	    				</td>
 			    		<td>
-			    			<a href="${ ui.pageLink("isanteplusreports", "indicatorReportPatientList") }?savedDataSetKey=${reportName}&savedColumnKey=${columnskeys[i]}" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
-			    				${ui.format(it.columnValues[colName])}
-		    				</a>
+			    			<% if (reportingValue.value.denominator != null) { %>
+				    			${ui.format(reportingValue.value.percentage)}% 
+				    			( <a href="${ ui.pageLink("isanteplusreports", "indicatorReportPatientList") }?savedDataSetKey=${reportName}&savedColumnKey=${reportingValue.key.name}&columnKeyType=numerator" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+				    				${ui.format(reportingValue.value.numerator)}
+			    				</a>/
+				    			<a href="${ ui.pageLink("isanteplusreports", "indicatorReportPatientList") }?savedDataSetKey=${reportName}&savedColumnKey=${reportingValue.key.name}&columnKeyType=denominator" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+				    				${ui.format(reportingValue.value.denominator)}
+			    				</a>)
+		    				<% } else { %>
+				    			<a href="${ ui.pageLink("isanteplusreports", "indicatorReportPatientList") }?savedDataSetKey=${reportName}&savedColumnKey=${reportingValue.key.name}&columnKeyType=numerator" onclick="window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;">
+				    				${ui.format(reportingValue.value.numerator)}
+			    				</a>		    				
+		    				<% } %>
 			    		</td>
     					<% i = i + 1 %>
 	    			</tr>
-	    		<% } %>
 	    	<% } %>
     	</table>
      <% } %> 

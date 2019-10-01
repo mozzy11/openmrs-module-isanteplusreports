@@ -18,8 +18,10 @@ import static org.openmrs.module.isanteplusreports.util.IsantePlusReportsConstan
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -29,11 +31,18 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusOtherHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleHtmlReportRenderer;
 import org.openmrs.module.isanteplusreports.report.renderer.IsantePlusSimpleOtherHtmlReportRenderer;
+import org.openmrs.module.isanteplusreports.reporting.utils.ColumnParameters;
+import org.openmrs.module.isanteplusreports.reporting.utils.EmrReportingUtils;
+import org.openmrs.module.isanteplusreports.reporting.utils.ReportUtils;
+import org.openmrs.module.reporting.cohort.definition.SqlCohortDefinition;
 import org.openmrs.module.reporting.common.ContentType;
+import org.openmrs.module.reporting.dataset.definition.CohortIndicatorDataSetDefinition;
+import org.openmrs.module.reporting.dataset.definition.DataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.SqlDataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.service.DataSetDefinitionService;
 import org.openmrs.module.reporting.definition.service.SerializedDefinitionService;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
+import org.openmrs.module.reporting.indicator.CohortIndicator;
 import org.openmrs.module.reporting.report.ReportDesign;
 import org.openmrs.module.reporting.report.ReportDesignResource;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
@@ -114,14 +123,16 @@ public class IsantePlusReportsUtil {
 		if ("xls".equals(extension)) {
 			renderer = new ExcelTemplateRenderer() {
 
-				public ReportDesign getDesign(String argument) {
+				@Override
+                public ReportDesign getDesign(String argument) {
 					return design;
 				}
 			};
 		} else {
 			renderer = new TextTemplateRenderer() {
 
-				public ReportDesign getDesign(String argument) {
+				@Override
+                public ReportDesign getDesign(String argument) {
 					return design;
 				}
 			};
@@ -201,6 +212,25 @@ public class IsantePlusReportsUtil {
 		rs.saveReportDesign(rDes);
 	}
 
+    public static void registerIndicatorReportsWithStartAndEndDateParams(String name, String description, String uuid,
+            DataSetDefinition dataSetDefinition) {
+        
+        Map<String, Object> mappings = new HashMap<String, Object>();
+        mappings.put("startDate", "${startDate}");
+        mappings.put("endDate", "${endDate}");
+        
+        DataSetDefinition dsd = dataSetDefinition;
+        dsd.addParameter(startDate);
+        dsd.addParameter(endDate);
+        Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
+        
+        ReportDefinition repDefinition = reportDefinition(name, description, uuid);
+        repDefinition.addParameter(startDate);
+        repDefinition.addParameter(endDate);
+        repDefinition.addDataSetDefinition(dsd, mappings);
+        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+    }
+    
 	public static void registerReportsWithStartAndEndDateParamsOtherRenderer(String sql, String messageProperties,
 			String messagePropertiesFr, String uuid) {
 		SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr,
@@ -362,4 +392,42 @@ public class IsantePlusReportsUtil {
 		rs.saveReportDesign(rDes);
 	}
 
+    public static SqlCohortDefinition sqlCohortDefinition(String sql, String name, String description) {
+        SqlCohortDefinition cd = new SqlCohortDefinition();
+        cd.setName(name);
+        cd.setDescription(description);
+        cd.addParameter(startDate);
+        cd.addParameter(endDate);
+        cd.addParameter(location);
+        cd.setQuery(sql);
+        
+        return cd;
+    }
+    
+    public static CohortIndicatorDataSetDefinition cohortIndicatorDataSetDefinition(String name, String description,
+            List<CohortIndicator> cohortIndicators) {
+        ColumnParameters col = new ColumnParameters("1", "", "");
+        
+        List<ColumnParameters> columnParameters = Arrays.asList(col);
+        
+        return cohortIndicatorDataSetDefinition(name, description, cohortIndicators, columnParameters, Arrays.asList("01"));
+    }
+    
+    public static CohortIndicatorDataSetDefinition cohortIndicatorDataSetDefinition(String name, String description,
+            List<CohortIndicator> cohortIndicators, List<ColumnParameters> columnParameters, List<String> columnNames) {
+        
+        CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
+        
+        dsd.setName(name);
+        dsd.setDescription(description);
+        
+        for (CohortIndicator indicator : cohortIndicators) {
+            EmrReportingUtils.addRow(dsd, indicator.getName(), indicator.getDescription(),
+                ReportUtils.map(indicator, "startDate=${startDate},endDate=${endDate},location=${location}"),
+                columnParameters, columnNames);
+        }
+        
+        return dsd;
+    }
+    
 }

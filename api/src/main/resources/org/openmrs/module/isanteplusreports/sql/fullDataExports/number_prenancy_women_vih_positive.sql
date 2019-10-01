@@ -1,4 +1,4 @@
-SELECT COUNT(DISTINCT ppr.patient_id) as Total 
+SELECT DISTINCT ppr.patient_id 
 FROM isanteplus.patient_pregnancy ppr
 LEFT OUTER JOIN  isanteplus.patient_laboratory plab
 ON ppr.patient_id=plab.patient_id

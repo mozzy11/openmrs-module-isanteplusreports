@@ -1,5 +1,5 @@
 jq().ready(function(){
-	jq("#isanteplus-report").dataTable({
+	jq("table#isanteplus-report, table#non-coded-diagnoses, table#tab_excel").dataTable({
 	    "bPaginate": false,
 	    "bLengthChange": false,
 	    "bFilter": false,

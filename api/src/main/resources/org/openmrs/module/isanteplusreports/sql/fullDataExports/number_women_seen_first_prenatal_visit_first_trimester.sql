@@ -1,4 +1,4 @@
-SELECT COUNT(DISTINCT ppr.patient_id) as Total 
+SELECT DISTINCT ppr.patient_id 
 FROM isanteplus.patient_pregnancy ppr
 INNER JOIN isanteplus.patient_menstruation pm
 ON pm.patient_id=ppr.patient_id

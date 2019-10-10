@@ -1,4 +1,4 @@
-SELECT COUNT(DISTINCT ppr.patient_id) as Total 
+SELECT DISTINCT ppr.patient_id 
 FROM isanteplus.patient_pregnancy ppr, isanteplus.patient_laboratory plab
 WHERE ppr.patient_id=plab.patient_id
 AND (plab.test_id=1042 OR plab.test_id=1040)

@@ -46,7 +46,7 @@
 		    <% } %>
 		    
 		</table>
-		  <%  ui.resourceLink("isanteplusreports", "images/sort_asc.png") %>123
+		  <%  ui.resourceLink("isanteplusreports", "images/sort_asc.png") %>
 		  
   		<table id="isanteplus-report">
   		<thead>

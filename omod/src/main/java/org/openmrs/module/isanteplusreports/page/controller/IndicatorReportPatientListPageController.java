@@ -35,6 +35,7 @@ public class IndicatorReportPatientListPageController {
 			@RequestParam(required = false, value = "savedColumnKey") String savedColumnKey,
 			@RequestParam(required = false, value = "applyDataSetId") String applyDataSetId,
 			@RequestParam(required = false, value = "limit") Integer limit,
+            @RequestParam(required = false, value = "columnKeyType") String columnKeyType,
 			@SpringBean CoreAppsProperties coreAppsProperties,
 			HttpServletRequest request, PageModel model)
 			throws EvaluationException, IOException, NumberFormatException, ParseException {
@@ -50,12 +51,17 @@ public class IndicatorReportPatientListPageController {
 
 				Object result = mapDataSet.getData(dataSetColumn);
 				Cohort selectedCohort = null;
+                log.debug(result.getClass().getName());
 				if (result instanceof CohortIndicatorAndDimensionResult) {
 					CohortIndicatorAndDimensionResult cidr = (CohortIndicatorAndDimensionResult) mapDataSet
 							.getData(dataSetColumn);
-					selectedCohort = cidr.getCohortIndicatorAndDimensionCohort();
-				} else if (result instanceof Cohort) {
-					selectedCohort = (Cohort) result;
+                    if (columnKeyType.equals("denominator")) { //Can either be "denominator" or "numerator" (Default is numerator)
+                        selectedCohort = cidr.getCohortIndicatorAndDimensionDenominator();
+                    } else {
+                        selectedCohort = cidr.getCohortIndicatorAndDimensionCohort();
+                    }
+                } else if (result instanceof Cohort) {
+                    selectedCohort = (Cohort) result;
 				}
 
 				model.addAttribute("selectedCohort", selectedCohort);

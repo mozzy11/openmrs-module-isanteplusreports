@@ -3,6 +3,8 @@
     ui.includeJavascript("coreapps", "fragments/datamanagement/codeDiagnosisDialog.js")
     ui.includeJavascript("uicommons", "datatables/jquery.dataTables.min.js")
     ui.includeJavascript("isanteplusreports", "print.js")
+    ui.includeJavascript("isanteplusreports", "isanteplusReport.js")
+    ui.includeCss("uicommons", "datatables/dataTables_jui.css")
 %>
 
 <script type="text/javascript">
@@ -73,6 +75,19 @@
 	  })();
 
 </script>
+
+<style type="text/css">
+	.sorting {
+    	background: url(${ ui.resourceLink("isanteplusreports", "images/sort_both.png") }) no-repeat center right;
+	}
+	.sorting_asc {
+    	background: url('${ ui.resourceLink("isanteplusreports", "images/sort_asc.png") }') no-repeat center right;
+	}
+	.sorting_desc {
+    	background: url('${ ui.resourceLink("isanteplusreports", "images/sort_desc.png") }') no-repeat center right;
+	}
+</style>
+
 <div>
 	<input type='button' id='btn' value='${ ui.message("isanteplusreports.print") }' onclick='printDiv();'/>&nbsp;&nbsp;
 	<input type='button' id='btnExport' value='${ ui.message("isanteplusreports.export") }' onclick="tablesToExcel(['tab_excel'], ['Patients'], 'PatientsArvByPeriod.xls', 'Excel')"/>

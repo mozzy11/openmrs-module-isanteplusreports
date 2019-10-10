@@ -176,5 +176,7 @@ public class IsantePlusReportsProperties{
 	public static final String LIST_OF_EXPOSED_INFANTS_UUID = "3d6ee8cc-cfea-4ce7-b84b-3c6893ce6a2c";
 	
 	public static final String ART_DISPENSATION_FOLLOW_UP_UUID = "ef282113-32bd-49d7-870f-0ef41443e8de";
+	
+	public static final String NEXT_VISIT_BY_PERIOD_UUID = "f3bef310-0e62-4b4f-88f1-8b7983ea51cb";
 
 }

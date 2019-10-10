@@ -1,5 +1,5 @@
 /*La liste des patients dont la date de renflouement des ARV est prévue dans les 30 prochains jours*/
-select distinct  p.patient_id AS 'Patient Id', DATE(pdisp.visit_date) as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
+select distinct p.patient_id AS 'Patient Id', DATE(pdisp.visit_date) as 'Date Visite',p.st_id as 'NO. de patient attribué par le site',
 p.national_id as 'Numéro d\'identité national',p.given_name as Nom,
 p.family_name as Prénom, p.birthdate as 'Date de naissance',pdisp.next_dispensation_date as 'Date de dispensation'
 FROM isanteplus.patient p, isanteplus.patient_dispensing pdisp,

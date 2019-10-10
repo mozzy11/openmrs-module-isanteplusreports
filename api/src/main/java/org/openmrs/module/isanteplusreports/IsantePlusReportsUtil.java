@@ -36,6 +36,7 @@ import org.openmrs.module.isanteplusreports.reporting.utils.EmrReportingUtils;
 import org.openmrs.module.isanteplusreports.reporting.utils.ReportUtils;
 import org.openmrs.module.reporting.cohort.definition.SqlCohortDefinition;
 import org.openmrs.module.reporting.common.ContentType;
+import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.definition.CohortIndicatorDataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.DataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.SqlDataSetDefinition;
@@ -61,11 +62,19 @@ public class IsantePlusReportsUtil {
 
 	static IsantePlusReportsProperties props = new IsantePlusReportsProperties();
 
-	static Parameter startDate = new Parameter("startDate", "isanteplusreports.parameters.startdate", Date.class);
+	
+	static Parameter startDate = new Parameter("startDate", MessageUtil.translate("isanteplusreports.parameters.startdate"), Date.class);
+	
+	static Parameter endDate = new Parameter("endDate", MessageUtil.translate("isanteplusreports.parameters.enddate"), Date.class);
+	
+	static Parameter location = new Parameter("location", MessageUtil.translate("isanteplusreports.parameters.location"), Location.class);
+	
+/*static Parameter startDate = new Parameter("startDate", "isanteplusreports.parameters.startdate", Date.class);
 
 	static Parameter endDate = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
 
-	static Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);
+	static Parameter location = new Parameter("location", "isanteplusreports.parameters.location", Location.class);*/
+
 
 	/**
 	 * Given a location on the classpath, return the contents of this resource as a
@@ -345,6 +354,33 @@ public class IsantePlusReportsUtil {
 	}
 
 	// has been moved to ReportUtil in reporting module, use the one there
+
+	/*@Deprecated
+	public static List<Map<String, Object>> simplify(DataSet dataSet) {
+		List<Map<String, Object>> simplified = new ArrayList<Map<String, Object>>();
+		for (DataSetRow row : dataSet) {
+			simplified.add(row.getColumnValuesByKey());
+		}
+		return simplified;
+	}*/
+	
+	/*public static void registerReportsWithOtherStartAndEndDateParams(String sql, String messageProperties, String messagePropertiesFr, String uuid) {
+        SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messagePropertiesFr, messagePropertiesFr,props.ISANTEPLUS_REPORTS_RESOURCE_PATH);
+        sqlData.addParameter(startDate);
+        sqlData.addParameter(endDate);
+        Context.getService(DataSetDefinitionService.class).saveDefinition(sqlData);
+        
+        Map<String, Object> mappings = new HashMap<String, Object>();
+        mappings.put("startDate", "${startDate}");
+        mappings.put("endDate", "${endDate}");
+        ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+        repDefinition.addParameter(startDate);
+        repDefinition.addParameter(endDate);
+        repDefinition.addDataSetDefinition(sqlData, mappings);
+        Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);
+        
+        ReportService rs = Context.getService(ReportService.class);*/
+
 	/*
 	 * @Deprecated public static List<Map<String, Object>> simplify(DataSet dataSet)
 	 * { List<Map<String, Object>> simplified = new ArrayList<Map<String,
@@ -429,5 +465,4 @@ public class IsantePlusReportsUtil {
         
         return dsd;
     }
-    
 }

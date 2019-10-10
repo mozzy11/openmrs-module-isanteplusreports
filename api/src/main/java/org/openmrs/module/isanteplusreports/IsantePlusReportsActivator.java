@@ -43,6 +43,7 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 		AppFrameworkService appFrameworkService = Context.getService(AppFrameworkService.class);
 
 		try {
+			MetadataDeployService metadataDeployService = Context.getService(MetadataDeployService.class);
 			register.registerReports();
 			registerTask("Clean reports request iSantePlus", "Clean Reports Request for iSantePlus", RegisterReportsTask.class,
 				    60 * 60 * 24l);
@@ -50,7 +51,7 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 				returnIpAddress();
 			appFrameworkService.disableApp("reportingui.reports");
 			Context.getService(IsantePlusReportsService.class).setEventScheduler();
-			installReportsRoleAndPrivilege();
+			installReportsRoleAndPrivilege(metadataDeployService);
 		}
 		catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -115,11 +116,12 @@ public class IsantePlusReportsActivator extends BaseModuleActivator {
 		
 	}
 	
-	 private void installReportsRoleAndPrivilege() {
+	 private void installReportsRoleAndPrivilege(MetadataDeployService service) {
 
-	        MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
-	        MetadataBundle reportsRolePrivilegeMetadata = Context.getRegisteredComponent("reportsRolePrivilegeMetadata", AddRoleAndPrivilegeBundle.class);
-	        deployService.installBundle(reportsRolePrivilegeMetadata);
+	       // MetadataDeployService deployService = Context.getService(MetadataDeployService.class);
+	       // MetadataBundle reportsRolePrivilegeMetadata = Context.getRegisteredComponent("reportsRolePrivilegeMetadata", AddRoleAndPrivilegeBundle.class);
+	        MetadataBundle reportsRolePrivilegeMetadata = Context.getRegisteredComponent("reportsRolePrivilegeMetadata", MetadataBundle.class);
+	        service.installBundle(reportsRolePrivilegeMetadata);
 	 }
 	
 }

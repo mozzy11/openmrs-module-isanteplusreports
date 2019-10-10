@@ -133,13 +133,13 @@ private final Log log = LogFactory.getLog(getClass());
 		else{ deathOnArtStatus = 0;}
 		
 		if(stoppedOnArt){
-			stoppedOnArtStatus = 2;
+			stoppedOnArtStatus = 3;
 			message += ", " + MessageUtil.translate("isanteplusreports.parameters.hiv_status.stopped_on_art");
 		}
 		else{ stoppedOnArtStatus = 0;}
 		
 		if(tranferedOnArt){
-			tranferedOnArtStatus = 3;
+			tranferedOnArtStatus = 2;
 			message += ", " + MessageUtil.translate("isanteplusreports.parameters.hiv_status.transfered");
 		}
 		else{ tranferedOnArtStatus = 0;}

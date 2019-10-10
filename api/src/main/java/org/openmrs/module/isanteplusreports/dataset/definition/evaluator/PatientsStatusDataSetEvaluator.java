@@ -97,8 +97,8 @@ private final Log log = LogFactory.getLog(getClass());
 					+ " pat.given_name as Prénom,pat.family_name as Nom, pat.gender as Sexe,"
 					+ " TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as Age, arv.name_fr as 'Status de patient',"
 					+ " patstatus.start_date as 'Dernière date', pat.last_address as Adresse, pat.telephone as Téléphone,"
-					+ " pat.mother_name as Contact,"
-					     + " CASE WHEN(patstatus.dis_reason=5240) THEN 'Perdu de vue' "
+					+ " pat.contact_name as Contact, pat.next_visit_date as 'Date de prochaine visite',"
+					     + " CASE WHEN(patstatus.dis_reason=5240) THEN 'Perdu de vue'"
 							 + "  WHEN (patstatus.dis_reason=159492) THEN 'Transfert'"
 								+ " WHEN (patstatus.dis_reason=159) THEN 'Décès'"
 								+ " WHEN (patstatus.dis_reason=1667) THEN 'Discontinuations'"
@@ -107,17 +107,15 @@ private final Log log = LogFactory.getLog(getClass());
 					sqlQuery.append(" FROM isanteplus.patient pat");
 					sqlQuery.append(" INNER JOIN isanteplus.patient_status_arv patstatus ON pat.patient_id=patstatus.patient_id");
 					sqlQuery.append(" INNER JOIN isanteplus.arv_status_loockup arv ON patstatus.id_status=arv.id");
-					sqlQuery.append(" INNER JOIN (SELECT ps.patient_id, MAX(ps.last_updated_date) as last_updated_date "
-							+ "FROM isanteplus.patient_status_arv ps WHERE ps.id_status "
-							+ "IN (:regularOnArt,:missingAppointment,:lostOfFollowUp,:deathOnArt, :stoppedOnArt,:tranferedOnArt,:transitionRecent,:transitionActive,"
-							+ ":transitionLostFollowUp,:transitionDeath, :transitionTranfered) AND ps.start_date <= :endDate GROUP BY 1) B");
+					sqlQuery.append(" INNER JOIN (SELECT ps.patient_id, MAX(ps.date_started_status) as date_started_status"
+							+ " FROM isanteplus.patient_status_arv ps WHERE ps.date_started_status <= :endDate GROUP BY 1) B");
 					sqlQuery.append(" ON patstatus.patient_id = B.patient_id");
 					sqlQuery.append(" WHERE patstatus.id_status IN (:regularOnArt,:missingAppointment,:lostOfFollowUp,"
 							+ ":deathOnArt, :stoppedOnArt,:tranferedOnArt,:transitionRecent,:transitionActive,"
 							+ ":transitionLostFollowUp,:transitionDeath, :transitionTranfered)");
 					/*sqlQuery.append(" AND patstatus.start_date = B.start_date");*/
-					sqlQuery.append(" AND patstatus.last_updated_date = B.last_updated_date");
-					sqlQuery.append(" AND patstatus.start_date <= :endDate"); 
+					sqlQuery.append(" AND patstatus.date_started_status = B.date_started_status");
+					sqlQuery.append(" AND patstatus.date_started_status <= :endDate"); 
 					sqlQuery.append(" ORDER BY arv.name_fr");
 		
 		SQLQuery query = sessionFactory.getCurrentSession().createSQLQuery(sqlQuery.toString());
@@ -175,7 +173,8 @@ private final Log log = LogFactory.getLog(getClass());
 			row.addColumnValue(new DataSetColumn("derniere_date", "derniere_date", String.class), o[9]);
 			row.addColumnValue(new DataSetColumn("telephone", "telephone", String.class), o[10]);
 			row.addColumnValue(new DataSetColumn("contact", "contact", String.class), o[11]);
-			row.addColumnValue(new DataSetColumn("raison", "raison", String.class), o[12]);
+			row.addColumnValue(new DataSetColumn("prochaine_visite", "prochaine_visite", String.class), o[12]);
+			row.addColumnValue(new DataSetColumn("raison", "raison", String.class), o[13]);
 			dataSet.addRow(row);
 		}
 		return dataSet;

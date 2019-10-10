@@ -49,9 +49,6 @@ ${ ui.includeFragment("coreapps", "patientHeader", [ patient: patient ]) }
 		   		<center><b>****************** ${ ui.message("isanteplusreports.lastSixForms") } ******************</b></center><br/>
 		   		${ ui.includeFragment("isanteplusreports", "lastSixForms", [ patientId: patient.patientId ]) }
 		   </div><br/>
-		   <div id="weightCurve" width="50%">
-				${ ui.includeFragment("isanteplus", "weightGraph", [ patientId: patient.patientId ]) }
-			</div><br/>
 			<div id="clinicExams" width="50%">
 				${ ui.includeFragment("isanteplusreports", "clinicExams", [ patientId: patient.patientId ]) }
 			</div><br/>

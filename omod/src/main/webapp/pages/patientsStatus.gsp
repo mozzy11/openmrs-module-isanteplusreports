@@ -2,7 +2,7 @@
     ui.decorateWith("appui", "standardEmrPage")
     ui.includeJavascript("coreapps", "fragments/datamanagement/codeDiagnosisDialog.js")
     ui.includeJavascript("uicommons", "datatables/jquery.dataTables.min.js")
-
+	ui.includeJavascript("isanteplusreports", "print.js")
 %>
 
 <script type="text/javascript">
@@ -24,6 +24,68 @@
 		
 	});
 			
+</script>
+
+<script type="text/javascript">
+ var tablesToExcel = (function() {
+	    var uri = 'data:application/vnd.ms-excel;base64,'
+	    , tmplWorkbookXML = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?><Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet">'
+	      + '<DocumentProperties xmlns="urn:schemas-microsoft-com:office:office"><Author>Axel Richter</Author><Created>{created}</Created></DocumentProperties>'
+	      + '<Styles>'
+	      + '<Style ss:ID="Currency"><NumberFormat ss:Format="Currency"></NumberFormat></Style>'
+	      + '<Style ss:ID="Date"><NumberFormat ss:Format="Medium Date"></NumberFormat></Style>'
+	      + '</Styles>' 
+	      + '{worksheets}</Workbook>'
+	    , tmplWorksheetXML = '<Worksheet ss:Name="{nameWS}"><Table>{rows}</Table></Worksheet>'
+	    , tmplCellXML = '<Cell{attributeStyleID}{attributeFormula}><Data ss:Type="{nameType}">{data}</Data></Cell>'
+	    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+	    , format = function(s, c) { return s.replace(/{(\\w+)}/g, function(m, p) { return c[p]; }) }
+	    return function(tables, wsnames, wbname, appname) {
+	      var ctx = "";
+	      var workbookXML = "";
+	      var worksheetsXML = "";
+	      var rowsXML = "";
+
+	      for (var i = 0; i < tables.length; i++) {
+	        if (!tables[i].nodeType) tables[i] = document.getElementById(tables[i]);
+	        for (var j = 0; j < tables[i].rows.length; j++) {
+	          rowsXML += '<Row>'
+	          for (var k = 0; k < tables[i].rows[j].cells.length; k++) {
+	            var dataType = tables[i].rows[j].cells[k].getAttribute("data-type");
+	            var dataStyle = tables[i].rows[j].cells[k].getAttribute("data-style");
+	            var dataValue = tables[i].rows[j].cells[k].getAttribute("data-value");
+	            dataValue = (dataValue)?dataValue:tables[i].rows[j].cells[k].innerHTML;
+	            var dataFormula = tables[i].rows[j].cells[k].getAttribute("data-formula");
+	            dataFormula = (dataFormula)?dataFormula:(appname=='Calc' && dataType=='DateTime')?dataValue:null;
+	            ctx = {  attributeStyleID: (dataStyle=='Currency' || dataStyle=='Date')?' ss:StyleID="'+dataStyle+'"':''
+	                   , nameType: (dataType=='Number' || dataType=='DateTime' || dataType=='Boolean' || dataType=='Error')?dataType:'String'
+	                   , data: (dataFormula)?'':dataValue
+	                   , attributeFormula: (dataFormula)?' ss:Formula="'+dataFormula+'"':''
+	                  };
+	            rowsXML += format(tmplCellXML, ctx);
+	          }
+	          rowsXML += '</Row>'
+	        }
+	        ctx = {rows: rowsXML, nameWS: wsnames[i] || 'Sheet' + i};
+	        worksheetsXML += format(tmplWorksheetXML, ctx);
+	        rowsXML = "";
+	      }
+
+	      ctx = {created: (new Date()).getTime(), worksheets: worksheetsXML};
+	      workbookXML = format(tmplWorkbookXML, ctx);
+
+	console.log(workbookXML);
+
+	      var link = document.createElement("A");
+	      link.href = uri + base64(workbookXML);
+	      link.download = wbname || 'Workbook.xls';
+	      link.target = '_blank';
+	      document.body.appendChild(link);
+	      link.click();
+	      document.body.removeChild(link);
+	    }
+	  })();
+
 </script>
 
 
@@ -77,9 +139,13 @@
 
 </form>
   <div id="divpopup" class="modal"> 
-  		 <div class="modal-content">
-    	 <span id="close" class="close">&times;</span>    
+  		 <div class="modal-content">   
         <% if (startDate != null || endDate != null) { %>
+    <div>
+	<input type='button' id='btn' value='${ ui.message("isanteplusreports.print") }' onclick='printDiv();'/>&nbsp;&nbsp;
+	<input type='button' id='btnExport' value='${ ui.message("isanteplusreports.export") }' onclick="tablesToExcel(['tab_excel'], ['Patients_status'], 'PatientsStatus.xls', 'Excel')"/>
+	</div><br/>
+    <div id="DivIdToPrint">    
     <h3>
         ${ ui.message("isanteplusreports.patientStatus", ui.format(date_debut), ui.format(date_fin)) }
     </h3>
@@ -100,7 +166,7 @@
     	</tr>
 	</table>
 	
-    <table id="non-coded-diagnoses" width="100%" border="1" cellspacing="0" cellpadding="2">
+    <table id="tab_excel" width="100%" border="1" cellspacing="0" cellpadding="2">
         <thead>
             <tr>
                 <th>${ ui.message("isanteplusreports.code_st") }</th>
@@ -114,6 +180,7 @@
                 <th>${ ui.message("isanteplusreports.last_date") }</th>
                 <th>${ ui.message("isanteplusreports.phone") }</th>
                 <th>${ ui.message("isanteplusreports.contact") }</th>
+                <th> ${ ui.message("isanteplusreports.nextVisit") }</th>
                  <th>${ ui.message("isanteplusreports.reason") }</th>
             </tr>
         </thead>
@@ -160,8 +227,12 @@
 			    		<td>
 			    			${ui.format(it.getColumnValue("telephone"))}
 			    		</td>
+			    		
 			    		<td>
 			    			${ui.format(it.getColumnValue("contact"))}
+			    		</td>
+			    		<td>
+			    			${ui.format(it.getColumnValue("prochaine_visite"))}
 			    		</td>
 			    		<td>
 			    			${ui.format(it.getColumnValue("raison"))}
@@ -174,8 +245,14 @@
 
 <% } %>
       <% if(i > 0) { %> 
-     	Total : ${ui.format(i)}  
-     <% } %>   
+     	Total : ${ui.format(i)}  <br/><br/>
+     	<div>
+			<input type='button' id='btn' value='${ ui.message("isanteplusreports.print") }' onclick='printDiv();'/>&nbsp;&nbsp;
+			<input type='button' id='btnExport' value='${ ui.message("isanteplusreports.export") }' onclick="tablesToExcel(['tab_excel'], ['Patients_status'], 'PatientsStatus.xls', 'Excel')"/>
+		</div>
+     	
+     <% } %>  
+     </div> 
    </div>
    </div>
 </div>

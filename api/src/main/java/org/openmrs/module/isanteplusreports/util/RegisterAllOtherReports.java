@@ -96,6 +96,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		numberHivPatient();
 		listOfExposedInfants();
 		artDispensationFollowUp();
+		listPatientWithNextVisitByPeriod();
 	}
 
 	private static void cleanTables() {
@@ -491,6 +492,11 @@ public class RegisterAllOtherReports extends SessionContext {
 		IsantePlusReportsUtil.registerReportsWithoutParams("ART_dispensation_follow_up.sql",MessageUtil.translate("isanteplusreports.art_dispensation_follow_up"),
 				MessageUtil.translate("isanteplusreports.art_dispensation_follow_up"), IsantePlusReportsProperties.ART_DISPENSATION_FOLLOW_UP_UUID);
 	
+	}
+	
+	private static void listPatientWithNextVisitByPeriod() {
+		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("next_visit_by_period.sql","isanteplusreports.next_visit_by_period",
+				MessageUtil.translate("isanteplusreports.next_visit_by_period"), IsantePlusReportsProperties.NEXT_VISIT_BY_PERIOD_UUID);
 	}
 	
 	

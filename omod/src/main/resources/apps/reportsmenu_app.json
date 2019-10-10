@@ -688,7 +688,16 @@
 		      	"url": "isanteplusreports/patientsStatus.page",
 		        "order": 165,
 		        "requiredPrivilege": "App: reportingui.reports"
-		    }
+		    },
+             {
+                "id": "isanteplusreports.next_visit_by_period",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "isanteplusreports.next_visit_by_period",
+                "url": "reportingui/runReport.page?reportDefinition=f3bef310-0e62-4b4f-88f1-8b7983ea51cb",
+                "order": 4,
+                "requiredPrivilege": "App: reportingui.reports"
+            }
 		    
            
         ],

@@ -302,7 +302,7 @@ public class IsantePlusReportsServiceImpl extends BaseOpenmrsService implements 
 		int i = 0;
 		Concept testsOrdered = Context.getConceptService().getConcept(impressionsCliniques);
 		for (Obs obs : Context.getObsService().getObservationsByPersonAndConcept(patient.getPerson(), testsOrdered)) {
-			if (obs != null && obs.getObsGroup().getConcept().getConceptId() == 159947) {
+			if (obs != null && obs.getValueGroupId() != null) {
 					if(i <= 25){
 					 impressionsCliniquesList.add(obs);
 					}

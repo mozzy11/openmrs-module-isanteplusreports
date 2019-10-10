@@ -1,5 +1,5 @@
 /*Patients (VIH) avec activité après discontinuation */
-select distinct p.identifier as Identifiant, p.st_id as 'No. de patient attribué par le site', p.national_id as 'No. d\'identité nationale',
+select distinct  p.patient_id AS 'Patient Id', p.identifier as Identifiant, p.st_id as 'No. de patient attribué par le site', p.national_id as 'No. d\'identité nationale',
 p.family_name as Nom,p.given_name as Prénom, DATE_FORMAT(MAX(DATE(en.encounter_datetime)), "%d-%m-%Y") as 'Date de discontinuation', 
 DATE_FORMAT(MAX(DATE(enc.encounter_datetime)),"%d-%m-%Y") as 'Dernière date', entype.name
 from isanteplus.patient p,

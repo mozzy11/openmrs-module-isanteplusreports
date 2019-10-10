@@ -1,5 +1,6 @@
 package org.openmrs.module.isanteplusreports.util;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -8,7 +9,10 @@ import org.openmrs.api.context.Context;
 import org.openmrs.module.appframework.context.SessionContext;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsUtil;
+import org.openmrs.module.isanteplusreports.library.indicator.PmtctReportsIndicatorLibrary;
+import org.openmrs.module.isanteplusreports.library.indicator.PrenatalReportsIndicatorLibrary;
 import org.openmrs.module.reporting.common.MessageUtil;
+import org.openmrs.module.reporting.dataset.definition.CohortIndicatorDataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.DataSetDefinition;
 import org.openmrs.module.reporting.dataset.definition.service.DataSetDefinitionService;
 import org.openmrs.module.reporting.definition.service.SerializedDefinitionService;
@@ -284,13 +288,27 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void numberPregnancyWomenHivTested() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_pregnancy_women_hiv_tested.sql","isanteplusreports.number_pregnancy_women_hiv_tested",
-				MessageUtil.translate("isanteplusreports.number_pregnancy_women_hiv_tested"), IsantePlusReportsProperties.NUMBER_PREGNANT_WOMEN_HIV_TESTED_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_pregnancy_women_hiv_tested",
+            MessageUtil.translate("isanteplusreports.number_pregnancy_women_hiv_tested"),
+            Arrays.asList(PmtctReportsIndicatorLibrary.pregnantWomenTestedForHiv()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.number_pregnancy_women_hiv_tested",
+            MessageUtil.translate("isanteplusreports.number_pregnancy_women_hiv_tested"),
+            IsantePlusReportsProperties.NUMBER_PREGNANT_WOMEN_HIV_TESTED_UUID, dsd);
 	}
 
 	private static void numberPregnancyWomenHivPositive() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_prenancy_women_vih_positive.sql","isanteplusreports.number_prenancy_women_vih_positive",
-				MessageUtil.translate("isanteplusreports.number_prenancy_women_vih_positive"), IsantePlusReportsProperties.NUMBER_PREGNANT_WOMEN_HIV_POSITIVE_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_prenancy_women_vih_positive",
+            MessageUtil.translate("isanteplusreports.number_prenancy_women_vih_positive"),
+            Arrays.asList(PmtctReportsIndicatorLibrary.pregnantWomenTestedHivPositive()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.number_prenancy_women_vih_positive",
+            MessageUtil.translate("isanteplusreports.number_prenancy_women_vih_positive"),
+            IsantePlusReportsProperties.NUMBER_PREGNANT_WOMEN_HIV_POSITIVE_UUID, dsd);
 	}
 	
 	private static void communityArvDistribution() {
@@ -304,13 +322,27 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void pregnancyWomenTestedForSyphilis() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("pregnancy_women_tested_for_syphilis.sql","isanteplusreports.pregnancy_women_tested_for_syphilis",
-				MessageUtil.translate("isanteplusreports.pregnancy_women_tested_for_syphilis"), IsantePlusReportsProperties.PREGNANCY_WOMEN_TESTED_FOR_SYPHILIS_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.pregnancy_women_tested_for_syphilis",
+            MessageUtil.translate("isanteplusreports.pregnancy_women_tested_for_syphilis"),
+            Arrays.asList(PrenatalReportsIndicatorLibrary.pregnantWomenTestedForSyphilis()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.pregnancy_women_tested_for_syphilis",
+            MessageUtil.translate("isanteplusreports.pregnancy_women_tested_for_syphilis"),
+            IsantePlusReportsProperties.PREGNANCY_WOMEN_TESTED_FOR_SYPHILIS_UUID, dsd);
 	}
 	
 	private static void pregnancyWomenDiagnosedWithSyphilis() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_pregnant_women_diagnosed_syphilis.sql","isanteplusreports.pregnancy_women_diagnosed_with_syphilis",
-				MessageUtil.translate("isanteplusreports.pregnancy_women_diagnosed_with_syphilis"), IsantePlusReportsProperties.PREGNANCY_WOMEN_DIAGNOSED_WITH_SYPHILIS);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.pregnancy_women_diagnosed_with_syphilis",
+            MessageUtil.translate("isanteplusreports.pregnancy_women_diagnosed_with_syphilis"),
+            Arrays.asList(PrenatalReportsIndicatorLibrary.pregnantWomenDiagnosedWithSyphilis()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.pregnancy_women_diagnosed_with_syphilis",
+            MessageUtil.translate("isanteplusreports.pregnancy_women_diagnosed_with_syphilis"),
+            IsantePlusReportsProperties.PREGNANCY_WOMEN_DIAGNOSED_WITH_SYPHILIS_UUID, dsd);
 	}
 	
 	private static void numberPrenatalVisitBySite() {
@@ -324,8 +356,15 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void numberHivPregnancyWomenGaveBirthAtHospital() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_hiv_women_gave_birth_at_hospital.sql","isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital",
-				MessageUtil.translate("isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital"), IsantePlusReportsProperties.NUMBER_HIV_PREGNANCY_WOMEN_GAVE_BIRTH_AT_HOSP);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital",
+            MessageUtil.translate("isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital"),
+            Arrays.asList(PmtctReportsIndicatorLibrary.hivPositivePregnantWomenWhoGaveBirthAtHospital()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital",
+            MessageUtil.translate("isanteplusreports.number_hiv_pregnancy_women_gave_birth_at_hospital"),
+            IsantePlusReportsProperties.NUMBER_HIV_PREGNANCY_WOMEN_GAVE_BIRTH_AT_HOSP, dsd);
 	}
 	
 	private static void exposedInfantsWithMotherInPtmeProgram() {
@@ -333,9 +372,16 @@ public class RegisterAllOtherReports extends SessionContext {
 				MessageUtil.translate("isanteplusreports.exposed_infants_register_in_ptme_program"), IsantePlusReportsProperties.EXPOSED_INFANT_WITH_MOTHER_IN_PTME_UUID);
 	}
 	
-	private static void numberInfantsFromMotherOnProphylaxis() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_infants_from_mother_on_prophylaxis.sql","isanteplusreports.number_infants_from_mother_on_prophylaxis",
-				MessageUtil.translate("isanteplusreports.number_infants_from_mother_on_prophylaxis"), IsantePlusReportsProperties.NUMBER_INFANTS_FROM_MOTHER_ON_PROPHYLAXIS);
+    private static void numberInfantsFromMotherOnProphylaxis() {
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_infants_from_mother_on_prophylaxis",
+            MessageUtil.translate("isanteplusreports.number_infants_from_mother_on_prophylaxis"),
+            Arrays.asList(PmtctReportsIndicatorLibrary.infantsBornToMothersOnProphylaxis()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.number_infants_from_mother_on_prophylaxis",
+            MessageUtil.translate("isanteplusreports.number_infants_from_mother_on_prophylaxis"),
+            IsantePlusReportsProperties.NUMBER_INFANTS_FROM_MOTHER_ON_PROPHYLAXIS, dsd);
 	}
 	
 	private static void frequencyPrenatalVisitsPerPatient() {
@@ -349,13 +395,27 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void numberExposedInfantsConfirmedHiv() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_exposed_infants_confirmed_hiv.sql","isanteplusreports.number_exposed_infants_confirmed_hiv",
-				MessageUtil.translate("isanteplusreports.number_exposed_infants_confirmed_hiv"), IsantePlusReportsProperties.NUMBER_EXPOSED_INFANTS_CONFIRMED_HIV_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_exposed_infants_confirmed_hiv",
+            MessageUtil.translate("isanteplusreports.number_exposed_infants_confirmed_hiv"),
+            Arrays.asList(PmtctReportsIndicatorLibrary.exposedInfantsConfirmedHivPositive()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.number_exposed_infants_confirmed_hiv",
+            MessageUtil.translate("isanteplusreports.number_exposed_infants_confirmed_hiv"),
+            IsantePlusReportsProperties.NUMBER_EXPOSED_INFANTS_CONFIRMED_HIV_UUID, dsd);
 	}
 
 	private static  void numberWomenFirstPrenatalVisitFirstTrimester() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_women_seen_first_prenatal_visit_first_trimester.sql","isanteplusreports.number_women_seen_first_prenatal_visit_first_trimester",
-				MessageUtil.translate("isanteplusreports.number_women_seen_first_prenatal_visit_first_trimester"), IsantePlusReportsProperties.NUMBER_WOMEN_SEEN_FIRST_PRENATAL_VISIT_FIRST_SEMESTER_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_women_seen_first_prenatal_visit_first_trimester",
+            MessageUtil.translate("isanteplusreports.number_women_seen_first_prenatal_visit_first_trimester"),
+            Arrays.asList(PrenatalReportsIndicatorLibrary.pregnantWomenFirstVisitAfterFirstTrimester()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.pregnancy_women_diagnosed_with_syphilis",
+            MessageUtil.translate("isanteplusreports.number_women_seen_first_prenatal_visit_first_trimester"),
+            IsantePlusReportsProperties.NUMBER_WOMEN_SEEN_FIRST_PRENATAL_VISIT_FIRST_SEMESTER_UUID, dsd);
 	}
 	
 	private static void hivTransmissionRisksFactor() {
@@ -364,8 +424,15 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void numberVisitsByPregnantWomenToClinic() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("number_visits_by_pregnant_women_to_the_clinic.sql","isanteplusreports.number_visits_by_pregnant_women_to_the_clinic",
-				MessageUtil.translate("isanteplusreports.number_visits_by_pregnant_women_to_the_clinic"), IsantePlusReportsProperties.NUMBER_VISITS_BY_PREGNANT_WOMEN_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.number_visits_by_pregnant_women_to_the_clinic",
+            MessageUtil.translate("isanteplusreports.number_visits_by_pregnant_women_to_the_clinic"),
+            Arrays.asList(PrenatalReportsIndicatorLibrary.visitsByPregnantWomentInClinic()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.number_visits_by_pregnant_women_to_the_clinic",
+            MessageUtil.translate("isanteplusreports.number_visits_by_pregnant_women_to_the_clinic"),
+            IsantePlusReportsProperties.NUMBER_VISITS_BY_PREGNANT_WOMEN_UUID, dsd);
 	}
 	
 	private static void listVisitsByPregnantWomenToClinic() {
@@ -473,8 +540,15 @@ public class RegisterAllOtherReports extends SessionContext {
 	}
 	
 	private static void numberWomenEnrolledBecamePregnant() {
-		IsantePlusReportsUtil.registerReportsWithStartAndEndDateParams("womenEnrolledBecamePregnant.sql","isanteplusreports.womenEnrolledBecamePregnant",
-				MessageUtil.translate("isanteplusreports.womenEnrolledBecamePregnant"), IsantePlusReportsProperties.WOMENENROLLEDBECAMEPREGNANT_UUID);
+        CohortIndicatorDataSetDefinition dsd = IsantePlusReportsUtil.cohortIndicatorDataSetDefinition(
+            "isanteplusreports.womenEnrolledBecamePregnant",
+            MessageUtil.translate("isanteplusreports.womenEnrolledBecamePregnant"),
+            Arrays.asList(PmtctReportsIndicatorLibrary.hivPositiveWomenEnrolledInCareWhoBecamePregnant()));
+        
+        IsantePlusReportsUtil.registerIndicatorReportsWithStartAndEndDateParams(
+            "isanteplusreports.womenEnrolledBecamePregnant",
+            MessageUtil.translate("isanteplusreports.womenEnrolledBecamePregnant"),
+            IsantePlusReportsProperties.WOMENENROLLEDBECAMEPREGNANT_UUID, dsd);
 	}
 	
 	private static void numberHivPatient() {

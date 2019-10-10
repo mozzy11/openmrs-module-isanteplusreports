@@ -18,4 +18,4 @@ AND enc.form_id=f.form_id
 AND pa.arv_status = asl.id
 /*and pd.next_dispensation_date between date(now()) and date_add(date(now()),interval 14 day)*/
 AND pd.next_dispensation_date BETWEEN :startDate AND :endDate
-ORDER BY 11
+ORDER BY 12

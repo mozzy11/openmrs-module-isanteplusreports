@@ -1,5 +1,6 @@
 /*Nombre de visites de femmes enceintes reçues en clinique / Number of visits by pregnant women to the clinic*/
-select COUNT(distinct pp.patient_id) AS Total 
+select distinct p.patient_id AS 'Patient Id', p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,p.family_name as nom,p.gender as sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Âge,
+p.last_visit_date as 'Dernière date'
 FROM isanteplus.patient p, isanteplus.patient_pregnancy pp
 WHERE p.patient_id=pp.patient_id
 AND p.gender <> 'M'

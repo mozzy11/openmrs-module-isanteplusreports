@@ -1,5 +1,5 @@
 /* Liste des patients éligible pour leur prémière charge virale */
-select DISTINCT p.st_id as 'Code ST',
+select DISTINCT p.patient_id AS 'Patient Id', p.st_id as 'Code ST',
 p.given_name as Prénom, p.family_name as Nom, p.telephone as Téléphone,TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Âge, p.gender as Sexe
 FROM isanteplus.patient p, isanteplus.patient_on_arv parv
 WHERE p.patient_id = parv.patient_id

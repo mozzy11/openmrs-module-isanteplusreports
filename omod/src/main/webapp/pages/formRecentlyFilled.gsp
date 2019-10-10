@@ -2,6 +2,8 @@
     ui.decorateWith("appui", "standardEmrPage")
     ui.includeJavascript("coreapps", "fragments/datamanagement/codeDiagnosisDialog.js")
     ui.includeJavascript("uicommons", "datatables/jquery.dataTables.min.js")
+    ui.includeJavascript("isanteplusreports", "isanteplusReport.js")
+    ui.includeCss("uicommons", "datatables/dataTables_jui.css")
 
 %>
 
@@ -13,6 +15,17 @@
     ];
 </script>
 
+<style type="text/css">
+	.sorting {
+    	background: url(${ ui.resourceLink("isanteplusreports", "images/sort_both.png") }) no-repeat center right;
+	}
+	.sorting_asc {
+    	background: url('${ ui.resourceLink("isanteplusreports", "images/sort_asc.png") }') no-repeat center right;
+	}
+	.sorting_desc {
+    	background: url('${ ui.resourceLink("isanteplusreports", "images/sort_desc.png") }') no-repeat center right;
+	}
+</style>
 
 <div ng-app="formRecentlyFilled" ng-controller="FormRecentlyFilledPageController">
 

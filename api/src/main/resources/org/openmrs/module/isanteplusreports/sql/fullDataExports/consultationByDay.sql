@@ -1,5 +1,5 @@
 /* Consultation par jour */
-SELECT DATE_FORMAT(DATE(patvi.date_started), "%d-%m-%Y") as VisitDate, loc.name as Clinic, CONCAT(pat.given_name,' ',pat.family_name) as Patient,
+SELECT  p.patient_id AS 'Patient Id', DATE_FORMAT(DATE(patvi.date_started), "%d-%m-%Y") as VisitDate, loc.name as Clinic, CONCAT(pat.given_name,' ',pat.family_name) as Patient,
 CASE WHEN pat.vih_status=1 THEN 'Patient VIH'
      WHEN pat.vih_status=0 THEN 'Patient non VIH'
 END as PatientType, enct.name as Form

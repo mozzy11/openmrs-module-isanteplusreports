@@ -680,6 +680,17 @@
                 "order": 160,
                 "requiredPrivilege": "App: reportingui.reports"
             },
+
+            {
+                "id": "isanteplusreports.malaria_indicator_report",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "isanteplusreports.malaria_indicator_report",
+                "url": "reportingui/runReport.page?reportDefinition=8c5fb6a1-758d-4b95-9cdb-a25b57276ec5",
+                "order": 164,
+                "requiredPrivilege": "App: reportingui.reports"
+            },
+            
 		    {
 		        "id": "isanteplusreports.patientStatus",
 		        "extensionPointId": "org.openmrs.module.isanteplusreports.reports.patientsstatus",

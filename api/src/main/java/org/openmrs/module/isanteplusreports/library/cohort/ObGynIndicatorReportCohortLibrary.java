@@ -23,7 +23,7 @@ public class ObGynIndicatorReportCohortLibrary {
 	
 	public static SqlCohortDefinition sqlCohortDefinition(String sqlResourceName, String cohortDefinitionName) {
 		String sql = IsantePlusReportsUtil
-		        .getStringFromResource(IsantePlusReportsConstants.MALARIA_INDICATORS_RESOURCE_PATH + sqlResourceName);
+		        .getStringFromResource(IsantePlusReportsConstants.OBGYN_INDICATORS_RESOURCE_PATH + sqlResourceName);
 		
 		SqlCohortDefinition definition = IsantePlusReportsUtil.sqlCohortDefinition(sql, cohortDefinitionName,
 		    MessageUtil.translate(cohortDefinitionName));

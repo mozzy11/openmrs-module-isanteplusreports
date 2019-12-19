@@ -708,7 +708,18 @@
                 "url": "reportingui/runReport.page?reportDefinition=f3bef310-0e62-4b4f-88f1-8b7983ea51cb",
                 "order": 4,
                 "requiredPrivilege": "App: reportingui.reports"
+            },
+
+            {
+                "id": "isanteplusreports.obgyn_indicator_report",
+                "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+                "type": "link",
+                "label": "isanteplusreports.obgyn_indicator_report",
+                "url": "reportingui/runIndicatorReport.page?reportDefinition=0616e88a-011f-4433-9d98-1743448977af",
+                "order": 166,
+                "requiredPrivilege": "App: reportingui.reports"
             }
+
         ],
         "requiredPrivilege": "App: reportingui.reports"
     }

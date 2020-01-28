@@ -47,16 +47,16 @@ WHERE
         LEFT JOIN isanteplus.patient_prescription pp
         ON phv.patient_id = pp.patient_id
         WHERE
-            DATE(phv.visit_date) BETWEEN :startDate AND :endDate
-            OR (
-                DATE(pp.visit_date) BETWEEN :startDate AND :endDate
-                AND pp.rx_or_prophy = 138405
+            (
+	            DATE(phv.visit_date) BETWEEN :startDate AND :endDate
+	            OR 
+	            DATE(pp.visit_date) BETWEEN :startDate AND :endDate
             )
+		    AND TIMESTAMPDIFF(MONTH, p.birthdate, phv.visit_date) <= 18
+		    AND TIMESTAMPDIFF(WEEK, p.birthdate, phv.visit_date) >= 4
     )
     AND p.patient_id NOT IN (
         SELECT discon.patient_id
         FROM isanteplus.discontinuation_reason discon
         WHERE discon.reason IN (159, 1667, 159492)
-    )
-    AND TIMESTAMPDIFF(MONTH, p.birthdate, :endDate) <= 18
-    AND TIMESTAMPDIFF(WEEK, p.birthdate, :endDate) >= 4;
+    );

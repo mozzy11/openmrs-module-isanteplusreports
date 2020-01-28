@@ -21,7 +21,7 @@ FROM
 WHERE
     p.vih_status = 1 -- HIV+
     AND p.gender = 'F'
-    AND TIMESTAMPDIFF(YEAR, p.birthdate,now()) BETWEEN 10 AND 49
+    AND TIMESTAMPDIFF(YEAR, p.birthdate,:endDate) BETWEEN 10 AND 49
     AND p.patient_id IN (
         SELECT pv.patient_id
         FROM isanteplus.health_qual_patient_visit pv

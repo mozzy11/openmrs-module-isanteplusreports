@@ -81,7 +81,7 @@ WHERE
         SELECT phv.patient_id
         FROM isanteplus.health_qual_patient_visit phv
     WHERE (
-        DATE(phv.visit_date) BETWEEN :startDate AND :endDate
+        DATE(phv.visit_date) BETWEEN :startDate AND :endDate AND phv.encounter_type IN (9,10) -- Paeds initial and followup encounter types
       )
       AND phv.age_in_years <= 14
     )

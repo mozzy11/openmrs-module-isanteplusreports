@@ -31,7 +31,7 @@ WHERE
     p.patient_id IN ( -- Pregnant
         SELECT ppreg.patient_id
         FROM isanteplus.patient_pregnancy ppreg
-        WHERE ppreg.end_date IS NULL OR (ppreg.end_date BETWEEN :startDate AND :endDate)
+        WHERE (ppreg.end_date IS NULL AND ppreg.start_date <= :endDate) OR (ppreg.end_date BETWEEN :startDate AND :endDate)
     )
     AND p.patient_id IN ( -- An adult in a given period
         SELECT hqpv.patient_id

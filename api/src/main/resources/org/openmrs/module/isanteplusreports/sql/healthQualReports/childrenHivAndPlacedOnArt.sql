@@ -12,14 +12,15 @@ SELECT
 FROM
 isanteplus.patient p
 WHERE
-  p.patient_id IN (
+  p.vih_status = '1' -- HIV+ patient
+  AND p.patient_id IN (
     SELECT phv.patient_id
     FROM isanteplus.health_qual_patient_visit phv
     LEFT JOIN isanteplus.patient_prescription pp
     ON phv.patient_id = pp.patient_id
     WHERE (
-        DATE(phv.visit_date) BETWEEN :startDate AND :endDate
-        OR (DATE(pp.visit_date) BETWEEN :startDate AND :endDate AND pp.rx_or_prophy = 138405)
+        DATE(phv.visit_date) BETWEEN :startDate AND :endDate AND encounter_type IN (9,10) -- Paeds initial and followup encounter types
+        OR (DATE(pp.visit_date) BETWEEN :startDate AND :endDate)
       )
       AND phv.age_in_years <= 14
   )

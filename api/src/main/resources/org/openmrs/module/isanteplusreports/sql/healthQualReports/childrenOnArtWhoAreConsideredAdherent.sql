@@ -26,10 +26,9 @@ LEFT JOIN isanteplus.patient_prescription pp
 WHERE
   pv.adherence_evaluation IS NOT NULL
   AND (
-      DATE(pv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
+      DATE(pv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate AND pv.encounter_type IN (9,10) -- Paeds initial and followup encounter types
     OR (
       DATE(pp.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
-      AND pp.rx_or_prophy = 138405
     )
   )
   AND p.patient_id IN (	-- on ART for 3 months or more

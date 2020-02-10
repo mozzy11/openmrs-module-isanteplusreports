@@ -58,6 +58,8 @@ import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualRep
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_12_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_13_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_13_INDICATOR_SQL;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_14_INDICATOR_MESSAGE;
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_14_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_1_INDICATOR_MESSAGE;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_1_INDICATOR_SQL;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants.PEDIATRIC_2_INDICATOR_MESSAGE;
@@ -124,6 +126,7 @@ public class RegisterAllHealthQualReports {
         healthQualPediatricHivAndArtProphy();
         healthQualPediatricReceivedPcrTest();
         healthQualPediatricNegativePcrTest();
+        healthQualEarlyInfantDiagnosis();
     }
 
     private static void numberOfPatientsBySex() {
@@ -212,7 +215,7 @@ public class RegisterAllHealthQualReports {
     }
 
     private static void healthQualChildrenRegularlyFollowedOnArt() {
-        registerHealthEqualReportWithStartDateAndPeriodParams(PEDIATRIC_1_INDICATOR_SQL, PEDIATRIC_1_INDICATOR_MESSAGE,
+        registerHealthEqualReportWithCurrentDateAndPeriodParams(PEDIATRIC_1_INDICATOR_SQL, PEDIATRIC_1_INDICATOR_MESSAGE,
             HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_1_INDICATOR_UUID);
     }
 
@@ -276,6 +279,11 @@ public class RegisterAllHealthQualReports {
             HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID);
     }
 
+    private static void healthQualEarlyInfantDiagnosis() {
+        registerHealthEqualReportWithStartAndEndDateParams(PEDIATRIC_14_INDICATOR_SQL, PEDIATRIC_14_INDICATOR_MESSAGE,
+            HealthQualReportsConstants.HEALTH_QUAL_PEDIATRIC_14_INDICATOR_UUID);
+    }
+    
     private static void registerHealthEqualReportWithStartAndEndDateParams(String sql, String messageProperties, String uuid) {
         SqlDataSetDefinition sqlData = sqlDataSetDefinitionWithResourcePath(sql, messageProperties, messageProperties, HEALTH_QUAL_REPORTS_RESOURCE_PATH);
         sqlData.addParameter(START_DATE);

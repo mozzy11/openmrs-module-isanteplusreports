@@ -3,7 +3,7 @@ SELECT
         DISTINCT CASE WHEN (
             p.gender = 'F'
             -- drug order form completed on date X. The date of the drug order form should not surpass the reporting period by more than 90 days.
-      			AND p.patient_id IN ( SELECT pnv.patient_id FROM isanteplus.patient_visit pnv
+      			AND p.patient_id IN ( SELECT pnv.patient_id FROM isanteplus.health_qual_patient_visit pnv
       			WHERE pnv.patient_id = p.patient_id
                   AND pnv.encounter_type IN (5, 11) -- Ord. Médicale OR Ord. médicale Pédiatrique
       			AND (pnv.visit_date BETWEEN DATE(:currentDate) AND DATE_ADD(DATE(:currentDate), INTERVAL 90 DAY)
@@ -15,7 +15,7 @@ SELECT
         DISTINCT CASE WHEN (
             p.gender = 'M'
             -- drug order form completed on date X. The date of the drug order form should not surpass the reporting period by more than 90 days.
-            AND p.patient_id IN ( SELECT pnv.patient_id FROM isanteplus.patient_visit pnv
+            AND p.patient_id IN ( SELECT pnv.patient_id FROM isanteplus.health_qual_patient_visit pnv
             WHERE pnv.patient_id = p.patient_id
                   AND pnv.encounter_type IN (5, 11) -- Ord. Médicale OR Ord. médicale Pédiatrique
             AND (pnv.visit_date BETWEEN DATE(:currentDate) AND DATE_ADD(DATE(:currentDate), INTERVAL 90 DAY)

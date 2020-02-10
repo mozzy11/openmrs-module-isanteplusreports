@@ -32,10 +32,9 @@ WHERE
     LEFT JOIN isanteplus.patient_prescription pp
     ON phv.patient_id = pp.patient_id
     WHERE (
-        DATE(phv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
+        DATE(phv.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate AND phv.encounter_type IN (9,10) -- Paeds initial and followup encounter types
         OR (
           DATE(pp.visit_date) BETWEEN SUBDATE(:currentDate, INTERVAL 3 MONTH) AND :currentDate
-          AND pp.rx_or_prophy = 138405
         )
       )
       AND phv.age_in_years <= 14 -- An child

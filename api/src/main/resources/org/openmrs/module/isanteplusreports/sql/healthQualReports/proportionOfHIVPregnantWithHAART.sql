@@ -3,9 +3,10 @@ SELECT
         DISTINCT CASE WHEN (
             p.gender = 'F' AND
             p.patient_id IN ( -- HAART
-                SELECT pd2.patient_id FROM isanteplus.patient_dispensing pd2
-                GROUP BY pd2.patient_id
-                HAVING count(*) >= 3
+				SELECT pd2.patient_id  FROM isanteplus.patient_dispensing pd2 WHERE arv_drug = 1065
+				GROUP BY pd2.patient_id, visit_id
+				HAVING COUNT(*) >= 3            
+				
             )
         ) THEN p.patient_id else null END
     ) AS 'femaleNumerator',
@@ -31,7 +32,7 @@ WHERE
     AND p.patient_id IN ( -- Pregnant
         SELECT ppreg.patient_id
         FROM isanteplus.patient_pregnancy ppreg
-        WHERE ppreg.end_date IS NULL OR (ppreg.end_date BETWEEN :startDate AND :endDate)
+        WHERE (ppreg.end_date IS NULL AND ppreg.start_date <= :endDate) OR (ppreg.end_date BETWEEN :startDate AND :endDate)
     )
     AND p.patient_id NOT IN ( -- Exclude deceased (159), transfer (159492)
         SELECT discon.patient_id

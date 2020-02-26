@@ -1,4 +1,4 @@
-SELECT DISTINCT ppr.patient_id 
+SELECT COUNT(DISTINCT ppr.patient_id)
 FROM isanteplus.patient_pregnancy ppr
 INNER JOIN isanteplus.patient_delivery pdel
 ON pdel.patient_id=ppr.patient_id

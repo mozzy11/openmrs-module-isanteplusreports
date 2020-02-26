@@ -1,5 +1,10 @@
-SELECT DISTINCT ppr.patient_id 
+/*Nombre de femmes enceintes vues en première visite après leur 1er trimestre*/
+SELECT distinct p.patient_id AS 'Patient Id', p.st_id,p.national_id as 'numéro identité national', p.given_name as prénom,
+p.family_name as nom,p.gender as sexe, TIMESTAMPDIFF(YEAR,p.birthdate,now()) as Âge,
+p.last_visit_date as 'Dernière date'
 FROM isanteplus.patient_pregnancy ppr
+INNER JOIN isanteplus.patient p
+ON ppr.patient_id = p.patient_id
 INNER JOIN isanteplus.patient_menstruation pm
 ON pm.patient_id=ppr.patient_id
 INNER JOIN isanteplus.visit_type vt

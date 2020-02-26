@@ -1,9 +1,9 @@
  /*Liste des enfants éligibles pour un PCR*/
- select DISTINCT B.st_id as 'NO. de patient attribué par le site', B.national_id as 'Numéro d\'identité national',
+ select DISTINCT B.patient_id AS 'Patient Id', B.st_id as 'NO. de patient attribué par le site', B.national_id as 'Numéro d\'identité national',
 	B.prenom as Prénom,B.nom as Nom, B.sexe as Sexe,
 	B.age as Âge, B.telephone as Téléphone,
 	B.mother_name as Contact 
-		FROM (SELECT DISTINCT pat.st_id as st_id, pat.national_id as national_id,
+		FROM (SELECT DISTINCT pat.patient_id, pat.st_id as st_id, pat.national_id as national_id,
 	pat.given_name as prenom,pat.family_name as nom, pat.gender as sexe,
 	TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as age, pat.telephone as telephone,
 	pat.mother_name
@@ -13,7 +13,7 @@
     AND (TIMESTAMPDIFF(DAY, pat.birthdate,DATE(now())) BETWEEN 28 AND 365)
     AND pat.patient_id NOT IN (select distinct o.person_id from openmrs.obs o where o.voided <> 1 AND (o.concept_id IN (844,1030)) OR (o.concept_id = 1271 AND value_coded = 844))
    UNION
-   SELECT DISTINCT pat.st_id as st_id, pat.national_id as national_id,
+   SELECT DISTINCT pat.patient_id, pat.st_id as 'NO. de patient attribué par le site', pat.national_id as national_id,
 	pat.given_name as prenom,pat.family_name as nom, pat.gender as sexe,
 	TIMESTAMPDIFF(YEAR, pat.birthdate,DATE(now())) as age, pat.telephone as telephone,
 	pat.mother_name 

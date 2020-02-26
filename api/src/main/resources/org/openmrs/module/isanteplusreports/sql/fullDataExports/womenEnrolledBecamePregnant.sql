@@ -1,6 +1,6 @@
 /*Nombre de femmes VIH(+) enrôlées en soins devenues enceintes*/
 /*Number of HIV-positive women enrolled in care who became pregnant*/
-select DISTINCT  p.patient_id AS 'Patient Id', p.national_id as 'No. d\'identité nationale', p.identifier as 'iSantéPlus ID',p.given_name as Prénom,
+select DISTINCT  p.patient_id AS 'Patient Id',p.st_id as 'NO. de patient attribué par le site', p.national_id as 'No. d\'identité nationale',p.given_name as Prénom,
 p.family_name as Nom, p.gender as Sexe,TIMESTAMPDIFF(YEAR, p.birthdate,DATE(now())) as Âge,
 p.telephone as Téléphone from isanteplus.patient_pregnancy ppr
 LEFT OUTER JOIN  isanteplus.patient_laboratory plab

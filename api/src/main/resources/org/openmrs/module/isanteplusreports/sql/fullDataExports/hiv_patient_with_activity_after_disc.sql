@@ -18,5 +18,7 @@ WHERE enct.uuid='9d0113c6-f23a-4461-8428-7e9a7344f2ba')
 AND DATE(enc.encounter_datetime) > DATE(en.encounter_datetime)
 AND enc.patient_id NOT IN (SELECT e.patient_id FROM openmrs.encounter e, openmrs.encounter_type et
  WHERE e.encounter_type = et.encounter_type_id AND et.uuid IN 
- ('12f4d7c3-e047-4455-a607-47a40fe32460','a5600919-4dde-4eb8-a45b-05c204af8284','709610ff-5e39-4a47-9c27-a60e740b0944','fdb5b14f-555f-4282-b4c1-9286addf0aae'))
+ ('12f4d7c3-e047-4455-a607-47a40fe32460','a5600919-4dde-4eb8-a45b-05c204af8284',
+'709610ff-5e39-4a47-9c27-a60e740b0944','fdb5b14f-555f-4282-b4c1-9286addf0aae',
+'1dd1e63a-1543-4885-b807-e49c6d18cffd'))
 GROUP BY p.patient_id;

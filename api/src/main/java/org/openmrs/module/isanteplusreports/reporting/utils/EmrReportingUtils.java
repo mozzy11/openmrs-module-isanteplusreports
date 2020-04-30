@@ -33,6 +33,25 @@ public class EmrReportingUtils {
 	}
 
 	/**
+	 * Creates a new cohort indicator
+	 * 
+	 * @param name   the indicator name
+	 * @param parameters List of evaluation parameters
+	 * @param cohort the mapped cohort
+	 * @return the cohort indicator
+	 */
+	public static CohortIndicator cohortIndicator(String name, List<Parameter> Parameters, Mapped<CohortDefinition> cohort) {
+		CohortIndicator ind = new CohortIndicator(name);
+
+		for (Parameter parameter : Parameters) {
+			ind.addParameter(parameter);
+		}
+        ind.setDescription(MessageUtil.translate(name));
+		ind.setCohortDefinition(cohort);
+		return ind;
+	}
+		
+	/**
 	 * Creates a new cohort indicator with numerator and a denominator cohort
 	 * 
 	 * @param name              the indicator name

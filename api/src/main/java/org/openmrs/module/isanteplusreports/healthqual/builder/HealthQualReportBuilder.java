@@ -1,32 +1,6 @@
 package org.openmrs.module.isanteplusreports.healthqual.builder;
 
-import com.itextpdf.text.DocumentException;
-import j2html.tags.ContainerTag;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.openmrs.module.isanteplusreports.exception.HealthQualException;
-import org.openmrs.module.reporting.common.MessageUtil;
-import org.openmrs.module.reporting.dataset.DataSet;
-import org.openmrs.module.reporting.report.ReportData;
-import org.w3c.dom.Document;
-import org.xhtmlrenderer.pdf.ITextRenderer;
-import org.xml.sax.SAXException;
-
-import javax.xml.bind.DatatypeConverter;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
+import static j2html.TagCreator.a;
 import static j2html.TagCreator.body;
 import static j2html.TagCreator.div;
 import static j2html.TagCreator.h2;
@@ -42,7 +16,38 @@ import static j2html.TagCreator.tr;
 import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.getStringFromResource;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.replaceNonBreakingSpaces;
 
-public class HealthQualReportBuilder {
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.xml.bind.DatatypeConverter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.openmrs.module.isanteplusreports.exception.HealthQualException;
+import org.openmrs.module.reporting.common.MessageUtil;
+import org.openmrs.module.reporting.dataset.DataSet;
+import org.openmrs.module.reporting.report.ReportData;
+import org.openmrs.ui.framework.UiUtils;
+import org.w3c.dom.Document;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+import org.xml.sax.SAXException;
+
+import com.itextpdf.text.DocumentException;
+
+import j2html.tags.ContainerTag;
+
+public class HealthQualReportBuilder extends UiUtils{
 
 	private final Log LOGGER = LogFactory.getLog(getClass());
 
@@ -62,6 +67,10 @@ public class HealthQualReportBuilder {
 	
 	private static final String FEMALE_DENOMINATOR_COLUMN_NAME = "femaleDenominator";
 	
+	private static final String TOTAL_NUMERATOR_COLUMN_NAME = "totalNumerator";
+
+	private static final String TOTAL_DENOMINATOR_COLUMN_NAME = "totalDenominator";
+
 	private static final String PERCENTAGE_STRING_FORMAT_PATTERN = "##0.0";
 
 	private static final String PERIOD_DATE_FORMAT_PATTERN = "yyyy/MM/dd";
@@ -194,18 +203,34 @@ public class HealthQualReportBuilder {
 		
 		Integer[] numerator = createSummaryArray(getDataSetIntegerValue(data, MALE_NUMERATOR_COLUMN_NAME),
 		    getDataSetIntegerValue(data, FEMALE_NUMERATOR_COLUMN_NAME));
-		buildIndicatorSummary(numerator);
+		String[] numeratorColumns = createSummaryColumnArray(data, MALE_NUMERATOR_COLUMN_NAME, FEMALE_NUMERATOR_COLUMN_NAME, TOTAL_NUMERATOR_COLUMN_NAME);
+		buildIndicatorSummary(numerator, numeratorColumns);
 		
 		Integer[] denominator = createSummaryArray(getDataSetIntegerValue(data, MALE_DENOMINATOR_COLUMN_NAME),
 		    getDataSetIntegerValue(data, FEMALE_DENOMINATOR_COLUMN_NAME));
-		buildIndicatorSummary(denominator);
+		String[] denominatorColumns = createSummaryColumnArray(data, MALE_DENOMINATOR_COLUMN_NAME, FEMALE_DENOMINATOR_COLUMN_NAME, TOTAL_DENOMINATOR_COLUMN_NAME);
+		buildIndicatorSummary(denominator, denominatorColumns);
 		
 		buildIndicatorSummary(createPercentageArray(numerator, denominator));
 	}
 	
-	private <T> void buildIndicatorSummary(T[] dataArray) {
+	private <T> void buildIndicatorSummary(T[] dataArray, String[] columnsArray) {
 		getRows()[2].with(MALE_LABEL, FEMALE_LABEL, TOTAL_LABEL);
 		
+		final int ROW = 3;
+		
+		String reportName = columnsArray[3];
+		String reportUrl = pageLink("isanteplusreports", "healthQualIndicatorReportPatientList");
+		String maleIndicatorUrl = String.format("%s?savedDataSetKey=%s&savedColumnKey=%s&columnKeyType=numerator", reportUrl, reportName, columnsArray[0]);
+		String femaleIndicatorUrl = String.format("%s?savedDataSetKey=%s&savedColumnKey=%s&columnKeyType=numerator", reportUrl, reportName, columnsArray[1]);
+		String totalUrl = String.format("%s?savedDataSetKey=%s&savedColumnKey=%s&columnKeyType=numerator", reportUrl, reportName, columnsArray[2]);
+		getRows()[ROW].with(td(a(dataArray[0].toString()).withHref(maleIndicatorUrl).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+		getRows()[ROW].with(td(a(dataArray[1].toString()).withHref(femaleIndicatorUrl).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+		getRows()[ROW].with(td(a(dataArray[2].toString()).withHref(totalUrl).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private <T> void buildIndicatorSummary(T[] dataArray) {
+		getRows()[2].with(MALE_LABEL, FEMALE_LABEL, TOTAL_LABEL);
 		final int ROW = 3;
 		getRows()[ROW].with(td(dataArray[0].toString()));
 		getRows()[ROW].with(td(dataArray[1].toString()));
@@ -218,6 +243,10 @@ public class HealthQualReportBuilder {
 
 	private Long[] createSummaryArray(Long males, Long females) {
 		return new Long[] { males, females, males + females };
+	}
+	
+	private String[] createSummaryColumnArray(DataSet data, String maleColumn, String femaleColumn, String totalColumn) {
+		return new String[] { maleColumn, femaleColumn, totalColumn, data.getDefinition().getName() };
 	}
 	
 	private String[] createPercentageArray(Integer[] dividend, Integer[] factor) {

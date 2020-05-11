@@ -11,131 +11,371 @@ public final class HealthQualReportsConstants {
 
     static final String ADULT_1_INDICATOR_SQL = "retentionOfPatientsOnArt.sql";
 
+    static final String ADULT_1_NUM_INDICATOR_SQL = "retention_of_patients_on_art_num.sql";
+
+    static final String ADULT_1_DEN_INDICATOR_SQL = "retention_of_patients_on_art_den.sql";
+    
     static final String ADULT_2_INDICATOR_SQL = "cd4AssessmentAtEnrolment.sql";
+
+    static final String ADULT_2_NUM_INDICATOR_SQL = "cd4_assessment_at_enrolment_num.sql";
+
+    static final String ADULT_2_DEN_INDICATOR_SQL = "cd4_assessment_at_enrolment_den.sql";
 
     static final String ADULT_3_INDICATOR_SQL = "arvEnrollment.sql";
 
+    static final String ADULT_3_NUM_INDICATOR_SQL = "arv_enrollment_num.sql";
+
+    static final String ADULT_3_DEN_INDICATOR_SQL = "arv_enrollment_den.sql";
+
     static final String ADULT_4_INDICATOR_SQL = "adultHivAndCortimixazoleProphy.sql";
+
+    static final String ADULT_4_NUM_INDICATOR_SQL = "adult_hiv_and_cortimixazole_prophy_num.sql";
+
+    static final String ADULT_4_DEN_INDICATOR_SQL = "adult_hiv_and_cortimixazole_prophy_den.sql";
 
     static final String ADULT_5_INDICATOR_SQL = "adultHivOnArtWithAdherentEvaluation.sql";
 
+    static final String ADULT_5_NUM_INDICATOR_SQL = "adult_hiv_on_art_with_adherent_evaluation_num.sql";
+
+    static final String ADULT_5_DEN_INDICATOR_SQL = "adult_hiv_on_art_with_adherent_evaluation_den.sql";
+
     static final String ADULT_6_INDICATOR_SQL = "adultHivOnArtAdherentToTreatment.sql";
+
+    static final String ADULT_6_NUM_INDICATOR_SQL = "adult_hiv_on_art_adherent_to_treatment_num.sql";
+
+    static final String ADULT_6_DEN_INDICATOR_SQL = "adult_hiv_on_art_adherent_to_treatment_den.sql";
 
     static final String ADULT_7_INDICATOR_SQL = "proportionOfPLHIVTestedForTB.sql";
 
+    static final String ADULT_7_NUM_INDICATOR_SQL = "proportion_of_plhiv_tested_for_tb_num.sql";
+
+    static final String ADULT_7_DEN_INDICATOR_SQL = "proportion_of_plhiv_tested_for_tb_den.sql";
+
     static final String ADULT_8_INDICATOR_SQL = "adultPlhivAndInh.sql";
+
+    static final String ADULT_8_NUM_INDICATOR_SQL = "adult_plhiv_and_inh_num.sql";
+
+    static final String ADULT_8_DEN_INDICATOR_SQL = "adult_plhiv_and_inh_den.sql";
 
     static final String ADULT_9_INDICATOR_SQL = "proportionOfHIVPatientsWithNutritionalAssessment.sql";
 
+    static final String ADULT_9_NUM_INDICATOR_SQL = "proportion_of_hiv_patients_with_nutritional_assessment_num.sql";
+
+    static final String ADULT_9_DEN_INDICATOR_SQL = "proportion_of_hiv_patients_with_nutritional_assessment_den.sql";
+
     static final String ADULT_10_INDICATOR_SQL = "proportionOfUndernourishedHIVPatients.sql";
+
+    static final String ADULT_10_NUM_INDICATOR_SQL = "proportion_of_undernourished_hiv_patients_num.sql";
+
+    static final String ADULT_10_DEN_INDICATOR_SQL = "proportion_of_undernourished_hiv_patients_num.sql";
 
     static final String ADULT_11_INDICATOR_SQL = "proportionOfHivWomenUsingFamilyPlanning.sql";
 
+    static final String ADULT_11_NUM_INDICATOR_SQL = "proportion_of_hiv_women_using_family_planning_num.sql";
+
+    static final String ADULT_11_DEN_INDICATOR_SQL = "proportion_of_hiv_women_using_family_planning_den.sql";
+
     static final String ADULT_12_INDICATOR_SQL = "proportionOfHIVPregnantWithHAART.sql";
+
+    static final String ADULT_12_NUM_INDICATOR_SQL = "proportion_of_hiv_pregnant_with_haart_num.sql";
+
+    static final String ADULT_12_DEN_INDICATOR_SQL = "proportion_of_hiv_pregnant_with_haart_den.sql";
 
     static final String ADULT_13_INDICATOR_SQL = "proportionOfWomenInPrenatalCareOrLD.sql";
 
+    static final String ADULT_13_NUM_INDICATOR_SQL = "proportion_of_women_in_prenatal_care_or_ld_num.sql";
+
+    static final String ADULT_13_DEN_INDICATOR_SQL = "proportion_of_women_in_prenatal_care_or_ld_den.sql";
+
     static final String ADULT_14_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest6Months.sql";
+
+    static final String ADULT_14_NUM_INDICATOR_SQL = "proportion_of_hiv_on_art_viral_load_test6_months_num.sql";
+
+    static final String ADULT_14_DEN_INDICATOR_SQL = "proportion_of_hiv_on_art_viral_load_test6_months_den.sql";
 
     static final String ADULT_15_INDICATOR_SQL = "proportionOfHivOnArtViralLoadTest.sql";
 
+    static final String ADULT_15_NUM_INDICATOR_SQL = "proportion_of_hiv_on_art_viral_load_test_num.sql";
+
+    static final String ADULT_15_DEN_INDICATOR_SQL = "proportion_of_hiv_on_art_viral_load_test_num.sql";
+
     static final String ADULT_16_INDICATOR_SQL = "proportionOfHivOnArtUndetectableViralLoadTest6Months.sql";
 
+    static final String ADULT_16_NUM_INDICATOR_SQL = "proportion_of_hiv_on_art_undetectable_viral_load_test_6_months_num.sql";
+
+    static final String ADULT_16_DEN_INDICATOR_SQL = "proportion_of_hiv_on_art_undetectable_viral_load_test_6_months_den.sql";
+    
     static final String PEDIATRIC_1_INDICATOR_SQL = "childrenRegularlyFollowedOnArt.sql";
+
+    static final String PEDIATRIC_1_NUM_INDICATOR_SQL = "children_regularly_followed_on_art_num.sql";
+
+    static final String PEDIATRIC_1_DEN_INDICATOR_SQL = "children_regularly_followed_on_art_den.sql";
 
     static final String PEDIATRIC_2_INDICATOR_SQL = "childrenHivAndPlacedOnArt.sql";
 
+    static final String PEDIATRIC_2_NUM_INDICATOR_SQL = "children_hiv_and_placed_on_art_num.sql";
+
+    static final String PEDIATRIC_2_DEN_INDICATOR_SQL = "children_hiv_and_placed_on_art_den.sql";
+
     static final String PEDIATRIC_3_INDICATOR_SQL = "pediatricHivAndReceivedCotrimoxazoleProphylaxis.sql";
+
+    static final String PEDIATRIC_3_NUM_INDICATOR_SQL = "pediatric_hiv_and_received_cotrimoxazole_prophylaxis_num.sql";
+
+    static final String PEDIATRIC_3_DEN_INDICATOR_SQL = "pediatric_hiv_and_received_cotrimoxazole_prophylaxis_den.sql";
 
     static final String PEDIATRIC_4_INDICATOR_SQL = "pediatricBenefitedFromAnAdherence.sql";
 
+    static final String PEDIATRIC_4_NUM_INDICATOR_SQL = "pediatric_benefited_from_an_adherence_num.sql";
+
+    static final String PEDIATRIC_4_DEN_INDICATOR_SQL = "pediatric_benefited_from_an_adherence_den.sql";
+
     static final String PEDIATRIC_5_INDICATOR_SQL = "childrenOnArtWhoAreConsideredAdherent.sql";
+
+    static final String PEDIATRIC_5_NUM_INDICATOR_SQL = "children_on_art_who_are_considered_adherent_num.sql";
+
+    static final String PEDIATRIC_5_DEN_INDICATOR_SQL = "children_on_art_who_are_considered_adherent_den.sql";
 
     static final String PEDIATRIC_6_INDICATOR_SQL = "proportionOfHIVChildrenTestedForTB.sql";
 
+    static final String PEDIATRIC_6_NUM_INDICATOR_SQL = "proportion_of_hiv_children_tested_for_tb_num.sql";
+
+    static final String PEDIATRIC_6_DEN_INDICATOR_SQL = "proportion_of_hiv_children_tested_for_tb_den.sql";
+
     static final String PEDIATRIC_7_INDICATOR_SQL = "proportionOfHIVChildrenOlderThanOneYearOfAgeReceivedINH.sql";
+
+    static final String PEDIATRIC_7_NUM_INDICATOR_SQL = "proportion_of_hiv_children_older_than_one_year_of_age_received_inh_num.sql";
+
+    static final String PEDIATRIC_7_DEN_INDICATOR_SQL = "proportion_of_hiv_children_older_than_one_year_of_age_received_inh_den.sql";
 
     static final String PEDIATRIC_8_INDICATOR_SQL = "proportionOfHIVChildrenYoungerThanOneYearOfAgeReceivedINH.sql";
 
+    static final String PEDIATRIC_8_NUM_INDICATOR_SQL = "proportion_of_hiv_children_younger_than_one_year_of_age_received_inh_num.sql";
+
+    static final String PEDIATRIC_8_DEN_INDICATOR_SQL = "proportion_of_hiv_children_younger_than_one_year_of_age_received_inh_den.sql";
+
     static final String PEDIATRIC_9_INDICATOR_SQL = "proportionOfChildrenWithNutritionalAssessment.sql";
+
+    static final String PEDIATRIC_9_NUM_INDICATOR_SQL = "proportion_of_children_with_nutritional_assessment_num.sql";
+
+    static final String PEDIATRIC_9_DEN_INDICATOR_SQL = "proportion_of_children_with_nutritional_assessment_den.sql";
 
     static final String PEDIATRIC_10_INDICATOR_SQL = "healthQualChildrenImmunizationAndVaccination.sql";
 
+    static final String PEDIATRIC_10_NUM_INDICATOR_SQL = "health_qual_children_immunization_and_vaccination_num.sql";
+
+    static final String PEDIATRIC_10_DEN_INDICATOR_SQL = "health_qual_children_immunization_and_vaccination_den.sql";
+
     static final String PEDIATRIC_11_INDICATOR_SQL = "pediatricHivAndArtProphy.sql";
+
+    static final String PEDIATRIC_11_NUM_INDICATOR_SQL = "pediatric_hiv_and_art_prophy_num.sql";
+
+    static final String PEDIATRIC_11_DEN_INDICATOR_SQL = "pediatric_hiv_and_art_prophy_den.sql";
 
     static final String PEDIATRIC_12_INDICATOR_SQL = "pediatricReceivedPcrTest.sql";
 
+    static final String PEDIATRIC_12_NUM_INDICATOR_SQL = "pediatric_received_pcr_test_num.sql";
+
+    static final String PEDIATRIC_12_DEN_INDICATOR_SQL = "pediatric_received_pcr_test_den.sql";
+
     static final String PEDIATRIC_13_INDICATOR_SQL = "pediatricNegativePcrTest.sql";
+
+    static final String PEDIATRIC_13_NUM_INDICATOR_SQL = "pediatric_negative_pcr_test_num.sql";
+
+    static final String PEDIATRIC_13_DEN_INDICATOR_SQL = "pediatric_negative_pcr_test_den.sql";
 
     static final String PEDIATRIC_14_INDICATOR_SQL = "earlyInfantDiagnosis.sql";
     
+    static final String PEDIATRIC_14_NUM_INDICATOR_SQL = "early_infant_diagnosis_num.sql";
+
+    static final String PEDIATRIC_14_DEN_INDICATOR_SQL = "early_infant_diagnosis_dem.sql";
+
     // Indicator message properties
     static final String ADULT = "isanteplusreports.adult";
 
     static final String PEDIATRIC = "isanteplusreports.pediatric";
 
+    static final String NUMERATOR = "_num_";
+
+    static final String DENOMINATOR = "_den_";
+    
     static final String NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_MESSAGE = "isanteplusreports.numberOfActivePatientsBySex";
 
     static final String ADULT_1_INDICATOR_MESSAGE = ADULT + 1;
 
+    static final String ADULT_1_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 1;
+
+    static final String ADULT_1_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 1;
+    
     static final String ADULT_2_INDICATOR_MESSAGE = ADULT + 2;
+
+    static final String ADULT_2_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 2;
+
+    static final String ADULT_2_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 2;
 
     static final String ADULT_3_INDICATOR_MESSAGE = ADULT + 3;
 
+    static final String ADULT_3_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 3;
+
+    static final String ADULT_3_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 3;
+
     static final String ADULT_4_INDICATOR_MESSAGE = ADULT + 4;
+
+    static final String ADULT_4_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 4;
+
+    static final String ADULT_4_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 4;
 
     static final String ADULT_5_INDICATOR_MESSAGE = ADULT + 5;
 
+    static final String ADULT_5_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 5;
+
+    static final String ADULT_5_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 5;
+
     static final String ADULT_6_INDICATOR_MESSAGE = ADULT + 6;
 
+    static final String ADULT_6_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 6;
+
+    static final String ADULT_6_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 6;
+    
     static final String ADULT_7_INDICATOR_MESSAGE = ADULT + 7;
 
+    static final String ADULT_7_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 7;
+
+    static final String ADULT_7_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 7;
+    
     static final String ADULT_8_INDICATOR_MESSAGE = ADULT + 8;
+
+    static final String ADULT_8_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 8;
+
+    static final String ADULT_8_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 8;
 
     static final String ADULT_9_INDICATOR_MESSAGE = ADULT + 9;
 
+    static final String ADULT_9_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 9;
+
+    static final String ADULT_9_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 9;
+    
     static final String ADULT_10_INDICATOR_MESSAGE = ADULT + 10;
+
+    static final String ADULT_10_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 10;
+
+    static final String ADULT_10_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 10;
 
     static final String ADULT_11_INDICATOR_MESSAGE = ADULT + 11;
 
+    static final String ADULT_11_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 11;
+
+    static final String ADULT_11_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 11;
+
     static final String ADULT_12_INDICATOR_MESSAGE = ADULT + 12;
 
+    static final String ADULT_12_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 12;
+
+    static final String ADULT_12_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 12;    
+    
     static final String ADULT_13_INDICATOR_MESSAGE = ADULT + 13;
+
+    static final String ADULT_13_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 13;
+
+    static final String ADULT_13_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 13;
 
     static final String ADULT_14_INDICATOR_MESSAGE = ADULT + 14;
 
+    static final String ADULT_14_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 14;
+
+    static final String ADULT_14_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 14;
+
     static final String ADULT_15_INDICATOR_MESSAGE = ADULT + 15;
+
+    static final String ADULT_15_NUM_INDICATOR_MESSAGE = ADULT + NUMERATOR + 15;
+
+    static final String ADULT_15_DEN_INDICATOR_MESSAGE = ADULT + DENOMINATOR + 15;
 
     static final String ADULT_16_INDICATOR_MESSAGE = ADULT + 16;
 
     static final String PEDIATRIC_1_INDICATOR_MESSAGE = PEDIATRIC + 1;
 
+    static final String PEDIATRIC_1_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 1;
+
+    static final String PEDIATRIC_1_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 1;
+
     static final String PEDIATRIC_2_INDICATOR_MESSAGE = PEDIATRIC + 2;
+
+    static final String PEDIATRIC_2_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 2;
+
+    static final String PEDIATRIC_2_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 2;
 
     static final String PEDIATRIC_3_INDICATOR_MESSAGE = PEDIATRIC + 3;
 
+    static final String PEDIATRIC_3_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 3;
+
+    static final String PEDIATRIC_3_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 3;
+
     static final String PEDIATRIC_4_INDICATOR_MESSAGE = PEDIATRIC + 4;
+
+    static final String PEDIATRIC_4_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 4;
+
+    static final String PEDIATRIC_4_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 4;
 
     static final String PEDIATRIC_5_INDICATOR_MESSAGE = PEDIATRIC + 5;
 
+    static final String PEDIATRIC_5_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 5;
+
+    static final String PEDIATRIC_5_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 5;
+
     static final String PEDIATRIC_6_INDICATOR_MESSAGE = PEDIATRIC + 6;
+
+    static final String PEDIATRIC_6_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 6;
+
+    static final String PEDIATRIC_6_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 6;
 
     static final String PEDIATRIC_7_INDICATOR_MESSAGE = PEDIATRIC + 7;
 
+    static final String PEDIATRIC_7_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 7;
+
+    static final String PEDIATRIC_7_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 7;
+
     static final String PEDIATRIC_8_INDICATOR_MESSAGE = PEDIATRIC + 8;
+
+    static final String PEDIATRIC_8_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 8;
+
+    static final String PEDIATRIC_8_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 8;
 
     static final String PEDIATRIC_9_INDICATOR_MESSAGE = PEDIATRIC + 9;
 
+    static final String PEDIATRIC_9_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 9;
+
+    static final String PEDIATRIC_9_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 9;
+
     static final String PEDIATRIC_10_INDICATOR_MESSAGE = PEDIATRIC + 10;
+
+    static final String PEDIATRIC_10_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 10;
+
+    static final String PEDIATRIC_10_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 10;
 
     static final String PEDIATRIC_11_INDICATOR_MESSAGE = PEDIATRIC + 11;
 
+    static final String PEDIATRIC_11_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 11;
+
+    static final String PEDIATRIC_11_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 11;
+
     static final String PEDIATRIC_12_INDICATOR_MESSAGE = PEDIATRIC + 12;
+
+    static final String PEDIATRIC_12_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 12;
+
+    static final String PEDIATRIC_12_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 12;
 
     static final String PEDIATRIC_13_INDICATOR_MESSAGE = PEDIATRIC + 13;
 
+    static final String PEDIATRIC_13_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 13;
+
+    static final String PEDIATRIC_13_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 13;
+
     static final String PEDIATRIC_14_INDICATOR_MESSAGE = PEDIATRIC + 14;
     
+    static final String PEDIATRIC_14_NUM_INDICATOR_MESSAGE = PEDIATRIC + NUMERATOR + 14;
+
+    static final String PEDIATRIC_14_DEN_INDICATOR_MESSAGE = PEDIATRIC + DENOMINATOR + 14;
+
     // indicators' UUIDs
     public static final String NUMBER_OF_ACTIVE_PATIENTS_BY_SEX_UUID = "69679207-04a8-4fb9-b3ad-75a8dd5c0a58";
 
@@ -198,5 +438,8 @@ public final class HealthQualReportsConstants {
     public static final String HEALTH_QUAL_PEDIATRIC_13_INDICATOR_UUID = "28a71811-5511-40eb-8ca5-79464cd3448a";
     
     public static final String HEALTH_QUAL_PEDIATRIC_14_INDICATOR_UUID = "1399880c-93cd-4c02-871b-80885ef8c0f2";
+    
+    //Misc
+    public static final String HEALTH_QUAL_GENERAL_PURPOSE_SUFFIX = "_HQ"; 
     
 }

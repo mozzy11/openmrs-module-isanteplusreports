@@ -1,5 +1,15 @@
 package org.openmrs.module.isanteplusreports.page.controller;
 
+import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.getReportData;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.time.DateUtils;
 import org.openmrs.Location;
 import org.openmrs.api.context.Context;
@@ -8,20 +18,13 @@ import org.openmrs.module.isanteplusreports.healthqual.HealthQualManager;
 import org.openmrs.module.isanteplusreports.healthqual.builder.HealthQualReportBuilder;
 import org.openmrs.module.isanteplusreports.healthqual.model.HealthQualSelectedIndicator;
 import org.openmrs.module.isanteplusreports.healthqual.util.HealthQualReportsConstants;
+import org.openmrs.module.reporting.ReportingConstants;
 import org.openmrs.module.reporting.common.DateUtil;
 import org.openmrs.module.reporting.dataset.DataSetRow;
 import org.openmrs.module.reporting.report.ReportData;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.page.PageModel;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.getReportData;
 
 public class HealthQualReportPageController {
 
@@ -56,6 +59,7 @@ public class HealthQualReportPageController {
 	        @RequestParam(required = false, value = "startDate") Date startDate,
 	        @RequestParam(required = false, value = "endDate") Date endDate,
 			PageModel model, HttpSession session) throws IOException {
+
 		
 		if (startDate == null) {
 			startDate = DateUtils.addDays(new Date(), -21);
@@ -75,11 +79,15 @@ public class HealthQualReportPageController {
 		builder.setEndDate(endDate);
 
 		setNumberOfPatients(startDate, endDate, builder);
-
-		for (HealthQualSelectedIndicator indicator : indicators) {
-			builder.addReportData(getReportData(indicator.getUuid(), startDate, endDate, indicator.getOptions()));
-		}
 		
+		List<ReportData> allReportData = new ArrayList<ReportData>();
+		for (HealthQualSelectedIndicator indicator : indicators) {
+			ReportData reportData = getReportData(indicator.getUuid(), startDate, endDate, indicator.getOptions());
+			allReportData.add(reportData);
+			builder.addReportData(reportData);
+		}
+				
+		session.setAttribute(ReportingConstants.OPENMRS_REPORT_DATA + HealthQualReportsConstants.HEALTH_QUAL_GENERAL_PURPOSE_SUFFIX, allReportData);
 		model.addAttribute("manager", healthQualManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
@@ -88,15 +96,12 @@ public class HealthQualReportPageController {
 	}
 
 	private Location getSessionLocation(HttpSession session) {
-		Integer locationId = (Integer) session.getAttribute(LOCATION_SESSION_ATTRIBUTE);
-		if (locationId == null) {
+		Location location = Context.getUserContext().getLocation();
+		if (location == null) {
 			return Context.getLocationService().getDefaultLocation();
 		}
-		Location childLocation = Context.getLocationService().getLocation(locationId);
-		if (childLocation == null || childLocation.getParentLocation() == null) {
-			return Context.getLocationService().getDefaultLocation();
-		}
-		return Context.getLocationService().getLocation(locationId).getParentLocation(); // to get clinic data
+		
+		return location; // to get clinic data
 	}
 
 	private void setNumberOfPatients(Date startDate, Date endDate, HealthQualReportBuilder builder) {

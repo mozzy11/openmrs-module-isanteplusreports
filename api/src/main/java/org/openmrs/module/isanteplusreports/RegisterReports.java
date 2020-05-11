@@ -6,6 +6,7 @@ import org.openmrs.GlobalProperty;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.ModuleFactory;
 import org.openmrs.module.isanteplusreports.healthqual.util.RegisterAllHealthQualReports;
+import org.openmrs.module.isanteplusreports.pnlsReport.RegisterAllPnlsReports;
 import org.openmrs.module.isanteplusreports.util.RegisterAllOtherReports;
 import org.openmrs.module.isanteplusreports.util.RegisterPatientsArvStatusReports;
 
@@ -23,13 +24,14 @@ public class RegisterReports {
 			String version = ModuleFactory.getModuleById("isanteplusreports").getVersion();
 			String oldversion = Context.getAdministrationService().getGlobalProperty("reports.moduleVersion");
 
-			if (!version.equals(oldversion)) {
+			//if (!version.equals(oldversion)) {
 				RegisterAllOtherReports.registerOtherReports();
 				RegisterAllHealthQualReports.registerAll();
 				RegisterPatientsArvStatusReports.registerAllPatientsArvStatusReports();
+				RegisterAllPnlsReports.registerAll();
 				
 				Context.getAdministrationService().saveGlobalProperty(new GlobalProperty("reports.moduleVersion", version));
-			}
+			//}
 		}
 		catch (Exception ex) {
 			log.error("One of reports has an error which blocks it and other reports to be registered");

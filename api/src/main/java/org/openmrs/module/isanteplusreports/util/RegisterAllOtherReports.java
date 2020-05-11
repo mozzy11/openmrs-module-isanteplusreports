@@ -11,6 +11,7 @@ import org.openmrs.module.isanteplusreports.IsantePlusReportsProperties;
 import org.openmrs.module.isanteplusreports.IsantePlusReportsUtil;
 import org.openmrs.module.isanteplusreports.library.indicator.PmtctReportsIndicatorLibrary;
 import org.openmrs.module.isanteplusreports.library.indicator.PrenatalReportsIndicatorLibrary;
+import org.openmrs.module.isanteplusreports.reporting.reports.MalariaIndicatorReport;
 import org.openmrs.module.isanteplusreports.reporting.reports.ObGynIndicatorReport;
 import org.openmrs.module.reporting.common.MessageUtil;
 import org.openmrs.module.reporting.dataset.definition.CohortIndicatorDataSetDefinition;
@@ -102,7 +103,7 @@ public class RegisterAllOtherReports extends SessionContext {
 		listOfExposedInfants();
 		artDispensationFollowUp();
 		listPatientWithNextVisitByPeriod();
-		//MalariaIndicatorReport.registerReport();
+		MalariaIndicatorReport.registerReport();
 		ObGynIndicatorReport.registerReport();
 	}
 

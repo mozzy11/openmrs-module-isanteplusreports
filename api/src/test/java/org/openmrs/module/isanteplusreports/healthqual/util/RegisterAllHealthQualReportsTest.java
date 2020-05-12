@@ -1,23 +1,38 @@
 package org.openmrs.module.isanteplusreports.healthqual.util;
 
 
+import java.util.Properties;
+
+import org.hibernate.cfg.Environment;
 import org.junit.Assert;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
-import org.openmrs.module.isanteplusreports.test.StandaloneContextSensitiveTest;
 import org.openmrs.module.reporting.definition.service.SerializedDefinitionService;
 import org.openmrs.module.reporting.report.definition.ReportDefinition;
+import org.openmrs.test.BaseModuleContextSensitiveTest;
 
-public class RegisterAllHealthQualReportsTest extends StandaloneContextSensitiveTest {
+public class RegisterAllHealthQualReportsTest extends BaseModuleContextSensitiveTest {
 	
+    @Override
+    public Properties getRuntimeProperties() {
+        Properties p = super.getRuntimeProperties();
+        String url = "jdbc:h2:mem:isanteplus;MODE=MYSQL;DB_CLOSE_DELAY=30;LOCK_TIMEOUT=10000;"
+        		+ "INIT=CREATE SCHEMA IF NOT EXISTS isanteplus\\;SET SCHEMA isanteplus\\;"
+        		+ "RUNSCRIPT FROM 'classpath:org/openmrs/module/isanteplusreports/sql/init.sql'\\;"
+				+ "RUNSCRIPT FROM 'classpath:org/openmrs/module/isanteplusreports/sql/data.sql'\\;";
+
+        p.setProperty(Environment.URL, url);
+        
+        return p;
+    }
+    
 	/**
-	* @see RegisterAllHealthQualReports#registerHealthEqualReportWithCurrentDateAndPeriodParamsNumDen(String,String,String,String)
-	* @verifies Execute query and return report with at least 4 datasets
-	*/
+	 * @see RegisterAllHealthQualReports#registerHealthEqualReportWithCurrentDateAndPeriodParamsNumDen(String,String,String,String)
+	 * @verifies save report definition and return valid instance
+	 */
 	@Test
-	public void registerHealthEqualReportWithCurrentDateAndPeriodParamsNumDen_shouldExecuteQueryAndReturnReportWithAtLeast4Datasets()
+	public void registerHealthEqualReportWithCurrentDateAndPeriodParamsNumDen_shouldSaveReportDefinitionAndReturnValidInstance()
 	        throws Exception {
-		// Adult on ART treatment
 		String sqlNum = HealthQualReportsConstants.ADULT_1_NUM_INDICATOR_SQL; 
 		String sqlDen = HealthQualReportsConstants.ADULT_1_DEN_INDICATOR_SQL;
 		String messageProperties = HealthQualReportsConstants.ADULT_1_INDICATOR_MESSAGE;
@@ -31,17 +46,6 @@ public class RegisterAllHealthQualReportsTest extends StandaloneContextSensitive
 
         Assert.assertEquals("Should return at last 1 instance of dataset definition", 1, rd.getDataSetDefinitions().size());
 
-/*		Map<String, Object> additionalOptions = new HashMap<String, Object>();
-		Date startDate = new SimpleDateFormat("dd/MM/yyyy").parse("01/04/2020");
-		Date endDate = new SimpleDateFormat("dd/MM/yyyy").parse("30/04/2020");
-		additionalOptions.put("period", 6);
-		ReportData rdt =  HealthQualUtils.getReportData(rd.getUuid(), startDate, endDate, additionalOptions);
-		
-        Assert.assertNotNull(rdt.getDataSets());
-
-		Assert.assertEquals("Should return exactly 4 columns for the dataset", 4, rdt.getDataSets().entrySet().size());
-		
-		Assert.fail("Not yet implemented");*/
 	}
 
 }

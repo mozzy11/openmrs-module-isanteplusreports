@@ -1,6 +1,20 @@
 package org.openmrs.module.isanteplusreports.healthqual;
 
-import j2html.tags.ContainerTag;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.powermock.api.mockito.PowerMockito.mockStatic;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,20 +39,7 @@ import org.openmrs.module.reporting.report.definition.service.ReportDefinitionSe
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.powermock.api.mockito.PowerMockito.mockStatic;
+import j2html.tags.ContainerTag;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({HealthQualReportBuilder.class, MessageUtil.class, HealthQualUtils.class, Context.class})
@@ -144,9 +145,9 @@ public class HealthQualReportBuilderTest {
         //Verify
         assertNotNull(result);
         assertTrue(result.contains("<table>"));
+        assertTrue(result.contains("<td>2</td>"));
+        assertTrue(result.contains("<td>3</td>"));
         assertTrue(result.contains("<td class=\"total\">5</td>"));
-        assertTrue(result.contains("<td class=\"total\">2</td>"));
-        assertTrue(result.contains("<td class=\"total\">0.0</td>"));
     }
 
     @Test

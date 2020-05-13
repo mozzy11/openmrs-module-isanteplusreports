@@ -5,6 +5,7 @@ target/
 .project
 .classpath
 .java-version
+.factorypath
 
 api/target/
 omod/target/

@@ -187,7 +187,7 @@ public final class HealthQualReportsConstants {
     
     static final String PEDIATRIC_14_NUM_INDICATOR_SQL = "early_infant_diagnosis_num.sql";
 
-    static final String PEDIATRIC_14_DEN_INDICATOR_SQL = "early_infant_diagnosis_dem.sql";
+    static final String PEDIATRIC_14_DEN_INDICATOR_SQL = "early_infant_diagnosis_den.sql";
 
     // Indicator message properties
     static final String ADULT = "isanteplusreports.adult";

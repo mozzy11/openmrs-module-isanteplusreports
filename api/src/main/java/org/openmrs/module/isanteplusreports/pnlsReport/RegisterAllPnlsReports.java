@@ -34,6 +34,7 @@ public class RegisterAllPnlsReports {
 	public static void registerAll() {
 		newlyEnrolledPatientsOnArt();
 		referredInPatientsOnArt();
+		registerBrestFeeding();
 	}
 	
 	private static void newlyEnrolledPatientsOnArt() {	
@@ -47,6 +48,14 @@ public class RegisterAllPnlsReports {
 		registerPnlsReportWithStartAndEndDateParams(PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_SQL,
 		    PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_MESSAGE,
 		    PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_UUID);		
+	}
+	
+	private static void registerBrestFeeding() {
+		registerPnlsBreastFeedingWomenReportWithStartAndEndDateParams(
+			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL,
+			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_MESSAGE,
+			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID
+			);
 	}
 	
 	private static void registerPnlsReportWithStartAndEndDateParams(String sql, String messageProperties, String uuid) {
@@ -65,6 +74,29 @@ public class RegisterAllPnlsReports {
 		pnlsReportUtils.addAgeandGenderColumns(dsd, CohortIndicator, "M");
 		pnlsReportUtils.addAgeandGenderColumns(dsd, CohortIndicator, "F");
 		pnlsReportUtils.addTotalColumns(dsd, CohortIndicator);
+		
+		Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
+		Map<String, Object> mappings = new HashMap<String, Object>();
+		mappings.put("startDate", "${startDate}");
+		mappings.put("endDate", "${endDate}");
+		ReportDefinition repDefinition = reportDefinition(messageProperties, messageProperties, uuid);
+		repDefinition.addParameter(START_DATE);
+		repDefinition.addParameter(END_DATE);
+		repDefinition.addDataSetDefinition(dsd, mappings);
+		Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);		
+	}
+	
+private static void registerPnlsBreastFeedingWomenReportWithStartAndEndDateParams(String sql, String messageProperties, String uuid) {
+		
+		CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
+		dsd.setName(messageProperties);
+		dsd.addParameter(START_DATE);
+		dsd.addParameter(END_DATE);
+				
+		CohortIndicator CohortIndicator = pnlsReportUtils.cohortIndicatorFromSqlResource(sql, "name", getParameters());
+		
+		String params = "startDate=${startDate},endDate=${endDate}";
+		dsd.addColumn("BF","Breast Feeding", Mapped.mapStraightThrough(CohortIndicator), "");
 		
 		Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
 		Map<String, Object> mappings = new HashMap<String, Object>();

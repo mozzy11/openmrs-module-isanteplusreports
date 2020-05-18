@@ -110,7 +110,7 @@ public class PnlsReportBuilder  extends UiUtils{
 	
 	private static final String COLUMN_NAME_Total_F = "TotalF";
 	
-private static final String COLUMN_NAME_0_1_T = "0-1T";
+    private static final String COLUMN_NAME_0_1_T = "0-1T";
 	
 	private static final String COLUMN_NAME_1_4_T = "1-4T";
 	
@@ -138,6 +138,8 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 	
 	private static final String COLUMN_NAME_Total_T = "TotalT";
 	
+	private static final String BREAST_FEEDING = "BF";
+	
 	private static final String PERIOD_DATE_FORMAT_PATTERN = "yyyy/MM/dd";
 
 	private static final String CREATION_DATE_FORMAT_PATTERN = "yyyy/MM/dd HH:mm:ss";
@@ -149,6 +151,8 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 	private ContainerTag[] rows;
 	
 	private List<DataSet> dataSets;
+	
+	private List<DataSet> bFdataSets;
 	
 	private String clinicDepartment;
 	
@@ -162,8 +166,7 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 
 	private Long malePatients;
 		
-	public  String[] getColumnNamesArray(){
-		
+	public  String[] getColumnNamesArray(){		
 		String[] colunms = {
 				COLUMN_NAME_0_1_M,
 				COLUMN_NAME_1_4_M ,
@@ -211,8 +214,17 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 		return colunms ;
 	}
 		
+	
+	public  String[] getBfColumnNamesArray(){		
+		String[] colunms = {BREAST_FEEDING};
+		return colunms ;
+	}
 	public  List<String> getColumnNamesList(){	
 		return Arrays.asList(getColumnNamesArray());							
+	  }
+	
+	public  List<String> getBfColumnNamesList(){	
+		return Arrays.asList(getBfColumnNamesArray());							
 	  }
 	
 	public String buildHtmlTables() {
@@ -277,8 +289,12 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 		while (iterator.hasNext()) {
 			tables.with(buildOneTable(iterator));
 			clearRows();
-		}
-		
+		}		
+		Iterator<DataSet> iteratorBf = getbFDataSets().iterator();
+		while (iteratorBf.hasNext()) {
+			tables.with(buildOneTableBf(iteratorBf));
+			clearRows();
+		}	
 		return tables;
 	}
 
@@ -286,6 +302,13 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 		buildGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicator(iterator.next());
+		}		
+		return table().with(getRows());
+	}
+	
+	private ContainerTag buildOneTableBf(Iterator<DataSet> iterator) {
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildIndicatorBf(iterator.next());
 		}		
 		return table().with(getRows());
 	}
@@ -321,6 +344,19 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 		int[] dataSet = createSummaryArray(getColumnNamesList() ,data);
 		String reportName = data.getDefinition().getName();
 		buildIndicatorSummary(dataSet ,getColumnNamesArray(),reportName );	
+	}
+	
+	
+	private void buildIndicatorBf(DataSet data){
+		getRows()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "1").withClass("indicatorLabel"));
+		
+		int[] dataSet = createSummaryArray(getBfColumnNamesList() ,data);
+		String reportName = data.getDefinition().getName();
+		final int ROW1 = 1;
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+		
+		String row1 =  ConstructUrl(reportUrl ,reportName, getBfColumnNamesArray()[0]);
+		populateTable(ROW1, dataSet[0],row1);
 	}
 	
 	private void buildIndicatorSummary(int[] dataArray ,String[] columnsArray, String reportName ) {
@@ -488,6 +524,13 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 		return dataSets;
 	}
 	
+	public List<DataSet> getbFDataSets() {
+		if (bFdataSets == null) {
+			bFdataSets = new LinkedList<DataSet>();
+		}
+		return bFdataSets;
+	}
+	
 	public void setDataSets(List<DataSet> dataSets) {
 		this.dataSets = dataSets;
 	}
@@ -497,7 +540,12 @@ private static final String COLUMN_NAME_0_1_T = "0-1T";
 	}
 	
 	public void addReportData(ReportData reportData) {
-		 getDataSets().addAll(reportData.getDataSets().values());
+		if(StringUtils.equals(reportData.getDefinition().getUuid(), PnlsReportConstants.NEWLY_ENROLLED_PATIENTS_ON_ART_UUID)
+			|| StringUtils.equals(reportData.getDefinition().getUuid(), PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_UUID)) {				
+		  getDataSets().addAll(reportData.getDataSets().values());
+		}else if (StringUtils.equals(reportData.getDefinition().getUuid() ,PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID)){
+		  getbFDataSets().addAll(reportData.getDataSets().values());
+		}
 	}
 	
 	public int getNumberOfIndicatorsInOneTable() {

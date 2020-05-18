@@ -19,7 +19,8 @@ import org.springframework.stereotype.Component;
 public class PnlsReportManager {
 	
 	private static final String[] indicatorUuids = { PnlsReportConstants.NEWLY_ENROLLED_PATIENTS_ON_ART_UUID,
-			                                         PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_UUID			                                         
+			                                         PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_UUID,
+			                                         PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID			                                        
 	                                                };
 	
 	private Map<String, PnlsIndicatorOption> options = new HashMap<>();

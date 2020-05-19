@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/IsantePlus/openmrs-module-isanteplusreports.svg?branch=master)](https://travis-ci.com/IsantePlus/openmrs-module-isanteplusreports)
+
 iSantePlusReports OpenMRS Module
 =====================================
 

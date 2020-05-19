@@ -1,5 +1,5 @@
 /*Rapport : Éventualité de duplication d'enregistrement de patients */
-select distinct  p.patient_id AS 'Patient Id', pat.st_id as 'Code ST', pat.national_id as 'Code national', p.family_name as Nom, p.given_name as Prénom, 
+select distinct  pat.patient_id AS 'Patient Id', pat.st_id as 'Code ST', pat.national_id as 'Code national', p.family_name as Nom, p.given_name as Prénom, 
 pat.gender as Sexe,TIMESTAMPDIFF(YEAR, p.birthdate,DATE(now())) as Âge, 
 pat.last_address as Adresse, p.mother_name as 'Nom de la mère', pat.telephone as Téléphone
 FROM (select pa.given_name, 

@@ -718,6 +718,15 @@
                 "url": "reportingui/runIndicatorReport.page?reportDefinition=0616e88a-011f-4433-9d98-1743448977af",
                 "order": 166,
                 "requiredPrivilege": "App: reportingui.reports"
+            },
+            {
+              "id": "isanteplusreports.pnls_report",
+              "extensionPointId": "org.openmrs.module.reportingui.reports.overview",
+              "type": "link",
+              "label": "isanteplusreports.pnls.label",
+              "url": "isanteplusreports/pnlsReport.page",
+              "order": 200,
+              "requiredPrivilege": "App: reportingui.reports"
             }
 
         ],

@@ -14,6 +14,26 @@ public class PnlsReportConstants {
 	
 	public final static String NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL ="newlyReferredInBreatFeedingWomen.sql";
 	
+	public final static String MSM_COHORT_SQL ="";
+	
+	public final static String SEX_PROFFESIONALS_COHORT_SQL ="";
+	
+	public final static String TRANSGENDER__COHORT_SQL ="";
+	
+	public final static String CAPTIVES__COHORT_SQL ="";
+	
+	public final static String INJECTION_DRUG_USERS_COHORT_SQL ="";
+	
+	public final static String DIED_REASON_COHORT_SQL ="";
+	
+	public final static String VOLUNTARY_REASON_COHORT_SQL ="";
+	
+	public final static String DENIAL_REASON_COHORT_SQL ="";
+	
+	public final static String MEDICAL_DECISION_REASON_COHORT_SQL ="";
+	
+	public final static String REFERRED_B4_REASON_COHORT_SQL ="";
+	
 	
 	public static final String NEWLY_ENROLLED_PATIENTS_ON_ART_UUID = "06460e12-937d-11ea-bb37-0242ac130059";
 	

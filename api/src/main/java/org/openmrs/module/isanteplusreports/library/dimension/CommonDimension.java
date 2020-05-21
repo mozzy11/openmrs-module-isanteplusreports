@@ -3,14 +3,24 @@ package org.openmrs.module.isanteplusreports.library.dimension;
 
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.openmrs.module.isanteplusreports.library.cohort.common.CommonCohortLibrary;
+import org.openmrs.module.isanteplusreports.pnlsReport.library.cohort.PnlsReportCohortLibrary;
 import org.openmrs.module.isanteplusreports.reporting.utils.ReportUtils;
 import org.openmrs.module.reporting.evaluation.parameter.Parameter;
 import org.openmrs.module.reporting.indicator.dimension.CohortDefinitionDimension;
 
 public class CommonDimension {
 
+	 private static final String DATE_PARAMS = "startDate=${startDate},endDate=${endDate}";
+	 
+	private final static Parameter START_DATE = new Parameter("startDate", "isanteplusreports.parameters.startdate",
+	        Date.class);
+	
+	private final static Parameter END_DATE = new Parameter("endDate", "isanteplusreports.parameters.enddate", Date.class);
+	
 	/**
 	   * Gender dimension
 	   *
@@ -45,5 +55,52 @@ public class CommonDimension {
 		    dim.addCohortDefinition("unknown", ReportUtils.map(ageCohortLibrary.unknownAgeCohort(), ""));
 		    return dim;
 		  }
+	  
+	  public CohortDefinitionDimension notEnrollReason(){		  
+		  CohortDefinitionDimension dim = new CohortDefinitionDimension();	  		  		  
+		  dim.setName("enrolRsn");
+		  dim.addCohortDefinition("DENIAL", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonDenial(), ""));
+		  dim.addCohortDefinition("DIED", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonDied(), ""));
+		  dim.addCohortDefinition("MED", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonMedical(), ""));
+		  dim.addCohortDefinition("REF", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonRefferd(), ""));
+		  dim.addCohortDefinition("VOL", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonVoluntary(), ""));
+		  dim.addCohortDefinition("OTHER", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonOther(), ""));
+		return dim;		
+	  };
+	  
+	  public CohortDefinitionDimension keyPopulationDimension(){		  
+		  CohortDefinitionDimension dim = new CohortDefinitionDimension();	  		  		  
+		  dim.setName("keyPopn");
+		  dim.addCohortDefinition("CAPT", ReportUtils.map(PnlsReportCohortLibrary.keyPopulationCaptive(), ""));
+		  dim.addCohortDefinition("DRUG", ReportUtils.map(PnlsReportCohortLibrary.keyPopulationDrug(), ""));
+		  dim.addCohortDefinition("MSM", ReportUtils.map(PnlsReportCohortLibrary.keyPopulationMsm(), ""));
+		  dim.addCohortDefinition("SEX", ReportUtils.map(PnlsReportCohortLibrary.keyPopulationSex(), ""));
+		  dim.addCohortDefinition("TRANSG", ReportUtils.map(PnlsReportCohortLibrary.keyPopulationTransgender(), ""));
+		return dim;		
+	  };
+	  
+	  
+	  public CohortDefinitionDimension ageZoneBy15() {
+		    CohortDefinitionDimension dim = new CohortDefinitionDimension();
+		    CommonCohortLibrary ageCohortLibrary = new CommonCohortLibrary();
+		    dim.addParameter(new Parameter("effectiveDate", "Effective Date", Date.class));
+		    dim.setName("age");
+			dim.addCohortDefinition("<15", ReportUtils.map(ageCohortLibrary.agedAtMostCohort(15), "effectiveDate=${endDate}"));
+		    dim.addCohortDefinition(">15", ReportUtils.map(ageCohortLibrary.agedAtLeastCohort(15), "effectiveDate=${endDate}"));
+		    dim.addCohortDefinition("unknown", ReportUtils.map(ageCohortLibrary.unknownAgeCohort(), ""));
+		    return dim;
+		  }
+	  
+	  public CohortDefinitionDimension CervicalCancerStatusDimension(){		  
+		  CohortDefinitionDimension dim = new CohortDefinitionDimension();
+		  dim.addParameter(START_DATE);
+		  dim.addParameter(END_DATE);
+		  dim.setName("cervStat");
+		  dim.addCohortDefinition("NEG", ReportUtils.map(PnlsReportCohortLibrary.CervicalCancerNegative(),DATE_PARAMS));
+		  dim.addCohortDefinition("POS", ReportUtils.map(PnlsReportCohortLibrary.CervicalCancerPostive(), DATE_PARAMS));  
+		  dim.addCohortDefinition("SUS", ReportUtils.map(PnlsReportCohortLibrary.CervicalCancerSuspected(),DATE_PARAMS));
+		return dim;		
+	  };
+	  	  
 	
 }

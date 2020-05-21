@@ -68,6 +68,20 @@ public class CommonCohortLibrary {
 	    }
 	  
 	  /**
+	   * Patients who are aged maximum a given age
+	   *
+	   * @return the cohort definition
+	   */
+	  public CohortDefinition agedAtMostCohort(int maxAge) {
+	        AgeCohortDefinition cd = new AgeCohortDefinition();
+	        cd.setName("aged at most " + maxAge);
+	        cd.addParameter(new Parameter("effectiveDate", "Effective Date", Date.class));
+	        cd.setMaxAge(maxAge);
+	        cd.setMaxAgeUnit(DurationUnit.YEARS);
+	        return cd;
+	    }
+	  
+	  /**
 	   * Patients whose age is unknown
 	   *
 	   * @return the cohort definition

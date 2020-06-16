@@ -1,6 +1,6 @@
 package org.openmrs.module.isanteplusreports.page.controller;
 
-import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.getReportData;
+import static org.openmrs.module.isanteplusreports.pnlsReport.utils.pnlsReportUtils.getReportData;
 
 import java.io.IOException;
 import java.util.ArrayList;

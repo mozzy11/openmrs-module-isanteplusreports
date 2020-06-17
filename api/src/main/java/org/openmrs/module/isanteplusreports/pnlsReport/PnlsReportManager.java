@@ -96,7 +96,10 @@ public class PnlsReportManager {
 			                                         PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_TESTED_POSTIVE_UUID,
 			                                         PnlsReportConstants.TOTAL_ARV_PATIENTS_RECOMENDED_PF_UUID ,
 			                                         PnlsReportConstants.PATIENTS_ACCEPTING_FAMILY_PLANNING_UUID,
-			                                         PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID
+			                                         PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID,
+			                                         PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_QUATERLY_UUID,
+			                                         PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_SEMI_ANNUALLY_UUID,
+			                                         PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_ANNUALLY_UUID
 	                                                };
 	
 	private Map<String, PnlsIndicatorOption> options = new HashMap<>();

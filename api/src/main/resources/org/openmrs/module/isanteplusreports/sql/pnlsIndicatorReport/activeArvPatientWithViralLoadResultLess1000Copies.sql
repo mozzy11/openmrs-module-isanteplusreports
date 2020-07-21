@@ -1,12 +1,12 @@
 SELECT CASE 
             WHEN pl.test_id = 856 THEN
-				                           CASE
-					                        WHEN CAST(pl.test_result AS UNSIGNED) < 1000 THEN pl.patient_id 							
-						                     END
+				  CASE
+				  WHEN CAST(pl.test_result AS UNSIGNED) < 1000 THEN pl.patient_id 							
+				  END
 		      WHEN pl.test_id = 1305 THEN
-		                                  CASE 
-													 WHEN pl.test_result = 1306 THEN pl.patient_id
-		                                  END
+		          CASE 
+                  WHEN pl.test_result = 1306 THEN pl.patient_id
+		          END
 		      END
             								            
 FROM isanteplus.patient_status_arv ps ,isanteplus.patient_laboratory pl

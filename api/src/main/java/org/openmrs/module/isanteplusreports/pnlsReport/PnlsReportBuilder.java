@@ -29,6 +29,7 @@ import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.Co
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_CERVICAL_CANCER_STATUS;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_CERVICAL_CANCER_TREATMENT;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_FAMILY_PLANNING ;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_4BY3 ;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -135,6 +136,10 @@ public class PnlsReportBuilder  extends UiUtils{
 	
 	private List<DataSet> dataSets4By7;
 	
+	private List<DataSet> dataSets4By3;
+	
+	private List<DataSet> dataSets4By7II;
+	
 	private List<DataSet> dataSets3By1;
 	
 	private List<DataSet> dataSets14By4;
@@ -239,6 +244,14 @@ public class PnlsReportBuilder  extends UiUtils{
 		return Arrays.asList(getColumnNamesArray4By7());							
 	  }
 	
+	public  String[] getColumnNamesArray4By3(){ 
+		return COLUMNS_ARRAY_4BY3;
+	}
+	
+	public  List<String> getColumnNamesList4By3(){	
+		return Arrays.asList(getColumnNamesArray4By3());							
+	  }
+	
 	public  String[] getActivePatientRegimenLinesColumnNamesArray(){ 
 		return COLUMNS_ARRAY_ACTIVE_PATIENTS_BY_REGIME;
 	}
@@ -270,6 +283,8 @@ public class PnlsReportBuilder  extends UiUtils{
 	public  List<String>getFamilyPlanningColumnNamesList(){	
 		return Arrays.asList(getFamilyPlanningColumnNamesArray());							
 	  }
+	
+	
 	
 	public String buildHtmlTables() {
 		String tablesHtml = buildTables().render();
@@ -408,6 +423,18 @@ public class PnlsReportBuilder  extends UiUtils{
 			tables.with(buildOneTableFamillyPlanning(iterator14));
 			clearRows13();
 		}
+		
+		Iterator<DataSet> iterator15 = getDataSets4By7II().iterator();		
+		while (iterator15.hasNext()) {
+			tables.with( buildOneTableForActivePatientsWithAtleastOneFollowUpVist(iterator15));
+			clearRows9();
+		}
+		
+		Iterator<DataSet> iterator16 = getDataSets4By3().iterator();		
+		while (iterator16.hasNext()) {
+			tables.with( buildOneTable4By3(iterator16));
+			clearRows();
+		}
 		return tables;
 	}
 
@@ -415,6 +442,15 @@ public class PnlsReportBuilder  extends UiUtils{
 		buildGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicator14By3(iterator.next());
+		}		
+		return table().with(getRows5());
+	}
+	
+	
+	private ContainerTag buildOneTable4By3(Iterator<DataSet> iterator) {
+		buildGenderSummaryTable();
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildIndicator4By3(iterator.next());
 		}		
 		return table().with(getRows5());
 	}
@@ -485,6 +521,15 @@ public class PnlsReportBuilder  extends UiUtils{
 	}		
 	return table().with(getRows9());
   }
+	
+	private ContainerTag buildOneTableForActivePatientsWithAtleastOneFollowUpVist(Iterator<DataSet> iterator) {
+		buildPatientSummaryTableForFollowUpVist();
+		 buildTbGenderSummaryTableOverMonhs();
+	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+		buildIndicatorFotArvPatientsOverMonths(iterator.next());
+	}		
+	return table().with(getRows9());
+ }
 	
 	private ContainerTag buildOne14By4Table(Iterator<DataSet> iterator) {
 		 buildTbSummaryTable();
@@ -628,6 +673,19 @@ public class PnlsReportBuilder  extends UiUtils{
 		less3Months.with(th(translateLabel("less3M")).attr("rowspan", "2").withClass("label"));
 		btn3_5Months.with(th(translateLabel("btn3_5M")).attr("rowspan", "2").withClass("label"));
 		over5Months.with(th(translateLabel("over5M")).attr("rowspan", "2").withClass("label"));
+		Total.with(th(translateLabel("Total")).withClass("label"));
+	}
+	
+	private void buildPatientSummaryTableForFollowUpVist() {
+		fillEmptyRow(getRows9()[0], 1);
+		fillEmptyRow(getRows9()[1], 1);
+		ContainerTag qauterly = getRows9()[2];
+		ContainerTag semiAnnually = getRows9()[4];
+		ContainerTag annually = getRows9()[6];
+		ContainerTag Total = getRows9()[8];
+		qauterly.with(th(translateLabel("quaterly")).attr("rowspan", "2").withClass("label"));
+		semiAnnually.with(th(translateLabel("semiAnualy")).attr("rowspan", "2").withClass("label"));
+		 annually .with(th(translateLabel("annualy")).attr("rowspan", "2").withClass("label"));
 		Total.with(th(translateLabel("Total")).withClass("label"));
 	}
 	
@@ -1039,6 +1097,18 @@ public class PnlsReportBuilder  extends UiUtils{
 		
 	}
 	
+	private void buildIndicator4By3(DataSet data) {
+		getRows5()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
+		getRows5()[1].with(td(translateLabel("<15")).attr("colspan", "1").withClass("label"),
+		                  td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
+                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
+                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
+				
+		int[] dataSet = createSummaryArray(getColumnNamesList4By3() ,data);
+		String reportName = data.getDefinition().getName();
+		buildIndicatorSummary4By3(dataSet ,getColumnNamesArray4By3(),reportName );
+	}
+	
 	private void buildTbDagnosisTestIndicator(DataSet data) {
 		getRows2()[0].with(td(translateLabel("geneExpertTest")).attr("colspan", "1").withClass("label"),
 		                  td(translateLabel("OtherTest")).attr("colspan", "1").withClass("label"),
@@ -1233,6 +1303,22 @@ public class PnlsReportBuilder  extends UiUtils{
 		    	 if(colCount < dataArray.length) {
 			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
 			        populateTable9(ROW,dataArray[colCount ],row); 
+			        colCount ++ ;
+			    }
+			 }
+		} 	
+	}
+	
+	private void buildIndicatorSummary4By3(int[] dataArray ,String[] columnsArray, String reportName ) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+		
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 4 ; ROW ++) {			
+		    for (int col = 0; col <= 3 ; col ++) {
+		    	 if(colCount < dataArray.length) {
+			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
+			        populateTable(ROW,dataArray[colCount ],row); 
 			        colCount ++ ;
 			    }
 			 }
@@ -1639,6 +1725,20 @@ public class PnlsReportBuilder  extends UiUtils{
 		return dataSets4By7;
 	}
 	
+	public List<DataSet> getDataSets4By3(){
+		if (dataSets4By3 == null) {
+			dataSets4By3 = new LinkedList<DataSet>();
+		}
+		return dataSets4By3;
+	}
+	
+	public List<DataSet> getDataSets4By7II(){
+		if (dataSets4By7II == null) {
+			dataSets4By7II = new LinkedList<DataSet>();
+		}
+		return dataSets4By7II;
+	}
+	
 	public List<DataSet> getDataSets3By1(){
 		if (dataSets3By1 == null) {
 			dataSets3By1 = new LinkedList<DataSet>();
@@ -1710,14 +1810,18 @@ public class PnlsReportBuilder  extends UiUtils{
 				getDataSets6By2().addAll(reportData.getDataSets().values());
 			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY7)) {
 				getDataSets4By7().addAll(reportData.getDataSets().values());
+			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY7_II)) {
+				getDataSets4By7II().addAll(reportData.getDataSets().values());
 			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_14BY9)) {
 				getDataSets14By9().addAll(reportData.getDataSets().values());
 			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY4)) {
 				getDataSets10By4().addAll(reportData.getDataSets().values());
 			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY4_II)) {
 				getDataSets10By4II().addAll(reportData.getDataSets().values());
-			} if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY11)) {
+			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY11)) {
 				getDataSets10By11().addAll(reportData.getDataSets().values());
+			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY3)) {
+				getDataSets4By3().addAll(reportData.getDataSets().values());
 			}
 	}
 	

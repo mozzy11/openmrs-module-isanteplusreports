@@ -219,6 +219,13 @@ public class pnlsReportUtils {
 		constructColumn("Total" + gender + column, "Total Patients", CohortIndicator, "gender=" + gender, dsd);
 	}
 	
+	public static void addTotalGenderAndAgeBy15Colums(CohortIndicatorDataSetDefinition dsd, CohortIndicator CohortIndicator, String column) {
+		constructColumn("<15" + column, "<15 Years", CohortIndicator, "age=<15" , dsd);
+		constructColumn(">15" + column, ">15 Years", CohortIndicator, "age=>15" , dsd);
+		constructColumn("UnKnown" +  column, "UnKnown", CohortIndicator, "age=unknown" , dsd);
+		constructColumn("Total" + column, "Total Patients", CohortIndicator, "", dsd);
+	}
+	
 	public static void constructColumn(String columnName, String ColumnDescription, CohortIndicator CohortIndicator,
 	        String dimension, CohortIndicatorDataSetDefinition dsd) {
 		dsd.addColumn(columnName, ColumnDescription, Mapped.mapStraightThrough(CohortIndicator), dimension);

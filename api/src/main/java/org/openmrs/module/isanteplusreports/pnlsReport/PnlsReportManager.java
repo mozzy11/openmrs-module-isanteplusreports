@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PnlsReportManager {
 	
-	private static final String[] indicatorUuids = {/* PnlsReportConstants.NEWLY_ENROLLED_PATIENTS_ON_ART_UUID,
+	private static final String[] indicatorUuids = { PnlsReportConstants.NEWLY_ENROLLED_PATIENTS_ON_ART_UUID,
 			                                         PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID,
 			                                         PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_UUID,	
 			                                         PnlsReportConstants.NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID,
@@ -96,7 +96,7 @@ public class PnlsReportManager {
 			                                         PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_TESTED_POSTIVE_UUID,
 			                                         PnlsReportConstants.TOTAL_ARV_PATIENTS_RECOMENDED_PF_UUID ,
 			                                         PnlsReportConstants.PATIENTS_ACCEPTING_FAMILY_PLANNING_UUID,
-			                                         PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID,*/
+			                                         PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID,
 			                                         PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_UUID ,
 			                                         PnlsReportConstants.ACTIVE_PATIENTS_6_MONTHS_INH_UUID
 	                                                };

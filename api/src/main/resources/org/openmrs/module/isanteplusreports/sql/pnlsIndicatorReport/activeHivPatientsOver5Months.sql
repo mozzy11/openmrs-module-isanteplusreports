@@ -1,5 +1,5 @@
 SELECT p.patient_id
-   FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_status_arv psa ,(select pdisp.patient_id, MIN(ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date))) as min_visit_date FROM isanteplus.patient_dispensing pdisp WHERE  pdisp.voided <> 1  GROUP BY 1) B
+   FROM isanteplus.patient p, isanteplus.patient_dispensing pdis, isanteplus.patient_status_arv psa ,(select pdisp.patient_id, MAX(ifnull(DATE(pdisp.dispensation_date),DATE(pdisp.visit_date))) as min_visit_date FROM isanteplus.patient_dispensing pdisp WHERE  pdisp.voided <> 1  GROUP BY 1) B
        WHERE p.patient_id = pdis.patient_id
        AND p.patient_id =B.patient_id 
        AND p.patient_id = psa.patient_id

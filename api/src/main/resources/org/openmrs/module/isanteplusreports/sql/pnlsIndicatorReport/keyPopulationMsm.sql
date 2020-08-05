@@ -1,3 +1,3 @@
-SELECT p.patient_id
-FROM isanteplus.patient p 
-     WHERE p.family_name = "MSM" ;
+SELECT pa.patient_id
+FROM isanteplus.patient_on_art pa
+        WHERE pa.key_population = "MSM" ;

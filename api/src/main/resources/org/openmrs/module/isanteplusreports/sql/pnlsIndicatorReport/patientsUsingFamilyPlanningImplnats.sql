@@ -1,3 +1,3 @@
-SELECT p.patient_id
-FROM isanteplus.patient p 
-     WHERE p.family_name = "DRUG" ;
+SELECT pat.patient_id
+   FROM isanteplus.patient_on_art pat
+   WHERE pat.using_family_planning_method = "IMPLANTS" ;

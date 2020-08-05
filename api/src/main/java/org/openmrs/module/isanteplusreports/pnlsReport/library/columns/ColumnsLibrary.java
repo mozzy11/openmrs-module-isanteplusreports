@@ -279,6 +279,11 @@ public class ColumnsLibrary {
 		
 	private static final String COLUMN_NAME_GT_15_F = ">15F";
 	
+    private static final String COLUMN_NAME_LS_15_T = "<15T";
+		
+	private static final String COLUMN_NAME_GT_15_T = ">15T";
+		
+	
 	public static String[] genarateGenderAndAgeColumnBy15ArrayNames(String column){
 		 String [] columns = {
 				 COLUMN_NAME_LS_15_M +column,
@@ -293,12 +298,29 @@ public class ColumnsLibrary {
 		return columns;		
 	}
 	
+	public static String[] genarateTotalColumnBy15ArrayNames(){
+		 String [] columns = {
+				 COLUMN_NAME_LS_15_T ,
+				 COLUMN_NAME_GT_15_T ,
+				 COLUMN_NAME_UK_T ,
+				 COLUMN_NAME_Total_T ,				
+		 };
+		return columns;		
+	}
+	
 	public static String[] getAllGenderAndAgeBy15ColumnsArray(){
 		String[]  ConcanetSet1 = (String[]) ArrayUtils.addAll(genarateGenderAndAgeColumnBy15ArrayNames("A") ,genarateGenderAndAgeColumnBy15ArrayNames("B"));
 		return ConcanetSet1;
 	}
+	
+	public static String[] getAllGenderAndAgeBy15ColumnsArraySingleRow(){
+		String[]  ConcanetSet1 = (String[]) ArrayUtils.addAll(genarateGenderAndAgeColumnBy15ArrayNames("A") ,genarateTotalColumnBy15ArrayNames());
+		return ConcanetSet1;
+	}
 		
 	public static final String[] COLUMNS_ARRAY_AGE_BY_15 =getAllGenderAndAgeBy15ColumnsArray();
+	
+	public static final String[] COLUMNS_ARRAY_4BY3 = getAllGenderAndAgeBy15ColumnsArraySingleRow();
 	
 	private static final String COLUMN_NAME_GENEEXPERT_TB_DIAGNOSIS_TEST = "GE";
 	

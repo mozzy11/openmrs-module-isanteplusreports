@@ -12,148 +12,147 @@ public class PnlsReportConstants {
 	
 	public final static String REFERRED_IN_PATIENTS_ENROLED_ON_ART_SQL = "refferedInPatientsEnrolledOnArt.sql";
 	
-	public final static String NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL = "newlyEnrolledBreatFeedingWomen.sql";
+	public final static String NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL_1_1_1 = "newlyEnrolledBreatFeedingWomen.sql";
 	
-	public final static String NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL = "newlyReferredInBreatFeedingWomen.sql";
+	public final static String NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL_1_2_1 = "newlyReferredInBreatFeedingWomen.sql";
 	
-	public final static String NOT_ENROLED_ON_ART_COHORT_INDICATOR_SQL = "notEnrolledOnArtCorhortIndicator.sql";
+	public final static String NOT_ENROLED_ON_ART_COHORT_INDICATOR_SQL_3 = "notEnrolledOnArtCorhortIndicator.sql";
 	
-	//Dimension corhots by Reason of Non Enrollment NOTE THAT THE SQL FILES BELOW ARE STILL DUMMY
-	public final static String COHORT_NON_ENROLLMENT_REASON_OTHER_SQL = "notEnrolledReasonOther.sql";
+	public final static String BREAST_FEEDING_WOMEN_NOT_YET_ENROLED_ON_ART_SQL_3_1 = "breastFeedingWomenNotYetEnrolledOnArt.sql";
 	
-	public final static String COHORT_NON_ENROLLMENT_REASON_DIED_SQL = "notEnrolledReasonDied.sql";
+	public final static String COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_SQL_5_1 = "NewlyEnrolledOnArtStartedTbTreatment.sql";
 	
-	public final static String COHORT_NON_ENROLLMENT_REASON_VOLUNTARY_SQL = "notEnrolledReasonVoluntary.sql";
+	public final static String COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_SQL_5_2 = "AlreadyOnArtStartedTbTreatment.sql";
 	
-	public final static String COHORT_NON_ENROLLMENT_REASON_DENIAL_SQL = "notEnrolledReasonDenial.sql";
+    public final static String COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_FOR_SIX_MONTHS_SQL_6_1 = "NewlyEnrolledOnArtStartedTbTreatmentForSixMonths.sql";
 	
-	public final static String COHORT_NON_ENROLLMENT_REASON_MEDICAL_SQL = "notEnrolledReasonMedical.sql";
+	public final static String COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_FOR_SIX_MONTHS_SQL_6_2 = "AlreadyOnArtStartedTbTreatmentForSixMonths.sql";
 	
-	public final static String COHORT_NON_ENROLLMENT_REASON_REFERRED_SQL = "notEnrolledReasonReferred.sql";
+	public final static String COHORT_NEW_PATIENTS_ON_ART_COMPLETED_TB_TREATMENT_SQL_7_1 = "NewlyEnrolledOnArtCompletedTbTreatment.sql";
 	
-	public final static String COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_SQL = "NewlyEnrolledOnArtStartedTbTreatment.sql";
+	public final static String COHORT_PATIENTS_ALREADY_ON_ART_COMPLETED_TB_TREATMENT_SQL_7_2 = "AlreadyOnArtCompletedTbTreatment.sql";
 	
-	public final static String COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_SQL = "AlreadyOnArtStartedTbTreatment.sql";
+	public final static String ACTIVE_PATIENTS_6_MONTHS_INH_SQL_8 = "activePatients6MonthsInh.sql";
 	
-	public final static String COHORT_NEW_PATIENTS_ON_ART_COMPLETED_TB_TREATMENT_SQL = "NewlyEnrolledOnArtCompletedTbTreatment.sql";
+	public final static String COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_POSTIVE_SQL_9_1 = "NewlyEnrolledOnArtScreeneesPostive.sql";
 	
-	public final static String COHORT_PATIENTS_ALREADY_ON_ART_COMPLETED_TB_TREATMENT_SQL = "AlreadyOnArtCompletedTbTreatment.sql";
+	public final static String COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_POSTIVE_SQL_9_1 = "AlreadyOnArtScreeneesPostive.sql";
 	
-	public final static String COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_POSTIVE_SQL = "NewlyEnrolledOnArtScreeneesPostive.sql";
+	public final static String COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_NEGATIVE_SQL_9_2 = "NewlyEnrolledOnArtScreeneesNegative.sql";
 	
-	public final static String COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_POSTIVE_SQL = "AlreadyOnArtScreeneesPostive.sql";
+	public final static String COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_NEGATIVE_SQL_9_2 = "AlreadyOnArtScreeneesNegative.sql";
 	
-	public final static String COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_NEGATIVE_SQL = "NewlyEnrolledOnArtScreeneesNegative.sql";
+	public final static String NEWLYLY_ENROLLED_ARV_PATIENTS_AND_NEWLY_PLACED_ON_TB_TREATMENT_SQL_10 = "patientsNewlyenrolledOnArvsAndTbTreatment.sql";
 	
-	public final static String COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_NEGATIVE_SQL = "AlreadyOnArtScreeneesNegative.sql";
+	public final static String PATIENTS_ALREADY_ON_ARVS_AND_ALREADY_PLACED_ON_TB_TREATMENT_SQL_10 = "patientsAlreadyOnArvsAndTbTreatment.sql";
 	
-	public final static String BREAST_FEEDING_WOMEN_NOT_YET_ENROLED_ON_ART_SQL = "breastFeedingWomenNotYetEnrolledOnArt.sql";
+	public final static String TB_HIV_PATIENTS_ON_ANTI_TB_TREATMENT_SQL_11 = "tbHivPatientsOnAntiTbTreatment.sql";
 	
-	public final static String NEWLYLY_ENROLLED_ARV_PATIENTS_AND_NEWLY_PLACED_ON_TB_TREATMENT_SQL = "patientsNewlyenrolledOnArvsAndTbTreatment.sql";
+	public final static String TB_HIV_PATIENTS_NEWLY_ENROLLED_ON_ART_ON_ANTI_TB_TREATMENT_SQL_12 = "tbHivPatientsNewlyEntolledOnArtOnAntiTbTreatment.sql";
 	
-	public final static String PATIENTS_ALREADY_ON_ARVS_AND_ALREADY_PLACED_ON_TB_TREATMENT_SQL = "patientsAlreadyOnArvsAndTbTreatment.sql";
+	public final static String TB_HIV_PATIENTS_ALREADY_ON_ART_ON_ANTI_TB_TREATMENT_SQL_12 = "tbHivPatientsAlreadyOnArtOnAntiTbTreatment.sql";
 	
-	public final static String TB_HIV_PATIENTS_ON_TB_TREATMENT_SQL = "tbHivPatientsOnTbTreatment.sql";
+	public final static String ACTIVE_HIV_PATIENTS_SQL_13 = "activeHivPatients.sql";
 	
-	public final static String TB_HIV_PATIENTS_NEWLY_ENROLLED_ON_ART_ON_TB_TREATMENT_SQL = "tbHivPatientsNewlyEntolledOnArtOnTbTreatment.sql";
+	public final static String ACTIVE_ARV_PATIENTS_LESS_3MONTHS_SQL_14_1 = "activeHivPatientsLess3Months.sql";
 	
-	public final static String TB_HIV_PATIENTS_ALREADY_ON_ART_ON_TB_TREATMENT_SQL = "tbHivPatientsAlreadyOnArtOnTbTreatment.sql";
+	public final static String ACTIVE_ARV_PATIENTS_BTN_3_5MONTHS_SQL_14_2 = "activeHivPatientsBtn3_5Months.sql";
 	
-	public final static String ACTIVE_HIV_PATIENTS_SQL = "activeHivPatients.sql";
+	public final static String ACTIVE_ARV_PATIENTS_OVER_5MONTHS_SQL_14_3 = "activeHivPatientsOver5Months.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_LESS_3MONTHS_SQL = "activeHivPatientsLess3Months.sql";
+    public final static String ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_QUATERLY_SQL_15_1 = "activePatientsWithAtleastOneFollowUpVistQuatery.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_BTN_3_5MONTHS_SQL = "activeHivPatientsBtn3_5Months.sql";
+	public final static String ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_SEMI_ANNUALLY_SQL_15_2 = "activePatientsWithAtleastOneFollowUpVistSemiAnnualy.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_OVER_5MONTHS_SQL = "activeHivPatientsOver5Months.sql";
+	public final static String ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_ANNUALLY_SQL_15_3 = "activePatientsWithAtleastOneFollowUpVistAnnualy.sql";
+		
+	public final static String ACTIVE_ARV_FIRST_LINE_REGIMEN_SQL_16_1 = "activeHivPatientsFirstLineRegimen.sql";
 	
-	public final static String ACTIVE_ARV_FIRST_LINE_REGIMEN_SQL = "activeHivPatientsFirstLineRegimen.sql";
+	public final static String ACTIVE_ARV_SECOND_LINE_REGIMEN_SQL_16_2 = "activeHivPatientsSecondLineRegimen.sql";
 	
-	public final static String ACTIVE_ARV_SECOND_LINE_REGIMEN_SQL = "activeHivPatientsSecondLineRegimen.sql";
+	public final static String ACTIVE_ARV_THIRD_LINE_REGIMEN_SQL_16_3 = "activeHivPatientsThirdLineRegimen.sql";
+	   	
+	public final static String INACTIVE_ARV_PATIENTS_DEAD_SQL_17_1 = "inactivePatientsDead.sql";
 	
-	public final static String ACTIVE_ARV_THIRD_LINE_REGIMEN_SQL = "activeHivPatientsThirdLineRegimen.sql";
+	public final static String INACTIVE_ARV_PATIENTS_MEDICAL_OR_VOLUNTARY_SQL_17_2 = "inactivePatientsMedicalOrVoluntary.sql";
 	
-	public final static String INACTIVE_ARV_PATIENTS_DEAD_SQL = "inactivePatientsDead.sql";
+	public final static String INACTIVE_ARV_PATIENTS_LOST_TO_FOR_A_MONTH_SQL_17_3 = "inactivePatientsLostToForMonth.sql";
 	
-	public final static String INACTIVE_ARV_PATIENTS_MEDICAL_OR_VOLUNTARY_SQL = "inactivePatientsMedicalOrVoluntary.sql";
+	public final static String INACTIVE_ARV_PATIENTS_MIGRATED_SQL_17_3_1 = "inactivePatientsMigrated.sql";
 	
-	public final static String INACTIVE_ARV_PATIENTS_LOST_TO_FOR_A_MONTH_SQL = "inactivePatientsLostToForMonth.sql";
+	public final static String INACTIVE_ARV_PATIENTS_TRANSFERRED_SQL_17_4 = "inactivePatientsTransferred.sql";
 	
-	public final static String INACTIVE_ARV_PATIENTS_MIGRATED_SQL = "inactivePatientsMigrated.sql";
+	public final static String LOST_ARV_PATIENTS_DIED_SQL_18_1 = "lostArvPatienstDied.sql";
 	
-	public final static String INACTIVE_ARV_PATIENTS_TRANSFERRED_SQL = "inactivePatientsTransferred.sql";
+	public final static String LOST_ARV_PATIENTS_AFTER_TREATMENT_LESS_3MONTHS_SQL_18_2 = "lostArvPatienstForlessThan3monthsTreatment.sql";
 	
-	public final static String LOST_ARV_PATIENTS_DIED_SQL = "lostArvPatienstDied.sql";
+	public final static String LOST_ARV_PATIENTS_AFTER_TREATMENT_MORE_3MONTHS_SQL_18_3 = "lostArvPatienstForMoreThan3monthsTreatment.sql";
 	
-	public final static String LOST_ARV_PATIENTS_AFTER_TREATMENT_LESS_3MONTHS_SQL = "lostArvPatienstForlessThan3monthsTreatment.sql";
+	public final static String LOST_ARV_PATIENTS_TRANSFERRED_SQL_18_4 = "lostArvPatientsTransferred.sql";
 	
-	public final static String LOST_ARV_PATIENTS_AFTER_TREATMENT_MORE_3MONTHS_SQL = "lostArvPatienstForMoreThan3monthsTreatment.sql";
+	public final static String LOST_ARV_PATIENTS_STOPPED_SQL_18_5 = "lostArvPatientsStopped.sql";
 	
-	public final static String LOST_ARV_PATIENTS_TRANSFERRED_SQL = "lostArvPatientsTransferred.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_TUBERCLOSIS_SQL_18_1_1 = "deadArvPatientsByTuberclosis.sql";
 	
-	public final static String LOST_ARV_PATIENTS_STOPPED_SQL = "lostArvPatientsStopped.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_OTHER_INFECTIOUS_DISEASES_SQL_18_1_2 = "deadArvPatientsByOtherInfectiousDiseases.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_TUBERCLOSIS_SQL = "deadArvPatientsByTuberclosis.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_CANCER_SQL_18_1_3 = "deadArvPatientsByCancer.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_OTHER_INFECTIOUS_DISEASES_SQL = "deadArvPatientsByOtherInfectiousDiseases.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_HIV_ILLNESSES_SQL_18_1_4 = "deadArvPatientsByHivIllnensses.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_CANCER_SQL = "deadArvPatientsByCancer.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_NATURAL_CAUSES_SQL_18_1_5 = "deadArvPatientsByNaturalCauses.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_HIV_ILLNESSES_SQL = "deadArvPatientsByHivIllnensses.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_UNNATURAL_CAUSES_SQL_18_1_6 = "deadArvPatientsByUnNaturalCauses.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_NATURAL_CAUSES_SQL = "deadArvPatientsByNaturalCauses.sql";
+	public final static String DEAD_ARV_PATIENTS_BY_UNKNOWN_CAUSES_SQL_18_1_7 = "deadArvPatientsByUnKnownCauses.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_UNNATURAL_CAUSES_SQL = "deadArvPatientsByUnNaturalCauses.sql";
+	public final static String LOST_ARV_PATIENTS_RESUMED_TREATMENT_SQL_19 = "lostPatientsResumedTreatment.sql";
 	
-	public final static String DEAD_ARV_PATIENTS_BY_UNKNOWN_CAUSES_SQL = "deadArvPatientsByUnKnownCauses.sql";
+	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_SQL_20_1 = "activeArvPatientWithViralLoadResult.sql";
 	
-	public final static String LOST_ARV_PATIENTS_RESUMED_TREATMENT_SQL = "lostPatientsResumedTreatment.sql";
+	public final static String ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL_20_1_1 = "activePregnantWomenOnArtWithViralLoadResult.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_SQL = "activeArvPatientWithViralLoadResult.sql";
+	public final static String ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL_20_1_2 = "activeBreastFeedingWomenOnArtWithViralLoadResult.sql";
 	
-	public final static String ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL = "activePregnantWomenOnArtWithViralLoadResult.sql";
+	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2 = "activeArvPatientWithViralLoadResultLess1000Copies.sql";
 	
-	public final static String ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL = "activeBreastFeedingWomenOnArtWithViralLoadResult.sql";
+	public final static String ACTIVE_PREGNANT_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2_1 = "activePregnantWomenWithViralLoadResultLess1000Copies.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL = "activeArvPatientWithViralLoadResultLess1000Copies.sql";
+	public final static String ACTIVE_BREAST_FEEDING_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2_2 = "activeBreastFeedingWomenWithViralLoadResultLess1000Copies.sql";
 	
-	public final static String ACTIVE_PREGNANT_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL = "activePregnantWomenWithViralLoadResultLess1000Copies.sql";
+	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1 = "activeArvPatientWithViralLoadResultTargeted.sql";
 	
-	public final static String ACTIVE_BREAST_FEEDING_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL = "activeBreastFeedingWomenWithViralLoadResultLess1000Copies.sql";
+	public final static String ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1_1 = "activePregnantWomenOnArtWithViralLoadResultTargeted.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL = "activeArvPatientWithViralLoadResultTargeted.sql";
+	public final static String ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1_2 = "activeBreastFeedingWomenOnArtWithViralLoadResultTargeted.sql";
 	
-	public final static String ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL = "activePregnantWomenOnArtWithViralLoadResultTargeted.sql";
+	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2 = "activeArvPatientWithViralLoadResultTargetedLessThan1000Copies.sql";
 	
-	public final static String ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL = "activeBreastFeedingWomenOnArtWithViralLoadResultTargeted.sql";
+	public final static String ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2_1 = "activePregnantWomenOnArtWithViralLoadResultTargetedLessThan1000Copies.sql";
 	
-	public final static String ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL = "activeArvPatientWithViralLoadResultTargetedLessThan1000Copies.sql";
+	public final static String ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2_2 = "activeBreastFeedingWomenOnArtWithViralLoadResultTargetedLessThan1000Copies.sql";
 	
-	public final static String ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL = "activePregnantWomenOnArtWithViralLoadResultTargetedLessThan1000Copies.sql";
+	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_SQL_22_1 = "patientsOnArvsFor12Months.sql";
 	
-	public final static String ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL = "activeBreastFeedingWomenOnArtWithViralLoadResultTargetedLessThan1000Copies.sql";
+	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_IN_SIGHT_SQL_22_1_1 = "patientsOnArvsFor12MonthsInSight.sql";
 	
-	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_SQL = "patientsOnArvsFor12Months.sql";
+	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_TRANSFERRED_SQL_22_1_2 = "patientsOnArvsFor12MonthsTransferred.sql";
 	
-	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_IN_SIGHT_SQL = "patientsOnArvsFor12MonthsInSight.sql";
+	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_ALIVE_SQL_22_2 = "patientsOnArvsFor12MonthsAlive.sql";
 	
-	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_TRANSFERRED_SQL = "patientsOnArvsFor12MonthsTransferred.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_SQL_23 = "womenOnArvsScreenedForCervicalCancer.sql";
 	
-	public final static String PATIENTS_ON_ARVS_FOR_12_MONTHS_ALIVE_SQL = "patientsOnArvsFor12MonthsAlive.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_FIRST_TIME_SQL_23_1 = "womenOnArvsScreenedForCervicalCancerFirstTime.sql";
 	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_SQL = "womenOnArvsScreenedForCervicalCancer.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_FIRST_NEGATIVE_SQL_23_2 = "womenOnArvsScreenedForCervicalCancerAfterFirstNegative.sql";
 	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_FIRST_TIME_SQL = "womenOnArvsScreenedForCervicalCancerFirstTime.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_TREATMENT_SQL_23_3 = "womenOnArvsScreenedForCervicalCancerAfterTreatment.sql";
 	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_FIRST_NEGATIVE_SQL = "womenOnArvsScreenedForCervicalCancerAfterFirstNegative.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_CRYO_SQL_24 = "womenOnArvsScreenedForCervicalCancerRcievedCryotherapy.sql";
 	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_TREATMENT_SQL = "womenOnArvsScreenedForCervicalCancerAfterTreatment.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_THERMO_SQL_24 = "womenOnArvsScreenedForCervicalCancerRcievedThermocoagulation.sql";
 	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_CRYO_SQL = "womenOnArvsScreenedForCervicalCancerRcievedCryotherapy.sql";
-	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_THERMO_SQL = "womenOnArvsScreenedForCervicalCancerRcievedThermocoagulation.sql";
-	
-	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_LEEP_SQL = "womenOnArvsScreenedForCervicalCancerRcievedLeep.sql";
+	public final static String WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_LEEP_SQL_24 = "womenOnArvsScreenedForCervicalCancerRcievedLeep.sql";
 	
 	//Family planning sql queries
 	public final static String PATIENTS_ACCEPTING_FAMILY_PLANNING_PILLS_SQL = "patientsAcceptingFamilyPlanningPills.sql";
@@ -187,31 +186,37 @@ public class PnlsReportConstants {
 	public final static String PATIENTS_USING_FAMILY_PLANNING_CONDOM_SQL = "patientsUsingFamilyPlanningCondoms.sql";
 	
 	public final static String PATIENTS_USING_FAMILY_PLANNING_CCV_SQL = "patientsUsingFamilyPlanningCcv.sql";
+		
+	//corhot indicators for Patients on CTX
+	
+	public final static String NEWLY_POWERED_CTX_COHORT_INDICATOR_SQL_4_1 = "newlyPoweredCtxCorhotIndicator.sql";
+	
+	public final static String ACTIVE_CTX_COHORT_INDICATOR_SQL_4_2 = "activeCtxCorhotIndicator.sql";
 	
 	//totals
-	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_SQL = "TotalPatientsUnderPreventionCtx.sql";
+	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_SQL_4 = "TotalPatientsUnderPreventionCtx.sql";
 	
-	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_SQL = "TotalPatientsUnderTbTreament.sql";
+	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_SQL_5 = "TotalPatientsUnderTbTreament.sql";
 	
-	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_FOR_SIX_MONTHS_SQL = "TotalPatientsUnderTbTreatmentForSixMonths.sql";
+	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_FOR_SIX_MONTHS_SQL_6 = "TotalPatientsUnderTbTreatmentForSixMonths.sql";
 	
-	public final static String TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_SQL = "TotalPatientsCompletedTbTreatment.sql";
+	public final static String TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_SQL_7 = "TotalPatientsCompletedTbTreatment.sql";
 	
-	public final static String TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL = "TotalPatientsForTbScreenes.sql";
+	public final static String TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL_8 = "TotalPatientsForTbScreenes.sql";
 	
-	public final static String TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_SQL = "TotalpatientsWithBacterologySpecimenSampleColection.sql";
+	public final static String TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_SQL_9_1_1 = "TotalpatientsWithBacterologySpecimenSampleColection.sql";
 	
-	public final static String GENEEXPERT_MTB_DIAGNOSIS_TEST_SQL = "TbDiagnosisTestsGeneExpertMtb.sql";
+	public final static String GENEEXPERT_MTB_DIAGNOSIS_TEST_SQL_9_1_1_1 = "TbDiagnosisTestsGeneExpertMtb.sql";
 	
-	public final static String OTHER_DIAGNOSIS_TEST_SQL = "TbDiagnosisTestsOther.sql";
+	public final static String OTHER_DIAGNOSIS_TEST_SQL_9_1_1_1 = "TbDiagnosisTestsOther.sql";
 	
-	public final static String TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_SQL = "TotalPatienstWithPostiveResultsFromTbDiagnosis.sql";
+	public final static String TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_SQL_9_1_1_1_1 = "TotalPatienstWithPostiveResultsFromTbDiagnosis.sql";
 	
 	public final static String TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_SQL = "TotalArvPatientsNewlyPalcedUnderTbTreatmet.sql";
 	
-	public final static String TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_SQL = "TotalArvPatientsInactiveAtTheEnd.sql";
+	public final static String TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_SQL_15 = "TotalArvPatientsInactiveAtTheEnd.sql";
 	
-	public final static String TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_SQL = "TotalArvPatientsLostToFollow.sql";
+	public final static String TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_SQL_16 = "TotalArvPatientsLostToFollow.sql";
 	
 	public final static String TOTAL_ARV_PATIENTS_RECOMENDED_PF_SQL = "totalArvPatientsRecomendedPf.sql";
 	
@@ -233,11 +238,18 @@ public class PnlsReportConstants {
 	
 	public final static String WOMEN_WITH_SUSPECTED_CERVICAL_CANCER_COHORT_SQL = "womenWithSuspectedCervicalCancer.sql";
 	
-	//corhot indicators for Patients on CTX
+	//Dimension corhots by Reason of Non Enrollment NOTE THAT THE SQL FILES BELOW ARE STILL DUMMY
+	public final static String COHORT_NON_ENROLLMENT_REASON_OTHER_SQL = "notEnrolledReasonOther.sql";
 	
-	public final static String NEWLY_POWERED_CTX_COHORT_INDICATOR_SQL = "newlyPoweredCtxCorhotIndicator.sql";
+	public final static String COHORT_NON_ENROLLMENT_REASON_DIED_SQL = "notEnrolledReasonDied.sql";
 	
-	public final static String ACTIVE_CTX_COHORT_INDICATOR_SQL = "activeCtxCorhotIndicator.sql";
+	public final static String COHORT_NON_ENROLLMENT_REASON_VOLUNTARY_SQL = "notEnrolledReasonVoluntary.sql";
+	
+	public final static String COHORT_NON_ENROLLMENT_REASON_DENIAL_SQL = "notEnrolledReasonDenial.sql";
+	
+	public final static String COHORT_NON_ENROLLMENT_REASON_MEDICAL_SQL = "notEnrolledReasonMedical.sql";
+	
+	public final static String COHORT_NON_ENROLLMENT_REASON_REFERRED_SQL = "notEnrolledReasonReferred.sql";
 	
 	//UUIDS	
 	public static final String NEWLY_ENROLLED_PATIENTS_ON_ART_UUID = "3e1698a5-f77f-45e3-a2b9-b0f7d2ede9qx";
@@ -374,6 +386,9 @@ public class PnlsReportConstants {
 	
 	public final static String PATIENTS_USING_FAMILY_PLANNING_UUID = "f9960bd2-da88-41ed-9064-a4f0f10484cx";
 	
+    public final static String ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_UUID = "cc5ff0c0-bd0f-11ea-qqde-0242ac130004";
+	
+	
 	//total indicators
 	public final static String TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_UUID = "e5dc31e6-8e69-4fca-a477-96e185e3f4cx";
 	
@@ -395,7 +410,9 @@ public class PnlsReportConstants {
 	
 	public final static String TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_UUID = "805ee42a-69d4-4ff7-9425-51e48ba70ccx";
 	
-	public final static String TOTAL_ARV_PATIENTS_RECOMENDED_PF_UUID = "e10xx9fa-2589-4781-a97c-a0ae4ee50bcx";
+	public final static String TOTAL_ARV_PATIENTS_RECOMENDED_PF_UUID = "e10xx9fa-2589-4781-a97c-bbae4ee50bcx";
+	
+	public final static String ACTIVE_PATIENTS_6_MONTHS_INH_UUID = "3e2a902c-878d-4da8-af82-c32efxxa8eeb";
 	
 	//messages
 	public static final String NEWLY_ENROLLED_PATIENTS_ON_ART_MESSAGE = "isanteplusreports.newlyEnrolledPatientsOnArt";
@@ -555,6 +572,10 @@ public class PnlsReportConstants {
 	
 	public final static String TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_MESSAGE = "isanteplusreports.lostToFollow";
 	
+	public final static String ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_MESSAGE = "isanteplusreports.followUp";
+	
+	public final static String ACTIVE_PATIENTS_6_MONTHS_INH_MESSAGE = "isanteplusreports.inh.6months";
+	
 	//report definiton Desriptions
 	public final static String REPORT_DESCRIPTION_14BY3 = "RD_14_by_3";
 	
@@ -570,6 +591,8 @@ public class PnlsReportConstants {
 	
 	public final static String REPORT_DESCRIPTION_4BY7 = "RD_4_by_7";
 	
+	public final static String REPORT_DESCRIPTION_4BY7_II = "RD_4_by_7_II";
+	
 	public final static String REPORT_DESCRIPTION_3BY1 = "RD_3_by_1";
 	
 	public final static String REPORT_DESCRIPTION_14BY4 = "RD_14_by_4";
@@ -583,5 +606,7 @@ public class PnlsReportConstants {
 	public final static String REPORT_DESCRIPTION_10BY4_II = "RD_10_by_4_II";
 	
 	public final static String REPORT_DESCRIPTION_10BY11 = "RD_10_by_11";
+	
+	public final static String REPORT_DESCRIPTION_4BY3 = "RD_4_by_3";
 	
 }

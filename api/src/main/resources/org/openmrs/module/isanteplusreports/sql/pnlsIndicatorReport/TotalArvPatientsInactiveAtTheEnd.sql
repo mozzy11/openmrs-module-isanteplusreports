@@ -1,4 +1,4 @@
-SELECT p.patient_id
-FROM isanteplus.patient p 
-     WHERE p.date_started_arv BETWEEN :startDate AND :endDate 
-     AND p.family_name = "ACTIVE" ;
+SELECT pa.patient_id
+   FROM isanteplus.patient_on_art pa	   
+	     WHERE  pa.inactive = 1
+	     AND pa.date_inactive BETWEEN :startDate AND :endDate  ;

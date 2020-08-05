@@ -55,7 +55,7 @@ public class RegisterAllPnlsReports {
 		totalPatientsWithPostiveResultsFromTbDiagnosis();
 		totalArvPatientsNewlyPlacedUnderTbTreatment();
 		patientsEnrolledOnArtAndTbTreatment();
-		tbHivPatientsOnTbTreatment();
+		tbHivPatientsOnAntiTbTreatment();
 		tbHivPatientsOnTbTreamentDintergratedByNelyAndActivelyEnrolledOnArt();
 		activeHivPatients();
 		activeArvPatientsBykeyPopulations();
@@ -110,6 +110,8 @@ public class RegisterAllPnlsReports {
 		totalArvPatientsRecomendedPf();
 		hivPatientsAcceptingFamilyPlanning();
 		hivPatientsUsingFamilyPlanning();
+		activeArvPatientsWithAtlestOneClinicalFollowUpVist();
+		activeHivPatientsFullSixMonthsOfInh();
 	}
 	
 	private static void newlyEnrolledPatientsOnArt() {	
@@ -127,23 +129,23 @@ public class RegisterAllPnlsReports {
 		    PnlsReportConstants.REFERRED_IN_PATIENTS_ENROLED_ON_ART_UUID);		
 	}
 	
-	private static void tbHivPatientsOnTbTreatment() {	
+	private static void tbHivPatientsOnAntiTbTreatment() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.TB_HIV_PATIENTS_ON_TB_TREATMENT_SQL,
+			PnlsReportConstants.TB_HIV_PATIENTS_ON_ANTI_TB_TREATMENT_SQL_11,
 		    PnlsReportConstants.TB_HIV_PATIENTS_ON_TB_TREATMENT_MESSAGE,
 		    PnlsReportConstants.TB_HIV_PATIENTS_ON_TB_TREATMENT_UUID);		
 	}
 	
 	private static void inactiveArvPatientsDead() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.INACTIVE_ARV_PATIENTS_DEAD_SQL,
+			PnlsReportConstants.INACTIVE_ARV_PATIENTS_DEAD_SQL_17_1,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_DEAD_MESSAGE,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_DEAD_UUID);		
 	}
 	
 	private static void inactiveArvPatientsMedicalOrVountary() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.INACTIVE_ARV_PATIENTS_MEDICAL_OR_VOLUNTARY_SQL ,
+			PnlsReportConstants.INACTIVE_ARV_PATIENTS_MEDICAL_OR_VOLUNTARY_SQL_17_2 ,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_MEDICAL_OR_VOLUNTARY_MESSAGE ,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_MEDICAL_OR_VOLUNTARY_UUID );		
 	}
@@ -151,168 +153,168 @@ public class RegisterAllPnlsReports {
 	
 	private static void inactiveArvPatientsLostToForAMonth() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.INACTIVE_ARV_PATIENTS_LOST_TO_FOR_A_MONTH_SQL ,
+			PnlsReportConstants.INACTIVE_ARV_PATIENTS_LOST_TO_FOR_A_MONTH_SQL_17_3 ,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_LOST_TO_FOR_A_MONTH_MESSAGE,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_LOST_TO_FOR_A_MONTH_UUID );		
 	}
 	
 	private static void inactiveArvPatientsLostToForMigrated() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.INACTIVE_ARV_PATIENTS_MIGRATED_SQL ,
+			PnlsReportConstants.INACTIVE_ARV_PATIENTS_MIGRATED_SQL_17_3_1 ,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_MIGRATED_MESSAGE,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_MIGRATED_UUID );		
 	}
 	
 	private static void inactiveArvPatientsTransferred() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.INACTIVE_ARV_PATIENTS_TRANSFERRED_SQL ,
+			PnlsReportConstants.INACTIVE_ARV_PATIENTS_TRANSFERRED_SQL_17_4 ,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_TRANSFERRED_MESSAGE,
 		    PnlsReportConstants.INACTIVE_ARV_PATIENTS_TRANSFERRED_UUID );		
 	}
 	
 	private static void activeHivPatients() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_HIV_PATIENTS_SQL,
+			PnlsReportConstants.ACTIVE_HIV_PATIENTS_SQL_13,
 		    PnlsReportConstants.ACTIVE_HIV_PATIENTS_MESSAGE,
 		    PnlsReportConstants.ACTIVE_HIV_PATIENTS_UUID);		
 	}
 	
 	private static void lostPatientsDied() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_DIED_SQL ,
+			PnlsReportConstants.LOST_ARV_PATIENTS_DIED_SQL_18_1 ,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_DIED_MESSAGE ,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_DIED_UUID);		
 	}
 	
 	private static void lostPatientsAfterLessThan3MonthsTreatment() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_LESS_3MONTHS_SQL,
+			PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_LESS_3MONTHS_SQL_18_2,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_LESS_3MONTHS_MESSAGE,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_LESS_3MONTHS_UUID);		
 	}
 	
 	private static void lostPatientsAfterMoreThan3MonthsTreatment() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_MORE_3MONTHS_SQL ,
+			PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_MORE_3MONTHS_SQL_18_3 ,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_MORE_3MONTHS_MESSAGE ,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_AFTER_TREATMENT_MORE_3MONTHS_UUID);		
 	}
 	
 	private static void lostPatientsTransferred() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_TRANSFERRED_SQL,
+			PnlsReportConstants.LOST_ARV_PATIENTS_TRANSFERRED_SQL_18_4,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_TRANSFERRED_MESSAGE,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_TRANSFERRED_UUID);		
 	}
 	
 	private static void lostPatientsStopped() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_STOPPED_SQL,
+			PnlsReportConstants.LOST_ARV_PATIENTS_STOPPED_SQL_18_5,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_STOPPED_MESSAGE,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_STOPPED_UUID);		
 	}
 	
 	private static void deadArvPatientsByTuberclosis() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_TUBERCLOSIS_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_TUBERCLOSIS_SQL_18_1_1,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_TUBERCLOSIS_MESSAGE,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_TUBERCLOSIS_UUID);		
 	}
 	
 	private static void deadArvPatientsByOtherInfectiousDiseases() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_OTHER_INFECTIOUS_DISEASES_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_OTHER_INFECTIOUS_DISEASES_SQL_18_1_2,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_OTHER_INFECTIOUS_DISEASES_MESSAGE,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_OTHER_INFECTIOUS_DISEASES_UUID);		
 	}
 	
 	private static void deadArvPatientsByCancer() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_CANCER_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_CANCER_SQL_18_1_3,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_CANCER_MESSAGE ,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_CANCER_UUID);		
 	}
 	
 	private static void deadArvPatientsByHivIllnesses() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_HIV_ILLNESSES_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_HIV_ILLNESSES_SQL_18_1_4,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_HIV_ILLNESSES_MESSAGE ,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_HIV_ILLNESSES_UUID);		
 	}
 	
 	private static void deadArvPatientsByNaturalCauses() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_NATURAL_CAUSES_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_NATURAL_CAUSES_SQL_18_1_5,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_NATURAL_CAUSES_MESSAGE ,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_NATURAL_CAUSES_UUID);		
 	}
 	
 	private static void deadArvPatientsByUnNaturalCauses() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNNATURAL_CAUSES_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNNATURAL_CAUSES_SQL_18_1_6,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNNATURAL_CAUSES_MESSAGE ,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNNATURAL_CAUSES_UUID);		
 	}
 	
 	private static void deadArvPatientsByUnKnownCauses() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNKNOWN_CAUSES_SQL,
+			PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNKNOWN_CAUSES_SQL_18_1_7,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNKNOWN_CAUSES_MESSAGE ,
 		    PnlsReportConstants.DEAD_ARV_PATIENTS_BY_UNKNOWN_CAUSES_UUID);		
 	}
 	
 	private static void lostArvPatientsResumedTreatment() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_SQL,
+			PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_SQL_19,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_MESSAGE ,
 		    PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_UUID);		
 	}
 	
 	private static void activeArvPatientsWithViralLoadResult() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_SQL_20_1,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_MESSAGE ,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_UUID);		
 	}
 	
 	private static void activeArvPatientsWithViralLoadResultLessThan1000Copies() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_MESSAGE ,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_UUID);		
 	}
 	
 	private static void activeArvPatientsWithViralLoadResultTargeted() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_MESSAGE  ,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_UUID);		
 	}
 	
 	private static void activeArvPatientsWithViralLoadResultTargetedLess1000Copies() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_MESSAGE ,
 		    PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_UUID);		
 	}
 	
 	private static void activeArvPatientsFor12Months() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_SQL,
+			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_SQL_22_1,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_MESSAGE ,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_UUID);		
 	}
 	
 	private static void activeArvPatientsFor12MonthsInSight() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_IN_SIGHT_SQL,
+			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_IN_SIGHT_SQL_22_1_1,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_IN_SIGHT_MESSAGE ,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_IN_SIGHT_UUID);		
 	}
 	
 	private static void activeArvPatientsFor12MonthsTransferred() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_TRANSFERRED_SQL,
+			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_TRANSFERRED_SQL_22_1_2,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_TRANSFERRED_MESSAGE,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_TRANSFERRED_UUID);		
 	}
@@ -320,14 +322,26 @@ public class RegisterAllPnlsReports {
 
 	private static void activeArvPatientsFor12MonthsAlive() {	
 		registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(
-			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_ALIVE_SQL,
+			PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_ALIVE_SQL_22_2,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_ALIVE_MESSAGE,
 		    PnlsReportConstants.PATIENTS_ON_ARVS_FOR_12_MONTHS_ALIVE_UUID);		
+	}
+	
+	private static void activeArvPatientsWithAtlestOneClinicalFollowUpVist() {
+		
+		registerArvActivePatientsWithClinicalFollowUpBy15OverMonthsWithStartAndEndDateParams(
+			
+			PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_QUATERLY_SQL_15_1 ,
+			PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_SEMI_ANNUALLY_SQL_15_2 ,
+			PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_ANNUALLY_SQL_15_3 ,
+			PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_MESSAGE,
+			PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_UUID
+				) ;		
 	}
 		
 	private static void newlyEnrolledBreastFeedingOnArt() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL,
+			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL_1_1_1,
 			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_MESSAGE,
 			PnlsReportConstants.NEW_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID
 			);
@@ -335,7 +349,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void newlyRefferedInBreastFeedingOnArt() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL,
+			PnlsReportConstants.NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_SQL_1_2_1,
 			PnlsReportConstants.NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_MESSAGE,
 			PnlsReportConstants.NEW_REFERRED_IN_BREAST_FEEDING_WOMEN_ENROLED_ON_ART_UUID
 			);
@@ -343,7 +357,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void BreastFeedingNotYetOnArt() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.BREAST_FEEDING_WOMEN_NOT_YET_ENROLED_ON_ART_SQL,
+			PnlsReportConstants.BREAST_FEEDING_WOMEN_NOT_YET_ENROLED_ON_ART_SQL_3_1,
 			PnlsReportConstants.BREAST_FEEDING_WOMEN_NOT_YET_ENROLED_ON_ART_MESSAGE,
 			PnlsReportConstants.BREAST_FEEDING_WOMEN_NOT_YET_ENROLED_ON_ART_UUID
 			);
@@ -351,7 +365,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsUnderPreventionCtx() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_SQL,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_SQL_4,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_CTX_UUID
 			);
@@ -359,7 +373,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsUnderPreventionTbTreatment() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_SQL,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_SQL_5,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_UUID
 			);
@@ -367,7 +381,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsUnderPreventionTbTreatmentForSixMonths() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_FOR_SIX_MONTHS_SQL,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_FOR_SIX_MONTHS_SQL_6,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_FOR_SIX_MONTHS_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_FOR_SIX_MONTHS_UUID
 			);
@@ -375,7 +389,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsCompletedPreventionTbTreatment() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_SQL,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_SQL_7,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_UUID
 			);
@@ -384,7 +398,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsWhoAreTbScrenees() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL_8,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_UUID
 			);
@@ -392,7 +406,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsWithBacteriologySpecimentSampleCollection() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_SQL,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_SQL_9_1_1,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_UUID
 			);
@@ -400,7 +414,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsWithPostiveResultsFromTbDiagnosis() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_SQL,
+			PnlsReportConstants.TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_SQL_9_1_1_1_1,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_MESSAGE,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_UUID
 			);
@@ -416,7 +430,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalArvPatientsInactiveAtTheEnd() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_SQL,
+			PnlsReportConstants.TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_SQL_15,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_MESSAGE,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_UUID
 			);
@@ -424,7 +438,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalArvPatientsLostToFollow() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_SQL,
+			PnlsReportConstants.TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_SQL_16,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_MESSAGE,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_LOST_TO_FOLLOW_UUID
 			);
@@ -440,7 +454,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void pregnantWomenOnArvWithViralLoadTest() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL,
+			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL_20_1_1,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_MESSAGE,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_UUID
 			);
@@ -448,7 +462,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void breastFeedingWomenOnArvWithViralLoadTest() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL,
+			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_SQL_20_1_2,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_MESSAGE,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_UUID
 			);
@@ -456,7 +470,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void pregnantWomenOnArvWithViralLoadResultsLessThan100Copies() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2_1,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_MESSAGE,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_UUID
 			);
@@ -464,7 +478,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void breastFeedingWomenOnArvWithViralLoadResultsLessThan1000Copies() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2_2,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_MESSAGE,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_UUID
 			);
@@ -472,7 +486,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void pregnantWomenOnArvWithViralLoadTargeted() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL,
+			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1_1,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_MESSAGE,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_UUID
 			);
@@ -480,7 +494,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void breastFeedingWomenOnArvWithViralLoadTargeted() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL,
+			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1_2,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_MESSAGE,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_UUID
 			);
@@ -488,7 +502,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void pregnantWomenOnArvWithViralLoadTargetedLessThan1000Copies() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2_1,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_MESSAGE,
 			PnlsReportConstants.ACTIVE_PREGNANT_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_UUID
 			);
@@ -496,7 +510,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void breastFeedingWomenOnArvWithViralLoadTargetedLesstHan1000Copies() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2_2,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_MESSAGE ,
 			PnlsReportConstants.ACTIVE_BREAST_FEEDING_WOMEN_ON_ART_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_UUID
 			);
@@ -505,7 +519,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void womenOnArvScreenedCervicalCancer() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_SQL ,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_SQL_23 ,
 			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_MESSAGE ,
 			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_UUID
 			);
@@ -513,7 +527,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void notEnrolledOnArtByReason() {
 		patientsNotEnrolledOnArtByReason(
-			PnlsReportConstants.NOT_ENROLED_ON_ART_COHORT_INDICATOR_SQL,
+			PnlsReportConstants.NOT_ENROLED_ON_ART_COHORT_INDICATOR_SQL_3,
 			PnlsReportConstants.NOT_YET_ENROLED_ON_ART_BY_REASON_MESSAGE,
 			PnlsReportConstants.NOT_YET_ENROLED_ON_ART_BY_REASON_UUID
 			);
@@ -531,7 +545,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void activeArvPatientsBykeyPopulations() {
 		registerKeyPopulationReportWithSingleRowAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_HIV_PATIENTS_SQL,
+			PnlsReportConstants.ACTIVE_HIV_PATIENTS_SQL_13,
 			PnlsReportConstants.ACTIVE_HIV_PATIENTS_BY_KEY_POPN_MESSAGE,
 			PnlsReportConstants.ACTIVE_HIV_PATIENTS_BY_KEY_POPN_UUID
 		);
@@ -540,7 +554,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void lostArvPatientsResumedTreatmentBykeyPopulations() {
 		registerKeyPopulationReportWithSingleRowAndStartAndEndDateParams(
-			PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_SQL,
+			PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_SQL_19,
 			PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_KEY_POPULATION_MESSAGE,
 			PnlsReportConstants.LOST_ARV_PATIENTS_RESUMED_TREATMENT_KEY_POPULATION_UUID
 		);
@@ -549,7 +563,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void activeArvPatientsWithViralLoadBykeyPopulations() {
 		registerKeyPopulationReportWithSingleRowAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_SQL_20_1,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_KEY_POPULATION_MESSAGE,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_KEY_POPULATION_UUID
 		);
@@ -558,7 +572,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void activeArvPatientsWithViralLoadLess100CopiesBykeyPopulations() {
 		registerKeyPopulationReportWithSingleRowAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_SQL_20_2,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_BY_KEY_POPULATION_MESSAGE,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_LESS_THAN_1000_COPIES_BY_KEY_POPULATION_UUID
 		);
@@ -567,7 +581,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void activeArvPatientsWithViralLoadBykeyPopulationsTargeted() {
 		registerKeyPopulationReportWithSingleRowAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_SQL_21_1,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_BY_KEY_POPULATION_MESSAGE,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_BY_KEY_POPULATION_UUID
 		);
@@ -576,7 +590,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void activeArvPatientsWithViralLoadLessThan1000CopiesBykeyPopulationsTargeted() {
 		registerKeyPopulationReportWithSingleRowAndStartAndEndDateParams(
-			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL ,
+			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_SQL_21_2 ,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_KEY_POPULATION_MESSAGE ,
 			PnlsReportConstants.ACTIVE_ARV_PATIENTS_WITH_VIRAL_LOAD_RESULT_TARGETED_LESS_THAN_1000_COPIES_KEY_POPULATION_UUID
 		);
@@ -585,8 +599,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsUnderCtx() {
 	  registerPatientsUnderCtxWithStartAndEndDateParams(
-			PnlsReportConstants.NEWLY_POWERED_CTX_COHORT_INDICATOR_SQL,
-			PnlsReportConstants.ACTIVE_CTX_COHORT_INDICATOR_SQL,
+			PnlsReportConstants.NEWLY_POWERED_CTX_COHORT_INDICATOR_SQL_4_1,
+			PnlsReportConstants.ACTIVE_CTX_COHORT_INDICATOR_SQL_4_2,
 			PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_CTX_MESSAGE,
 			PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_CTX_UUID
 		);		
@@ -594,8 +608,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsEnrolledOnArtUnderTbTreatMent() {
 		registerArvPatientsByAge15TreatmentWithStartAndEndDateParams(
-				PnlsReportConstants.COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_SQL,
-				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_SQL,
+				PnlsReportConstants.COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_SQL_5_1,
+				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_SQL_5_2,
 				PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_MESSAGE,
 				PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_UUID
 			);		
@@ -603,8 +617,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsEnrolledOnArtUnderTbTreatMentFor6months() {
 		registerArvPatientsByAge15TreatmentWithStartAndEndDateParams(
-				PnlsReportConstants.COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_SQL,
-				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_SQL,
+				PnlsReportConstants.COHORT_NEW_PATIENTS_ON_ART_STARTED_WITH_TB_TREATMENT_FOR_SIX_MONTHS_SQL_6_1,
+				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_STARTED_WITH_TB_TREATMENT_FOR_SIX_MONTHS_SQL_6_2,
 				PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_6MONTHS_MESSAGE,
 				PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_6MONTHS_UUID
 			);		
@@ -613,8 +627,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsEnrolledOnArtCompletedTbTreatMentFor6months() {
 		registerArvPatientsByAge15TreatmentWithStartAndEndDateParams(
-				PnlsReportConstants.COHORT_NEW_PATIENTS_ON_ART_COMPLETED_TB_TREATMENT_SQL,
-				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_COMPLETED_TB_TREATMENT_SQL,
+				PnlsReportConstants.COHORT_NEW_PATIENTS_ON_ART_COMPLETED_TB_TREATMENT_SQL_7_1,
+				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_COMPLETED_TB_TREATMENT_SQL_7_2,
 				PnlsReportConstants.PATIENTS_WHO_COMPLETED_TB_TREATMENT__MESSAGE,
 				PnlsReportConstants.PATIENTS_WHO_COMPLETED_TB_TREATMENT_UUID
 			);		
@@ -622,8 +636,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsEnrolledOnArtTbPostiveScrenneesFor6months() {
 		registerArvPatientsByAge15TreatmentWithStartAndEndDateParams(
-				PnlsReportConstants.COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_POSTIVE_SQL,
-				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_POSTIVE_SQL,
+				PnlsReportConstants.COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_POSTIVE_SQL_9_1,
+				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_POSTIVE_SQL_9_1,
 				PnlsReportConstants.PATIENTS_ON_ART_SCRENEES_POSTIVE_MESSAGE,
 				PnlsReportConstants.PATIENTS_ON_ART_SCRENEES_POSTIVE_UUID
 			);		
@@ -631,8 +645,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsEnrolledOnArtTbNegativeScrenneesFor6months() {
 		registerArvPatientsByAge15TreatmentWithStartAndEndDateParams(
-				PnlsReportConstants.COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_NEGATIVE_SQL,
-				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_NEGATIVE_SQL,
+				PnlsReportConstants.COHORT_NEWLY_ENROLLED_PATIENTS_ON_ART_SCRENEES_NEGATIVE_SQL_9_2,
+				PnlsReportConstants.COHORT_PATIENTS_ALREADY_ON_ART_SCRENEES_NEGATIVE_SQL_9_2,
 				PnlsReportConstants.PATIENTS_ON_ART_SCRENEES_NEGATIVE_MESSAGE,
 				PnlsReportConstants.PATIENTS_ON_ART_SCRENEES_NEGATIVE_UUID
 			);		
@@ -640,8 +654,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void patientsEnrolledOnArtAndTbTreatment() {
 		registerArvPatientsByAge15TreatmentWithStartAndEndDateParams(
-				PnlsReportConstants.NEWLYLY_ENROLLED_ARV_PATIENTS_AND_NEWLY_PLACED_ON_TB_TREATMENT_SQL,
-				PnlsReportConstants.PATIENTS_ALREADY_ON_ARVS_AND_ALREADY_PLACED_ON_TB_TREATMENT_SQL,
+				PnlsReportConstants.NEWLYLY_ENROLLED_ARV_PATIENTS_AND_NEWLY_PLACED_ON_TB_TREATMENT_SQL_10,
+				PnlsReportConstants.PATIENTS_ALREADY_ON_ARVS_AND_ALREADY_PLACED_ON_TB_TREATMENT_SQL_10,
 				PnlsReportConstants.ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_MESSAGE,
 				PnlsReportConstants.ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_UUID
 			);		
@@ -649,8 +663,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void ArvPatientsWithSamplesSentForTbDiagnosisTest() {
 		registerArvPatientsWithDiagnosisTestsWithStartAndEndDateParams(
-				PnlsReportConstants.GENEEXPERT_MTB_DIAGNOSIS_TEST_SQL,
-				PnlsReportConstants.OTHER_DIAGNOSIS_TEST_SQL,
+				PnlsReportConstants.GENEEXPERT_MTB_DIAGNOSIS_TEST_SQL_9_1_1_1,
+				PnlsReportConstants.OTHER_DIAGNOSIS_TEST_SQL_9_1_1_1,
 				PnlsReportConstants.ARV_PATIENTS_WITH_SAMPLES_SENT_TO_DIAGNOSTIC_TEST_MESSAGE,
 				PnlsReportConstants.ARV_PATIENTS_WITH_SAMPLES_SENT_TO_DIAGNOSTIC_TEST_UUID
 			);		
@@ -658,8 +672,8 @@ public class RegisterAllPnlsReports {
 	
 	private static void tbHivPatientsOnTbTreamentDintergratedByNelyAndActivelyEnrolledOnArt() {
 		registerPnlsReportWith15By4ColumnsAndWithStartAndEndDateParams(
-				PnlsReportConstants.TB_HIV_PATIENTS_NEWLY_ENROLLED_ON_ART_ON_TB_TREATMENT_SQL,
-				PnlsReportConstants.TB_HIV_PATIENTS_ALREADY_ON_ART_ON_TB_TREATMENT_SQL,
+				PnlsReportConstants.TB_HIV_PATIENTS_NEWLY_ENROLLED_ON_ART_ON_ANTI_TB_TREATMENT_SQL_12,
+				PnlsReportConstants.TB_HIV_PATIENTS_ALREADY_ON_ART_ON_ANTI_TB_TREATMENT_SQL_12,
 				PnlsReportConstants.TB_HIV_PATIENTS_ON_TB_TREATMENT_DISTENGRATED_BY_NEW_AND_ALREADY_ON_ART_MESSAGE,
 				PnlsReportConstants.TB_HIV_PATIENTS_ON_TB_TREATMENT_DISTENGRATED_BY_NEW_AND_ALREADY_ON_ART_UUID
 			);		
@@ -667,19 +681,20 @@ public class RegisterAllPnlsReports {
 	
 	private static void activeArvPatientsOverMonths() {
 		registerArvActivePatientsBy15OverMonthsWithStartAndEndDateParams(
-				PnlsReportConstants.ACTIVE_ARV_PATIENTS_LESS_3MONTHS_SQL,
-				PnlsReportConstants.ACTIVE_ARV_PATIENTS_BTN_3_5MONTHS_SQL,
-				PnlsReportConstants.ACTIVE_ARV_PATIENTS_OVER_5MONTHS_SQL,
+				PnlsReportConstants.ACTIVE_ARV_PATIENTS_LESS_3MONTHS_SQL_14_1,
+				PnlsReportConstants.ACTIVE_ARV_PATIENTS_BTN_3_5MONTHS_SQL_14_2,
+				PnlsReportConstants.ACTIVE_ARV_PATIENTS_OVER_5MONTHS_SQL_14_3,
 				PnlsReportConstants.ACTIVE_ARV_PATIENTS_OVER_MONTHS_MESSAGE,
 				PnlsReportConstants.ACTIVE_ARV_PATIENTS_OVER_MONTHS_UUID
 			);		
 		}
 	
+	
 	private static void activeArvPatientsByRegimeLines() {
 		registerActivePatientsWithRegimeLinesStartAndEndDateParams(
-				PnlsReportConstants.ACTIVE_ARV_FIRST_LINE_REGIMEN_SQL,
-				PnlsReportConstants.ACTIVE_ARV_SECOND_LINE_REGIMEN_SQL,
-				PnlsReportConstants.ACTIVE_ARV_THIRD_LINE_REGIMEN_SQL,
+				PnlsReportConstants.ACTIVE_ARV_FIRST_LINE_REGIMEN_SQL_16_1,
+				PnlsReportConstants.ACTIVE_ARV_SECOND_LINE_REGIMEN_SQL_16_2,
+				PnlsReportConstants.ACTIVE_ARV_THIRD_LINE_REGIMEN_SQL_16_3,
 				PnlsReportConstants.ACTIVE_ARV_PATIENTS_REGIME_LINES_MESSAGE,
 				PnlsReportConstants.ACTIVE_ARV_PATIENTS_REGIME_LINES_UUID
 			);		
@@ -687,7 +702,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void womenScreenedForCervicalCancerFirstTime() {	
 		 registerWomenWithCervicalCancerStatusStartAndEndDateParams(
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_FIRST_TIME_SQL,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_FIRST_TIME_SQL_23_1,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_FIRST_TIME_MESSAGE,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_FIRST_TIME_UUID);
 		
@@ -695,7 +710,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void womenScreenedForCervicalCancerAfterTestNegative() {	
 		 registerWomenWithCervicalCancerStatusStartAndEndDateParams(
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_FIRST_NEGATIVE_SQL,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_FIRST_NEGATIVE_SQL_23_2,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_FIRST_NEGATIVE_MESSAGE,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_FIRST_NEGATIVE_UUID);
 		
@@ -703,7 +718,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void womenScreenedForCervicalCancerAfterTreatment() {	
 		 registerWomenWithCervicalCancerStatusStartAndEndDateParams(
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_TREATMENT_SQL,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_TREATMENT_SQL_23_3,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_TREATMENT_MESSAGE,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_AFTER_TREATMENT_UUID);
 		
@@ -711,9 +726,9 @@ public class RegisterAllPnlsReports {
 	
 	private static void womenScreenedForCervicalCancePostive() {	
 		registerWomenWithCervicalCancerByTreatmentStartAndEndDateParams(
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_CRYO_SQL,
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_THERMO_SQL,
-			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_LEEP_SQL,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_CRYO_SQL_24,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_THERMO_SQL_24,
+			PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_RECIEVED_LEEP_SQL_24,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_TESTED_POSTIVE_MESSAGE,
 		    PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_TESTED_POSTIVE_UUID);
 		
@@ -747,6 +762,15 @@ public class RegisterAllPnlsReports {
 		    PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_MESSAGE,
 		    PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID);
 		
+	}
+	
+	
+	private static void activeHivPatientsFullSixMonthsOfInh() {
+		registerArvActivePatientsBy15WithStartAndEndDateParams(
+			 PnlsReportConstants.ACTIVE_PATIENTS_6_MONTHS_INH_SQL_8 ,
+			 PnlsReportConstants.ACTIVE_PATIENTS_6_MONTHS_INH_MESSAGE ,
+			 PnlsReportConstants.ACTIVE_PATIENTS_6_MONTHS_INH_UUID			
+				);
 	}
 	
 	private static void registerPnlsReportWithAgeAndGenderColumnsAndStartAndEndDateParams(String sql, String messageProperties, String uuid) {
@@ -1046,14 +1070,74 @@ private static void registerArvActivePatientsBy15OverMonthsWithStartAndEndDatePa
 	Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);		
 }
 
-private static void registerArvPatientsWithDiagnosisTestsWithStartAndEndDateParams(String genexpertMtbSql ,String otherTbDiagnosisTestsSql, String messageProperties, String uuid) {
+private static void registerArvActivePatientsWithClinicalFollowUpBy15OverMonthsWithStartAndEndDateParams(String qauterlySql ,String semiAnnualySql, String annualySql, String messageProperties, String uuid) {
 	
 	CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
 	dsd.setName(messageProperties);
 	dsd.addParameter(START_DATE);
 	dsd.addParameter(END_DATE);
 	
+	dsd.addDimension("gender", ReportUtils.map(new CommonDimension().gender(), ""));
+	dsd.addDimension("age", ReportUtils.map(new CommonDimension().ageZoneBy15(), "effectiveDate=${endDate}"));
 	
+	CohortIndicator quaterly = pnlsReportUtils.cohortIndicatorFromSqlResource(qauterlySql, "name", getParameters());
+	CohortIndicator semiAnnually = pnlsReportUtils.cohortIndicatorFromSqlResource(semiAnnualySql, "name", getParameters());
+	CohortIndicator annualy = pnlsReportUtils.cohortIndicatorFromSqlResource(annualySql, "name", getParameters());
+	
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd, quaterly, "M", "A");
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd, quaterly, "F", "A");
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd,semiAnnually, "M", "B");
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd, semiAnnually, "F", "B");
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd, annualy, "M", "C");
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd, annualy, "F", "C");
+		
+	Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
+	Map<String, Object> mappings = new HashMap<String, Object>();
+	mappings.put("startDate", "${startDate}");
+	mappings.put("endDate", "${endDate}");
+	ReportDefinition repDefinition = reportDefinition(messageProperties,PnlsReportConstants.REPORT_DESCRIPTION_4BY7_II , uuid);
+	repDefinition.addParameter(START_DATE);
+	repDefinition.addParameter(END_DATE);
+	repDefinition.addDataSetDefinition(dsd, mappings);
+	Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);		
+}
+
+
+private static void registerArvActivePatientsBy15WithStartAndEndDateParams(String corhotSql ,String messageProperties, String uuid) {
+	
+	CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
+	dsd.setName(messageProperties);
+	dsd.addParameter(START_DATE);
+	dsd.addParameter(END_DATE);
+	
+	dsd.addDimension("gender", ReportUtils.map(new CommonDimension().gender(), ""));
+	dsd.addDimension("age", ReportUtils.map(new CommonDimension().ageZoneBy15(), "effectiveDate=${endDate}"));
+	
+	CohortIndicator corhot = pnlsReportUtils.cohortIndicatorFromSqlResource(corhotSql, "name", getParameters());
+		
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd,  corhot, "M", "A");
+	pnlsReportUtils.addGenderAndAgeBy15Colums(dsd,  corhot, "F", "A");
+	pnlsReportUtils.addTotalGenderAndAgeBy15Colums(dsd , corhot , "T");
+		
+	Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
+	Map<String, Object> mappings = new HashMap<String, Object>();
+	mappings.put("startDate", "${startDate}");
+	mappings.put("endDate", "${endDate}");
+	ReportDefinition repDefinition = reportDefinition(messageProperties,PnlsReportConstants.REPORT_DESCRIPTION_4BY3 , uuid);
+	repDefinition.addParameter(START_DATE);
+	repDefinition.addParameter(END_DATE);
+	repDefinition.addDataSetDefinition(dsd, mappings);
+	Context.getService(SerializedDefinitionService.class).saveDefinition(repDefinition);		
+}
+
+
+private static void registerArvPatientsWithDiagnosisTestsWithStartAndEndDateParams(String genexpertMtbSql ,String otherTbDiagnosisTestsSql, String messageProperties, String uuid) {
+	
+	CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
+	dsd.setName(messageProperties);
+	dsd.addParameter(START_DATE);
+	dsd.addParameter(END_DATE);
+		
 	CohortIndicator CohortIndicatorGeneExpertTest = pnlsReportUtils.cohortIndicatorFromSqlResource( genexpertMtbSql, "name", getParameters());
 	CohortIndicator CohortIndicatorOtherTest = pnlsReportUtils.cohortIndicatorFromSqlResource(otherTbDiagnosisTestsSql, "name", getParameters());
 	

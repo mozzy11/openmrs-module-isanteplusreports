@@ -1,4 +1,3 @@
-SELECT p.patient_id
-FROM isanteplus.patient p 
-     WHERE p.date_started_arv BETWEEN :startDate AND :endDate 
-     AND p.family_name = "ACTIVE" ;
+SELECT pat.patient_id
+   FROM isanteplus.patient_on_art pat
+   WHERE pat.accepted_family_planning_method = "PILLS" ;

@@ -6,5 +6,6 @@ FROM isanteplus.patient_status_arv ps ,isanteplus.patient_laboratory pl, isantep
 	 AND ps.id_status IN (6,8)
 	 AND pl.test_id IN (856,1305)
     AND ps.date_started_status BETWEEN :startDate AND :endDate 
+    AND pat.date_breast_feeding BETWEEN :startDate AND :endDate 
 	 AND pl.test_done =1 
 	 AND TIMESTAMPDIFF(MONTH, pl.date_test_done ,:endDate) >= 12 ;

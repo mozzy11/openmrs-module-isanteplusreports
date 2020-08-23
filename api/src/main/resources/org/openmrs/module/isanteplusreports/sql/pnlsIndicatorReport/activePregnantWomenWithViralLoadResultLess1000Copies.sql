@@ -9,7 +9,7 @@ SELECT CASE
 		          END
 		      END
             								            
-FROM isanteplus.patient_status_arv ps ,isanteplus.patient_laboratory pl
+FROM isanteplus.patient_status_arv ps ,isanteplus.patient_laboratory pl ,isanteplus.patient_pregnancy pp
     WHERE ps.patient_id = pl.patient_id
     AND pl.patient_id = pp.patient_id
      AND pp.end_date >= :endDate

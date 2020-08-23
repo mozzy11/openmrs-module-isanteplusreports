@@ -34,6 +34,7 @@ public class PnlsReportManager {
 			                                         PnlsReportConstants.HIV_PATIENTS_UNDER_PREVENTION_TB_TREATMENT_6MONTHS_UUID,
 			                                         PnlsReportConstants.TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_UUID,
 			                                         PnlsReportConstants.PATIENTS_WHO_COMPLETED_TB_TREATMENT_UUID,
+			                                         PnlsReportConstants.ACTIVE_PATIENTS_6_MONTHS_INH_UUID ,
 			                                         PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_UUID,
 			                                         PnlsReportConstants.PATIENTS_ON_ART_SCRENEES_POSTIVE_UUID,
 			                                         PnlsReportConstants.PATIENTS_ON_ART_SCRENEES_NEGATIVE_UUID,
@@ -47,6 +48,7 @@ public class PnlsReportManager {
 			                                         PnlsReportConstants.ACTIVE_HIV_PATIENTS_UUID,
 			                                         PnlsReportConstants.ACTIVE_HIV_PATIENTS_BY_KEY_POPN_UUID,
 			                                         PnlsReportConstants.ACTIVE_ARV_PATIENTS_OVER_MONTHS_UUID,
+			                                         PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_UUID ,
 			                                         PnlsReportConstants.ACTIVE_ARV_PATIENTS_REGIME_LINES_UUID,
 			                                         PnlsReportConstants.TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_UUID,
 			                                         PnlsReportConstants.INACTIVE_ARV_PATIENTS_DEAD_UUID,
@@ -96,9 +98,7 @@ public class PnlsReportManager {
 			                                         PnlsReportConstants.WOMEN_ON_ARVS_SCREENED_FOR_CERVICAL_CANCER_TESTED_POSTIVE_UUID,
 			                                         PnlsReportConstants.TOTAL_ARV_PATIENTS_RECOMENDED_PF_UUID ,
 			                                         PnlsReportConstants.PATIENTS_ACCEPTING_FAMILY_PLANNING_UUID,
-			                                         PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID,
-			                                         PnlsReportConstants.ACTIVE_PATIENTS_WITH_ATLEST_FOLLOW_UP_VIST_UUID ,
-			                                         PnlsReportConstants.ACTIVE_PATIENTS_6_MONTHS_INH_UUID
+			                                         PnlsReportConstants.PATIENTS_USING_FAMILY_PLANNING_UUID                       
 	                                                };
 	
 	private Map<String, PnlsIndicatorOption> options = new HashMap<>();

@@ -398,7 +398,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalPatientsWhoAreTbScrenees() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL_8,
+			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL_9,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_MESSAGE,
 			PnlsReportConstants.TOTAL_HIV_PATIENTS_TB_SCRENEES_UUID
 			);
@@ -422,7 +422,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void totalArvPatientsNewlyPlacedUnderTbTreatment() {
 		registerPnlsSingleColumnReportWithStartAndEndDateParams(
-			PnlsReportConstants.TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_SQL,
+			PnlsReportConstants.TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_SQL_10,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_MESSAGE,
 			PnlsReportConstants.TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_UUID
 			);

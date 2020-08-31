@@ -202,7 +202,7 @@ public class PnlsReportConstants {
 	
 	public final static String TOTAL_HIV_PATIENTS_COMPLETED_PREVENTION_TB_TREATMENT_SQL_7 = "TotalPatientsCompletedTbTreatment.sql";
 	
-	public final static String TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL_8 = "TotalPatientsForTbScreenes.sql";
+	public final static String TOTAL_HIV_PATIENTS_TB_SCRENEES_SQL_9 = "TotalPatientsForTbScreenes.sql";
 	
 	public final static String TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_SQL_9_1_1 = "TotalpatientsWithBacterologySpecimenSampleColection.sql";
 	
@@ -212,7 +212,7 @@ public class PnlsReportConstants {
 	
 	public final static String TOTAL_ARV_PATIENTS_WITH_POSTIVE_RESULT_FROM_TB_DIAGNOSIS_SQL_9_1_1_1_1 = "TotalPatienstWithPostiveResultsFromTbDiagnosis.sql";
 	
-	public final static String TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_SQL = "TotalArvPatientsNewlyPalcedUnderTbTreatmet.sql";
+	public final static String TOTAL_ARV_PATIENTS_NEWLY_PLACED_ON_TB_TREATMENT_SQL_10 = "TotalArvPatientsNewlyPalcedUnderTbTreatmet.sql";
 	
 	public final static String TOTAL_ARV_PATIENTS_INACTIVE_AT_THE_END_SQL_15 = "TotalArvPatientsInactiveAtTheEnd.sql";
 	

@@ -1,5 +1,10 @@
-SELECT pa.patient_id
-   FROM isanteplus.patient_on_art pa
-	    WHERE pa.tb_screen =1
-	    AND pa.date_started_arv BETWEEN :startDate AND :endDate 
-		 AND pa.tb_status = "POSTIVE" ;
+SELECT ps.patient_id 
+FROM isanteplus.patient_status_arv ps ,isanteplus.patient_on_art pat , isanteplus.patient p
+    WHERE ps.patient_id = pat.patient_id
+    AND p.patient_id = pat.patient_id
+	 AND ps.id_status IN (6,8)
+	 AND p.date_started_arv  BETWEEN :startDate AND :endDate
+    AND ps.date_started_status BETWEEN :startDate AND :endDate
+    AND pat.tb_screened =1  
+    AND pat.tb_status = 'POSTIVE'
+	 AND TIMESTAMPDIFF(MONTH,pat.date_tb_screened ,:endDate) <= 6 ;

@@ -179,7 +179,7 @@
                 <legend>
                     ${ ui.message("reportingui.runReport.run.legend") }
                 </legend>
-                 <p>  <input type="checkbox" id="check" name="check" > Select all indicators</input></p>
+                 <p>  <input type="checkbox" id="check" name="check" >${ ui.message("isanteplusreports.pnls.select.all") }</input></p>
                 <p id="parameterSection">
                     ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "startDateField", "label": "From Date", "formFieldName": "startDate", "defaultDate": startDate, "useTime": false ]) }
                     ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "endDateField", "label": "To Date", "formFieldName": "endDate", "defaultDate": endDate, "useTime": false ]) }

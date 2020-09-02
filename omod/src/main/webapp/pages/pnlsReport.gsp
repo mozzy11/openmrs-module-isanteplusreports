@@ -3,7 +3,7 @@
     ui.includeJavascript("isanteplusreports", "healthQualExportToExcel.js")
 %>
 
-<script type="text/javascript">
+<script type="text/javascript" charset="UTF-8">
     var breadcrumbs = [
         { icon: "icon-home", link: '/' + OPENMRS_CONTEXT_PATH + '/index.htm' },
         { label: "${ ui.escapeJs(ui.message("reportingui.reportsapp.home.title")) }", link: emr.pageLink("reportingui", "reportsapp/home") },
@@ -23,6 +23,17 @@
             event.preventDefault();                            
             saveExcel();
         });
+         
+         var checkBox = document.getElementById("check");
+         jq('#check').change(function(event) {
+            
+             if (checkBox.checked == true){
+                jq('.opts').prop("checked", true);
+             } else {
+                jq('.opts').prop("checked", false);
+            }
+        });
+
     });
 
     <% if (pdfResult != null) { %>
@@ -168,6 +179,7 @@
                 <legend>
                     ${ ui.message("reportingui.runReport.run.legend") }
                 </legend>
+                 <p>  <input type="checkbox" id="check" name="check" > Select all indicators</input></p>
                 <p id="parameterSection">
                     ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "startDateField", "label": "From Date", "formFieldName": "startDate", "defaultDate": startDate, "useTime": false ]) }
                     ${ ui.includeFragment("uicommons", "field/datetimepicker", [ "id": "endDateField", "label": "To Date", "formFieldName": "endDate", "defaultDate": endDate, "useTime": false ]) }
@@ -179,13 +191,12 @@
                 <thead>
                     <tr>
                         <th style="width:100%">${ ui.message("isanteplusreports.healthqual.indicator.label") }</th>
-                        <th>${ ui.message("isanteplusreports.healthqual.options.label") }</th>
                         <th>${ ui.message("isanteplusreports.healthqual.selection.label") }</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <th class="indicatorsHeader" colspan="3">
+                        <th class="indicatorsHeader" colspan="2">
                             ${ ui.message("isanteplusreports.pnls.indicator.adult.label") }
                         </th>
                     </tr>

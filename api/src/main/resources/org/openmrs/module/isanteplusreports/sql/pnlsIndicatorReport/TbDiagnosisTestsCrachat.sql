@@ -4,5 +4,5 @@ SELECT pat.patient_id
    AND  ps.id_status IN (6,8)
    AND ps.date_started_status BETWEEN :startDate AND :endDate
    AND pat.date_sample_sent_for_diagnositic_tb IS NOT NULL
-   AND pat.tb_other_test = 1
+   AND pat.tb_crachat_test = 1
 	AND pat.date_sample_sent_for_diagnositic_tb  BETWEEN :startDate AND :endDate ; 

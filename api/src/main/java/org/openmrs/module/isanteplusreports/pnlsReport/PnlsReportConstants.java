@@ -207,6 +207,8 @@ public class PnlsReportConstants {
 	public final static String TOTAL_HIV_PATIENTS_WITH_A_BACTERIOLOGY_SPECIMEN_COLLECTION_SQL_9_1_1 = "TotalpatientsWithBacterologySpecimenSampleColection.sql";
 	
 	public final static String GENEEXPERT_MTB_DIAGNOSIS_TEST_SQL_9_1_1_1 = "TbDiagnosisTestsGeneExpertMtb.sql";
+
+	public final static String CRACHAT_MTB_DIAGNOSIS_TEST_SQL_9_1_1_1 = "TbDiagnosisTestsCrachat.sql";
 	
 	public final static String OTHER_DIAGNOSIS_TEST_SQL_9_1_1_1 = "TbDiagnosisTestsOther.sql";
 	

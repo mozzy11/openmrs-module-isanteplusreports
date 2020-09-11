@@ -663,6 +663,7 @@ public class RegisterAllPnlsReports {
 	
 	private static void ArvPatientsWithSamplesSentForTbDiagnosisTest() {
 		registerArvPatientsWithDiagnosisTestsWithStartAndEndDateParams(
+			    PnlsReportConstants.CRACHAT_MTB_DIAGNOSIS_TEST_SQL_9_1_1_1 ,
 				PnlsReportConstants.GENEEXPERT_MTB_DIAGNOSIS_TEST_SQL_9_1_1_1,
 				PnlsReportConstants.OTHER_DIAGNOSIS_TEST_SQL_9_1_1_1,
 				PnlsReportConstants.ARV_PATIENTS_WITH_SAMPLES_SENT_TO_DIAGNOSTIC_TEST_MESSAGE,
@@ -829,7 +830,7 @@ public class RegisterAllPnlsReports {
 		dsd.addParameter(START_DATE);
 		dsd.addParameter(END_DATE);
  
-		dsd.addDimension("enrolRsn", ReportUtils.map(new CommonDimension().notEnrollReason(), ""));
+		dsd.addDimension("enrolRsn", ReportUtils.map(new CommonDimension().notEnrollReason(), "endDate=${endDate}"));
 		dsd.addDimension("gender", ReportUtils.map(new CommonDimension().gender(), ""));
 		dsd.addDimension("age", ReportUtils.map(new CommonDimension().ageZone(), "effectiveDate=${endDate}"));
 		
@@ -846,7 +847,6 @@ public class RegisterAllPnlsReports {
 		pnlsReportUtils.addAgeAndGenderAndNotEnrollOnArtReasonColumns(dsd, CohortIndicator, "F","E" ,"REF");
 		pnlsReportUtils.addAgeAndGenderAndNotEnrollOnArtReasonColumns(dsd, CohortIndicator, "M","F" ,"OTHER");
 		pnlsReportUtils.addAgeAndGenderAndNotEnrollOnArtReasonColumns(dsd, CohortIndicator, "F","F" ,"OTHER");
-		pnlsReportUtils.addTotalColumns(dsd, CohortIndicator);
 
 		Context.getService(DataSetDefinitionService.class).saveDefinition(dsd);
 		Map<String, Object> mappings = new HashMap<String, Object>();
@@ -1131,16 +1131,18 @@ private static void registerArvActivePatientsBy15WithStartAndEndDateParams(Strin
 }
 
 
-private static void registerArvPatientsWithDiagnosisTestsWithStartAndEndDateParams(String genexpertMtbSql ,String otherTbDiagnosisTestsSql, String messageProperties, String uuid) {
+private static void registerArvPatientsWithDiagnosisTestsWithStartAndEndDateParams(String crachatSql ,String genexpertMtbSql,String otherTbDiagnosisTestsSql, String messageProperties, String uuid) {
 	
 	CohortIndicatorDataSetDefinition dsd = new CohortIndicatorDataSetDefinition();
 	dsd.setName(messageProperties);
 	dsd.addParameter(START_DATE);
 	dsd.addParameter(END_DATE);
-		
+
+	CohortIndicator CrachatTest = pnlsReportUtils.cohortIndicatorFromSqlResource( crachatSql, "name", getParameters());	
 	CohortIndicator CohortIndicatorGeneExpertTest = pnlsReportUtils.cohortIndicatorFromSqlResource( genexpertMtbSql, "name", getParameters());
 	CohortIndicator CohortIndicatorOtherTest = pnlsReportUtils.cohortIndicatorFromSqlResource(otherTbDiagnosisTestsSql, "name", getParameters());
 	
+	dsd.addColumn("CT", "GeneExpert MTB Diagnosis Tests", Mapped.mapStraightThrough(CrachatTest), "");
 	dsd.addColumn("GE", "GeneExpert MTB Diagnosis Tests", Mapped.mapStraightThrough(CohortIndicatorGeneExpertTest), "");
 	dsd.addColumn("OT", "Other Diagnosis Tests", Mapped.mapStraightThrough(CohortIndicatorOtherTest), "");
 		

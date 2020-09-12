@@ -878,7 +878,23 @@ public class PnlsReportBuilder  extends UiUtils{
 				
 		int[] dataSet = createSummaryArray(getColumnNamesList14By14(),data);
 		String reportName = data.getDefinition().getName();
-		buildSummary14By14(dataSet ,getColumnNamesArray14By14(),reportName );	
+		buildSummary14By14(dataSet ,getColumnNamesArray14By14(),reportName );
+		final int ROW = 14;
+		populateTable14WithSum(ROW, dataSet[0],dataSet[14],dataSet[28],dataSet[42],dataSet[56],dataSet[70],dataSet[84],dataSet[98],dataSet[112],dataSet[126],dataSet[140],dataSet[154] );
+		populateTable14WithSum(ROW, dataSet[1],dataSet[15],dataSet[29],dataSet[43],dataSet[57],dataSet[71],dataSet[85],dataSet[99],dataSet[113],dataSet[127],dataSet[141],dataSet[155] );
+		populateTable14WithSum(ROW, dataSet[2],dataSet[16],dataSet[30],dataSet[44],dataSet[58],dataSet[72],dataSet[86],dataSet[100],dataSet[114],dataSet[128] ,dataSet[142],dataSet[156]);
+		populateTable14WithSum(ROW, dataSet[3],dataSet[17],dataSet[31],dataSet[45],dataSet[59],dataSet[73],dataSet[87],dataSet[101],dataSet[115],dataSet[129],dataSet[143],dataSet[157] );
+		populateTable14WithSum(ROW, dataSet[4],dataSet[18],dataSet[32],dataSet[46],dataSet[60],dataSet[74],dataSet[88],dataSet[102],dataSet[116],dataSet[130] ,dataSet[144],dataSet[158]);
+		populateTable14WithSum(ROW, dataSet[5],dataSet[19],dataSet[33],dataSet[47],dataSet[61],dataSet[75],dataSet[89],dataSet[103],dataSet[117],dataSet[131],dataSet[145],dataSet[159]);
+		populateTable14WithSum(ROW, dataSet[6],dataSet[20],dataSet[34],dataSet[48],dataSet[62],dataSet[76],dataSet[90],dataSet[104],dataSet[118],dataSet[132],dataSet[146],dataSet[160] );
+		populateTable14WithSum(ROW, dataSet[7],dataSet[21],dataSet[35],dataSet[49],dataSet[63],dataSet[77],dataSet[91],dataSet[105],dataSet[119],dataSet[133] ,dataSet[147],dataSet[161]);
+		populateTable14WithSum(ROW, dataSet[8],dataSet[22],dataSet[36],dataSet[50],dataSet[64],dataSet[78],dataSet[92],dataSet[106],dataSet[120],dataSet[134] ,dataSet[148],dataSet[162]);
+		populateTable14WithSum(ROW, dataSet[9],dataSet[23],dataSet[37],dataSet[51],dataSet[65],dataSet[79],dataSet[93],dataSet[107],dataSet[121],dataSet[135] ,dataSet[149],dataSet[163]);
+		populateTable14WithSum(ROW, dataSet[10],dataSet[24],dataSet[38],dataSet[52],dataSet[66],dataSet[80],dataSet[94],dataSet[108],dataSet[122],dataSet[136],dataSet[150],dataSet[164] );
+		populateTable14WithSum(ROW, dataSet[11],dataSet[25],dataSet[39],dataSet[53],dataSet[67],dataSet[81],dataSet[95],dataSet[109],dataSet[123],dataSet[137] ,dataSet[151],dataSet[165]);
+		populateTable14WithSum(ROW, dataSet[12],dataSet[26],dataSet[40],dataSet[54],dataSet[68],dataSet[82],dataSet[96],dataSet[110],dataSet[124],dataSet[138] ,dataSet[152],dataSet[166]);
+		populateTable14WithSum(ROW, dataSet[13],dataSet[27],dataSet[41],dataSet[55],dataSet[69],dataSet[83],dataSet[97],dataSet[111],dataSet[125],dataSet[139] ,dataSet[153],dataSet[167]);
+				
 	}
 	
 	private void buildIndicator14By3(DataSet data) {
@@ -1110,7 +1126,8 @@ public class PnlsReportBuilder  extends UiUtils{
 	}
 	
 	private void buildTbDagnosisTestIndicator(DataSet data) {
-		getRows2()[0].with(td(translateLabel("geneExpertTest")).attr("colspan", "1").withClass("label"),
+		getRows2()[0].with(td(translateLabel("CrachatTest")).attr("colspan", "1").withClass("label"),
+			              td(translateLabel("geneExpertTest")).attr("colspan", "1").withClass("label"),
 		                  td(translateLabel("OtherTest")).attr("colspan", "1").withClass("label"),
                           td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
 				
@@ -1120,9 +1137,12 @@ public class PnlsReportBuilder  extends UiUtils{
 		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
 		String row1 =  ConstructUrl(reportUrl ,reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[0]);
 		String row2 =  ConstructUrl(reportUrl ,reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[1]);
+		String row3 =  ConstructUrl(reportUrl ,reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[2]);
+
 		populateTable2(ROW1, dataSet[0],row1);
 		populateTable2(ROW1, dataSet[1],row2);
-		getRows2()[ROW1].with(td(Integer.toString(dataSet[0]+ dataSet[1])));
+		populateTable2(ROW1, dataSet[2],row3);
+		getRows2()[ROW1].with(td(Integer.toString(dataSet[0]+ dataSet[1] + dataSet[2])));
 	}
 	
 	
@@ -1344,7 +1364,7 @@ public class PnlsReportBuilder  extends UiUtils{
   private void buildSummary14By14(int[] dataArray ,String[] columnsArray, String reportName ) {		
 		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
 		int colCount = 0;
-		for (int ROW = 2; ROW <= 14 ; ROW ++) {			
+		for (int ROW = 2; ROW <= 13 ; ROW ++) {			
 		    for (int col = 0; col <= 13 ; col ++) {
 		    	 if(colCount < dataArray.length) {
 			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
@@ -1434,6 +1454,10 @@ public class PnlsReportBuilder  extends UiUtils{
 	
 	private void populateTable13WithSum(Integer ROW ,int data1 ,int data2 ,int data3,int data4 ,int data5 ,int data6 ,int data7 ,int data8 ,int data9,int data10   ) {
 		getRows13()[ROW].with(td(Integer.toString(data1 + data2 +data3 +data4 +data5 +data6 +data7 +data8 +data9 +data10)));
+	}
+
+	private void populateTable14WithSum(Integer ROW ,int data1 ,int data2 ,int data3,int data4 ,int data5 ,int data6 ,int data7 ,int data8 ,int data9,int data10 ,int data11,int data12 ) {
+		getRows14()[ROW].with(td(Integer.toString(data1 + data2 +data3 +data4 +data5 +data6 +data7 +data8 +data9 +data10 + data11 +data12)));
 	}
 	
 	private void populateTable(Integer ROW , int data ) {

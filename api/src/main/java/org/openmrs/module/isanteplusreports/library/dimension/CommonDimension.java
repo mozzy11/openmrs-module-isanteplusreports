@@ -3,8 +3,6 @@ package org.openmrs.module.isanteplusreports.library.dimension;
 
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.openmrs.module.isanteplusreports.library.cohort.common.CommonCohortLibrary;
 import org.openmrs.module.isanteplusreports.pnlsReport.library.cohort.PnlsReportCohortLibrary;
@@ -57,14 +55,15 @@ public class CommonDimension {
 		  }
 	  
 	  public CohortDefinitionDimension notEnrollReason(){		  
-		  CohortDefinitionDimension dim = new CohortDefinitionDimension();	  		  		  
+		  CohortDefinitionDimension dim = new CohortDefinitionDimension();
+		  dim.addParameter(new Parameter("endDate", "end Date", Date.class));	  		  		  
 		  dim.setName("enrolRsn");
-		  dim.addCohortDefinition("DENIAL", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonDenial(), ""));
-		  dim.addCohortDefinition("DIED", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonDied(), ""));
-		  dim.addCohortDefinition("MED", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonMedical(), ""));
-		  dim.addCohortDefinition("REF", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonRefferd(), ""));
-		  dim.addCohortDefinition("VOL", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonVoluntary(), ""));
-		  dim.addCohortDefinition("OTHER", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonOther(), ""));
+		  dim.addCohortDefinition("DENIAL", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonDenial(), "endDate=${endDate}"));
+		  dim.addCohortDefinition("DIED", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonDied(), "endDate=${endDate}"));
+		  dim.addCohortDefinition("MED", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonMedical(), "endDate=${endDate}"));
+		  dim.addCohortDefinition("REF", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonRefferd(), "endDate=${endDate}"));
+		  dim.addCohortDefinition("VOL", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonVoluntary(), "endDate=${endDate}"));
+		  dim.addCohortDefinition("OTHER", ReportUtils.map(PnlsReportCohortLibrary.cohortByNonEnrollmentReasonOther(), "endDate=${endDate}"));
 		return dim;		
 	  };
 	  

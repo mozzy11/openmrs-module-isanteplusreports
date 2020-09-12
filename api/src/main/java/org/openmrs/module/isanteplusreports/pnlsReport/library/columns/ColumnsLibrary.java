@@ -217,13 +217,10 @@ public class ColumnsLibrary {
 		String[]  set1= (String[]) ArrayUtils.addAll(genarateColumnArrayNames("A") ,genarateColumnArrayNames("B"));
 		String[]  set2= (String[]) ArrayUtils.addAll(genarateColumnArrayNames("C") ,genarateColumnArrayNames("D"));
 		String[]  set3= (String[]) ArrayUtils.addAll(genarateColumnArrayNames("E") ,genarateColumnArrayNames("F"));
-		String[]  set4 = genarateTotalColumnArrayNames();
 		
 		String[]  ConcanetSet1 = (String[]) ArrayUtils.addAll(set1 ,set2);
-		String[]  ConcanetSet2 = (String[]) ArrayUtils.addAll(set3 ,set4);
-		
-		String[] finalColumnsSet = (String[]) ArrayUtils.addAll( ConcanetSet1, ConcanetSet2);
-				             
+		//String[]  ConcanetSet2 = (String[]) ArrayUtils.addAll(set3 ,);	
+		String[] finalColumnsSet = (String[]) ArrayUtils.addAll( ConcanetSet1, set3);			             
 		return finalColumnsSet;	
 	}
 	
@@ -322,11 +319,12 @@ public class ColumnsLibrary {
 	
 	public static final String[] COLUMNS_ARRAY_4BY3 = getAllGenderAndAgeBy15ColumnsArraySingleRow();
 	
-	private static final String COLUMN_NAME_GENEEXPERT_TB_DIAGNOSIS_TEST = "GE";
-	
+    private static final String COLUMN_NAME_CRACHAT_TB_DIAGNOSIS_TEST = "CT";
+	private static final String COLUMN_NAME_GENEEXPERT_TB_DIAGNOSIS_TEST = "GE";	
 	private static final String COLUMN_NAME_OTHER_TB_DIAGNOSIS_TEST = "OT";
 	
 	public static final String[] COLUMNS_ARRAY_ARV_PATIENTS_BY_TB_DIAGNOSIS_TEST = {
+		                                COLUMN_NAME_CRACHAT_TB_DIAGNOSIS_TEST ,
 			                            COLUMN_NAME_GENEEXPERT_TB_DIAGNOSIS_TEST,
 			                            COLUMN_NAME_OTHER_TB_DIAGNOSIS_TEST
 	                                      };

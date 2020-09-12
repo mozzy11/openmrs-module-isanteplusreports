@@ -9,11 +9,13 @@ SELECT CASE
 		          END
 		      END
             								            
-FROM isanteplus.patient_status_arv ps ,isanteplus.patient_laboratory pl ,isanteplus.patient_pregnancy pp
+FROM isanteplus.patient_status_arv ps ,isanteplus.patient_laboratory pl ,isanteplus.patient_pregnancy pp ,isanteplus.patient_on_art pat
     WHERE ps.patient_id = pl.patient_id
     AND pl.patient_id = pp.patient_id
-     AND pp.end_date >= :endDate
+    AND pl.patient_id = pat.patient_id
+    AND pp.end_date >= :endDate
 	 AND ps.id_status IN (6,8)
     AND ps.date_started_status BETWEEN :startDate AND :endDate 
 	 AND pl.test_done =1 
-	 AND TIMESTAMPDIFF(MONTH, pl.date_test_done ,:endDate) >= 12;
+	 AND TIMESTAMPDIFF(MONTH, pl.date_test_done ,:endDate) >= 12
+	 AND pat.viral_load_targeted IS NULL ;

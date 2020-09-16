@@ -74,16 +74,16 @@ public class PnlsReportPageController {
 		List<ReportData> allReportData = new ArrayList<ReportData>();
 		for (PnlsReportSelectedIndicator indicator : indicators) {
 			ReportData reportData = getReportData(indicator.getUuid(), startDate, endDate, indicator.getOptions());
-			allReportData.add(reportData);
-			builder.addReportData(reportData);
+			allReportData.add(reportData);		
 		}
+		builder.buildHtmlTables(allReportData);
 				
 		session.setAttribute(ReportingConstants.OPENMRS_REPORT_DATA + PnlsReportConstants.PNLS_GENERAL_PURPOSE_SUFFIX, allReportData);
 		model.addAttribute("manager", pnlsManager);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("htmlResult", builder.buildHtmlTables());
-		model.addAttribute("pdfResult", builder.buildPdf());
+		model.addAttribute("htmlResult", builder.getTablesHtml());
+		model.addAttribute("pdfResult", builder.buildPdf()); 
 	}
 
 	private Location getSessionLocation(HttpSession session) {

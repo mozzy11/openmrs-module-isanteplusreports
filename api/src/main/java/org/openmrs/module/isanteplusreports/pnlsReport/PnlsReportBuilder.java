@@ -118,7 +118,7 @@ public class PnlsReportBuilder extends UiUtils {
 	private ContainerTag[] rows6;
 
 	private ContainerTag[] rows13;
-	
+
 	private String clinicDepartment;
 
 	private String clinic;
@@ -131,9 +131,9 @@ public class PnlsReportBuilder extends UiUtils {
 
 	private Long malePatients;
 
-	private String tablesHtml ;
+	private String tablesHtml;
 
-	private ContainerTag tables ;
+	private ContainerTag tables;
 
 	public String[] getColumnNamesArray14By3() {
 		return COLUMNS_ARRAY_14_BY_3;
@@ -262,7 +262,7 @@ public class PnlsReportBuilder extends UiUtils {
 	}
 
 	public String buildPdf() {
-		String htmlForPdf = html(head(getStyleForPdf()), body(createPdfHeader(),this.tables)).render();
+		String htmlForPdf = html(head(getStyleForPdf()), body(createPdfHeader(), this.tables)).render();
 		LOGGER.debug("built htmlForPdf: " + htmlForPdf);
 		try {
 			return convertHtmlToPdfInBase64(htmlForPdf);
@@ -310,8 +310,8 @@ public class PnlsReportBuilder extends UiUtils {
 	}
 
 	private ContainerTag buildTables(List<ReportData> allReportData) {
-		this.tables =  div();
-	   for (ReportData reportData:allReportData){	
+		this.tables = div();
+		for (ReportData reportData : allReportData) {
 			if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_14BY3)) {
 				List<DataSet> data = new LinkedList<DataSet>();
@@ -333,43 +333,43 @@ public class PnlsReportBuilder extends UiUtils {
 
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_14BY14)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTable14By14(iterator));
-							clearRows14();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTable14By14(iterator));
+					clearRows14();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_6BY3)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableKeyPopn(iterator));
-							clearRows4();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableKeyPopn(iterator));
+					clearRows4();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_14BY6)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneCtxTable(iterator));
-							clearRows8();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneCtxTable(iterator));
+					clearRows8();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_4BY5)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTbTable(iterator));
-							clearRows7();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTbTable(iterator));
+					clearRows7();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_3BY1)) {
-						List<DataSet> data = new LinkedList<DataSet>();
+				List<DataSet> data = new LinkedList<DataSet>();
 				data.addAll(reportData.getDataSets().values());
 				Iterator<DataSet> iterator = data.iterator();
 				while (iterator.hasNext()) {
@@ -378,87 +378,87 @@ public class PnlsReportBuilder extends UiUtils {
 				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_14BY4)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOne14By4Table(iterator));
-							clearRows7();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOne14By4Table(iterator));
+					clearRows7();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_6BY2)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableKeyPopnBySingleRow(iterator));
-							clearRows3();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableKeyPopnBySingleRow(iterator));
+					clearRows3();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_4BY7)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableForActivePatientsOverMonths(iterator));
-							clearRows9();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableForActivePatientsOverMonths(iterator));
+					clearRows9();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_4BY7_II)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with( buildOneTableForActivePatientsWithAtleastOneFollowUpVist(iterator));
-							clearRows9();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableForActivePatientsWithAtleastOneFollowUpVist(iterator));
+					clearRows9();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_14BY9)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableForActivePatientsByRegimenLines(iterator));
-							clearRows11();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableForActivePatientsByRegimenLines(iterator));
+					clearRows11();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_10BY4)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableforCervicalCancerStatus(iterator));
-							clearRows6();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableforCervicalCancerStatus(iterator));
+					clearRows6();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_10BY4_II)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableforCervicalCancerTreatment(iterator));
-							clearRows6();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableforCervicalCancerTreatment(iterator));
+					clearRows6();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_10BY11)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with(buildOneTableFamillyPlanning(iterator));
-							clearRows13();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableFamillyPlanning(iterator));
+					clearRows13();
+				}
 			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
 					PnlsReportConstants.REPORT_DESCRIPTION_4BY3)) {
-						List<DataSet> data = new LinkedList<DataSet>();
-						data.addAll(reportData.getDataSets().values());
-						Iterator<DataSet> iterator = data.iterator();
-						while (iterator.hasNext()) {
-							this.tables.with( buildOneTable4By3(iterator));
-							clearRows();
-						}
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTable4By3(iterator));
+					clearRows();
+				}
 			}
-	   }
+		}
 		return this.tables;
 	}
 
@@ -1763,7 +1763,6 @@ public class PnlsReportBuilder extends UiUtils {
 	public void setRows8(ContainerTag[] rows) {
 		this.rows8 = rows;
 	}
-
 
 	public int getNumberOfIndicatorsInOneTable() {
 		return numberOfIndicatorsInOneTable;

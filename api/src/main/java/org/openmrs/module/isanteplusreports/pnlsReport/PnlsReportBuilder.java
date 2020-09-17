@@ -15,21 +15,21 @@ import static j2html.TagCreator.th;
 import static j2html.TagCreator.tr;
 import static org.openmrs.module.isanteplusreports.IsantePlusReportsUtil.getStringFromResource;
 import static org.openmrs.module.isanteplusreports.healthqual.util.HealthQualUtils.replaceNonBreakingSpaces;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_14_BY_3 ; 
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_14_BY_3;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COULUMNS_ARRAY_1_BY_1;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_14_BY_14 ;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_14_BY_14;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.KEY_POPN_COLUMNS_ARRAY;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.CTX_COLUMNS_ARRAY;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_AGE_BY_15;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_ARV_PATIENTS_BY_TB_DIAGNOSIS_TEST;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_14_BY_4;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_KEY_POPN_SINGLE_ROW ;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_4By7 ;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_ACTIVE_PATIENTS_BY_REGIME ;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_KEY_POPN_SINGLE_ROW;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_4By7;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_ACTIVE_PATIENTS_BY_REGIME;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_CERVICAL_CANCER_STATUS;
 import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_CERVICAL_CANCER_TREATMENT;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_FAMILY_PLANNING ;
-import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_4BY3 ;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_FAMILY_PLANNING;
+import static org.openmrs.module.isanteplusreports.pnlsReport.library.columns.ColumnsLibrary.COLUMNS_ARRAY_4BY3;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -63,97 +63,64 @@ import com.itextpdf.text.DocumentException;
 
 import j2html.tags.ContainerTag;
 
-public class PnlsReportBuilder  extends UiUtils{
+public class PnlsReportBuilder extends UiUtils {
 
 	private final Log LOGGER = LogFactory.getLog(getClass());
 
 	private static final int ROWS_5 = 5;
-	
+
 	private static final int ROWS_15 = 15;
-	
-    private static final int ROWS_2 = 2;
-    
-    private static final int ROWS_3 = 3;
-	
+
+	private static final int ROWS_2 = 2;
+
+	private static final int ROWS_3 = 3;
+
 	private static final int ROWS_4 = 4;
-	
+
 	private static final int ROWS_8 = 8;
-	
+
 	private static final int ROWS_7 = 7;
-	
+
 	private static final int ROWS_9 = 9;
-	
+
 	private static final int ROWS_11 = 11;
-	
+
 	private static final int ROWS_6 = 6;
-	
+
 	private static final int ROWS_13 = 13;
-		
-	
+
 	private static final String PERIOD_DATE_FORMAT_PATTERN = "yyyy/MM/dd";
 
 	private static final String CREATION_DATE_FORMAT_PATTERN = "yyyy/MM/dd HH:mm:ss";
 
 	private static final String STRING_IF_EMPTY = "-";
-	
+
 	private int numberOfIndicatorsInOneTable = 1; // if there are too many indicators the table will be splitted
-	
+
 	private ContainerTag[] rows5;
-	
+
 	private ContainerTag[] rows14;
-	
+
 	private ContainerTag[] rows2;
-	
+
 	private ContainerTag[] rows3;
-	
+
 	private ContainerTag[] rows4;
-	
+
 	private ContainerTag[] rows8;
-	
+
 	private ContainerTag[] rows7;
-	
+
 	private ContainerTag[] rows9;
-	
+
 	private ContainerTag[] rows11;
-	
+
 	private ContainerTag[] rows6;
-	
+
 	private ContainerTag[] rows13;
-	
-	private List<DataSet> dataSets14By3;
-	
-	private List<DataSet> dataSets1By1;
-	
-	private List<DataSet> dataSets14By14;
-	
-	private List<DataSet> dataSets6By3;
-	
-	private List<DataSet> dataSets6By2;
-	
-	private List<DataSet> dataSets14By6;
-	
-	private List<DataSet> dataSets4By5;
-	
-	private List<DataSet> dataSets4By7;
-	
-	private List<DataSet> dataSets4By3;
-	
-	private List<DataSet> dataSets4By7II;
-	
-	private List<DataSet> dataSets3By1;
-	
-	private List<DataSet> dataSets14By4;
-	
-	private List<DataSet> dataSets14By9;
-	
-	private List<DataSet> dataSets10By4;
-	
-	private List<DataSet> dataSets10By4II;
-	
-	private List<DataSet> dataSets10By11;
-	
+
 	private String clinicDepartment;
-	
+
 	private String clinic;
 
 	private Date startDate;
@@ -163,137 +130,139 @@ public class PnlsReportBuilder  extends UiUtils{
 	private Long femalePatients;
 
 	private Long malePatients;
-		
-	public  String[] getColumnNamesArray14By3(){ 
-		return COLUMNS_ARRAY_14_BY_3 ;
+
+	private String tablesHtml;
+
+	private ContainerTag tables;
+
+	public String[] getColumnNamesArray14By3() {
+		return COLUMNS_ARRAY_14_BY_3;
 	}
-		
-	public  List<String> getColumnNamesList14By3(){	
-		return Arrays.asList(getColumnNamesArray14By3());							
-	  }
-	
-	public  String[] getBreastFeedingColumnNamesArray(){		
-		return COULUMNS_ARRAY_1_BY_1 ;
+
+	public List<String> getColumnNamesList14By3() {
+		return Arrays.asList(getColumnNamesArray14By3());
 	}
-	
-	public  List<String> getBreastFeedingColumnNamesList(){	
-		return Arrays.asList(getBreastFeedingColumnNamesArray());							
-	  }
-	
-	public  String[] getColumnNamesArray14By14(){ 
+
+	public String[] getBreastFeedingColumnNamesArray() {
+		return COULUMNS_ARRAY_1_BY_1;
+	}
+
+	public List<String> getBreastFeedingColumnNamesList() {
+		return Arrays.asList(getBreastFeedingColumnNamesArray());
+	}
+
+	public String[] getColumnNamesArray14By14() {
 		return COLUMNS_ARRAY_14_BY_14;
 	}
-	
-	public  List<String> getColumnNamesList14By14(){	
-		return Arrays.asList(getColumnNamesArray14By14());							
-	  }
-	
-	public  String[] getKeyPopnColumnNamesArray(){ 
+
+	public List<String> getColumnNamesList14By14() {
+		return Arrays.asList(getColumnNamesArray14By14());
+	}
+
+	public String[] getKeyPopnColumnNamesArray() {
 		return KEY_POPN_COLUMNS_ARRAY;
 	}
-	
-	public  List<String> getKeyPopnColumnNamesList(){	
-		return Arrays.asList(getKeyPopnColumnNamesArray());							
-	  }
-	
-	public  String[] getCtxColumnNamesArray(){ 
+
+	public List<String> getKeyPopnColumnNamesList() {
+		return Arrays.asList(getKeyPopnColumnNamesArray());
+	}
+
+	public String[] getCtxColumnNamesArray() {
 		return CTX_COLUMNS_ARRAY;
 	}
-	
-	public  List<String> getCtxColumnNamesList(){	
-		return Arrays.asList(getCtxColumnNamesArray());							
-	  }
-	
-	public  String[] getAgeBy15ColumnNamesArray(){ 
+
+	public List<String> getCtxColumnNamesList() {
+		return Arrays.asList(getCtxColumnNamesArray());
+	}
+
+	public String[] getAgeBy15ColumnNamesArray() {
 		return COLUMNS_ARRAY_AGE_BY_15;
 	}
-	
-	public  List<String> getAgeBy15ColumnNamesList(){	
-		return Arrays.asList(getAgeBy15ColumnNamesArray());							
-	  }
-	
-	public  String[] getArvPatientsByTbDiagnosisTestColumnNamesArray(){ 
+
+	public List<String> getAgeBy15ColumnNamesList() {
+		return Arrays.asList(getAgeBy15ColumnNamesArray());
+	}
+
+	public String[] getArvPatientsByTbDiagnosisTestColumnNamesArray() {
 		return COLUMNS_ARRAY_ARV_PATIENTS_BY_TB_DIAGNOSIS_TEST;
 	}
-	
-	public  List<String> getArvPatientsByTbDiagnosisTestColumnNamesList(){	
-		return Arrays.asList( getArvPatientsByTbDiagnosisTestColumnNamesArray());							
-	  }
-	
-	public  String[] getColumnNamesArray14By4(){ 
+
+	public List<String> getArvPatientsByTbDiagnosisTestColumnNamesList() {
+		return Arrays.asList(getArvPatientsByTbDiagnosisTestColumnNamesArray());
+	}
+
+	public String[] getColumnNamesArray14By4() {
 		return COLUMNS_ARRAY_14_BY_4;
 	}
-	
-	public  List<String> getColumnNamesList14By4(){	
-		return Arrays.asList(getColumnNamesArray14By4());							
-	  }
-	
-	public  String[] getKeyPopnSingleRowColumnNamesArray(){ 
-		return COLUMNS_ARRAY_KEY_POPN_SINGLE_ROW ;
+
+	public List<String> getColumnNamesList14By4() {
+		return Arrays.asList(getColumnNamesArray14By4());
 	}
-	
-	public  List<String> getKeyPopnSingleRowColumnNamesList(){	
-		return Arrays.asList(getKeyPopnSingleRowColumnNamesArray());							
-	  }
-	
-	public  String[] getColumnNamesArray4By7(){ 
+
+	public String[] getKeyPopnSingleRowColumnNamesArray() {
+		return COLUMNS_ARRAY_KEY_POPN_SINGLE_ROW;
+	}
+
+	public List<String> getKeyPopnSingleRowColumnNamesList() {
+		return Arrays.asList(getKeyPopnSingleRowColumnNamesArray());
+	}
+
+	public String[] getColumnNamesArray4By7() {
 		return COLUMNS_ARRAY_4By7;
 	}
-	
-	public  List<String> getColumnNamesList4By7(){	
-		return Arrays.asList(getColumnNamesArray4By7());							
-	  }
-	
-	public  String[] getColumnNamesArray4By3(){ 
+
+	public List<String> getColumnNamesList4By7() {
+		return Arrays.asList(getColumnNamesArray4By7());
+	}
+
+	public String[] getColumnNamesArray4By3() {
 		return COLUMNS_ARRAY_4BY3;
 	}
-	
-	public  List<String> getColumnNamesList4By3(){	
-		return Arrays.asList(getColumnNamesArray4By3());							
-	  }
-	
-	public  String[] getActivePatientRegimenLinesColumnNamesArray(){ 
+
+	public List<String> getColumnNamesList4By3() {
+		return Arrays.asList(getColumnNamesArray4By3());
+	}
+
+	public String[] getActivePatientRegimenLinesColumnNamesArray() {
 		return COLUMNS_ARRAY_ACTIVE_PATIENTS_BY_REGIME;
 	}
-	
-	public  List<String>getActivePatientRegimenLinesColumnNamesList(){	
-		return Arrays.asList(getActivePatientRegimenLinesColumnNamesArray());							
-	  }
-	
-	public  String[] getwomenCancerStatusColumnNamesArray(){ 
+
+	public List<String> getActivePatientRegimenLinesColumnNamesList() {
+		return Arrays.asList(getActivePatientRegimenLinesColumnNamesArray());
+	}
+
+	public String[] getwomenCancerStatusColumnNamesArray() {
 		return COLUMNS_ARRAY_CERVICAL_CANCER_STATUS;
 	}
-	
-	public  List<String>getwomenCancerStatusColumnNamesList(){	
-		return Arrays.asList(getwomenCancerStatusColumnNamesArray());							
-	  }
-	
-	public  String[] getwomenCancerTreatmentColumnNamesArray(){ 
+
+	public List<String> getwomenCancerStatusColumnNamesList() {
+		return Arrays.asList(getwomenCancerStatusColumnNamesArray());
+	}
+
+	public String[] getwomenCancerTreatmentColumnNamesArray() {
 		return COLUMNS_ARRAY_CERVICAL_CANCER_TREATMENT;
 	}
-	
-	public  List<String>getwomenCancerTreatmentColumnNamesList(){	
-		return Arrays.asList(getwomenCancerTreatmentColumnNamesArray());							
-	  }
-	
-	public  String[] getFamilyPlanningColumnNamesArray(){ 
+
+	public List<String> getwomenCancerTreatmentColumnNamesList() {
+		return Arrays.asList(getwomenCancerTreatmentColumnNamesArray());
+	}
+
+	public String[] getFamilyPlanningColumnNamesArray() {
 		return COLUMNS_ARRAY_FAMILY_PLANNING;
 	}
-	
-	public  List<String>getFamilyPlanningColumnNamesList(){	
-		return Arrays.asList(getFamilyPlanningColumnNamesArray());							
-	  }
-	
-	
-	
-	public String buildHtmlTables() {
-		String tablesHtml = buildTables().render();
-		LOGGER.debug("built tables html: " + tablesHtml);
-		return tablesHtml;
+
+	public List<String> getFamilyPlanningColumnNamesList() {
+		return Arrays.asList(getFamilyPlanningColumnNamesArray());
 	}
-	
+
+	public String buildHtmlTables(List<ReportData> allReportData) {
+		setTablesHtml(buildTables(allReportData).render());
+		LOGGER.debug("built tables html: " + tablesHtml);
+		return getTablesHtml();
+	}
+
 	public String buildPdf() {
-		String htmlForPdf = html(head(getStyleForPdf()), body(createPdfHeader(), buildTables())).render();
+		String htmlForPdf = html(head(getStyleForPdf()), body(createPdfHeader(), this.tables)).render();
 		LOGGER.debug("built htmlForPdf: " + htmlForPdf);
 		try {
 			return convertHtmlToPdfInBase64(htmlForPdf);
@@ -303,11 +272,8 @@ public class PnlsReportBuilder  extends UiUtils{
 	}
 
 	private ContainerTag createPdfHeader() {
-		return div().withClass("center").with(
-			h2(translateLabel("pdf.header")),
-			h3(createPeriodString()),
-			h5(createDateOfCreationString())
-		);
+		return div().withClass("center").with(h2(translateLabel("pdf.header")), h3(createPeriodString()),
+				h5(createDateOfCreationString()));
 	}
 
 	private String createPeriodString() {
@@ -323,13 +289,14 @@ public class PnlsReportBuilder  extends UiUtils{
 	private ContainerTag getStyleForPdf() {
 		return style().withType("text/css").withText(getStringFromResource("healthQualPdfStyle.css"));
 	}
-	
-	private String convertHtmlToPdfInBase64(String html) throws IOException, ParserConfigurationException, SAXException,
-	        DocumentException {
-		
+
+	private String convertHtmlToPdfInBase64(String html)
+			throws IOException, ParserConfigurationException, SAXException, DocumentException {
+
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		//Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes()));
+		// Document doc = builder.parse(new
+		// ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes()));
 		Document doc = builder.parse(new ByteArrayInputStream(html.replaceAll("&nbsp;", "").getBytes("UTF-8")));
 		ITextRenderer renderer = new ITextRenderer();
 		renderer.setDocument(doc, null);
@@ -338,242 +305,297 @@ public class PnlsReportBuilder  extends UiUtils{
 		renderer.createPDF(out);
 		out.flush();
 		out.close();
-		
+
 		return DatatypeConverter.printBase64Binary(out.toByteArray());
 	}
-	
-	private ContainerTag buildTables() {
-		ContainerTag tables = div();
-		Iterator<DataSet> iterator1 = getDataSets14By3().iterator();
-		while (iterator1.hasNext()) {
-			tables.with(buildOneTable14By3(iterator1));
-			clearRows();
-		}	
-		Iterator<DataSet> iterator2 = getDataSets1By1().iterator();
-		while (iterator2.hasNext()) {
-			tables.with(buildOneTable1By1(iterator2));
-			clearRows2();
-		}	
-		
-		Iterator<DataSet> iterator3 =getDataSets14By14().iterator();
-		while (iterator3.hasNext()) {
-			tables.with(buildOneTable14By14(iterator3));
-			clearRows14();
-		}		
-		Iterator<DataSet> iterator4 = getDataSets6By3().iterator();		
-		while (iterator4.hasNext()) {
-			tables.with(buildOneTableKeyPopn(iterator4));
-			clearRows4();
+
+	private ContainerTag buildTables(List<ReportData> allReportData) {
+		this.tables = div();
+		for (ReportData reportData : allReportData) {
+			if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_14BY3)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTable14By3(iterator));
+					clearRows();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_1BY1)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTable1By1(iterator));
+					clearRows2();
+				}
+
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_14BY14)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTable14By14(iterator));
+					clearRows14();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_6BY3)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableKeyPopn(iterator));
+					clearRows4();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_14BY6)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneCtxTable(iterator));
+					clearRows8();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_4BY5)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTbTable(iterator));
+					clearRows7();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_3BY1)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTbDiagnosisTestTable(iterator));
+					clearRows2();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_14BY4)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOne14By4Table(iterator));
+					clearRows7();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_6BY2)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableKeyPopnBySingleRow(iterator));
+					clearRows3();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_4BY7)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableForActivePatientsOverMonths(iterator));
+					clearRows9();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_4BY7_II)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableForActivePatientsWithAtleastOneFollowUpVist(iterator));
+					clearRows9();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_14BY9)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableForActivePatientsByRegimenLines(iterator));
+					clearRows11();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_10BY4)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableforCervicalCancerStatus(iterator));
+					clearRows6();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_10BY4_II)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableforCervicalCancerTreatment(iterator));
+					clearRows6();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_10BY11)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTableFamillyPlanning(iterator));
+					clearRows13();
+				}
+			} else if (StringUtils.equals(reportData.getDefinition().getDescription(),
+					PnlsReportConstants.REPORT_DESCRIPTION_4BY3)) {
+				List<DataSet> data = new LinkedList<DataSet>();
+				data.addAll(reportData.getDataSets().values());
+				Iterator<DataSet> iterator = data.iterator();
+				while (iterator.hasNext()) {
+					this.tables.with(buildOneTable4By3(iterator));
+					clearRows();
+				}
+			}
 		}
-		Iterator<DataSet> iterator5 = getDataSets14By6().iterator();		
-		while (iterator5.hasNext()) {
-			tables.with(buildOneCtxTable(iterator5));
-			clearRows8();
-		}		
-		Iterator<DataSet> iterator6 = getDataSets4By5().iterator();		
-		while (iterator6.hasNext()) {
-			tables.with(buildOneTbTable(iterator6));
-			clearRows7();
-		}
-		
-		Iterator<DataSet> iterator7 = getDataSets3By1().iterator();		
-		while (iterator7.hasNext()) {
-			tables.with(buildOneTbDiagnosisTestTable(iterator7));
-			clearRows2();
-		}
-		
-		Iterator<DataSet> iterator8 = getDataSets14By4().iterator();		
-		while (iterator8.hasNext()) {
-			tables.with(buildOne14By4Table(iterator8));
-			clearRows7();
-		}
-		
-		Iterator<DataSet> iterator9 = getDataSets6By2().iterator();		
-		while (iterator9.hasNext()) {
-			tables.with(buildOneTableKeyPopnBySingleRow(iterator9));
-			clearRows3();
-		}
-		
-		Iterator<DataSet> iterator10 = getDataSets4By7().iterator();		
-		while (iterator10.hasNext()) {
-			tables.with(buildOneTableForActivePatientsOverMonths(iterator10));
-			clearRows9();
-		}
-		
-		Iterator<DataSet> iterator11 = getDataSets14By9().iterator();		
-		while (iterator11.hasNext()) {
-			tables.with(buildOneTableForActivePatientsByRegimenLines(iterator11));
-			clearRows11();
-		}
-		
-		Iterator<DataSet> iterator12 = getDataSets10By4().iterator();		
-		while (iterator12.hasNext()) {
-			 tables.with(buildOneTableforCervicalCancerStatus(iterator12));
-			clearRows6();
-		}
-		
-		Iterator<DataSet> iterator13 = getDataSets10By4II().iterator();		
-		while (iterator13.hasNext()) {
-			tables.with(buildOneTableforCervicalCancerTreatment(iterator13));
-			clearRows6();
-		}
-		
-		Iterator<DataSet> iterator14 = getDataSets10By11().iterator();		
-		while (iterator14.hasNext()) {
-			tables.with(buildOneTableFamillyPlanning(iterator14));
-			clearRows13();
-		}
-		
-		Iterator<DataSet> iterator15 = getDataSets4By7II().iterator();		
-		while (iterator15.hasNext()) {
-			tables.with( buildOneTableForActivePatientsWithAtleastOneFollowUpVist(iterator15));
-			clearRows9();
-		}
-		
-		Iterator<DataSet> iterator16 = getDataSets4By3().iterator();		
-		while (iterator16.hasNext()) {
-			tables.with( buildOneTable4By3(iterator16));
-			clearRows();
-		}
-		return tables;
+		return this.tables;
 	}
 
 	private ContainerTag buildOneTable14By3(Iterator<DataSet> iterator) {
 		buildGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicator14By3(iterator.next());
-		}		
+		}
 		return table().with(getRows5());
 	}
-	
-	
+
 	private ContainerTag buildOneTable4By3(Iterator<DataSet> iterator) {
 		buildGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicator4By3(iterator.next());
-		}		
+		}
 		return table().with(getRows5());
 	}
-	
+
 	private ContainerTag buildOneTable1By1(Iterator<DataSet> iterator) {
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicator1By1(iterator.next());
-		}		
+		}
 		return table().with(getRows2());
 	}
-	
+
 	private ContainerTag buildOneTable14By14(Iterator<DataSet> iterator) {
-		   buildNotEnrolledReasonSummaryTable();
-		   buildNotEnrolledGenderSummaryTable();
+		buildNotEnrolledReasonSummaryTable();
+		buildNotEnrolledGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicator14By14(iterator.next());
-		}		
+		}
 		return table().with(getRows14());
 	}
-	
+
 	private ContainerTag buildOneTableKeyPopn(Iterator<DataSet> iterator) {
-		   buildPopulationSummaryTable();
+		buildPopulationSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicatorKeyPopn(iterator.next());
-		}		
+		}
 		return table().with(getRows4());
 	}
-	
+
 	private ContainerTag buildOneTableKeyPopnBySingleRow(Iterator<DataSet> iterator) {
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicatorKeyPopnSingleRow(iterator.next());
-		}		
+		}
 		return table().with(getRows3());
 	}
-	
+
 	private ContainerTag buildOneCtxTable(Iterator<DataSet> iterator) {
-		    buildCtxSummaryTable();
-		    buildCtxGenderSummaryTable();
+		buildCtxSummaryTable();
+		buildCtxGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildCtxIndicator(iterator.next());
-		}		
+		}
 		return table().with(getRows8());
 	}
-	
+
 	private ContainerTag buildOneTableForActivePatientsByRegimenLines(Iterator<DataSet> iterator) {
-	    buildRegimeLinesSummaryTable();
-	    buildRegimensLineGenderSummaryTable();
-	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
-		buildRegimensLineIndicator(iterator.next());
-	}		
-	return table().with(getRows11());
- }
-	
+		buildRegimeLinesSummaryTable();
+		buildRegimensLineGenderSummaryTable();
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildRegimensLineIndicator(iterator.next());
+		}
+		return table().with(getRows11());
+	}
+
 	private ContainerTag buildOneTbTable(Iterator<DataSet> iterator) {
-		 buildTbSummaryTable();
-	     buildTbGenderSummaryTable();
-	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
-		buildTbIndicator(iterator.next());
-	}		
-	return table().with(getRows7());
-   }
-	
+		buildTbSummaryTable();
+		buildTbGenderSummaryTable();
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildTbIndicator(iterator.next());
+		}
+		return table().with(getRows7());
+	}
+
 	private ContainerTag buildOneTableForActivePatientsOverMonths(Iterator<DataSet> iterator) {
-		 buildPatientSummaryOverMonthsTable();
-		 buildTbGenderSummaryTableOverMonhs();
-	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
-		buildIndicatorFotArvPatientsOverMonths(iterator.next());
-	}		
-	return table().with(getRows9());
-  }
-	
+		buildPatientSummaryOverMonthsTable();
+		buildTbGenderSummaryTableOverMonhs();
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildIndicatorFotArvPatientsOverMonths(iterator.next());
+		}
+		return table().with(getRows9());
+	}
+
 	private ContainerTag buildOneTableForActivePatientsWithAtleastOneFollowUpVist(Iterator<DataSet> iterator) {
 		buildPatientSummaryTableForFollowUpVist();
-		 buildTbGenderSummaryTableOverMonhs();
-	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
-		buildIndicatorFotArvPatientsOverMonths(iterator.next());
-	}		
-	return table().with(getRows9());
- }
-	
+		buildTbGenderSummaryTableOverMonhs();
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildIndicatorFotArvPatientsOverMonths(iterator.next());
+		}
+		return table().with(getRows9());
+	}
+
 	private ContainerTag buildOne14By4Table(Iterator<DataSet> iterator) {
-		 buildTbSummaryTable();
-	     buildTbGenderSummaryTable();
-	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
-		buildIndicator14By4(iterator.next());
-	}		
-	return table().with(getRows7());
-  }
-	
+		buildTbSummaryTable();
+		buildTbGenderSummaryTable();
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildIndicator14By4(iterator.next());
+		}
+		return table().with(getRows7());
+	}
+
 	private ContainerTag buildOneTbDiagnosisTestTable(Iterator<DataSet> iterator) {
 		buildTbDiagnosisTestSummaryTable();
-	for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
-		buildTbDagnosisTestIndicator(iterator.next());
-	}		
-	return table().with(getRows2());
-  }
-	
-	
+		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
+			buildTbDagnosisTestIndicator(iterator.next());
+		}
+		return table().with(getRows2());
+	}
+
 	private ContainerTag buildOneTableforCervicalCancerStatus(Iterator<DataSet> iterator) {
 		buildCancerSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicatorCervicalCancerStatus(iterator.next());
-		}		
+		}
 		return table().with(getRows6());
 	}
-	
+
 	private ContainerTag buildOneTableforCervicalCancerTreatment(Iterator<DataSet> iterator) {
 		buildCancerTreatmentSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicatorCervicalCancerTreatment(iterator.next());
-		}		
+		}
 		return table().with(getRows6());
 	}
-	
-	private ContainerTag buildOneTableFamillyPlanning(Iterator<DataSet> iterator) {		   
-		   buildFpMethodSummaryTable();
-		   buildFpGenderSummaryTable();
+
+	private ContainerTag buildOneTableFamillyPlanning(Iterator<DataSet> iterator) {
+		buildFpMethodSummaryTable();
+		buildFpGenderSummaryTable();
 		for (int i = 0; i < numberOfIndicatorsInOneTable && iterator.hasNext(); ++i) {
 			buildIndicatorFamilyPlanning(iterator.next());
-		}		
+		}
 		return table().with(getRows13());
 	}
-	
+
 	private void buildGenderSummaryTable() {
 		fillEmptyRow(getRows5()[0], 1);
 		fillEmptyRow(getRows5()[1], 1);
@@ -582,9 +604,8 @@ public class PnlsReportBuilder  extends UiUtils{
 		ContainerTag Subtotal = getRows5()[4];
 		maleLabel.with(th(translateLabel("Males")).withClass("label"));
 		femaleLable.with(th(translateLabel("FeMales")).withClass("label"));
-		Subtotal.with(th(translateLabel("Subtotal")).withClass("label"));		
+		Subtotal.with(th(translateLabel("Subtotal")).withClass("label"));
 	}
-	
 
 	private void buildCancerSummaryTable() {
 		fillEmptyRow(getRows6()[0], 1);
@@ -595,11 +616,10 @@ public class PnlsReportBuilder  extends UiUtils{
 		ContainerTag Subtotal = getRows6()[5];
 		negative.with(th(translateLabel("negative")).withClass("label"));
 		postive.with(th(translateLabel("postive")).withClass("label"));
-		suspected .with(th(translateLabel("suspected")).withClass("label"));
-		Subtotal.with(th(translateLabel("Subtotal")).withClass("label"));		
+		suspected.with(th(translateLabel("suspected")).withClass("label"));
+		Subtotal.with(th(translateLabel("Subtotal")).withClass("label"));
 	}
-	
-	
+
 	private void buildCancerTreatmentSummaryTable() {
 		fillEmptyRow(getRows6()[0], 1);
 		fillEmptyRow(getRows6()[1], 1);
@@ -609,10 +629,10 @@ public class PnlsReportBuilder  extends UiUtils{
 		ContainerTag Subtotal = getRows6()[5];
 		negative.with(th(translateLabel("cryo")).withClass("label"));
 		postive.with(th(translateLabel("thermo")).withClass("label"));
-		suspected .with(th(translateLabel("leep")).withClass("label"));
-		Subtotal.with(th(translateLabel("Subtotal")).withClass("label"));		
+		suspected.with(th(translateLabel("leep")).withClass("label"));
+		Subtotal.with(th(translateLabel("Subtotal")).withClass("label"));
 	}
-	
+
 	private void buildPopulationSummaryTable() {
 		fillEmptyRow(getRows4()[0], 1);
 		fillEmptyRow(getRows4()[1], 1);
@@ -621,7 +641,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		newEnroll.with(th(translateLabel("NewPatients")).withClass("label"));
 		reffrenced.with(th(translateLabel("Referenced")).withClass("label"));
 	}
-	
+
 	private void buildCtxSummaryTable() {
 		fillEmptyRow(getRows8()[0], 1);
 		fillEmptyRow(getRows8()[1], 1);
@@ -634,8 +654,8 @@ public class PnlsReportBuilder  extends UiUtils{
 		newTotal.with(th(translateLabel("Total")).withClass("label"));
 		activeTotal.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
-	private void  buildRegimeLinesSummaryTable() {
+
+	private void buildRegimeLinesSummaryTable() {
 		fillEmptyRow(getRows11()[0], 1);
 		fillEmptyRow(getRows11()[1], 1);
 		ContainerTag regime1 = getRows11()[2];
@@ -651,7 +671,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		regime2Total.with(th(translateLabel("Total")).withClass("label"));
 		regime3Total.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
+
 	private void buildTbSummaryTable() {
 		fillEmptyRow(getRows7()[0], 1);
 		fillEmptyRow(getRows7()[1], 1);
@@ -662,7 +682,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		AlreadyTb.with(th(translateLabel("alreadyTb")).attr("rowspan", "2").withClass("label"));
 		Total.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
+
 	private void buildPatientSummaryOverMonthsTable() {
 		fillEmptyRow(getRows9()[0], 1);
 		fillEmptyRow(getRows9()[1], 1);
@@ -675,7 +695,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		over5Months.with(th(translateLabel("over5M")).attr("rowspan", "2").withClass("label"));
 		Total.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
+
 	private void buildPatientSummaryTableForFollowUpVist() {
 		fillEmptyRow(getRows9()[0], 1);
 		fillEmptyRow(getRows9()[1], 1);
@@ -685,16 +705,18 @@ public class PnlsReportBuilder  extends UiUtils{
 		ContainerTag Total = getRows9()[8];
 		qauterly.with(th(translateLabel("quaterly")).attr("rowspan", "2").withClass("label"));
 		semiAnnually.with(th(translateLabel("semiAnualy")).attr("rowspan", "2").withClass("label"));
-		 annually .with(th(translateLabel("annualy")).attr("rowspan", "2").withClass("label"));
+		annually.with(th(translateLabel("annualy")).attr("rowspan", "2").withClass("label"));
 		Total.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
-	private void buildTbDiagnosisTestSummaryTable(){
+
+	private void buildTbDiagnosisTestSummaryTable() {
 		fillEmptyRow(getRows2()[0], 1);
 		ContainerTag diagnosisTestLable = getRows2()[1];
-		diagnosisTestLable.with(th(translateString(PnlsReportConstants.ARV_PATIENTS_WITH_SAMPLES_SENT_TO_DIAGNOSTIC_TEST_MESSAGE)).withClass("label"));
+		diagnosisTestLable
+				.with(th(translateString(PnlsReportConstants.ARV_PATIENTS_WITH_SAMPLES_SENT_TO_DIAGNOSTIC_TEST_MESSAGE))
+						.withClass("label"));
 	}
-	
+
 	private void buildNotEnrolledReasonSummaryTable() {
 		fillEmptyRow(getRows14()[0], 1);
 		fillEmptyRow(getRows14()[1], 1);
@@ -711,9 +733,9 @@ public class PnlsReportBuilder  extends UiUtils{
 		D.with(th(translateLabel("medical")).attr("rowspan", "2").withClass("label"));
 		E.with(th(translateLabel("refered")).attr("rowspan", "2").withClass("label"));
 		F.with(th(translateLabel("other")).attr("rowspan", "2").withClass("label"));
-		Subtotal.with(th(translateLabel("Total")).withClass("label"));		
+		Subtotal.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
+
 	private void buildFpMethodSummaryTable() {
 		fillEmptyRow(getRows13()[0], 1);
 		fillEmptyRow(getRows13()[1], 1);
@@ -732,11 +754,11 @@ public class PnlsReportBuilder  extends UiUtils{
 		vagTabs.with(th(translateLabel("vagTabs")).attr("rowspan", "1").withClass("label"));
 		lam.with(th(translateLabel("lam")).attr("rowspan", "1").withClass("label"));
 		necklace.with(th(translateLabel("necklace")).attr("rowspan", "1").withClass("label"));
-		condom .with(th(translateLabel("condom")).attr("rowspan", "2").withClass("label"));		
+		condom.with(th(translateLabel("condom")).attr("rowspan", "2").withClass("label"));
 		ccv.with(th(translateLabel("ccv")).attr("rowspan", "2").withClass("label"));
-		Subtotal.with(th(translateLabel("Total")).withClass("label"));			
+		Subtotal.with(th(translateLabel("Total")).withClass("label"));
 	}
-	
+
 	private void buildNotEnrolledGenderSummaryTable() {
 		fillEmptyRow(getRows14()[0], 1);
 		fillEmptyRow(getRows14()[1], 1);
@@ -767,7 +789,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		FF.with(th("F").withClass("label"));
 		T.with(th(".").withClass("label"));
 	}
-	
+
 	private void buildFpGenderSummaryTable() {
 		fillEmptyRow(getRows13()[0], 1);
 		fillEmptyRow(getRows13()[1], 1);
@@ -777,14 +799,14 @@ public class PnlsReportBuilder  extends UiUtils{
 		ContainerTag MC = getRows13()[10];
 		ContainerTag FC = getRows13()[11];
 		ContainerTag T = getRows13()[12];
-		FA.with(th(translateLabel("FeMales")).attr("rowspan", "6").withClass("label"));	
+		FA.with(th(translateLabel("FeMales")).attr("rowspan", "6").withClass("label"));
 		MB.with(th(translateLabel("Males")).withClass("label"));
 		FB.with(th(translateLabel("FeMales")).withClass("label"));
 		MC.with(th(translateLabel("Males")).withClass("label"));
 		FC.with(th(translateLabel("FeMales")).withClass("label"));
 		T.with(th(".").withClass("label"));
 	}
-	
+
 	private void buildCtxGenderSummaryTable() {
 		fillEmptyRow(getRows8()[0], 1);
 		fillEmptyRow(getRows8()[1], 1);
@@ -801,7 +823,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		E1.with(th(".").withClass("label"));
 		E2.with(th(".").withClass("label"));
 	}
-	
+
 	private void buildRegimensLineGenderSummaryTable() {
 		fillEmptyRow(getRows11()[0], 1);
 		fillEmptyRow(getRows11()[1], 1);
@@ -824,7 +846,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		E2.with(th(".").withClass("label"));
 		E3.with(th(".").withClass("label"));
 	}
-	
+
 	private void buildTbGenderSummaryTable() {
 		fillEmptyRow(getRows7()[0], 1);
 		fillEmptyRow(getRows7()[1], 1);
@@ -839,7 +861,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		FB.with(th("F").withClass("label"));
 		E2.with(th(".").withClass("label"));
 	}
-	
+
 	private void buildTbGenderSummaryTableOverMonhs() {
 		fillEmptyRow(getRows9()[0], 1);
 		fillEmptyRow(getRows9()[1], 1);
@@ -858,641 +880,692 @@ public class PnlsReportBuilder  extends UiUtils{
 		FC.with(th("F").withClass("label"));
 		E2.with(th(".").withClass("label"));
 	}
-				
+
 	private void buildIndicator14By14(DataSet data) {
-		getRows14()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
+		getRows14()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
 		getRows14()[1].with(td(translateLabel("1-0")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("5-9")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("10-14")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getColumnNamesList14By14(),data);
+				td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("5-9")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("10-14")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getColumnNamesList14By14(), data);
 		String reportName = data.getDefinition().getName();
-		buildSummary14By14(dataSet ,getColumnNamesArray14By14(),reportName );
+		buildSummary14By14(dataSet, getColumnNamesArray14By14(), reportName);
 		final int ROW = 14;
-		populateTable14WithSum(ROW, dataSet[0],dataSet[14],dataSet[28],dataSet[42],dataSet[56],dataSet[70],dataSet[84],dataSet[98],dataSet[112],dataSet[126],dataSet[140],dataSet[154] );
-		populateTable14WithSum(ROW, dataSet[1],dataSet[15],dataSet[29],dataSet[43],dataSet[57],dataSet[71],dataSet[85],dataSet[99],dataSet[113],dataSet[127],dataSet[141],dataSet[155] );
-		populateTable14WithSum(ROW, dataSet[2],dataSet[16],dataSet[30],dataSet[44],dataSet[58],dataSet[72],dataSet[86],dataSet[100],dataSet[114],dataSet[128] ,dataSet[142],dataSet[156]);
-		populateTable14WithSum(ROW, dataSet[3],dataSet[17],dataSet[31],dataSet[45],dataSet[59],dataSet[73],dataSet[87],dataSet[101],dataSet[115],dataSet[129],dataSet[143],dataSet[157] );
-		populateTable14WithSum(ROW, dataSet[4],dataSet[18],dataSet[32],dataSet[46],dataSet[60],dataSet[74],dataSet[88],dataSet[102],dataSet[116],dataSet[130] ,dataSet[144],dataSet[158]);
-		populateTable14WithSum(ROW, dataSet[5],dataSet[19],dataSet[33],dataSet[47],dataSet[61],dataSet[75],dataSet[89],dataSet[103],dataSet[117],dataSet[131],dataSet[145],dataSet[159]);
-		populateTable14WithSum(ROW, dataSet[6],dataSet[20],dataSet[34],dataSet[48],dataSet[62],dataSet[76],dataSet[90],dataSet[104],dataSet[118],dataSet[132],dataSet[146],dataSet[160] );
-		populateTable14WithSum(ROW, dataSet[7],dataSet[21],dataSet[35],dataSet[49],dataSet[63],dataSet[77],dataSet[91],dataSet[105],dataSet[119],dataSet[133] ,dataSet[147],dataSet[161]);
-		populateTable14WithSum(ROW, dataSet[8],dataSet[22],dataSet[36],dataSet[50],dataSet[64],dataSet[78],dataSet[92],dataSet[106],dataSet[120],dataSet[134] ,dataSet[148],dataSet[162]);
-		populateTable14WithSum(ROW, dataSet[9],dataSet[23],dataSet[37],dataSet[51],dataSet[65],dataSet[79],dataSet[93],dataSet[107],dataSet[121],dataSet[135] ,dataSet[149],dataSet[163]);
-		populateTable14WithSum(ROW, dataSet[10],dataSet[24],dataSet[38],dataSet[52],dataSet[66],dataSet[80],dataSet[94],dataSet[108],dataSet[122],dataSet[136],dataSet[150],dataSet[164] );
-		populateTable14WithSum(ROW, dataSet[11],dataSet[25],dataSet[39],dataSet[53],dataSet[67],dataSet[81],dataSet[95],dataSet[109],dataSet[123],dataSet[137] ,dataSet[151],dataSet[165]);
-		populateTable14WithSum(ROW, dataSet[12],dataSet[26],dataSet[40],dataSet[54],dataSet[68],dataSet[82],dataSet[96],dataSet[110],dataSet[124],dataSet[138] ,dataSet[152],dataSet[166]);
-		populateTable14WithSum(ROW, dataSet[13],dataSet[27],dataSet[41],dataSet[55],dataSet[69],dataSet[83],dataSet[97],dataSet[111],dataSet[125],dataSet[139] ,dataSet[153],dataSet[167]);
-				
+		populateTable14WithSum(ROW, dataSet[0], dataSet[14], dataSet[28], dataSet[42], dataSet[56], dataSet[70],
+				dataSet[84], dataSet[98], dataSet[112], dataSet[126], dataSet[140], dataSet[154]);
+		populateTable14WithSum(ROW, dataSet[1], dataSet[15], dataSet[29], dataSet[43], dataSet[57], dataSet[71],
+				dataSet[85], dataSet[99], dataSet[113], dataSet[127], dataSet[141], dataSet[155]);
+		populateTable14WithSum(ROW, dataSet[2], dataSet[16], dataSet[30], dataSet[44], dataSet[58], dataSet[72],
+				dataSet[86], dataSet[100], dataSet[114], dataSet[128], dataSet[142], dataSet[156]);
+		populateTable14WithSum(ROW, dataSet[3], dataSet[17], dataSet[31], dataSet[45], dataSet[59], dataSet[73],
+				dataSet[87], dataSet[101], dataSet[115], dataSet[129], dataSet[143], dataSet[157]);
+		populateTable14WithSum(ROW, dataSet[4], dataSet[18], dataSet[32], dataSet[46], dataSet[60], dataSet[74],
+				dataSet[88], dataSet[102], dataSet[116], dataSet[130], dataSet[144], dataSet[158]);
+		populateTable14WithSum(ROW, dataSet[5], dataSet[19], dataSet[33], dataSet[47], dataSet[61], dataSet[75],
+				dataSet[89], dataSet[103], dataSet[117], dataSet[131], dataSet[145], dataSet[159]);
+		populateTable14WithSum(ROW, dataSet[6], dataSet[20], dataSet[34], dataSet[48], dataSet[62], dataSet[76],
+				dataSet[90], dataSet[104], dataSet[118], dataSet[132], dataSet[146], dataSet[160]);
+		populateTable14WithSum(ROW, dataSet[7], dataSet[21], dataSet[35], dataSet[49], dataSet[63], dataSet[77],
+				dataSet[91], dataSet[105], dataSet[119], dataSet[133], dataSet[147], dataSet[161]);
+		populateTable14WithSum(ROW, dataSet[8], dataSet[22], dataSet[36], dataSet[50], dataSet[64], dataSet[78],
+				dataSet[92], dataSet[106], dataSet[120], dataSet[134], dataSet[148], dataSet[162]);
+		populateTable14WithSum(ROW, dataSet[9], dataSet[23], dataSet[37], dataSet[51], dataSet[65], dataSet[79],
+				dataSet[93], dataSet[107], dataSet[121], dataSet[135], dataSet[149], dataSet[163]);
+		populateTable14WithSum(ROW, dataSet[10], dataSet[24], dataSet[38], dataSet[52], dataSet[66], dataSet[80],
+				dataSet[94], dataSet[108], dataSet[122], dataSet[136], dataSet[150], dataSet[164]);
+		populateTable14WithSum(ROW, dataSet[11], dataSet[25], dataSet[39], dataSet[53], dataSet[67], dataSet[81],
+				dataSet[95], dataSet[109], dataSet[123], dataSet[137], dataSet[151], dataSet[165]);
+		populateTable14WithSum(ROW, dataSet[12], dataSet[26], dataSet[40], dataSet[54], dataSet[68], dataSet[82],
+				dataSet[96], dataSet[110], dataSet[124], dataSet[138], dataSet[152], dataSet[166]);
+		populateTable14WithSum(ROW, dataSet[13], dataSet[27], dataSet[41], dataSet[55], dataSet[69], dataSet[83],
+				dataSet[97], dataSet[111], dataSet[125], dataSet[139], dataSet[153], dataSet[167]);
+
 	}
-	
+
 	private void buildIndicator14By3(DataSet data) {
-		getRows5()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
+		getRows5()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
 		getRows5()[1].with(td(translateLabel("1-0")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("5-9")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("10-14")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getColumnNamesList14By3() ,data);
+				td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("5-9")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("10-14")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getColumnNamesList14By3(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary14By3(dataSet ,getColumnNamesArray14By3(),reportName );	
+		buildIndicatorSummary14By3(dataSet, getColumnNamesArray14By3(), reportName);
 	}
-	
+
 	private void buildIndicatorCervicalCancerStatus(DataSet data) {
-		getRows6()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "10").withClass("indicatorLabel"));
-		getRows6()[1].with( td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getwomenCancerStatusColumnNamesList() ,data);
+		getRows6()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "10").withClass("indicatorLabel"));
+		getRows6()[1].with(td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getwomenCancerStatusColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary10By4(dataSet ,getwomenCancerStatusColumnNamesArray(),reportName );	
+		buildIndicatorSummary10By4(dataSet, getwomenCancerStatusColumnNamesArray(), reportName);
 	}
-	
+
 	private void buildIndicatorCervicalCancerTreatment(DataSet data) {
-		getRows6()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "10").withClass("indicatorLabel"));
-		getRows6()[1].with( td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getwomenCancerTreatmentColumnNamesList() ,data);
+		getRows6()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "10").withClass("indicatorLabel"));
+		getRows6()[1].with(td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getwomenCancerTreatmentColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorTreatmentSummary(dataSet ,getwomenCancerTreatmentColumnNamesArray(),reportName );	
+		buildIndicatorTreatmentSummary(dataSet, getwomenCancerTreatmentColumnNamesArray(), reportName);
 		final int ROW = 5;
-		populateTable6WithSum(ROW, dataSet[0],dataSet[10],dataSet[20] );
-		populateTable6WithSum(ROW, dataSet[1],dataSet[11],dataSet[21] );
-		populateTable6WithSum(ROW, dataSet[2],dataSet[12],dataSet[22] );
-		populateTable6WithSum(ROW, dataSet[3],dataSet[13],dataSet[23] );
-		populateTable6WithSum(ROW, dataSet[4],dataSet[14],dataSet[24] );
-		populateTable6WithSum(ROW, dataSet[5],dataSet[15],dataSet[25] );
-		populateTable6WithSum(ROW, dataSet[6],dataSet[16],dataSet[26] );
-		populateTable6WithSum(ROW, dataSet[7],dataSet[17],dataSet[27] );
-		populateTable6WithSum(ROW, dataSet[8],dataSet[18],dataSet[28] );
-		populateTable6WithSum(ROW, dataSet[9],dataSet[19],dataSet[29] );
-		
+		populateTable6WithSum(ROW, dataSet[0], dataSet[10], dataSet[20]);
+		populateTable6WithSum(ROW, dataSet[1], dataSet[11], dataSet[21]);
+		populateTable6WithSum(ROW, dataSet[2], dataSet[12], dataSet[22]);
+		populateTable6WithSum(ROW, dataSet[3], dataSet[13], dataSet[23]);
+		populateTable6WithSum(ROW, dataSet[4], dataSet[14], dataSet[24]);
+		populateTable6WithSum(ROW, dataSet[5], dataSet[15], dataSet[25]);
+		populateTable6WithSum(ROW, dataSet[6], dataSet[16], dataSet[26]);
+		populateTable6WithSum(ROW, dataSet[7], dataSet[17], dataSet[27]);
+		populateTable6WithSum(ROW, dataSet[8], dataSet[18], dataSet[28]);
+		populateTable6WithSum(ROW, dataSet[9], dataSet[19], dataSet[29]);
+
 	}
-	
+
 	private void buildIndicatorFamilyPlanning(DataSet data) {
-		getRows13()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "10").withClass("indicatorLabel"));
-		getRows13()[1].with( td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getFamilyPlanningColumnNamesList() ,data);
+		getRows13()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "10").withClass("indicatorLabel"));
+		getRows13()[1].with(td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getFamilyPlanningColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorFamillyPlanningSummary(dataSet ,getFamilyPlanningColumnNamesArray(),reportName );
+		buildIndicatorFamillyPlanningSummary(dataSet, getFamilyPlanningColumnNamesArray(), reportName);
 		final int ROW = 12;
-		populateTable13WithSum(ROW, dataSet[0],dataSet[10],dataSet[20],dataSet[30],dataSet[40],dataSet[50],dataSet[60],dataSet[70],dataSet[80],dataSet[90] );
-		populateTable13WithSum(ROW, dataSet[1],dataSet[11],dataSet[21],dataSet[31],dataSet[41],dataSet[51],dataSet[61],dataSet[71],dataSet[81],dataSet[91] );
-		populateTable13WithSum(ROW, dataSet[2],dataSet[12],dataSet[22],dataSet[32],dataSet[42],dataSet[52],dataSet[62],dataSet[72],dataSet[82],dataSet[92] );
-		populateTable13WithSum(ROW, dataSet[3],dataSet[13],dataSet[23],dataSet[33],dataSet[43],dataSet[53],dataSet[63],dataSet[73],dataSet[83],dataSet[93] );
-		populateTable13WithSum(ROW, dataSet[4],dataSet[14],dataSet[24],dataSet[34],dataSet[44],dataSet[54],dataSet[64],dataSet[74],dataSet[84],dataSet[94] );
-		populateTable13WithSum(ROW, dataSet[5],dataSet[15],dataSet[25],dataSet[35],dataSet[45],dataSet[55],dataSet[65],dataSet[75],dataSet[85],dataSet[95] );
-		populateTable13WithSum(ROW, dataSet[6],dataSet[16],dataSet[26],dataSet[36],dataSet[46],dataSet[56],dataSet[66],dataSet[76],dataSet[86],dataSet[96] );
-		populateTable13WithSum(ROW, dataSet[7],dataSet[17],dataSet[27],dataSet[37],dataSet[47],dataSet[57],dataSet[67],dataSet[77],dataSet[87],dataSet[97] );
-		populateTable13WithSum(ROW, dataSet[8],dataSet[18],dataSet[28],dataSet[38],dataSet[48],dataSet[58],dataSet[68],dataSet[78],dataSet[88],dataSet[98] );
-		populateTable13WithSum(ROW, dataSet[9],dataSet[19],dataSet[29],dataSet[39],dataSet[49],dataSet[59],dataSet[69],dataSet[79],dataSet[89],dataSet[99] );		
+		populateTable13WithSum(ROW, dataSet[0], dataSet[10], dataSet[20], dataSet[30], dataSet[40], dataSet[50],
+				dataSet[60], dataSet[70], dataSet[80], dataSet[90]);
+		populateTable13WithSum(ROW, dataSet[1], dataSet[11], dataSet[21], dataSet[31], dataSet[41], dataSet[51],
+				dataSet[61], dataSet[71], dataSet[81], dataSet[91]);
+		populateTable13WithSum(ROW, dataSet[2], dataSet[12], dataSet[22], dataSet[32], dataSet[42], dataSet[52],
+				dataSet[62], dataSet[72], dataSet[82], dataSet[92]);
+		populateTable13WithSum(ROW, dataSet[3], dataSet[13], dataSet[23], dataSet[33], dataSet[43], dataSet[53],
+				dataSet[63], dataSet[73], dataSet[83], dataSet[93]);
+		populateTable13WithSum(ROW, dataSet[4], dataSet[14], dataSet[24], dataSet[34], dataSet[44], dataSet[54],
+				dataSet[64], dataSet[74], dataSet[84], dataSet[94]);
+		populateTable13WithSum(ROW, dataSet[5], dataSet[15], dataSet[25], dataSet[35], dataSet[45], dataSet[55],
+				dataSet[65], dataSet[75], dataSet[85], dataSet[95]);
+		populateTable13WithSum(ROW, dataSet[6], dataSet[16], dataSet[26], dataSet[36], dataSet[46], dataSet[56],
+				dataSet[66], dataSet[76], dataSet[86], dataSet[96]);
+		populateTable13WithSum(ROW, dataSet[7], dataSet[17], dataSet[27], dataSet[37], dataSet[47], dataSet[57],
+				dataSet[67], dataSet[77], dataSet[87], dataSet[97]);
+		populateTable13WithSum(ROW, dataSet[8], dataSet[18], dataSet[28], dataSet[38], dataSet[48], dataSet[58],
+				dataSet[68], dataSet[78], dataSet[88], dataSet[98]);
+		populateTable13WithSum(ROW, dataSet[9], dataSet[19], dataSet[29], dataSet[39], dataSet[49], dataSet[59],
+				dataSet[69], dataSet[79], dataSet[89], dataSet[99]);
 	}
-	
+
 	private void buildIndicator14By4(DataSet data) {
-		getRows7()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
+		getRows7()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
 		getRows7()[1].with(td(translateLabel("1-0")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("5-9")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("10-14")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getColumnNamesList14By4() ,data);
+				td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("5-9")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("10-14")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getColumnNamesList14By4(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary14By4(dataSet ,getColumnNamesArray14By4(),reportName );
+		buildIndicatorSummary14By4(dataSet, getColumnNamesArray14By4(), reportName);
 		final int ROW = 6;
-		populateTable7WithSum(ROW ,dataSet[0],dataSet[14], dataSet[28] , dataSet [42]);
-		populateTable7WithSum(ROW ,dataSet[1],dataSet[15], dataSet[29] , dataSet [43]);
-		populateTable7WithSum(ROW ,dataSet[2],dataSet[16], dataSet[30] , dataSet [44]);
-		populateTable7WithSum(ROW ,dataSet[3],dataSet[17], dataSet[31] , dataSet [45]);
-		populateTable7WithSum(ROW ,dataSet[4],dataSet[18], dataSet[32] , dataSet [46]);
-		populateTable7WithSum(ROW ,dataSet[5],dataSet[19], dataSet[33] , dataSet [47]);
-		populateTable7WithSum(ROW ,dataSet[6],dataSet[20], dataSet[34] , dataSet [48]);
-		populateTable7WithSum(ROW ,dataSet[7],dataSet[21], dataSet[35] , dataSet [49]);
-		populateTable7WithSum(ROW ,dataSet[8],dataSet[22], dataSet[36] , dataSet [50]);
-		populateTable7WithSum(ROW ,dataSet[9],dataSet[23], dataSet[37] , dataSet [51]);
-		populateTable7WithSum(ROW ,dataSet[10],dataSet[24], dataSet[38] , dataSet [52]);
-		populateTable7WithSum(ROW ,dataSet[11],dataSet[25], dataSet[39] , dataSet [53]);
-		populateTable7WithSum(ROW ,dataSet[12],dataSet[26], dataSet[40] , dataSet [54]);
-		populateTable7WithSum(ROW ,dataSet[13],dataSet[27], dataSet[41] , dataSet [55]);
+		populateTable7WithSum(ROW, dataSet[0], dataSet[14], dataSet[28], dataSet[42]);
+		populateTable7WithSum(ROW, dataSet[1], dataSet[15], dataSet[29], dataSet[43]);
+		populateTable7WithSum(ROW, dataSet[2], dataSet[16], dataSet[30], dataSet[44]);
+		populateTable7WithSum(ROW, dataSet[3], dataSet[17], dataSet[31], dataSet[45]);
+		populateTable7WithSum(ROW, dataSet[4], dataSet[18], dataSet[32], dataSet[46]);
+		populateTable7WithSum(ROW, dataSet[5], dataSet[19], dataSet[33], dataSet[47]);
+		populateTable7WithSum(ROW, dataSet[6], dataSet[20], dataSet[34], dataSet[48]);
+		populateTable7WithSum(ROW, dataSet[7], dataSet[21], dataSet[35], dataSet[49]);
+		populateTable7WithSum(ROW, dataSet[8], dataSet[22], dataSet[36], dataSet[50]);
+		populateTable7WithSum(ROW, dataSet[9], dataSet[23], dataSet[37], dataSet[51]);
+		populateTable7WithSum(ROW, dataSet[10], dataSet[24], dataSet[38], dataSet[52]);
+		populateTable7WithSum(ROW, dataSet[11], dataSet[25], dataSet[39], dataSet[53]);
+		populateTable7WithSum(ROW, dataSet[12], dataSet[26], dataSet[40], dataSet[54]);
+		populateTable7WithSum(ROW, dataSet[13], dataSet[27], dataSet[41], dataSet[55]);
 	}
-	
-	
+
 	private void buildCtxIndicator(DataSet data) {
-		getRows8()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
+		getRows8()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
 		getRows8()[1].with(td(translateLabel("1-0")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("5-9")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("10-14")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getCtxColumnNamesList() ,data);
+				td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("5-9")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("10-14")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getCtxColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary14By6(dataSet ,getCtxColumnNamesArray(),reportName );	
+		buildIndicatorSummary14By6(dataSet, getCtxColumnNamesArray(), reportName);
 	}
-	
+
 	private void buildRegimensLineIndicator(DataSet data) {
-		getRows11()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
+		getRows11()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "14").withClass("indicatorLabel"));
 		getRows11()[1].with(td(translateLabel("1-0")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("5-9")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("10-14")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("15-19")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("20-24")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("25-29")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("30-34")) .attr("colspan", "1").withClass("label"),                  
-                          td(translateLabel("35-39")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("40-44")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("45-49")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("50")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getActivePatientRegimenLinesColumnNamesList() ,data);
+				td(translateLabel("1-4")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("5-9")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("10-14")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("15-19")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("20-24")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("25-29")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("30-34")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("35-39")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("40-44")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("45-49")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("50")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getActivePatientRegimenLinesColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary14By9(dataSet ,getActivePatientRegimenLinesColumnNamesArray(),reportName );	
+		buildIndicatorSummary14By9(dataSet, getActivePatientRegimenLinesColumnNamesArray(), reportName);
 	}
-	
+
 	private void buildTbIndicator(DataSet data) {
-		getRows7()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
+		getRows7()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
 		getRows7()[1].with(td(translateLabel("<15")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getAgeBy15ColumnNamesList() ,data);
+				td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getAgeBy15ColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary4By5(dataSet ,getAgeBy15ColumnNamesArray(),reportName );
+		buildIndicatorSummary4By5(dataSet, getAgeBy15ColumnNamesArray(), reportName);
 		final int ROW = 6;
-		populateTable7WithSum(ROW ,dataSet[0],dataSet[4], dataSet[8] , dataSet [12]);
-		populateTable7WithSum(ROW ,dataSet[1],dataSet[5], dataSet[9] , dataSet [13]);
-		populateTable7WithSum(ROW ,dataSet[2],dataSet[6], dataSet[10] , dataSet [14]);
-		populateTable7WithSum(ROW ,dataSet[3],dataSet[7], dataSet[11] , dataSet [15]);
+		populateTable7WithSum(ROW, dataSet[0], dataSet[4], dataSet[8], dataSet[12]);
+		populateTable7WithSum(ROW, dataSet[1], dataSet[5], dataSet[9], dataSet[13]);
+		populateTable7WithSum(ROW, dataSet[2], dataSet[6], dataSet[10], dataSet[14]);
+		populateTable7WithSum(ROW, dataSet[3], dataSet[7], dataSet[11], dataSet[15]);
 	}
-	
+
 	private void buildIndicatorFotArvPatientsOverMonths(DataSet data) {
-		getRows9()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
+		getRows9()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
 		getRows9()[1].with(td(translateLabel("<15")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getColumnNamesList4By7() ,data);
+				td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getColumnNamesList4By7(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary4By7(dataSet ,getColumnNamesArray4By7(),reportName );
+		buildIndicatorSummary4By7(dataSet, getColumnNamesArray4By7(), reportName);
 		final int ROW = 8;
-		populateTable9WithSum(ROW ,dataSet[0],dataSet[4], dataSet[8] , dataSet [12], dataSet [16], dataSet [20]);
-		populateTable9WithSum(ROW ,dataSet[1],dataSet[5], dataSet[9] , dataSet [13], dataSet [17], dataSet [21]);
-		populateTable9WithSum(ROW ,dataSet[2],dataSet[6], dataSet[10] , dataSet [14], dataSet [18], dataSet [22]);
-		populateTable9WithSum(ROW ,dataSet[3],dataSet[7], dataSet[11] , dataSet [15], dataSet [19], dataSet [23]);
-		
+		populateTable9WithSum(ROW, dataSet[0], dataSet[4], dataSet[8], dataSet[12], dataSet[16], dataSet[20]);
+		populateTable9WithSum(ROW, dataSet[1], dataSet[5], dataSet[9], dataSet[13], dataSet[17], dataSet[21]);
+		populateTable9WithSum(ROW, dataSet[2], dataSet[6], dataSet[10], dataSet[14], dataSet[18], dataSet[22]);
+		populateTable9WithSum(ROW, dataSet[3], dataSet[7], dataSet[11], dataSet[15], dataSet[19], dataSet[23]);
+
 	}
-	
+
 	private void buildIndicator4By3(DataSet data) {
-		getRows5()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
+		getRows5()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "4").withClass("indicatorLabel"));
 		getRows5()[1].with(td(translateLabel("<15")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
-                          td(translateLabel("UnKnown")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getColumnNamesList4By3() ,data);
+				td(translateLabel(">15")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("UnKnown")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getColumnNamesList4By3(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummary4By3(dataSet ,getColumnNamesArray4By3(),reportName );
+		buildIndicatorSummary4By3(dataSet, getColumnNamesArray4By3(), reportName);
 	}
-	
+
 	private void buildTbDagnosisTestIndicator(DataSet data) {
 		getRows2()[0].with(td(translateLabel("CrachatTest")).attr("colspan", "1").withClass("label"),
-			              td(translateLabel("geneExpertTest")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("OtherTest")).attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;
-				
-		int[] dataSet = createSummaryArray(getArvPatientsByTbDiagnosisTestColumnNamesList() ,data);
+				td(translateLabel("geneExpertTest")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("OtherTest")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+
+		int[] dataSet = createSummaryArray(getArvPatientsByTbDiagnosisTestColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
 		final int ROW1 = 1;
 		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		String row1 =  ConstructUrl(reportUrl ,reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[0]);
-		String row2 =  ConstructUrl(reportUrl ,reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[1]);
-		String row3 =  ConstructUrl(reportUrl ,reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[2]);
+		String row1 = ConstructUrl(reportUrl, reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[0]);
+		String row2 = ConstructUrl(reportUrl, reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[1]);
+		String row3 = ConstructUrl(reportUrl, reportName, getArvPatientsByTbDiagnosisTestColumnNamesArray()[2]);
 
-		populateTable2(ROW1, dataSet[0],row1);
-		populateTable2(ROW1, dataSet[1],row2);
-		populateTable2(ROW1, dataSet[2],row3);
-		getRows2()[ROW1].with(td(Integer.toString(dataSet[0]+ dataSet[1] + dataSet[2])));
+		populateTable2(ROW1, dataSet[0], row1);
+		populateTable2(ROW1, dataSet[1], row2);
+		populateTable2(ROW1, dataSet[2], row3);
+		getRows2()[ROW1].with(td(Integer.toString(dataSet[0] + dataSet[1] + dataSet[2])));
 	}
-	
-	
+
 	private void buildIndicatorKeyPopn(DataSet data) {
-		getRows4()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "6").withClass("indicatorLabel"));
+		getRows4()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "6").withClass("indicatorLabel"));
 		getRows4()[1].with(td(translateLabel("msm")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("sexP")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("trans")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("captv")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("drug")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;				
-		int[] dataSet = createSummaryArray(getKeyPopnColumnNamesList() ,data);
+				td(translateLabel("sexP")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("trans")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("captv")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("drug")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+		int[] dataSet = createSummaryArray(getKeyPopnColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
-		buildIndicatorSummaryKeyPopn(dataSet ,getKeyPopnColumnNamesArray(),reportName );	
+		buildIndicatorSummaryKeyPopn(dataSet, getKeyPopnColumnNamesArray(), reportName);
 	}
-	
-	private void buildIndicatorKeyPopnSingleRow(DataSet data) {
-		getRows3()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "6").withClass("indicatorLabel"));
-		getRows3()[1].with(td(translateLabel("msm")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("sexP")).attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("trans")) .attr("colspan", "1").withClass("label"),
-		                  td(translateLabel("captv")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("drug")) .attr("colspan", "1").withClass("label"),
-                          td(translateLabel("Total")) .attr("colspan", "1").withClass("label")) ;				
-		int[] dataSet = createSummaryArray(getKeyPopnSingleRowColumnNamesList() ,data);
-		String reportName = data.getDefinition().getName();
-		buildSummaryKeyPopnSingleRow(dataSet ,getKeyPopnSingleRowColumnNamesArray(),reportName );
-		populateTable(2, dataSet[0]+ dataSet[1]+ dataSet[2]+ dataSet[3] + dataSet[4] );
-	}
-	
-	private void buildIndicator1By1(DataSet data){
-		getRows2()[0].with(th(translate(data.getDefinition().getName())).attr("colspan", "1").withClass("indicatorLabel"));
 
-		int[] dataSet = createSummaryArray(getBreastFeedingColumnNamesList() ,data);
+	private void buildIndicatorKeyPopnSingleRow(DataSet data) {
+		getRows3()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "6").withClass("indicatorLabel"));
+		getRows3()[1].with(td(translateLabel("msm")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("sexP")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("trans")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("captv")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("drug")).attr("colspan", "1").withClass("label"),
+				td(translateLabel("Total")).attr("colspan", "1").withClass("label"));
+		int[] dataSet = createSummaryArray(getKeyPopnSingleRowColumnNamesList(), data);
+		String reportName = data.getDefinition().getName();
+		buildSummaryKeyPopnSingleRow(dataSet, getKeyPopnSingleRowColumnNamesArray(), reportName);
+		populateTable(2, dataSet[0] + dataSet[1] + dataSet[2] + dataSet[3] + dataSet[4]);
+	}
+
+	private void buildIndicator1By1(DataSet data) {
+		getRows2()[0]
+				.with(th(translate(data.getDefinition().getName())).attr("colspan", "1").withClass("indicatorLabel"));
+
+		int[] dataSet = createSummaryArray(getBreastFeedingColumnNamesList(), data);
 		String reportName = data.getDefinition().getName();
 		final int ROW1 = 1;
 		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
 
-		String row1 =  ConstructUrl(reportUrl ,reportName, getBreastFeedingColumnNamesArray()[0]);
-		populateTable2(ROW1, dataSet[0],row1);
-	}
-	
-	private void buildIndicatorSummary14By3(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 4 ; ROW ++) {			
-		    for (int col = 0; col <= 13 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary10By4(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 5 ; ROW ++) {			
-		    for (int col = 0; col <= 9 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable6(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorTreatmentSummary(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 4 ; ROW ++) {			
-		    for (int col = 0; col <= 9 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable6(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorFamillyPlanningSummary(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 11 ; ROW ++) {			
-		    for (int col = 0; col <= 9 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable13(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary14By4(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 5 ; ROW ++) {			
-		    for (int col = 0; col <= 13 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable7(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary14By6(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 7 ; ROW ++) {			
-		    for (int col = 0; col <= 13 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable8(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary14By9(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 10 ; ROW ++) {			
-		    for (int col = 0; col <= 13 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable11(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary4By5(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 5 ; ROW ++) {			
-		    for (int col = 0; col <= 3 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable7(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary4By7(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 7 ; ROW ++) {			
-		    for (int col = 0; col <= 3 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable9(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummary4By3(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 4 ; ROW ++) {			
-		    for (int col = 0; col <= 3 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-	private void buildIndicatorSummaryKeyPopn(int[] dataArray ,String[] columnsArray, String reportName ) {
-
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 3 ; ROW ++) {			
-		    for (int col = 0; col <= 5 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount]);
-			        populateTable4(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 	
-	}
-	
-  private void buildSummary14By14(int[] dataArray ,String[] columnsArray, String reportName ) {		
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 13 ; ROW ++) {			
-		    for (int col = 0; col <= 13 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable14By14(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 
-		
-	}
-  
-  private void buildSummaryKeyPopnSingleRow(int[] dataArray ,String[] columnsArray, String reportName ) {		
-		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
-		int colCount = 0;
-		for (int ROW = 2; ROW <= 2 ; ROW ++) {			
-		    for (int col = 0; col <= 4 ; col ++) {
-		    	 if(colCount < dataArray.length) {
-			        String row =  ConstructUrl(reportUrl ,reportName, columnsArray[colCount ]);
-			        populateTable3(ROW,dataArray[colCount ],row); 
-			        colCount ++ ;
-			    }
-			 }
-		} 
-		
-	}
-	
-	private String ConstructUrl( String reportBaseUrl , String reportName,String columnName) {
-		 return String.format("%s?savedDataSetKey=%s&savedColumnKey=%s&columnKeyType=numerator", reportBaseUrl, reportName, columnName);
-	}
-	
-	private void populateTable14By14(Integer ROW ,int data , String rowLink) {
-		getRows14()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-		
-	private void populateTable(Integer ROW ,int data , String rowLink) {
-		getRows5()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable6(Integer ROW ,int data , String rowLink) {
-		getRows6()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable8(Integer ROW ,int data , String rowLink) {
-		getRows8()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable11(Integer ROW ,int data , String rowLink) {
-		getRows11()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable7(Integer ROW ,int data , String rowLink) {
-		getRows7()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-
-	private void populateTable9(Integer ROW ,int data , String rowLink) {
-		getRows9()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable2(Integer ROW ,int data , String rowLink) {
-		getRows2()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable3(Integer ROW ,int data , String rowLink) {
-		getRows3()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable4(Integer ROW ,int data , String rowLink) {
-		getRows4()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable13(Integer ROW ,int data , String rowLink) {
-		getRows13()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick", "window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
-	}
-	
-	private void populateTable7WithSum(Integer ROW ,int data1 ,int data2 ,int data3 , int data4 ) {
-		getRows7()[ROW].with(td(Integer.toString(data1 + data2 +data3 + data4)));
-	}
-	
-	private void populateTable9WithSum(Integer ROW ,int data1 ,int data2 ,int data3 , int data4 , int data5 , int data6 ) {
-		getRows9()[ROW].with(td(Integer.toString(data1 + data2 +data3 + data4  + data5  + data6)));
-	}
-	
-	private void populateTable6WithSum(Integer ROW ,int data1 ,int data2 ,int data3  ) {
-		getRows6()[ROW].with(td(Integer.toString(data1 + data2 +data3)));
-	}
-	
-	private void populateTable13WithSum(Integer ROW ,int data1 ,int data2 ,int data3,int data4 ,int data5 ,int data6 ,int data7 ,int data8 ,int data9,int data10   ) {
-		getRows13()[ROW].with(td(Integer.toString(data1 + data2 +data3 +data4 +data5 +data6 +data7 +data8 +data9 +data10)));
+		String row1 = ConstructUrl(reportUrl, reportName, getBreastFeedingColumnNamesArray()[0]);
+		populateTable2(ROW1, dataSet[0], row1);
 	}
 
-	private void populateTable14WithSum(Integer ROW ,int data1 ,int data2 ,int data3,int data4 ,int data5 ,int data6 ,int data7 ,int data8 ,int data9,int data10 ,int data11,int data12 ) {
-		getRows14()[ROW].with(td(Integer.toString(data1 + data2 +data3 +data4 +data5 +data6 +data7 +data8 +data9 +data10 + data11 +data12)));
+	private void buildIndicatorSummary14By3(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 4; ROW++) {
+			for (int col = 0; col <= 13; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
 	}
-	
-	private void populateTable(Integer ROW , int data ) {
+
+	private void buildIndicatorSummary10By4(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 5; ROW++) {
+			for (int col = 0; col <= 9; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable6(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorTreatmentSummary(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 4; ROW++) {
+			for (int col = 0; col <= 9; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable6(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorFamillyPlanningSummary(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 11; ROW++) {
+			for (int col = 0; col <= 9; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable13(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummary14By4(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 5; ROW++) {
+			for (int col = 0; col <= 13; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable7(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummary14By6(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 7; ROW++) {
+			for (int col = 0; col <= 13; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable8(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummary14By9(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 10; ROW++) {
+			for (int col = 0; col <= 13; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable11(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummary4By5(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 5; ROW++) {
+			for (int col = 0; col <= 3; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable7(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummary4By7(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 7; ROW++) {
+			for (int col = 0; col <= 3; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable9(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummary4By3(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 4; ROW++) {
+			for (int col = 0; col <= 3; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildIndicatorSummaryKeyPopn(int[] dataArray, String[] columnsArray, String reportName) {
+
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 3; ROW++) {
+			for (int col = 0; col <= 5; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable4(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+	}
+
+	private void buildSummary14By14(int[] dataArray, String[] columnsArray, String reportName) {
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 13; ROW++) {
+			for (int col = 0; col <= 13; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable14By14(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+
+	}
+
+	private void buildSummaryKeyPopnSingleRow(int[] dataArray, String[] columnsArray, String reportName) {
+		String reportUrl = pageLink("isanteplusreports", "pnlsReportPatientList");
+		int colCount = 0;
+		for (int ROW = 2; ROW <= 2; ROW++) {
+			for (int col = 0; col <= 4; col++) {
+				if (colCount < dataArray.length) {
+					String row = ConstructUrl(reportUrl, reportName, columnsArray[colCount]);
+					populateTable3(ROW, dataArray[colCount], row);
+					colCount++;
+				}
+			}
+		}
+
+	}
+
+	private String ConstructUrl(String reportBaseUrl, String reportName, String columnName) {
+		return String.format("%s?savedDataSetKey=%s&savedColumnKey=%s&columnKeyType=numerator", reportBaseUrl,
+				reportName, columnName);
+	}
+
+	private void populateTable14By14(Integer ROW, int data, String rowLink) {
+		getRows14()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable(Integer ROW, int data, String rowLink) {
+		getRows5()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable6(Integer ROW, int data, String rowLink) {
+		getRows6()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable8(Integer ROW, int data, String rowLink) {
+		getRows8()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable11(Integer ROW, int data, String rowLink) {
+		getRows11()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable7(Integer ROW, int data, String rowLink) {
+		getRows7()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable9(Integer ROW, int data, String rowLink) {
+		getRows9()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable2(Integer ROW, int data, String rowLink) {
+		getRows2()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable3(Integer ROW, int data, String rowLink) {
+		getRows3()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable4(Integer ROW, int data, String rowLink) {
+		getRows4()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable13(Integer ROW, int data, String rowLink) {
+		getRows13()[ROW].with(td(a(Integer.toString(data)).withHref(rowLink).attr("onclick",
+				"window.open(this.href, 'windowName', 'width=1000, height=700, left=24, top=24, scrollbars, resizable'); return false;")));
+	}
+
+	private void populateTable7WithSum(Integer ROW, int data1, int data2, int data3, int data4) {
+		getRows7()[ROW].with(td(Integer.toString(data1 + data2 + data3 + data4)));
+	}
+
+	private void populateTable9WithSum(Integer ROW, int data1, int data2, int data3, int data4, int data5, int data6) {
+		getRows9()[ROW].with(td(Integer.toString(data1 + data2 + data3 + data4 + data5 + data6)));
+	}
+
+	private void populateTable6WithSum(Integer ROW, int data1, int data2, int data3) {
+		getRows6()[ROW].with(td(Integer.toString(data1 + data2 + data3)));
+	}
+
+	private void populateTable13WithSum(Integer ROW, int data1, int data2, int data3, int data4, int data5, int data6,
+			int data7, int data8, int data9, int data10) {
+		getRows13()[ROW].with(
+				td(Integer.toString(data1 + data2 + data3 + data4 + data5 + data6 + data7 + data8 + data9 + data10)));
+	}
+
+	private void populateTable14WithSum(Integer ROW, int data1, int data2, int data3, int data4, int data5, int data6,
+			int data7, int data8, int data9, int data10, int data11, int data12) {
+		getRows14()[ROW].with(td(Integer.toString(
+				data1 + data2 + data3 + data4 + data5 + data6 + data7 + data8 + data9 + data10 + data11 + data12)));
+	}
+
+	private void populateTable(Integer ROW, int data) {
 		getRows3()[ROW].with(td(Integer.toString(data)));
 	}
-	
+
 	private int[] createSummaryArray(List<String> columNames, DataSet dataSet) {
 		List<Integer> columnValues = new ArrayList<Integer>();
-		for (String column : columNames ) {
-			columnValues.add(getDataSetIntegerValue( dataSet,column));	 	
+		for (String column : columNames) {
+			columnValues.add(getDataSetIntegerValue(dataSet, column));
 		}
 		return columnValues.stream().mapToInt(Integer::intValue).toArray();
 	}
-		
+
 	// filling by empty <td>
 	private void fillEmptyRow(ContainerTag row, Integer length) {
 		row.with(td().attr("colspan", length.toString()));
 	}
-	
+
 	public String getClinic() {
 		return StringUtils.isNotBlank(clinic) ? clinic : STRING_IF_EMPTY;
 	}
-	
+
 	public void setClinic(String clinic) {
 		this.clinic = clinic;
 	}
-	
+
 	public String getClinicDepartment() {
 		return StringUtils.isNotBlank(clinicDepartment) ? clinicDepartment : STRING_IF_EMPTY;
 	}
-	
+
 	public void setClinicDepartment(String clinicDepartment) {
 		this.clinicDepartment = clinicDepartment;
 	}
-	
+
 	public ContainerTag[] getRows5() {
 		if (rows5 == null) {
 			rows5 = new ContainerTag[ROWS_5];
@@ -1502,7 +1575,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows5;
 	}
-	
+
 	public ContainerTag[] getRows4() {
 		if (rows4 == null) {
 			rows4 = new ContainerTag[ROWS_4];
@@ -1512,7 +1585,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows4;
 	}
-	
+
 	public ContainerTag[] getRows14() {
 		if (rows14 == null) {
 			rows14 = new ContainerTag[ROWS_15];
@@ -1522,7 +1595,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows14;
 	}
-	
+
 	public ContainerTag[] getRows2() {
 		if (rows2 == null) {
 			rows2 = new ContainerTag[ROWS_2];
@@ -1532,7 +1605,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows2;
 	}
-	
+
 	public ContainerTag[] getRows3() {
 		if (rows3 == null) {
 			rows3 = new ContainerTag[ROWS_3];
@@ -1542,7 +1615,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows3;
 	}
-	
+
 	public ContainerTag[] getRows8() {
 		if (rows8 == null) {
 			rows8 = new ContainerTag[ROWS_8];
@@ -1552,7 +1625,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows8;
 	}
-	
+
 	public ContainerTag[] getRows7() {
 		if (rows7 == null) {
 			rows7 = new ContainerTag[ROWS_7];
@@ -1572,7 +1645,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows9;
 	}
-	
+
 	public ContainerTag[] getRows11() {
 		if (rows11 == null) {
 			rows11 = new ContainerTag[ROWS_11];
@@ -1582,7 +1655,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows11;
 	}
-	
+
 	public ContainerTag[] getRows6() {
 		if (rows6 == null) {
 			rows6 = new ContainerTag[ROWS_6];
@@ -1592,7 +1665,7 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows6;
 	}
-	
+
 	public ContainerTag[] getRows13() {
 		if (rows13 == null) {
 			rows13 = new ContainerTag[ROWS_13];
@@ -1602,19 +1675,19 @@ public class PnlsReportBuilder  extends UiUtils{
 		}
 		return rows13;
 	}
-	
+
 	private void clearRows() {
 		setRows(null);
 	}
-	
+
 	private void clearRows7() {
 		setRows7(null);
 	}
-	
+
 	private void clearRows2() {
 		setRows2(null);
 	}
-	
+
 	private void clearRows3() {
 		setRows3(null);
 	}
@@ -1622,255 +1695,97 @@ public class PnlsReportBuilder  extends UiUtils{
 	private void clearRows9() {
 		setRows9(null);
 	}
-	
+
 	private void clearRows11() {
 		setRows11(null);
-	} 
-	
+	}
+
 	private void clearRows6() {
 		setRows6(null);
-	} 
-	
+	}
+
 	private void clearRows13() {
 		setRows13(null);
-	} 
-	
+	}
+
 	private void clearRows4() {
 		setRows4(null);
-	} 
-	
+	}
+
 	private void clearRows14() {
 		setRows14(null);
 	}
-	
+
 	private void clearRows8() {
 		setRows8(null);
 	}
-	
+
 	public void setRows(ContainerTag[] rows) {
 		this.rows5 = rows;
 	}
-	
+
 	public void setRows2(ContainerTag[] rows) {
 		this.rows2 = rows;
 	}
-	
+
 	public void setRows3(ContainerTag[] rows) {
 		this.rows3 = rows;
 	}
-	
+
 	public void setRows7(ContainerTag[] rows) {
 		this.rows7 = rows;
 	}
-	
+
 	public void setRows9(ContainerTag[] rows) {
 		this.rows9 = rows;
 	}
-	
+
 	public void setRows11(ContainerTag[] rows) {
 		this.rows11 = rows;
 	}
-	
+
 	public void setRows6(ContainerTag[] rows) {
 		this.rows6 = rows;
 	}
-	
+
 	public void setRows13(ContainerTag[] rows) {
 		this.rows13 = rows;
 	}
-	
+
 	public void setRows4(ContainerTag[] rows) {
 		this.rows4 = rows;
 	}
-	
+
 	public void setRows14(ContainerTag[] rows) {
 		this.rows14 = rows;
 	}
-	
+
 	public void setRows8(ContainerTag[] rows) {
 		this.rows8 = rows;
 	}
-	
-	
-	public List<DataSet> getDataSets14By3() {
-		if (dataSets14By3 == null) {
-			dataSets14By3 = new LinkedList<DataSet>();
-		}
-		return dataSets14By3;
-	}
-	
-	public List<DataSet> getDataSets1By1() {
-		if (dataSets1By1 == null) {
-			dataSets1By1 = new LinkedList<DataSet>();
-		}
-		return dataSets1By1;
-	}
-	
-	public List<DataSet> getDataSets14By14() {
-		if (dataSets14By14 == null) {
-			dataSets14By14 = new LinkedList<DataSet>();
-		}
-		return dataSets14By14;
-	}
-	
-	public List<DataSet> getDataSets6By3() {
-		if (dataSets6By3 == null) {
-			dataSets6By3 = new LinkedList<DataSet>();
-		}
-		return dataSets6By3;
-	}
-	
-	public List<DataSet> getDataSets6By2() {
-		if (dataSets6By2 == null) {
-			dataSets6By2 = new LinkedList<DataSet>();
-		}
-		return dataSets6By2;
-	}
-	
-	
-	public List<DataSet> getDataSets14By6(){
-		if (dataSets14By6 == null) {
-			dataSets14By6 = new LinkedList<DataSet>();
-		}
-		return dataSets14By6;
-	}
-	
-	public List<DataSet> getDataSets4By5(){
-		if (dataSets4By5 == null) {
-			dataSets4By5 = new LinkedList<DataSet>();
-		}
-		return dataSets4By5;
-	}
-	
-	public List<DataSet> getDataSets4By7(){
-		if (dataSets4By7 == null) {
-			dataSets4By7 = new LinkedList<DataSet>();
-		}
-		return dataSets4By7;
-	}
-	
-	public List<DataSet> getDataSets4By3(){
-		if (dataSets4By3 == null) {
-			dataSets4By3 = new LinkedList<DataSet>();
-		}
-		return dataSets4By3;
-	}
-	
-	public List<DataSet> getDataSets4By7II(){
-		if (dataSets4By7II == null) {
-			dataSets4By7II = new LinkedList<DataSet>();
-		}
-		return dataSets4By7II;
-	}
-	
-	public List<DataSet> getDataSets3By1(){
-		if (dataSets3By1 == null) {
-			dataSets3By1 = new LinkedList<DataSet>();
-		}
-		return dataSets3By1;
-	}
-	
-	public List<DataSet> getDataSets14By4(){
-		if (dataSets14By4 == null) {
-			dataSets14By4= new LinkedList<DataSet>();
-		}
-		return dataSets14By4;
-	}
-	
-	public List<DataSet> getDataSets14By9(){
-		if (dataSets14By9 == null) {
-			dataSets14By9= new LinkedList<DataSet>();
-		}
-		return dataSets14By9;
-	}
-	
-	public List<DataSet> getDataSets10By4(){
-		if (dataSets10By4 == null) {
-			dataSets10By4= new LinkedList<DataSet>();
-		}
-		return dataSets10By4;
-	}
-	
-	public List<DataSet> getDataSets10By4II(){
-		if (dataSets10By4II == null) {
-			dataSets10By4II= new LinkedList<DataSet>();
-		}
-		return dataSets10By4II;
-	}
-	
-	public List<DataSet> getDataSets10By11(){
-		if (dataSets10By11 == null) {
-			dataSets10By11= new LinkedList<DataSet>();
-		}
-		return dataSets10By11;
-	}
-	
-	public void setDataSets(List<DataSet> dataSets) {
-		this.dataSets14By3 = dataSets;
-	}
-	
-	public void addDataSet(DataSet i) {
-		getDataSets14By3().add(i);
-	}
-	
-	public void addReportData(ReportData reportData) {
-		if(StringUtils.equals(reportData.getDefinition().getDescription(), PnlsReportConstants.REPORT_DESCRIPTION_14BY3)) {				
-			getDataSets14By3().addAll(reportData.getDataSets().values());
-			}else if (StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_1BY1)){
-				getDataSets1By1().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_14BY14)) {
-				getDataSets14By14().addAll(reportData.getDataSets().values());	
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_6BY3)) {
-				getDataSets6By3().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_14BY6)) {
-				 getDataSets14By6().addAll(reportData.getDataSets().values());	
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY5)) {
-				getDataSets4By5().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_3BY1)) {
-				getDataSets3By1().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_14BY4)) {
-				getDataSets14By4().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_6BY2)) {
-				getDataSets6By2().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY7)) {
-				getDataSets4By7().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY7_II)) {
-				getDataSets4By7II().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_14BY9)) {
-				getDataSets14By9().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY4)) {
-				getDataSets10By4().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY4_II)) {
-				getDataSets10By4II().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_10BY11)) {
-				getDataSets10By11().addAll(reportData.getDataSets().values());
-			}else if(StringUtils.equals(reportData.getDefinition().getDescription() ,PnlsReportConstants.REPORT_DESCRIPTION_4BY3)) {
-				getDataSets4By3().addAll(reportData.getDataSets().values());
-			}
-	}
-	
+
 	public int getNumberOfIndicatorsInOneTable() {
 		return numberOfIndicatorsInOneTable;
 	}
-	
+
 	public void setNumberOfIndicatorsInOneTable(int numberOfIndicatorsInOneTable) {
 		this.numberOfIndicatorsInOneTable = numberOfIndicatorsInOneTable;
 	}
-	
+
 	private Integer getDataSetIntegerValue(DataSet dataSet, String columnName) {
 		Object value = dataSet.iterator().next().getColumnValue(columnName);
 		if (value == null || StringUtils.isBlank(value.toString())) {
 			dataSet.getDefinition().getName();
 			throw new HealthQualException("`" + dataSet.getDefinition().getName() + "` report - column `" + columnName
-			        + "` doesn't exist in dataSet. Probably there is a bug in report SQL");
+					+ "` doesn't exist in dataSet. Probably there is a bug in report SQL");
 		}
 		return Integer.valueOf(value.toString());
 	}
-	
+
 	private static String translateLabel(String labelName) {
 		return translate("isanteplusreports.pnls.result." + labelName + ".label");
 	}
-	
+
 	private static String translateString(String labelName) {
 		return translate(labelName);
 	}
@@ -1909,6 +1824,14 @@ public class PnlsReportBuilder  extends UiUtils{
 
 	public void setMalePatients(Long malePatients) {
 		this.malePatients = malePatients;
+	}
+
+	public String getTablesHtml() {
+		return tablesHtml;
+	}
+
+	public void setTablesHtml(String tablesHtml) {
+		this.tablesHtml = tablesHtml;
 	}
 
 }

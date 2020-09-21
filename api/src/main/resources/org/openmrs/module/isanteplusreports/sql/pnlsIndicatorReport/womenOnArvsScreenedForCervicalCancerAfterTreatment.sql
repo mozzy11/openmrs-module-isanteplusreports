@@ -6,7 +6,7 @@ FROM isanteplus.patient p , isanteplus.patient_on_art pat , (SELECT p.patient_id
 	 AND A.patient_id = p.patient_id
 	AND B.patient_id = p.patient_id
 	 AND pat.date_started_cervical_cancer_status = A.second_last_status_date
-	 AND pat.cervical_cancer_status = 'NEGATIVE'
+	 AND pat.cervical_cancer_status = 'POSTIVE'
 	 AND pat.date_screened_cervical_cancer = B.max_screen_date
     AND p.gender = 'F'
      AND p.vih_status = 1

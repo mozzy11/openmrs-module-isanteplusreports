@@ -1,3 +1,4 @@
+SELECT pat.patient_id
 FROM isanteplus.patient_status_arv ps  ,isanteplus.patient_on_art pat
     WHERE ps.patient_id = pat.patient_id
 	AND ps.id_status =9
